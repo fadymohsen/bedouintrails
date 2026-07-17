@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { getUserSession } from "@/lib/auth/session";
 import { getUserProfile } from "@/lib/services/profile";
 import ProfileClient from "@/components/profile/profile-client";

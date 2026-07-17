@@ -3,10 +3,14 @@ import { getTranslations } from "next-intl/server";
 import Navbar from "@/components/navbar/navbar";
 import Footer from "@/components/footer/footer";
 
-export const metadata = {
-  title: "404 - Page Not Found | Bedouin Trails",
-  robots: "noindex",
-};
+export async function generateMetadata() {
+  const t = await getTranslations();
+  return {
+    title: t("meta_title_not_found"),
+    description: t("meta_desc_not_found"),
+    robots: "noindex",
+  };
+}
 
 export default async function NotFound() {
   const t = await getTranslations();
