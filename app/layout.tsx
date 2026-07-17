@@ -18,13 +18,25 @@ export const metadata: Metadata = {
   },
   description:
     "Desert safari and tour experiences in Egypt's Western Desert and White Desert National Park.",
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
   openGraph: {
     type: "website",
     siteName: "Bedouin Trails",
-    images: ["/og-image.jpg"],
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Bedouin Trails — Desert Safari Tours in Egypt",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
+    images: ["/og-image.jpg"],
   },
 };
 
