@@ -13,11 +13,13 @@ import FaqAccordion from "@/components/faq-accordion/faq-accordion";
 import ScrollReveal from "@/components/scroll-reveal/scroll-reveal";
 import styles from "@/components/home/home.module.scss";
 
-export const metadata = {
-  title: "Bedouin Trails | Egyptian Western Desert Safari Tours",
-  description:
-    "Bedouin Trails is an Egyptian desert safari tour company based in Cairo. We organize White Desert safari tours, camel treks, desert trekking, and multi-day desert tours from Cairo to Bahariya Oasis, Siwa Oasis, the White Desert, and the Black Desert in Egypt's Western Desert. Book your desert adventure today!",
-};
+export async function generateMetadata() {
+  const t = await getTranslations();
+  return {
+    title: t("meta_title_home"),
+    description: t("meta_desc_home"),
+  };
+}
 
 const ACTIVITY_IMAGES = [
   { key: "recreational_trips", img: "/img/camel-ride.webp" },

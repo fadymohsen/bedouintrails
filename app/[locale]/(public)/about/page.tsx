@@ -13,30 +13,18 @@ import styles from "@/components/about/about.module.scss";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://bedouintrails.com";
 
-export const metadata: Metadata = {
-  title: "About Bedouin Trails | White Desert Safari Tour Company in Egypt",
-  description:
-    "Learn about Bedouin Trails, an Egyptian desert safari tour company offering White Desert safari tours, camel treks, desert trekking, and multi-day desert tours from Cairo to Bahariya Oasis, Siwa Oasis, and the Western Desert of Egypt.",
-  keywords:
-    "White Desert Egypt, White Desert Safari, Egypt Desert Tour, Egypt Safari Tours, Bahariya Oasis Tour, Western Desert Egypt, Desert Trekking Egypt, Camel Trek Egypt, White Desert tour from Cairo, Black Desert Egypt tour, Sahara Hiking Tour, Multi Day Desert Trek, Desert Yoga Retreat Egypt, Meditation Retreat Egypt, Silent Retreat Desert, Djara Cave Western Desert, White Desert Camping, 2 day White Desert tour Egypt",
-  alternates: {
-    canonical: `${SITE_URL}/about`,
-  },
-  openGraph: {
-    title: "About Bedouin Trails | White Desert Safari Tour Company in Egypt",
-    description:
-      "Learn about Bedouin Trails, offering White Desert safari tours, camel treks, desert trekking, and multi-day desert tours from Cairo to Bahariya Oasis, Siwa Oasis & the Western Desert.",
-    url: `${SITE_URL}/about`,
-    images: [`${SITE_URL}/og-image.jpg`],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "About Bedouin Trails | White Desert Safari Tour Company",
-    description:
-      "Learn about Bedouin Trails, offering White Desert safari tours, camel treks, and multi-day desert tours in Egypt's Western Desert.",
-    images: [`${SITE_URL}/og-image.jpg`],
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations();
+  const title = t("meta_title_about");
+  const description = t("meta_desc_about");
+  return {
+    title,
+    description,
+    alternates: { canonical: `${SITE_URL}/about` },
+    openGraph: { title, description, url: `${SITE_URL}/about`, images: [`${SITE_URL}/og-image.jpg`] },
+    twitter: { card: "summary_large_image", title, description, images: [`${SITE_URL}/og-image.jpg`] },
+  };
+}
 
 export default async function AboutPage() {
   const locale = (await getLocale()) as Locale;
