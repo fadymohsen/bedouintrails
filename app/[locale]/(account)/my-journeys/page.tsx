@@ -7,10 +7,14 @@ import type { Locale } from "@/lib/i18n/config";
 import Card from "@/components/card/card";
 import styles from "@/components/my-journeys/my-journeys.module.scss";
 
-export const metadata: Metadata = {
-  title: "My Journeys | Bedouin Trails",
-  robots: { index: false, follow: false },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations();
+  return {
+    title: t("meta_title_my_journeys"),
+    description: t("meta_desc_my_journeys"),
+    robots: { index: false, follow: false },
+  };
+}
 
 export default async function MyJourneysPage() {
   const locale = (await getLocale()) as Locale;

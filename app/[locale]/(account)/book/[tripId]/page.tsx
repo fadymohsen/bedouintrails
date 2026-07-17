@@ -6,10 +6,14 @@ import { localize } from "@/lib/i18n/localized";
 import type { Locale } from "@/lib/i18n/config";
 import BookFormClient from "@/components/book-form/book-form-client";
 
-export const metadata: Metadata = {
-  title: "Book Your Trip | Bedouin Trails",
-  robots: { index: false, follow: false },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations();
+  return {
+    title: t("meta_title_book"),
+    description: t("meta_desc_book"),
+    robots: { index: false, follow: false },
+  };
+}
 
 export default async function BookTripPage({ params }: { params: Promise<{ tripId: string }> }) {
   const { tripId } = await params;

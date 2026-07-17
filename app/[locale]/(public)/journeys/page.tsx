@@ -8,23 +8,17 @@ import JourneysFilterGrid from "@/components/journeys/journeys-filter-grid";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://bedouintrails.com";
 
-export const metadata: Metadata = {
-  title: "Desert Safari Tours & Adventure Journeys | Bedouin Trails",
-  description:
-    "Browse all White Desert safari tours, Egypt desert tours, multi-day desert treks, camel treks, and desert camping adventures. Explore Bahariya Oasis, Siwa Oasis, White Desert, Black Desert, and Djara Cave in Egypt's Western Desert with Bedouin Trails.",
-  keywords:
-    "White Desert Egypt, White Desert Safari, White Desert Camping, Egypt Desert Tour, Egypt Safari Tours, Bahariya Oasis Tour, Western Desert Egypt, Desert Trekking Egypt, Multi Day Desert Trek, Camel Trek Egypt, White Desert tour from Cairo, Djara Cave Western Desert, Black Desert Egypt tour, 2 day White Desert tour Egypt, Sahara Hiking Tour, Desert Yoga Retreat Egypt, Meditation Retreat Egypt, Silent Retreat Desert",
-  alternates: {
-    canonical: `${SITE_URL}/journeys`,
-  },
-  openGraph: {
-    title: "Desert Safari Tours & Adventure Journeys | Bedouin Trails",
-    description:
-      "Browse White Desert safari tours, Egypt desert tours, multi-day desert treks, camel treks, and camping adventures in Bahariya Oasis, Siwa Oasis & the Western Desert.",
-    url: `${SITE_URL}/journeys`,
-    images: [`${SITE_URL}/og-image.jpg`],
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations();
+  const title = t("meta_title_journeys");
+  const description = t("meta_desc_journeys");
+  const url = `${SITE_URL}/journeys`;
+  return {
+    title, description,
+    alternates: { canonical: url },
+    openGraph: { title, description, url, images: [`${SITE_URL}/og-image.jpg`] },
+  };
+}
 
 export default async function JourneysPage() {
   const locale = (await getLocale()) as Locale;
