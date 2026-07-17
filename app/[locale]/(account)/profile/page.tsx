@@ -4,10 +4,14 @@ import { getUserSession } from "@/lib/auth/session";
 import { getUserProfile } from "@/lib/services/profile";
 import ProfileClient from "@/components/profile/profile-client";
 
-export const metadata: Metadata = {
-  title: "Profile | Bedouin Trails",
-  robots: { index: false, follow: false },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations();
+  return {
+    title: t("meta_title_profile"),
+    description: t("meta_desc_profile"),
+    robots: { index: false, follow: false },
+  };
+}
 
 export default async function ProfilePage() {
   const session = await getUserSession();
