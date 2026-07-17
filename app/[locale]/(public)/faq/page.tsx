@@ -10,30 +10,18 @@ import styles from "@/components/faq-page/faq-page.module.scss";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://bedouintrails.com";
 
-export const metadata: Metadata = {
-  title: "FAQ | Bedouin Trails - Desert Safari in Bahariya & Siwa Oasis",
-  description:
-    "Frequently asked questions about White Desert safari tours, Egypt desert tours, Bahariya Oasis tours, Siwa Oasis, White Desert camping, desert trekking, camel treks, multi-day desert treks, booking, pricing, and what to expect on your adventure with Bedouin Trails.",
-  keywords:
-    "White Desert Egypt FAQ, White Desert Safari, White Desert Camping, Egypt Desert Tour, Egypt Safari Tours, Bahariya Oasis Tour, Western Desert Egypt, Desert Trekking Egypt, Camel Trek Egypt, White Desert tour from Cairo, Black Desert Egypt tour, 2 day White Desert tour Egypt, Multi Day Desert Trek, Djara Cave Western Desert, Desert Yoga Retreat Egypt",
-  alternates: {
-    canonical: `${SITE_URL}/faq`,
-  },
-  openGraph: {
-    title: "FAQ | Bedouin Trails",
-    description:
-      "Frequently asked questions about White Desert safari tours, Egypt desert tours, Bahariya Oasis, Siwa Oasis, White Desert camping, desert trekking, and booking.",
-    url: `${SITE_URL}/faq`,
-    images: [`${SITE_URL}/og-image.jpg`],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "FAQ | Bedouin Trails Desert Safari Tours",
-    description:
-      "Frequently asked questions about White Desert safari tours, Egypt desert tours, booking, pricing, and what to expect.",
-    images: [`${SITE_URL}/og-image.jpg`],
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations();
+  const title = t("meta_title_faq");
+  const description = t("meta_desc_faq");
+  const url = `${SITE_URL}/faq`;
+  return {
+    title, description,
+    alternates: { canonical: url },
+    openGraph: { title, description, url, images: [`${SITE_URL}/og-image.jpg`] },
+    twitter: { card: "summary_large_image", title, description, images: [`${SITE_URL}/og-image.jpg`] },
+  };
+}
 
 export default async function FaqPage() {
   const locale = (await getLocale()) as Locale;

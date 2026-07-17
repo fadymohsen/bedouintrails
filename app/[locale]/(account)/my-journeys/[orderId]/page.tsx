@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getLocale } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { getUserSession } from "@/lib/auth/session";
 import { getOrderDetails } from "@/lib/services/orders";
 import { NotFoundError, OwnershipError } from "@/lib/services/errors";

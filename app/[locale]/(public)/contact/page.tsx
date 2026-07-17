@@ -8,30 +8,18 @@ import styles from "@/components/contact/contact.module.scss";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://bedouintrails.com";
 
-export const metadata: Metadata = {
-  title: "Contact Bedouin Trails | Book White Desert Safari Tours from Cairo",
-  description:
-    "Contact Bedouin Trails to book your White Desert safari tour from Cairo, Egypt desert tours, camel treks, desert trekking adventures, and multi-day desert treks to Bahariya Oasis, Siwa Oasis, and the Western Desert of Egypt.",
-  keywords:
-    "White Desert Egypt, White Desert Safari, White Desert Camping, Egypt Desert Tour, Egypt Safari Tours, Bahariya Oasis Tour, Western Desert Egypt, Desert Trekking Egypt, Camel Trek Egypt, White Desert tour from Cairo, Black Desert Egypt tour, 2 day White Desert tour Egypt, Multi Day Desert Trek, Sahara Hiking Tour, Desert Yoga Retreat Egypt, Meditation Retreat Egypt, Silent Retreat Desert, Djara Cave Western Desert",
-  alternates: {
-    canonical: `${SITE_URL}/contact`,
-  },
-  openGraph: {
-    title: "Contact Bedouin Trails | Book White Desert Safari Tours",
-    description:
-      "Contact Bedouin Trails to book White Desert safari tours, Egypt desert tours, camel treks, and multi-day adventures from Cairo.",
-    url: `${SITE_URL}/contact`,
-    images: [`${SITE_URL}/og-image.jpg`],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Contact Bedouin Trails | Book Desert Safari Tours",
-    description:
-      "Contact Bedouin Trails to book White Desert safari tours, Egypt desert tours, and multi-day desert treks from Cairo.",
-    images: [`${SITE_URL}/og-image.jpg`],
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations();
+  const title = t("meta_title_contact");
+  const description = t("meta_desc_contact");
+  const url = `${SITE_URL}/contact`;
+  return {
+    title, description,
+    alternates: { canonical: url },
+    openGraph: { title, description, url, images: [`${SITE_URL}/og-image.jpg`] },
+    twitter: { card: "summary_large_image", title, description, images: [`${SITE_URL}/og-image.jpg`] },
+  };
+}
 
 export default async function ContactPage() {
   const t = await getTranslations();

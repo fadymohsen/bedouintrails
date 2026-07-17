@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getLocale } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { listActiveTraps } from "@/lib/services/traps";
 import { mapTrapForCard } from "@/lib/mappers/trap";
 import type { Locale } from "@/lib/i18n/config";
