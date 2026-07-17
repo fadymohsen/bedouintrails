@@ -1,0 +1,236 @@
+@use "@/styles/framer-tokens" as fr;
+
+.blogs-page {
+  display: flex;
+  gap: fr.$gap-lg;
+  padding: fr.$section-padding;
+  max-width: fr.$section-max-width;
+  margin: 0 auto;
+  background: fr.$surface-1;
+
+  @media (max-width: 992px) {
+    flex-direction: column;
+    padding: 48px 24px;
+    gap: fr.$gap-md;
+  }
+}
+
+.no-articles {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: fr.$gap-xl;
+  max-width: fr.$section-max-width;
+  margin: 0 auto;
+  background: fr.$surface-2;
+  border-radius: fr.$radius;
+  text-align: center;
+  min-height: 400px;
+
+  h3 {
+    font-family: fr.$font-display;
+    font-size: fr.$h3-size;
+    line-height: fr.$h3-line;
+    color: fr.$text-heading;
+    font-weight: 400;
+    margin-bottom: fr.$gap-sm;
+  }
+
+  p {
+    font-family: fr.$font-body;
+    font-size: fr.$body-size;
+    color: fr.$text-body-muted;
+    max-width: 500px;
+  }
+
+  .browse-btn {
+    margin-top: fr.$gap-md;
+    display: inline-flex;
+    padding: 14px 28px;
+    border-radius: 100px;
+    background: fr.$brand-primary;
+    color: #fff;
+    font-family: fr.$font-body;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background: fr.$brand-primary-hovered;
+    }
+  }
+}
+
+.content-section {
+  flex: 3;
+
+  @media (max-width: 992px) {
+    flex: auto;
+    order: 1;
+  }
+
+  .image-container {
+    width: 100%;
+  }
+
+  .header-image {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    border-radius: fr.$radius;
+    margin-bottom: fr.$gap-md;
+
+    @media (max-width: 768px) {
+      height: 260px;
+    }
+  }
+
+  .description {
+    display: contents;
+  }
+
+  .article-text {
+    h1 {
+      font-family: fr.$font-display;
+      font-size: fr.$display-size;
+      line-height: fr.$display-line;
+      text-transform: uppercase;
+      color: fr.$text-heading;
+      font-weight: 400;
+      margin: 0 0 fr.$gap-md;
+
+      @media (max-width: 768px) {
+        font-size: 2.2rem;
+      }
+    }
+
+    h2 {
+      font-family: fr.$font-display;
+      color: fr.$brand-primary;
+      margin: fr.$gap-md 0 fr.$gap-sm;
+      font-size: fr.$h4-size;
+      line-height: fr.$h4-line;
+      font-weight: 400;
+    }
+
+    h3 {
+      font-family: fr.$font-body;
+      color: fr.$text-heading;
+      font-size: fr.$h5-size;
+      margin: fr.$gap-sm 0;
+    }
+
+    p {
+      font-family: fr.$font-body;
+      font-size: fr.$body-size;
+      line-height: fr.$body-line;
+      color: fr.$text-body-muted;
+      margin-bottom: fr.$gap-sm;
+    }
+
+    a {
+      color: fr.$brand-primary;
+      font-weight: 600;
+
+      &:hover {
+        color: fr.$brand-primary-hovered;
+      }
+    }
+
+    ul,
+    ol {
+      color: fr.$text-body-muted;
+      font-family: fr.$font-body;
+      padding-inline-start: 20px;
+
+      li {
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
+
+.sidebar {
+  flex: 1;
+  background: fr.$surface-2;
+  padding: fr.$gap-md;
+  border-radius: fr.$radius;
+  height: fit-content;
+
+  @media (max-width: 992px) {
+    order: 2;
+    flex: auto;
+  }
+
+  h2 {
+    font-family: fr.$font-display;
+    font-size: fr.$h4-size;
+    color: fr.$text-heading;
+    font-weight: 400;
+    margin: 0 0 fr.$gap-md;
+  }
+
+  .article-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .link-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+    border-radius: fr.$radius;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+
+    .bullet {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: fr.$text-body-muted;
+      flex-shrink: 0;
+    }
+
+    .title {
+      flex: 1;
+      font-family: fr.$font-body;
+      font-size: fr.$body-small-size;
+      font-weight: 600;
+      color: fr.$link-unhovered;
+    }
+
+    .arrow {
+      flex-shrink: 0;
+      width: 6px;
+      height: 6px;
+      border-inline-end: 2px solid fr.$text-body-muted;
+      border-top: 2px solid fr.$text-body-muted;
+      transform: rotate(45deg);
+    }
+
+    &:hover {
+      background: fr.$surface-3;
+
+      .title {
+        color: fr.$text-heading;
+      }
+    }
+
+    &.active {
+      background: fr.$surface-3;
+      border-inline-start: 3px solid fr.$brand-primary;
+
+      .bullet {
+        background: fr.$brand-primary;
+      }
+
+      .title {
+        color: fr.$text-heading;
+      }
+    }
+  }
+}

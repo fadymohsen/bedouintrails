@@ -1,0 +1,199 @@
+@use "@/styles/framer-tokens" as fr;
+
+.contactPage {
+  background: fr.$surface-1;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: fr.$gap-lg;
+  max-width: fr.$section-max-width;
+  margin: 0 auto;
+  padding: fr.$section-padding;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.infoCard {
+  background: fr.$surface-2;
+  border-radius: fr.$radius;
+  padding: fr.$gap-lg;
+  display: flex;
+  flex-direction: column;
+  gap: fr.$gap-md;
+  height: fit-content;
+
+  h2 {
+    font-size: fr.$h3-size;
+    line-height: fr.$h3-line;
+    margin: 0;
+  }
+
+  p {
+    font-family: fr.$font-body;
+    font-size: fr.$body-size;
+    line-height: fr.$body-line;
+    color: fr.$text-body-muted;
+    margin: 0;
+  }
+}
+
+.infoLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: fr.$font-body;
+    font-size: fr.$link-body-size;
+    font-weight: 600;
+    color: fr.$text-heading;
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    svg {
+      color: fr.$brand-primary;
+      flex-shrink: 0;
+    }
+
+    &:hover {
+      color: fr.$brand-primary;
+    }
+  }
+}
+
+.mapLink {
+  display: block;
+  border-radius: fr.$radius;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+.socialRow {
+  display: flex;
+  gap: 10px;
+}
+
+.socialButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: fr.$surface-3;
+  color: fr.$text-heading;
+  font-size: 1.2rem;
+  transition: background-color 0.2s, color 0.2s;
+
+  &:hover {
+    background-color: fr.$brand-primary;
+    color: #fff;
+  }
+}
+
+// ---- Contact form ----
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: fr.$gap-sm;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: fr.$gap-sm;
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form input,
+.form textarea {
+  width: 100%;
+  background: fr.$surface-2;
+  border: 1px solid hsla(0, 0%, 100%, 0.1);
+  border-radius: fr.$radius;
+  padding: 14px 18px;
+  font-family: fr.$font-body;
+  font-size: fr.$body-small-size;
+  color: fr.$text-heading;
+  outline: none;
+  transition: border-color 0.2s ease;
+
+  &::placeholder {
+    color: fr.$text-body-muted;
+  }
+
+  &:focus {
+    border-color: fr.$brand-primary;
+  }
+}
+
+.form textarea {
+  resize: vertical;
+  min-height: 140px;
+}
+
+.pillButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 28px;
+  border-radius: 100px;
+  background: fr.$brand-primary;
+  color: #fff;
+  font-family: fr.$font-body;
+  font-weight: 600;
+  font-size: fr.$link-body-size;
+  border: none;
+  cursor: pointer;
+  width: fit-content;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    background: fr.$brand-primary-hovered;
+    transform: translateY(-2px);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+.formSuccess {
+  background: fr.$surface-2;
+  border-radius: fr.$radius;
+  padding: fr.$gap-lg;
+  text-align: center;
+
+  p {
+    font-family: fr.$font-body;
+    color: fr.$text-heading;
+    font-size: fr.$body-lead-size;
+    margin: 0;
+  }
+}
+
+.formError {
+  color: fr.$brand-primary;
+  font-family: fr.$font-body;
+  font-size: fr.$body-small-size;
+  margin: 0;
+}

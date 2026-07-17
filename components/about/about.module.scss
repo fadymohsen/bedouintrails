@@ -1,0 +1,159 @@
+@use "@/styles/framer-tokens" as fr;
+
+.aboutPage {
+  background: fr.$surface-1;
+}
+
+.storyRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: fr.$gap-lg;
+  max-width: fr.$section-max-width;
+  margin: 0 auto;
+  padding: fr.$section-padding;
+
+  &.reverse {
+    .imageCol {
+      order: 2;
+    }
+  }
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+
+    &.reverse .imageCol {
+      order: 0;
+    }
+  }
+}
+
+.imageCol img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: fr.$radius;
+}
+
+.textCol {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: fr.$gap-sm;
+
+  h2 {
+    font-size: fr.$h2-size;
+    line-height: fr.$h2-line;
+    margin: 0;
+  }
+
+  p {
+    font-family: fr.$font-body;
+    font-size: fr.$body-size;
+    line-height: fr.$body-line;
+    color: fr.$text-body-muted;
+    margin: 0;
+  }
+}
+
+// ---- Trust bar (shared visual language with home) ----
+.trustBar {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  flex-wrap: wrap;
+  max-width: fr.$section-max-width;
+  margin: 0 auto;
+  padding: fr.$gap-lg fr.$gap-md fr.$gap-xl;
+  gap: fr.$gap-xl;
+}
+
+.trustItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 4px;
+  position: relative;
+  padding: 0 fr.$gap-md;
+
+  &:not(:first-child)::before {
+    content: "";
+    position: absolute;
+    inset-inline-start: -48px;
+    top: 10%;
+    height: 80%;
+    width: 1px;
+    background: hsla(0, 0%, 100%, 0.12);
+  }
+
+  h3 {
+    font-size: fr.$h2-size;
+    line-height: fr.$h2-line;
+  }
+
+  p {
+    font-family: fr.$font-accent;
+    font-size: fr.$accent-small-size;
+    color: fr.$text-body-muted;
+    margin: 0;
+  }
+}
+
+// ---- CTA banner ----
+.ctaBanner {
+  max-width: fr.$section-max-width;
+  margin: 0 auto fr.$gap-xl;
+  padding: 0 24px;
+}
+
+.ctaCard {
+  background: fr.$surface-2;
+  border-radius: fr.$radius;
+  padding: fr.$gap-xl 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: fr.$gap-sm;
+
+  h2 {
+    font-size: fr.$display-size;
+    line-height: fr.$display-line;
+    text-transform: uppercase;
+    margin: 0;
+
+    @media (max-width: 768px) {
+      font-size: 2.4rem;
+    }
+  }
+
+  p {
+    font-family: fr.$font-body;
+    font-size: fr.$body-lead-size;
+    line-height: fr.$body-lead-line;
+    color: fr.$text-body-muted;
+    max-width: 640px;
+    margin: 0 0 fr.$gap-sm;
+  }
+}
+
+.pillButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  border-radius: 100px;
+  background: fr.$brand-primary;
+  color: #fff;
+  font-family: fr.$font-body;
+  font-weight: 600;
+  font-size: fr.$link-body-size;
+  text-decoration: none;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    background: fr.$brand-primary-hovered;
+    transform: translateY(-2px);
+  }
+}

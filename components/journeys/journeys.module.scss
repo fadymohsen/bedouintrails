@@ -1,0 +1,82 @@
+@use "@/styles/framer-tokens" as fr;
+
+.filterBar {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: fr.$gap-sm;
+  max-width: fr.$section-max-width;
+  margin: fr.$gap-lg auto;
+  padding: 0 24px;
+}
+
+.filter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: fr.$surface-2;
+  border-radius: 100px;
+  padding: 12px 20px;
+  height: 52px;
+
+  select,
+  input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: fr.$text-heading;
+    font-family: fr.$font-body;
+    font-size: fr.$body-small-size;
+  }
+
+  select option {
+    color: #000;
+  }
+
+  input::placeholder {
+    color: fr.$text-body-muted;
+  }
+}
+
+.searchBar {
+  flex: 1;
+  max-width: 320px;
+
+  .icon {
+    color: fr.$text-body-muted;
+    flex-shrink: 0;
+  }
+
+  input {
+    width: 100%;
+  }
+}
+
+.cardsContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: fr.$gap-md;
+  max-width: fr.$section-max-width;
+  margin: 0 auto;
+  padding: 0 24px fr.$gap-xl;
+
+  @media (max-width: 992px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.noResults {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: fr.$gap-xl;
+
+  h2 {
+    font-size: fr.$h3-size;
+    line-height: fr.$h3-line;
+    color: fr.$text-body-muted;
+  }
+}

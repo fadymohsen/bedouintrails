@@ -1,0 +1,39 @@
+// Shared font stack (matches the global @fontsource/el-messiri import in app/layout.tsx)
+$font-display: 'El Messiri', serif;
+$font-body: 'El Messiri', sans-serif;
+
+// "Gold" theme — used by booking/auth-adjacent surfaces (BookingDetails, BookForm)
+$gold-primary: #d4a574;
+$gold-dark: #b8925f;
+$gold-accent-teal: #5fa9a3;
+$gold-white: #ffffff;
+$gold-dark-bg: #1a1a1a;
+$gold-light-bg: #faf9f7;
+$gold-text-dark: #2d2d2d;
+$gold-text-light: #6b7280;
+$gold-error: #dc3545;
+$gold-success: #28a745;
+$gold-border: #e8e5e0;
+
+// "Card" theme — used by the trip Card component
+$card-primary-orange: #f59e0b;
+$card-text-dark: #1f2937;
+$card-text-gray: #6b7280;
+$card-white: #f5f5f5;
+$card-bg-gray: #fff;
+
+// "Brand" theme — used by Home, FAQ, and most other content pages
+// Also the single canonical accent for shared chrome (navbar/footer/card) —
+// previously those used a second, slightly-off shade (#cf9050) for the same role.
+$brand-primary: #c48d56;
+$brand-primary-hover: #aa7643;
+$brand-primary-light: #8ab9ff;
+$brand-text-dark: #2d3748;
+$brand-text-light: #718096;
+$brand-bg-light: #f8fafc;
+$brand-bg-white: #ffffff;
+$brand-border: #e2e8f0;
+$brand-radius: 12px;
+$brand-shadow-light: 0 2px 4px rgba(0, 0, 0, 0.05);
+$brand-shadow-medium: 0 4px 6px rgba(0, 0, 0, 0.07);
+$brand-shadow-hover: 0 8px 25px rgba(0, 102, 255, 0.15);

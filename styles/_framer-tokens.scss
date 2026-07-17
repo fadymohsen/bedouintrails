@@ -1,0 +1,89 @@
+// Design tokens captured 1:1 from the Framer "Yonder"-style adventure-tours template
+// via the Unframer MCP (getProjectXml ColorStyles/TextStyles). Used ONLY by the public
+// marketing site (home/journeys/blogs/faq/about/contact/guides + navbar/footer).
+//
+// Do NOT touch styles/_variables.scss — that file still powers admin/auth/profile/
+// my-journeys/booking, which stay on the old gold/card theme.
+
+// ---- Colors (ColorStyles) ----
+$surface-1: rgb(42, 46, 30);
+$surface-1-transparent: rgba(42, 46, 30, 0);
+$surface-2: rgb(55, 59, 42);
+$surface-2-transparent: rgba(55, 59, 42, 0);
+$surface-3: rgb(67, 71, 56);
+$surface-4: rgb(79, 82, 71);
+
+$text-heading: rgb(255, 255, 255);
+$text-body: rgb(255, 255, 255);
+$text-body-muted: rgba(255, 255, 255, 0.75);
+
+$brand-primary: rgb(233, 75, 23);
+$brand-primary-hovered: rgb(205, 66, 19);
+$brand-accent-1: rgb(46, 85, 30);
+
+$link-unhovered: rgba(255, 255, 255, 0.7);
+$link-hovered: rgb(255, 255, 255);
+
+$ui-glass-bg: rgba(0, 0, 0, 0.17);
+
+// ---- Type scale (TextStyles) ----
+// Font families
+//
+// IMPORTANT: DM Sans and Courier Prime are loaded via next/font/google in
+// app/(public)/layout.tsx, which generates a hashed internal font-family name
+// exposed ONLY through a CSS custom property (--font-dm-sans/--font-courier-prime).
+// Hardcoding the literal family name here (e.g. "DM Sans") bypasses next/font
+// entirely and silently falls back to the browser default — must reference the
+// custom property instead. Tanker is loaded via a plain Fontshare <link>, so its
+// real family name works as a literal.
+$font-display: var(--font-tanker), sans-serif; // headings — Fontshare, itf_ffl free license (swapped to Cairo for RTL locales, see app/(public)/layout.tsx)
+$font-body: var(--font-dm-sans), sans-serif; // body copy
+$font-accent: var(--font-courier-prime), monospace; // meta/labels/tags
+
+// Heading/Display — font-display
+$h1-size: 64px;
+$h1-line: 1em;
+$display-size: 76px;
+$display-line: 1em;
+$h2-size: 45px;
+$h2-line: 1.1em;
+$h3-size: 32px;
+$h3-line: 1.2em;
+$h4-size: 27px;
+$h4-line: 1.3em;
+$h4-paragraph-spacing: 40px;
+$h5-size: 23px;
+$h5-line: 1.35em;
+$h5-paragraph-spacing: 40px;
+
+// Body — font-body (DM Sans)
+$body-size: 16px;
+$body-line: 1.5em;
+$body-paragraph-spacing: 20px;
+$body-lead-size: 19px;
+$body-lead-line: 1.4em;
+$body-small-size: 14px;
+$body-small-line: 1.4em;
+$body-article-size: 16px;
+$body-article-line: 1.5em;
+$link-small-size: 14px;
+$link-small-weight: 600;
+$link-body-size: 16px;
+$link-body-weight: 600;
+
+// Accent — font-accent (Courier Prime)
+$accent-small-size: 14px;
+$accent-small-line: 1.5em;
+$accent-body-size: 16px;
+$accent-body-line: 1.4em;
+$accent-large-size: 19px;
+$accent-large-line: 1.4em;
+
+// ---- Shared shape values seen repeated across every captured page/component ----
+$radius: 12px;
+$section-max-width: 1328px;
+$section-padding: 84px 24px;
+$gap-sm: 12px;
+$gap-md: 24px;
+$gap-lg: 48px;
+$gap-xl: 96px;

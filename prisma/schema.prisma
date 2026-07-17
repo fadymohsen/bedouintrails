@@ -1,0 +1,274 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum AdminRole {
+  admin
+  employee
+}
+
+enum TrapStatus {
+  active
+  inactive
+}
+
+enum OrderStatus {
+  pending
+  accepted
+  paid
+  cancelled
+}
+
+model User {
+  id           Int      @id @default(autoincrement())
+  firstName    String   @map("first_name")
+  lastName     String   @map("last_name")
+  email        String   @unique
+  phone        String?
+  password     String
+  otp          Int?
+  isVerify     Boolean  @default(false) @map("is_verify")
+  image        String?
+  fcmToken     String?  @map("fcm_token")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  orders  Order[]
+  reviews Review[]
+
+  @@map("users")
+}
+
+model Admin {
+  id          Int       @id @default(autoincrement())
+  firstName   String    @map("first_name")
+  lastName    String    @map("last_name")
+  email       String    @unique
+  phone       String?
+  password    String
+  role        AdminRole @default(admin)
+  status      Boolean   @default(true)
+  permissions Json?
+  otp         Int?
+  isVerify    Boolean   @default(false) @map("is_verify")
+  image       String?
+  fcmToken    String?   @map("fcm_token")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  @@map("admins")
+}
+
+model Trap {
+  id                Int        @id @default(autoincrement())
+  nameEn            String     @map("name_en")
+  nameAr            String?    @map("name_ar")
+  slug              String     @unique
+  interfaceFromEn   String     @map("interface_from_en")
+  interfaceFromAr   String?    @map("interface_from_ar")
+  interfaceToEn     String     @map("interface_to_en")
+  interfaceToAr     String?    @map("interface_to_ar")
+  descriptionEn     String?    @db.Text @map("description_en")
+  descriptionAr     String?    @db.Text @map("description_ar")
+  duration          Int        @default(0)
+  countPeople       Int        @default(0) @map("count_people")
+  status            TrapStatus @default(active)
+  metaTitle         String?    @map("meta_title")
+  metaDescription   String?    @db.Text @map("meta_description")
+  createdAt         DateTime   @default(now()) @map("created_at")
+  updatedAt         DateTime   @updatedAt @map("updated_at")
+
+  galleries Gallery[]
+  trapDays  TrapDay[]
+  orders    Order[]
+  reviews   Review[]
+
+  @@map("traps")
+}
+
+model Gallery {
+  id        Int      @id @default(autoincrement())
+  trapId    Int      @map("trap_id")
+  image     String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  trap Trap @relation(fields: [trapId], references: [id], onDelete: Cascade)
+
+  @@map("galleries")
+}
+
+model TrapDay {
+  id        Int      @id @default(autoincrement())
+  trapId    Int      @map("trap_id")
+  dayNumber Int      @map("day_number")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  trap  Trap          @relation(fields: [trapId], references: [id], onDelete: Cascade)
+  cards TrapDayCard[]
+
+  @@map("trap_days")
+}
+
+model TrapDayCard {
+  id            Int      @id @default(autoincrement())
+  trapDayId     Int      @map("trap_day_id")
+  titleEn       String   @map("title_en")
+  titleAr       String?  @map("title_ar")
+  descriptionEn String?  @db.Text @map("description_en")
+  descriptionAr String?  @db.Text @map("description_ar")
+  image         String?
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  day TrapDay @relation(fields: [trapDayId], references: [id], onDelete: Cascade)
+
+  @@map("trap_day_cards")
+}
+
+model Order {
+  id               Int         @id @default(autoincrement())
+  userId           Int         @map("user_id")
+  trapId           Int         @map("trap_id")
+  firstName        String      @map("first_name")
+  lastName         String      @map("last_name")
+  email            String
+  phone            String
+  description      String?     @db.Text
+  numberOfAdults   Int         @map("number_of_adults")
+  numberOfChildren Int         @default(0) @map("number_of_children")
+  startDate        DateTime    @map("start_date") @db.Date
+  endDate          DateTime    @map("end_date") @db.Date
+  status           OrderStatus @default(pending)
+  createdAt        DateTime    @default(now()) @map("created_at")
+  updatedAt        DateTime    @updatedAt @map("updated_at")
+
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  trap    Trap     @relation(fields: [trapId], references: [id], onDelete: Cascade)
+  reviews Review[]
+
+  @@map("orders")
+}
+
+model Review {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @map("user_id")
+  orderId   Int      @map("order_id")
+  trapId    Int      @map("trap_id")
+  stars     Int
+  comment   String?
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  trap  Trap  @relation(fields: [trapId], references: [id], onDelete: Cascade)
+
+  @@map("reviews")
+}
+
+model Slider {
+  id            Int      @id @default(autoincrement())
+  image         String
+  titleEn       String?  @map("title_en")
+  titleAr       String?  @map("title_ar")
+  descriptionEn String?  @db.Text @map("description_en")
+  descriptionAr String?  @db.Text @map("description_ar")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  @@map("sliders")
+}
+
+model CommonQuestion {
+  id        Int      @id @default(autoincrement())
+  questionEn String  @map("question_en")
+  questionAr String? @map("question_ar")
+  answerEn   String  @db.Text @map("answer_en")
+  answerAr   String? @db.Text @map("answer_ar")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("common_questions")
+}
+
+model Article {
+  id              Int      @id @default(autoincrement())
+  titleEn         String   @map("title_en")
+  titleAr         String?  @map("title_ar")
+  descriptionEn   String   @db.Text @map("description_en")
+  descriptionAr   String?  @db.Text @map("description_ar")
+  slug            String   @unique
+  image           String?
+  metaTitle       String?  @map("meta_title")
+  metaDescription String?  @db.Text @map("meta_description")
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  @@map("articles")
+}
+
+model AboutUs {
+  id            Int      @id @default(autoincrement())
+  titleEn       String   @map("title_en")
+  titleAr       String?  @map("title_ar")
+  descriptionEn String   @db.Text @map("description_en")
+  descriptionAr String?  @db.Text @map("description_ar")
+  image         String?
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  @@map("about_us")
+}
+
+model Blog {
+  id                  Int       @id @default(autoincrement())
+  slug                String    @unique
+  titleEn             String    @map("title_en")
+  titleAr             String    @map("title_ar")
+  contentEn           String    @db.Text @map("content_en")
+  contentAr           String    @db.Text @map("content_ar")
+  excerptEn           String?   @db.Text @map("excerpt_en")
+  excerptAr           String?   @db.Text @map("excerpt_ar")
+  metaTitleEn         String?   @map("meta_title_en")
+  metaTitleAr         String?   @map("meta_title_ar")
+  metaDescriptionEn   String?   @db.Text @map("meta_description_en")
+  metaDescriptionAr   String?   @db.Text @map("meta_description_ar")
+  image               String?
+  author              String    @default("Bedouin Trails Team")
+  category            String?
+  tags                Json?
+  primaryKeywords     Json?     @map("primary_keywords")
+  secondaryKeywords   Json?     @map("secondary_keywords")
+  readingTime         Int?      @map("reading_time")
+  isPublished         Boolean   @default(false) @map("is_published")
+  publishedAt         DateTime? @map("published_at")
+  createdAt           DateTime  @default(now()) @map("created_at")
+  updatedAt           DateTime  @updatedAt @map("updated_at")
+
+  faqs BlogFaq[]
+
+  @@map("blogs")
+}
+
+model BlogFaq {
+  id          Int      @id @default(autoincrement())
+  blogId      Int      @map("blog_id")
+  questionEn  String   @map("question_en")
+  questionAr  String   @map("question_ar")
+  answerEn    String   @db.Text @map("answer_en")
+  answerAr    String   @db.Text @map("answer_ar")
+  sortOrder   Int      @default(0) @map("sort_order")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  blog Blog @relation(fields: [blogId], references: [id], onDelete: Cascade)
+
+  @@map("blog_faqs")
+}

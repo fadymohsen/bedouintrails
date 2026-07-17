@@ -1,0 +1,392 @@
+@use "@/styles/framer-tokens" as fr;
+
+// ---- Home hero (HeroCarousel) ----
+.heroContainer {
+  position: relative;
+  margin: fr.$gap-sm auto 0;
+  max-width: fr.$section-max-width;
+  height: 720px;
+  max-height: 90vh;
+  overflow: hidden;
+  border-radius: fr.$radius;
+  background: #000;
+
+  @media (max-width: 1400px) {
+    margin-inline: 24px;
+  }
+
+  @media (max-width: 992px) {
+    height: 560px;
+  }
+
+  @media (max-width: 768px) {
+    height: 480px;
+  }
+
+  @media (max-width: 480px) {
+    height: 420px;
+  }
+}
+
+.mainContent {
+  position: absolute;
+  top: 12%;
+  inset-inline-start: 8%;
+  width: 90%;
+  max-width: 620px;
+  text-align: start;
+  z-index: 5;
+  pointer-events: none;
+
+  @media (max-width: 768px) {
+    inset-inline-start: 6%;
+    top: 8%;
+    width: 88%;
+  }
+}
+
+.contentItem {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+
+  &.active {
+    opacity: 1;
+    transform: translateY(0);
+    position: relative;
+  }
+
+  &.exit {
+    opacity: 0;
+    transform: translateY(-24px);
+  }
+
+  h1 {
+    font-family: fr.$font-display;
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    line-height: 1em;
+    color: fr.$text-heading;
+    margin: 0 0 16px;
+    font-weight: 400;
+    text-transform: lowercase;
+  }
+
+  p {
+    font-family: fr.$font-body;
+    font-size: fr.$body-lead-size;
+    line-height: fr.$body-lead-line;
+    color: fr.$text-body-muted;
+    margin: 0;
+    max-width: 90%;
+  }
+}
+
+.heroCta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  margin-top: fr.$gap-md;
+  padding: 16px 28px;
+  border-radius: 100px;
+  background: fr.$brand-primary;
+  color: #fff;
+  font-family: fr.$font-body;
+  font-weight: 600;
+  font-size: fr.$link-body-size;
+  text-decoration: none;
+  pointer-events: auto;
+  z-index: 6;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    background: fr.$brand-primary-hovered;
+    transform: translateY(-2px);
+  }
+}
+
+.mainBg .bgLayer {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1.2s ease-in-out;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.15) 45%, rgba(0, 0, 0, 0.35) 100%);
+  }
+
+  &.active {
+    opacity: 0.8;
+  }
+}
+
+.nextDeparture {
+  position: absolute;
+  bottom: 24px;
+  inset-inline-end: 24px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  background: hsla(0, 0%, 0%, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: fr.$radius;
+  text-decoration: none;
+  max-width: 320px;
+  transition: transform 0.25s ease, background-color 0.25s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    background: hsla(0, 0%, 0%, 0.6);
+  }
+
+  img {
+    width: 64px;
+    height: 64px;
+    border-radius: 8px;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 640px) {
+    display: none;
+  }
+}
+
+.nextDepartureText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+
+  .eyebrow {
+    font-family: fr.$font-accent;
+    font-size: 11px;
+    color: fr.$brand-primary;
+    text-transform: uppercase;
+  }
+
+  strong {
+    font-family: fr.$font-display;
+    font-weight: 400;
+    font-size: fr.$h5-size;
+    line-height: 1.1em;
+    color: fr.$text-heading;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.nextDepartureLink {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: fr.$font-body;
+  font-size: fr.$body-small-size;
+  font-weight: 600;
+  color: fr.$text-body-muted;
+}
+
+.heroDots {
+  position: absolute;
+  bottom: 24px;
+  inset-inline-start: 8%;
+  z-index: 20;
+  display: flex;
+  gap: 8px;
+
+  @media (max-width: 768px) {
+    inset-inline-start: 6%;
+  }
+}
+
+.heroDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: hsla(0, 0%, 100%, 0.35);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background-color 0.2s ease, width 0.2s ease;
+
+  &.active {
+    background: #fff;
+    width: 22px;
+    border-radius: 4px;
+  }
+}
+
+// ---- Trip carousel (Featured Journeys marquee) ----
+.marqueeWrapper {
+  width: 100%;
+  overflow: hidden;
+  padding: 8px 0;
+  // Fades the leading/trailing edge cards instead of hard-cutting mid-word
+  // titles, so the continuous ticker reads as intentional, not broken.
+  mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%);
+
+  :global(.swiper-slide) {
+    margin: 0 12px;
+    cursor: grab;
+    height: auto;
+
+    &:active {
+      cursor: grabbing;
+    }
+  }
+
+  :global(.safari-card) {
+    height: 100% !important;
+  }
+}
+
+.discoverCard {
+  height: 100%;
+  background-color: fr.$brand-primary;
+  border-radius: fr.$radius;
+  padding: 24px;
+
+  div {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  h1 {
+    font-family: fr.$font-body;
+    font-weight: 600;
+    text-align: center;
+    font-size: 1.3rem;
+    line-height: 1.4;
+    color: #fff;
+    margin: 0;
+  }
+
+  a {
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  button {
+    padding: 12px 24px;
+    font-family: fr.$font-body;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: fr.$brand-primary;
+    background: #fff;
+    border-radius: fr.$radius;
+  }
+}
+
+:global(.steady-swiper) {
+  :global(.swiper-wrapper) {
+    transition-timing-function: linear !important;
+  }
+
+  :global(.swiper-slide) {
+    height: auto;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+// ---- Trip-detail hero variant (trip-hero-carousel, card_page=true) ----
+.card_nav {
+  display: flex;
+  background-color: transparent;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: clamp(10px, 1.5vh, 15px) 2%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  direction: ltr;
+  pointer-events: none;
+
+  .content-logo img {
+    width: clamp(90px, 12vw, 140px);
+    height: auto;
+    filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.2));
+
+    @media (max-width: 768px) {
+      width: clamp(70px, 10vw, 110px);
+    }
+
+    @media (max-width: 480px) {
+      width: clamp(50px, 8vw, 80px);
+    }
+  }
+
+  .backBtn {
+    display: flex;
+    align-items: center;
+    position: relative;
+    pointer-events: auto;
+    gap: 5px;
+
+    .btn {
+      width: 44px;
+      height: 44px;
+      border: none;
+      background: fr.$ui-glass-bg;
+      backdrop-filter: blur(6px);
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 3;
+      flex-shrink: 0;
+      left: 30px;
+
+      &::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-left: 2px solid #fff;
+        border-bottom: 2px solid #fff;
+        transform: rotate(45deg);
+      }
+
+      &:hover {
+        background: hsla(0, 0%, 0%, 0.3);
+      }
+    }
+
+    .cancell-btn {
+      background-color: #cf5050;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50px;
+      padding: 6px 24px;
+      font-size: 16px;
+      color: #ffffff;
+      white-space: nowrap;
+      position: relative;
+      z-index: 2;
+    }
+  }
+}

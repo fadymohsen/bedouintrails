@@ -1,0 +1,44 @@
+"use server";
+
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
+import { requireAdmin } from "@/lib/auth/session";
+import { aboutUsFormSchema } from "@/lib/validators/aboutUs";
+import { createAboutUs, updateAboutUs, deleteAboutUs } from "@/lib/services/adminAboutUs";
+
+function formToAboutUsInput(form: FormData) {
+  return aboutUsFormSchema.parse({
+    titleEn: form.get("titleEn"),
+    titleAr: form.get("titleAr") || undefined,
+    descriptionEn: form.get("descriptionEn"),
+    descriptionAr: form.get("descriptionAr") || undefined,
+  });
+}
+
+type ActionState = { success?: boolean; error?: string } | undefined;
+
+export async function createAboutUsAction(_prevState: unknown, form: FormData): Promise<ActionState> {
+  await requireAdmin("manage_website");
+  const input = formToAboutUsInput(form);
+  const imageFile = form.get("image");
+  const aboutUs = await createAboutUs(input, imageFile instanceof File && imageFile.size > 0 ? imageFile : null);
+  revalidatePath("/admin/about-us");
+  redirect(`/admin/about-us/${aboutUs.id}`);
+}
+
+export async function updateAboutUsAction(aboutUsId: number, _prevState: unknown, form: FormData): Promise<ActionState> {
+  await requireAdmin("manage_website");
+  const input = formToAboutUsInput(form);
+  const imageFile = form.get("image");
+  await updateAboutUs(aboutUsId, input, imageFile instanceof File && imageFile.size > 0 ? imageFile : null);
+  revalidatePath("/admin/about-us");
+  revalidatePath(`/admin/about-us/${aboutUsId}`);
+  return { success: true };
+}
+
+export async function deleteAboutUsAction(aboutUsId: number) {
+  await requireAdmin("manage_website");
+  await deleteAboutUs(aboutUsId);
+  revalidatePath("/admin/about-us");
+  redirect("/admin/about-us");
+}

@@ -1,0 +1,107 @@
+/* Design tokens for the public marketing site, scoped under .site-public so they
+   never leak into admin/auth/profile/my-journeys/booking (still on the gold/card theme).
+   Values must stay in sync with styles/_framer-tokens.scss (same source: Framer
+   ColorStyles/TextStyles captured via the Unframer MCP). */
+
+.site-public {
+  --surface-1: rgb(42, 46, 30);
+  --surface-1-transparent: rgba(42, 46, 30, 0);
+  --surface-2: rgb(55, 59, 42);
+  --surface-2-transparent: rgba(55, 59, 42, 0);
+  --surface-3: rgb(67, 71, 56);
+  --surface-4: rgb(79, 82, 71);
+
+  --text-heading: rgb(255, 255, 255);
+  --text-body: rgb(255, 255, 255);
+  --text-body-muted: rgba(255, 255, 255, 0.75);
+
+  --brand-primary: rgb(233, 75, 23);
+  --brand-primary-hovered: rgb(205, 66, 19);
+  --brand-accent-1: rgb(46, 85, 30);
+
+  --link-unhovered: rgba(255, 255, 255, 0.7);
+  --link-hovered: rgb(255, 255, 255);
+
+  --ui-glass-bg: rgba(0, 0, 0, 0.17);
+
+  --radius: 12px;
+
+  background: var(--surface-1);
+  color: var(--text-body);
+  font-family: var(--font-dm-sans), sans-serif;
+}
+
+.site-public h1,
+.site-public h2,
+.site-public h3,
+.site-public h4,
+.site-public h5,
+.site-public .display {
+  font-family: var(--font-tanker), sans-serif;
+  color: var(--text-heading);
+  font-weight: 400;
+  margin: 0;
+}
+
+/* Exact desktop sizes from Framer's TextStyles (Heading 1-5 + Display). Framer
+   defines separate Tablet/Phone breakpoint values per page that weren't captured
+   (would have needed a live fetch per breakpoint per page) — clamp() approximates
+   the same desktop-down-to-mobile scaling instead of an exact per-breakpoint match. */
+.site-public h1 {
+  font-size: clamp(2.25rem, 4vw + 1rem, 4rem); /* 64px desktop */
+  line-height: 1em;
+}
+
+.site-public .display {
+  font-size: clamp(2.5rem, 5vw + 1rem, 4.75rem); /* 76px desktop */
+  line-height: 1em;
+}
+
+.site-public h2 {
+  font-size: clamp(1.75rem, 3vw + 1rem, 2.8125rem); /* 45px desktop */
+  line-height: 1.1em;
+}
+
+.site-public h3 {
+  font-size: clamp(1.5rem, 2vw + 1rem, 2rem); /* 32px desktop */
+  line-height: 1.2em;
+}
+
+.site-public h4 {
+  font-size: clamp(1.25rem, 1.5vw + 1rem, 1.6875rem); /* 27px desktop */
+  line-height: 1.3em;
+}
+
+.site-public h5 {
+  font-size: clamp(1.125rem, 1vw + 1rem, 1.4375rem); /* 23px desktop */
+  line-height: 1.35em;
+}
+
+.site-public p {
+  font-size: 1rem; /* 16px, Body */
+  line-height: 1.5em;
+  margin: 0;
+}
+
+.site-public .lead {
+  font-size: 1.1875rem; /* 19px, Body/Lead */
+  line-height: 1.4em;
+}
+
+.site-public .body-small {
+  font-size: 0.875rem; /* 14px, Body/Small */
+  line-height: 1.4em;
+}
+
+.site-public code,
+.site-public .accent {
+  font-family: var(--font-courier-prime), monospace;
+}
+
+.site-public a {
+  color: var(--link-unhovered);
+}
+
+.site-public a:hover {
+  color: var(--link-hovered);
+}

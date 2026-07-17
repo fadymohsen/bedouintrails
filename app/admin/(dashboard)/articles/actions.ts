@@ -1,0 +1,46 @@
+"use server";
+
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
+import { requireAdmin } from "@/lib/auth/session";
+import { articleFormSchema } from "@/lib/validators/article";
+import { createArticle, updateArticle, deleteArticle } from "@/lib/services/adminArticles";
+
+function formToArticleInput(form: FormData) {
+  return articleFormSchema.parse({
+    titleEn: form.get("titleEn"),
+    titleAr: form.get("titleAr") || undefined,
+    descriptionEn: form.get("descriptionEn"),
+    descriptionAr: form.get("descriptionAr") || undefined,
+    metaTitle: form.get("metaTitle") || undefined,
+    metaDescription: form.get("metaDescription") || undefined,
+  });
+}
+
+type ActionState = { success?: boolean; error?: string } | undefined;
+
+export async function createArticleAction(_prevState: unknown, form: FormData): Promise<ActionState> {
+  await requireAdmin("manage_website");
+  const input = formToArticleInput(form);
+  const imageFile = form.get("image");
+  const article = await createArticle(input, imageFile instanceof File && imageFile.size > 0 ? imageFile : null);
+  revalidatePath("/admin/articles");
+  redirect(`/admin/articles/${article.id}`);
+}
+
+export async function updateArticleAction(articleId: number, _prevState: unknown, form: FormData): Promise<ActionState> {
+  await requireAdmin("manage_website");
+  const input = formToArticleInput(form);
+  const imageFile = form.get("image");
+  await updateArticle(articleId, input, imageFile instanceof File && imageFile.size > 0 ? imageFile : null);
+  revalidatePath("/admin/articles");
+  revalidatePath(`/admin/articles/${articleId}`);
+  return { success: true };
+}
+
+export async function deleteArticleAction(articleId: number) {
+  await requireAdmin("manage_website");
+  await deleteArticle(articleId);
+  revalidatePath("/admin/articles");
+  redirect("/admin/articles");
+}
