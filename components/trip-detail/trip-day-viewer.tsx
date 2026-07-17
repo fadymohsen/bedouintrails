@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import styles from "./trip-detail.module.scss";
 
@@ -67,8 +68,8 @@ export default function TripDayViewer({
           currentDayData.cards.map((card, index) => (
             <div className={styles["step-card"]} key={card.id}>
               <div className={styles.badge}>{index + 1}</div>
-              <div className={styles["image-wrapper"]}>
-                {card.image && <img src={card.image} alt={card.title} />}
+              <div className={styles["image-wrapper"]} style={{ position: "relative" }}>
+                {card.image && <Image src={card.image} alt={card.title} fill style={{ objectFit: "cover" }} />}
               </div>
               <div className={styles.content}>
                 <h3>

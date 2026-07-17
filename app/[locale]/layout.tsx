@@ -1,7 +1,7 @@
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
-import { isLocale, isRtl, type Locale } from "@/lib/i18n/config";
+import { isLocale } from "@/lib/i18n/config";
 import { routing } from "@/i18n/routing";
 import type { Metadata } from "next";
 
@@ -44,15 +44,10 @@ export default async function LocaleLayout({
   }
 
   const messages = await getMessages();
-  const dir = isRtl(locale as Locale) ? "rtl" : "ltr";
 
   return (
-    <html lang={locale} dir={dir}>
-      <body>
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          {children}
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <NextIntlClientProvider locale={locale} messages={messages}>
+      {children}
+    </NextIntlClientProvider>
   );
 }

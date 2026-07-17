@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Link } from "@/lib/i18n/navigation";
 import { useTranslations } from "next-intl";
 import { FaFacebook, FaInstagram, FaWhatsapp, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
@@ -13,7 +14,7 @@ export default function Footer() {
         <div className={styles.columns}>
           <div className={styles.col}>
             <Link href="/" className={styles.footerLogoRow}>
-              <img src="/img/logo.png" alt="Bedouin Trails Logo" width={40} height={40} />
+              <Image src="/img/logo.png" alt="Bedouin Trails Logo" width={40} height={40} />
               <span>Bedouin Trails</span>
             </Link>
             <nav className={styles.footerMenu}>

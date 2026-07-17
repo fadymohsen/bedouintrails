@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
     description: t("guide_crystal_meta_desc"),
     keywords:
       "Crystal Mountain Egypt, Crystal Mountain Western Desert, quartz crystal desert Egypt, Egypt Desert Tour, White Desert tour stops, Bahariya Oasis attractions, Western Desert Egypt landmarks, crystal ridge Egypt",
-    alternates: { canonical: url, languages: { en: url, ar: url, "x-default": url } },
+    alternates: { canonical: url,  },
     openGraph: {
       title: t("guide_crystal_og_title"),
       description: t("guide_crystal_og_desc"),

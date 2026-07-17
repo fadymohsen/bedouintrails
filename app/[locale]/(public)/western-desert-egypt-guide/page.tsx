@@ -14,7 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title: t("guide_western_title"),
     description: t("guide_western_meta_desc"),
     keywords: t("guide_western_meta_keywords"),
-    alternates: { canonical: url, languages: { en: url, ar: url, "x-default": url } },
+    alternates: { canonical: url,  },
     openGraph: {
       title: t("guide_western_og_title"),
       description: t("guide_western_og_desc"),

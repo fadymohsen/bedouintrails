@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Link } from "@/lib/i18n/navigation";
 import { FaArrowRight, FaInstagram, FaCompass, FaBoxOpen, FaMapMarkedAlt } from "react-icons/fa";
 import { getTranslations, getLocale } from "next-intl/server";
@@ -83,8 +84,38 @@ export default async function HomePage() {
   const spotlightName = spotlightTrap ? (locale === "ar" ? spotlightTrap.nameAr ?? spotlightTrap.nameEn : spotlightTrap.nameEn) : null;
   const spotlightImages = spotlightTrap?.galleries.map((g) => g.image) ?? [];
 
+  const organizationJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "TravelAgency",
+    name: "Bedouin Trails",
+    url: "https://bedouintrails.com",
+    logo: "https://bedouintrails.com/img/logo.png",
+    image: "https://bedouintrails.com/og-image.jpg",
+    description:
+      "Egyptian desert safari tour company based in Cairo, organizing White Desert safari tours, camel treks, desert trekking, and multi-day desert tours.",
+    address: {
+      "@type": "PostalAddress",
+      addressCountry: "EG",
+      addressLocality: "Cairo",
+    },
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: "+20-10-02717380",
+      contactType: "reservations",
+      availableLanguage: ["English", "Arabic"],
+    },
+    sameAs: [
+      "https://www.instagram.com/the.white.and.black.desert",
+      "https://www.facebook.com/profile.php?id=61587717913002",
+    ],
+  };
+
   return (
     <main className={styles.home}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+      />
       <div className="carousel">
         <HeroCarousel
           slides={heroSlides}
@@ -127,11 +158,11 @@ export default async function HomePage() {
           <div className={styles.scene}>
             <div className={styles.collageWrapper}>
               <div className={styles.pillLarge}>
-                <img src="/img/adventure.webp" alt="ATV rider celebrating on sand dunes" width={400} height={500} />
+                <Image src="/img/adventure.webp" alt="ATV rider celebrating on sand dunes" width={400} height={500} />
                 <div className={styles.grainOverlay} />
               </div>
               <div className={styles.pillSmall}>
-                <img src="/img/adventure1.webp" alt="Group dancing near Elephant Rock" />
+                <Image src="/img/adventure1.webp" alt="Group dancing near Elephant Rock" width={300} height={400} />
                 <div className={styles.grainOverlay} />
               </div>
             </div>
@@ -150,13 +181,13 @@ export default async function HomePage() {
         <div className={styles.spotlightSection}>
           <ScrollReveal className={styles.spotlightCard}>
             {spotlightImages[0] && (
-              <div className={`${styles.spotlightPolaroid} ${styles.left}`}>
-                <img src={spotlightImages[0]} alt={spotlightName ?? ""} />
+              <div className={`${styles.spotlightPolaroid} ${styles.left}`} style={{ position: "relative" }}>
+                <Image src={spotlightImages[0]} alt={spotlightName ?? ""} fill style={{ objectFit: "cover" }} />
               </div>
             )}
             {spotlightImages[1] && (
-              <div className={`${styles.spotlightPolaroid} ${styles.right}`}>
-                <img src={spotlightImages[1]} alt={spotlightName ?? ""} />
+              <div className={`${styles.spotlightPolaroid} ${styles.right}`} style={{ position: "relative" }}>
+                <Image src={spotlightImages[1]} alt={spotlightName ?? ""} fill style={{ objectFit: "cover" }} />
               </div>
             )}
             <span className={styles.spotlightEyebrow}>{t("featured_journeys")}</span>
@@ -176,7 +207,7 @@ export default async function HomePage() {
       <ScrollReveal as="div" className={styles.activitiesGrid}>
         {ACTIVITY_IMAGES.map((item) => (
           <div key={item.key} className={styles.activityTile}>
-            <img src={item.img} alt={t(item.key)} loading="lazy" />
+            <Image src={item.img} alt={t(item.key)} loading="lazy" width={300} height={200} />
             <h3>{t(item.key)}</h3>
           </div>
         ))}
@@ -217,7 +248,7 @@ export default async function HomePage() {
           <div className={styles.historyGrid}>
             {historyEntries.map((entry, i) => (
               <ScrollReveal key={entry.id} className={styles.historyItem} delay={i * 100}>
-                <img src={entry.image ?? "/img/adventure3.webp"} alt={entry.title} loading="lazy" />
+                <Image src={entry.image ?? "/img/adventure3.webp"} alt={entry.title} loading="lazy" width={400} height={300} />
                 <h3>{entry.title}</h3>
                 <p>{entry.description}</p>
                 {HISTORY_LINKS[i] && (
@@ -242,7 +273,7 @@ export default async function HomePage() {
           <div className={styles.journalList}>
             {homeBlogs.map((blog, i) => (
               <ScrollReveal key={blog.id} as="div" className={styles.journalItem} delay={i * 100}>
-                <img src={blog.image ?? "/img/adventure.webp"} alt={blog.title} loading="lazy" />
+                <Image src={blog.image ?? "/img/adventure.webp"} alt={blog.title} loading="lazy" width={400} height={300} />
                 <div>
                   <span className={styles.journalEyebrow}>{t("blogs")}</span>
                   <h3 className={styles.journalTitle}>{blog.title}</h3>
@@ -280,7 +311,7 @@ export default async function HomePage() {
               rel="noopener noreferrer"
               href="https://www.instagram.com/the.white.and.black.desert?igsh=aHdjbzB6ajJ5dTBk"
             >
-              <img src={card.image ?? "/img/adventure1.webp"} alt={card.name} loading="lazy" />
+              <Image src={card.image ?? "/img/adventure1.webp"} alt={card.name} loading="lazy" width={300} height={300} />
               <div className={styles.socialLabel}>
                 <strong>{card.name}</strong>
               </div>

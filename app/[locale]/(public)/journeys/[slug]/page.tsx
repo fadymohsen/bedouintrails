@@ -45,7 +45,6 @@ export async function generateMetadata({
       `${name} - ${localize(trip.interfaceFromEn, trip.interfaceFromAr, locale)} → ${localize(trip.interfaceToEn, trip.interfaceToAr, locale)}. Book your spot now | Bedouin Trails`,
     alternates: {
       canonical: url,
-      languages: { en: url, ar: url, "x-default": url },
     },
     openGraph: {
       title: trip.metaTitle || name,
@@ -53,6 +52,12 @@ export async function generateMetadata({
       images: [image],
       url,
       type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: trip.metaTitle || name,
+      description: trip.metaDescription || name,
+      images: [image],
     },
   };
 }

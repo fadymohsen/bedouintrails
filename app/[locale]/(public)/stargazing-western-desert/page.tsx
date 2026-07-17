@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
     description: t("guide_stars_meta_desc"),
     keywords:
       "stargazing Western Desert, stargazing Egypt, White Desert stars, dark sky Egypt, Milky Way Egypt, desert stargazing, White Desert Camping, night sky Western Desert, astrophotography Egypt desert",
-    alternates: { canonical: url, languages: { en: url, ar: url, "x-default": url } },
+    alternates: { canonical: url,  },
     openGraph: {
       title: t("guide_stars_og_title"),
       description: t("guide_stars_og_desc"),

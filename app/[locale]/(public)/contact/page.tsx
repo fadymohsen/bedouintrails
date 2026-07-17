@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import { FaFacebook, FaInstagram, FaWhatsapp, FaEnvelope } from "react-icons/fa";
@@ -15,7 +16,6 @@ export const metadata: Metadata = {
     "White Desert Egypt, White Desert Safari, White Desert Camping, Egypt Desert Tour, Egypt Safari Tours, Bahariya Oasis Tour, Western Desert Egypt, Desert Trekking Egypt, Camel Trek Egypt, White Desert tour from Cairo, Black Desert Egypt tour, 2 day White Desert tour Egypt, Multi Day Desert Trek, Sahara Hiking Tour, Desert Yoga Retreat Egypt, Meditation Retreat Egypt, Silent Retreat Desert, Djara Cave Western Desert",
   alternates: {
     canonical: `${SITE_URL}/contact`,
-    languages: { en: `${SITE_URL}/contact`, ar: `${SITE_URL}/contact`, "x-default": `${SITE_URL}/contact` },
   },
   openGraph: {
     title: "Contact Bedouin Trails | Book White Desert Safari Tours",
@@ -60,7 +60,7 @@ export default async function ContactPage() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img src="/img/googlemaps.webp" alt="Bedouin Trails office location, Cairo, Egypt" loading="lazy" />
+            <Image src="/img/googlemaps.webp" alt="Bedouin Trails office location, Cairo, Egypt" loading="lazy" width={600} height={300} />
           </a>
 
           <div className={styles.socialRow}>

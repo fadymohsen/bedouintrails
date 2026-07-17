@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
     description: t("guide_safety_meta_desc"),
     keywords:
       "desert safety Egypt, White Desert safety, Egypt desert tour safety, desert survival tips, desert camping safety, Western Desert Egypt safety, safari safety tips, desert first aid, desert travel advice",
-    alternates: { canonical: url, languages: { en: url, ar: url, "x-default": url } },
+    alternates: { canonical: url,  },
     openGraph: {
       title: t("guide_safety_og_title"),
       description: t("guide_safety_og_desc"),

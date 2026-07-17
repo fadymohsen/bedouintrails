@@ -7,8 +7,26 @@ import BlogLayout from "@/components/blogs/blog-layout";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://bedouintrails.com";
 
 export const metadata: Metadata = {
-  title: "Blogs | Bedouin Trails",
+  title: "Desert Travel Blog & Guides | Bedouin Trails",
+  description:
+    "Read travel stories, desert safari tips, and guides about Egypt's White Desert, Black Desert, Bahariya Oasis, Siwa Oasis, and Western Desert adventures with Bedouin Trails.",
+  keywords:
+    "White Desert blog, Egypt desert travel blog, desert safari tips, Bahariya Oasis guide, Western Desert stories, Egypt travel guides",
   alternates: { canonical: `${SITE_URL}/blogs` },
+  openGraph: {
+    title: "Desert Travel Blog & Guides | Bedouin Trails",
+    description:
+      "Read travel stories, desert safari tips, and guides about Egypt's White Desert, Bahariya Oasis, and Western Desert adventures.",
+    url: `${SITE_URL}/blogs`,
+    images: [`${SITE_URL}/og-image.jpg`],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Desert Travel Blog & Guides | Bedouin Trails",
+    description:
+      "Travel stories, desert safari tips, and guides about Egypt's Western Desert adventures.",
+    images: [`${SITE_URL}/og-image.jpg`],
+  },
 };
 
 export default async function BlogsIndexPage() {

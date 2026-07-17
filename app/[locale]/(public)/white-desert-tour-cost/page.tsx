@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
     description: t("guide_cost_meta_desc"),
     keywords:
       "White Desert tour cost, White Desert tour price, Egypt desert tour cost, how much White Desert safari, Egypt Safari Tours price, Bahariya Oasis tour cost, desert camping Egypt price, White Desert tour from Cairo cost",
-    alternates: { canonical: url, languages: { en: url, ar: url, "x-default": url } },
+    alternates: { canonical: url,  },
     openGraph: {
       title: t("guide_cost_og_title"),
       description: t("guide_cost_og_desc"),

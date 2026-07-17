@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { Link } from "@/lib/i18n/navigation";
 import { FaArrowRight } from "react-icons/fa";
 import { useTranslations } from "next-intl";
@@ -66,7 +67,7 @@ export default function HeroCarousel({ slides, ctaHref = "/journeys", featuredTr
 
       {featuredTrip && (
         <Link href={`/journeys/${featuredTrip.slug}`} className={styles.nextDeparture}>
-          <img src={featuredTrip.image || "/img/adventure.webp"} alt={featuredTrip.name} />
+          <Image src={featuredTrip.image || "/img/adventure.webp"} alt={featuredTrip.name} width={64} height={64} style={{ objectFit: "cover", borderRadius: 8 }} />
           <div className={styles.nextDepartureText}>
             <span className={styles.eyebrow}>{t("featured_journeys")}</span>
             <strong>{featuredTrip.name}</strong>

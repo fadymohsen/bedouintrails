@@ -41,28 +41,40 @@ export default function ContactForm() {
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <div className={styles.formRow}>
-        <input
-          type="text"
-          placeholder={t("full_name")}
-          required
-          value={form.name}
-          onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
-        />
-        <input
-          type="email"
-          placeholder={t("email_address")}
-          required
-          value={form.email}
-          onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
-        />
+        <div>
+          <label htmlFor="contact-name" className="sr-only">{t("full_name")}</label>
+          <input
+            id="contact-name"
+            type="text"
+            placeholder={t("full_name")}
+            required
+            value={form.name}
+            onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
+          />
+        </div>
+        <div>
+          <label htmlFor="contact-email" className="sr-only">{t("email_address")}</label>
+          <input
+            id="contact-email"
+            type="email"
+            placeholder={t("email_address")}
+            required
+            value={form.email}
+            onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
+          />
+        </div>
       </div>
+      <label htmlFor="contact-phone" className="sr-only">{t("whatsapp_number")}</label>
       <input
+        id="contact-phone"
         type="tel"
         placeholder={t("whatsapp_number")}
         value={form.phone}
         onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
       />
+      <label htmlFor="contact-message" className="sr-only">{t("your_message")}</label>
       <textarea
+        id="contact-message"
         placeholder={t("your_message")}
         required
         rows={6}

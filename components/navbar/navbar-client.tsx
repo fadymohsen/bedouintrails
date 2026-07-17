@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { Link } from "@/lib/i18n/navigation";
 import { usePathname } from "@/lib/i18n/navigation";
 import { useLocale, useTranslations } from "next-intl";
@@ -52,7 +53,7 @@ export default function NavbarClient({ user }: { user: NavbarUser }) {
     <div className={styles.navbar}>
       <div className={styles.logo}>
         <Link href="/">
-          <img src="/img/logo.png" alt="Bedouin Trails" width={50} height={50} />
+          <Image src="/img/logo.png" alt="Bedouin Trails" width={50} height={50} />
         </Link>
       </div>
 
@@ -96,7 +97,7 @@ export default function NavbarClient({ user }: { user: NavbarUser }) {
                   className={styles.navDropdown__profile}
                   onClick={() => setDropdownOpen(false)}
                 >
-                  <img src={user.image || "/img/profile-img.png"} alt={user.firstName || "User"} />
+                  <Image src={user.image || "/img/profile-img.png"} alt={user.firstName || "User"} width={32} height={32} />
                   <span>{user.firstName}</span>
                   <FaBars size={18} />
                 </Link>
@@ -114,7 +115,7 @@ export default function NavbarClient({ user }: { user: NavbarUser }) {
         {user ? (
           <Link href="/profile" className={styles.userProfile}>
             <IoSettingsOutline size={30} />
-            <img src={user.image || "/img/profile-img.png"} alt={user.firstName || "User Profile"} />
+            <Image src={user.image || "/img/profile-img.png"} alt={user.firstName || "User Profile"} width={40} height={40} />
           </Link>
         ) : (
           <Link href="/auth" className={styles.loginBtnNav}>

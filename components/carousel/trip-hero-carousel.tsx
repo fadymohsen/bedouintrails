@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { useRouter } from "@/lib/i18n/navigation";
 import { useTranslations } from "next-intl";
 import styles from "./carousel.module.scss";
@@ -41,7 +42,7 @@ export default function TripHeroCarousel({ images, isOrder = false, orderStatus,
           >
             <div className={styles.card_nav}>
               <div className={styles["content-logo"]}>
-                <img src="/img/bedouin-trail.webp" alt="Bedouin Trail Logo" loading="lazy" />
+                <Image src="/img/bedouin-trail.webp" alt="Bedouin Trail Logo" loading="lazy" width={120} height={40} />
               </div>
               <div className={styles.backBtn}>
                 <button className={styles.btn} onClick={() => router.back()} aria-label="Back" />
@@ -71,8 +72,8 @@ export default function TripHeroCarousel({ images, isOrder = false, orderStatus,
 
           return (
             <div key={index} className={`${styles.thumbNode} ${posClass}`} onClick={() => setActiveIndex(index)}>
-              <div className={styles.imgBox}>
-                <img src={image} alt="Desert safari slide" />
+              <div className={styles.imgBox} style={{ position: "relative", overflow: "hidden" }}>
+                <Image src={image} alt="Desert safari slide" fill style={{ objectFit: "cover" }} />
               </div>
               {position === 0 && <div className={styles.activeFrame} />}
             </div>

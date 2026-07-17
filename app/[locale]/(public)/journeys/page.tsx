@@ -16,7 +16,6 @@ export const metadata: Metadata = {
     "White Desert Egypt, White Desert Safari, White Desert Camping, Egypt Desert Tour, Egypt Safari Tours, Bahariya Oasis Tour, Western Desert Egypt, Desert Trekking Egypt, Multi Day Desert Trek, Camel Trek Egypt, White Desert tour from Cairo, Djara Cave Western Desert, Black Desert Egypt tour, 2 day White Desert tour Egypt, Sahara Hiking Tour, Desert Yoga Retreat Egypt, Meditation Retreat Egypt, Silent Retreat Desert",
   alternates: {
     canonical: `${SITE_URL}/journeys`,
-    languages: { en: `${SITE_URL}/journeys`, ar: `${SITE_URL}/journeys`, "x-default": `${SITE_URL}/journeys` },
   },
   openGraph: {
     title: "Desert Safari Tours & Adventure Journeys | Bedouin Trails",

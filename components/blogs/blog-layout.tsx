@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Link } from "@/lib/i18n/navigation";
 import { localize } from "@/lib/i18n/localized";
 import type { Locale } from "@/lib/i18n/config";
@@ -79,7 +80,7 @@ export default function BlogLayout({
       <main className={styles["content-section"]}>
         <article>
           <div className={styles["image-container"]}>
-            {current.image && <img src={current.image} alt={currentTitle} className={styles["header-image"]} />}
+            {current.image && <Image src={current.image} alt={currentTitle} className={styles["header-image"]} width={1200} height={420} style={{ objectFit: "cover" }} />}
           </div>
           <div className={styles["article-text"]}>
             <h1>{currentTitle}</h1>

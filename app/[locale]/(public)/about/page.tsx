@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Link } from "@/lib/i18n/navigation";
 import { FaArrowRight } from "react-icons/fa";
 import { getTranslations, getLocale } from "next-intl/server";
@@ -20,7 +21,6 @@ export const metadata: Metadata = {
     "White Desert Egypt, White Desert Safari, Egypt Desert Tour, Egypt Safari Tours, Bahariya Oasis Tour, Western Desert Egypt, Desert Trekking Egypt, Camel Trek Egypt, White Desert tour from Cairo, Black Desert Egypt tour, Sahara Hiking Tour, Multi Day Desert Trek, Desert Yoga Retreat Egypt, Meditation Retreat Egypt, Silent Retreat Desert, Djara Cave Western Desert, White Desert Camping, 2 day White Desert tour Egypt",
   alternates: {
     canonical: `${SITE_URL}/about`,
-    languages: { en: `${SITE_URL}/about`, ar: `${SITE_URL}/about`, "x-default": `${SITE_URL}/about` },
   },
   openGraph: {
     title: "About Bedouin Trails | White Desert Safari Tour Company in Egypt",
@@ -80,8 +80,8 @@ export default async function AboutPage() {
           key={item.id}
           className={`${styles.storyRow} ${index % 2 !== 0 ? styles.reverse : ""}`}
         >
-          <div className={styles.imageCol}>
-            <img src={item.image ?? "/img/adventure3.webp"} alt={item.title} loading="lazy" />
+          <div className={styles.imageCol} style={{ position: "relative" }}>
+            <Image src={item.image ?? "/img/adventure3.webp"} alt={item.title} loading="lazy" fill style={{ objectFit: "cover" }} />
           </div>
           <div className={styles.textCol}>
             <h2>{item.title}</h2>

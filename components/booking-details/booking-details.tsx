@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { FaEnvelope, FaPhone, FaCalendarAlt } from "react-icons/fa";
 import styles from "./booking-details.module.scss";
@@ -20,7 +21,7 @@ export default function BookingDetails({ data }: { data: BookingDetailsData }) {
   return (
     <div className={styles["booking-details"]}>
       <div className={styles.leftP}>
-        <img src="/img/camel-ride1.webp" alt="Camel riding experience in the desert" loading="lazy" />
+        <Image src="/img/camel-ride1.webp" alt="Camel riding experience in the desert" loading="lazy" width={400} height={500} style={{ objectFit: "cover", width: "100%", height: "auto", borderRadius: "2rem" }} />
       </div>
       <div className={styles.rightP}>
         <div className={styles["field-row"]}>

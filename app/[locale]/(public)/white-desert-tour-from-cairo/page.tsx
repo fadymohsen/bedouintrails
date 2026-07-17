@@ -14,7 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title: t("guide_whitetour_title"),
     description: t("guide_whitetour_meta_desc"),
     keywords: t("guide_whitetour_meta_keywords"),
-    alternates: { canonical: url, languages: { en: url, ar: url, "x-default": url } },
+    alternates: { canonical: url,  },
     openGraph: {
       title: t("guide_whitetour_og_title"),
       description: t("guide_whitetour_og_desc"),

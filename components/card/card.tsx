@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Link } from "@/lib/i18n/navigation";
 import { FaStar } from "react-icons/fa";
 import { useTranslations } from "next-intl";
@@ -26,12 +27,12 @@ export default function Card({ data, href }: CardProps) {
           </div>
         )}
 
-        <img
+        <Image
           src={data.image || "/img/adventure1.webp"}
           alt={data.name}
           loading="lazy"
-          width="100%"
-          height="auto"
+          fill
+          style={{ objectFit: "cover" }}
         />
       </div>
 

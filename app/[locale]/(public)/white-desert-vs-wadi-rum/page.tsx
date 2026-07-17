@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
     description: t("guide_compare_meta_desc"),
     keywords:
       "White Desert vs Wadi Rum, Egypt desert or Jordan desert, White Desert Egypt, Wadi Rum comparison, desert safari comparison, best desert experience, Egypt Safari Tours, White Desert Safari",
-    alternates: { canonical: url, languages: { en: url, ar: url, "x-default": url } },
+    alternates: { canonical: url,  },
     openGraph: {
       title: t("guide_compare_og_title"),
       description: t("guide_compare_og_desc"),

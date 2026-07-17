@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { FaStar } from "react-icons/fa6";
 import { useTranslations } from "next-intl";
 import styles from "./rating-card.module.scss";
@@ -29,10 +30,12 @@ export function TestimonialCard({ review }: { review: TestimonialData }) {
           <p className={styles.comment}>{review.comment || t("no_comment_available")}</p>
         </div>
         <div className={styles["avatar-wrapper"]}>
-          <img
+          <Image
             src={review.userImage || "https://ui-avatars.com/api/?name="}
             alt={review.userName}
             className={styles["avatar-img"]}
+            width={64}
+            height={64}
           />
         </div>
       </div>
