@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       { protocol: "https", hostname: "*.public.blob.vercel-storage.com" },
       { protocol: "https", hostname: "framerusercontent.com" },
+      { protocol: "https", hostname: "api.bedouintrails.com" },
     ],
   },
   sassOptions: {
