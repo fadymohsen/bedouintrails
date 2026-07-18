@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Link } from "@/lib/i18n/navigation";
 import { FaArrowRight } from "react-icons/fa";
 import { getTranslations, getLocale } from "next-intl/server";
@@ -6,6 +5,7 @@ import type { Metadata } from "next";
 import { prisma } from "@/lib/prisma";
 import type { Locale } from "@/lib/i18n/config";
 import { mapAboutUs } from "@/lib/mappers/misc";
+import SafeImage from "@/components/safe-image/safe-image";
 import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
 import PageHero from "@/components/page-hero/page-hero";
 import ScrollReveal from "@/components/scroll-reveal/scroll-reveal";
@@ -68,11 +68,12 @@ export default async function AboutPage() {
           key={item.id}
           className={`${styles.storyRow} ${index % 2 !== 0 ? styles.reverse : ""}`}
         >
+          <h2 className={styles.mobileTitle}>{item.title}</h2>
           <div className={styles.imageCol} style={{ position: "relative" }}>
-            <Image src={item.image ?? "/img/adventure3.webp"} alt={item.title} loading="lazy" fill style={{ objectFit: "cover" }} />
+            <SafeImage src={item.image || "/img/adventure3.webp"} alt={item.title} loading="lazy" fill style={{ objectFit: "cover" }} />
           </div>
           <div className={styles.textCol}>
-            <h2>{item.title}</h2>
+            <h2 className={styles.desktopTitle}>{item.title}</h2>
             <p>{item.description}</p>
           </div>
         </ScrollReveal>

@@ -1,4 +1,5 @@
 {
+  "navigation": "Navigation",
   "booking_details_tab": "Booking Details",
   "trip_details_tab": "Trip Details",
   "booking_data": "Booking Data",
@@ -1150,5 +1151,8 @@
   "meta_title_auth": "Sign In | Bedouin Trails",
   "meta_desc_auth": "Sign in or create an account to book desert safari tours with Bedouin Trails.",
   "meta_title_not_found": "Page Not Found | Bedouin Trails",
-  "meta_desc_not_found": "The page you are looking for does not exist or has been moved."
+  "meta_desc_not_found": "The page you are looking for does not exist or has been moved.",
+  "blogs_hero_title": "Discover Egypt's Desert Stories & Guides",
+  "related_trips_title": "Related Safaris",
+  "read_next_story": "Read Next Story"
 }

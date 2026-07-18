@@ -1,7 +1,7 @@
-import Image from "next/image";
 import { Link } from "@/lib/i18n/navigation";
 import { localize } from "@/lib/i18n/localized";
 import type { Locale } from "@/lib/i18n/config";
+import SafeImage from "@/components/safe-image/safe-image";
 import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
 import styles from "./blogs.module.scss";
 
@@ -45,6 +45,11 @@ export default function BlogLayout({
   const currentTitle = localize(current.titleEn, current.titleAr, locale, current.titleI18n);
   const currentContent = localize(current.contentEn, current.contentAr, locale, current.contentI18n);
   const currentUrl = `${SITE_URL}/blogs/${current.slug}`;
+
+  // Find the next blog in the sequence
+  const currentIndex = blogs.findIndex((b) => b.slug === current.slug);
+  const nextBlog = currentIndex !== -1 && blogs.length > 1 ? blogs[(currentIndex + 1) % blogs.length] : null;
+  const nextTitle = nextBlog ? localize(nextBlog.titleEn, nextBlog.titleAr, locale, nextBlog.titleI18n) : "";
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -92,7 +97,16 @@ export default function BlogLayout({
       <main className={styles["content-section"]}>
         <article>
           <div className={styles["image-container"]}>
-            {current.image && <Image src={current.image} alt={currentTitle} className={styles["header-image"]} width={1200} height={420} style={{ objectFit: "cover" }} />}
+            {current.image && (
+              <SafeImage
+                src={current.image}
+                alt={currentTitle}
+                className={styles["header-image"]}
+                width={1200}
+                height={420}
+                style={{ objectFit: "cover" }}
+              />
+            )}
           </div>
           <div className={styles["article-text"]}>
             <h1>{currentTitle}</h1>
@@ -108,6 +122,16 @@ export default function BlogLayout({
                   <p>{localize(faq.answerEn, faq.answerAr, locale, faq.answerI18n)}</p>
                 </div>
               ))}
+            </div>
+          )}
+
+          {nextBlog && (
+            <div className={styles["read-next-container"]}>
+              <span className={styles["next-label"]}>{t("read_next_story") || "Read Next Story"}</span>
+              <Link href={`/blogs/${nextBlog.slug}`} className={styles["next-link"]}>
+                <h3>{nextTitle}</h3>
+                <span className={styles["arrow-icon"]}>→</span>
+              </Link>
             </div>
           )}
         </article>

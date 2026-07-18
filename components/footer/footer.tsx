@@ -11,12 +11,12 @@ export default function Footer() {
     <div className={styles.footer} id="contact">
       <div className={styles.mountainDivider} />
       <div className={styles.wrap}>
+        <Link href="/" className={styles.footerLogoRowCentered}>
+          <Image src="/img/logo.png" alt="Bedouin Trails Logo" width={160} height={160} />
+        </Link>
         <div className={styles.columns}>
           <div className={styles.col}>
-            <Link href="/" className={styles.footerLogoRow}>
-              <Image src="/img/logo.png" alt="Bedouin Trails Logo" width={40} height={40} />
-              <span>Bedouin Trails</span>
-            </Link>
+            <h5 className={styles.colTitle}>{t("navigation")}</h5>
             <nav className={styles.footerMenu}>
               <Link href="/">{t("home")}</Link>
               <Link href="/about">{t("about")}</Link>
@@ -27,15 +27,15 @@ export default function Footer() {
           <div className={styles.col}>
             <h5 className={styles.colTitle}>{t("explore")}</h5>
             <nav className={styles.footerMenu}>
-              <Link href="/journeys">{t("journeys")}</Link>
+              <Link href="/journeys">{t("safari_trips")}</Link>
               <Link href="/blogs">{t("blogs")}</Link>
-              <Link href="/faq">{t("faq")}</Link>
+              <Link href="/contact">{t("contact")}</Link>
             </nav>
           </div>
 
           <div className={styles.col}>
-            <h5 className={styles.colTitle}>{t("stay_connected")}</h5>
-            <p className={styles.colText}>{t("stay_connected_message")}</p>
+            <h5 className={styles.colTitle}>{t("contact_us")}</h5>
+            <p className={styles.colText}>{t("about_footer_title")}</p>
             <div className={styles.contactLinks}>
               <a href="https://wa.link/qtrpve/" target="_blank" rel="noopener noreferrer">
                 <FaWhatsapp /> +20 10 02717380
@@ -86,10 +86,6 @@ export default function Footer() {
 
         <div className={styles.copyrights}>
           <p>{t("terms_privacy")}</p>
-        </div>
-
-        <div className={styles.watermark} aria-hidden="true">
-          Bedouin Trails
         </div>
       </div>
     </div>

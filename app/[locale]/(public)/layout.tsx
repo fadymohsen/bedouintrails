@@ -36,23 +36,16 @@ export default async function PublicLayout({ children }: { children: React.React
         ["--font-dm-sans" as string]: "var(--font-cairo)",
         ["--font-courier-prime" as string]: "var(--font-cairo)",
       }
-    : { ["--font-tanker" as string]: "Tanker" };
+    : { ["--font-tanker" as string]: "'Tanker'" };
 
   return (
-    <>
-      {/* Tanker (headings) — Fontshare, itf_ffl free/commercial license */}
-      <link
-        rel="stylesheet"
-        href="https://api.fontshare.com/v2/css?f[]=tanker@400&display=swap"
-      />
-      <div
-        className={`site-public ${dmSans.variable} ${courierPrime.variable} ${cairo.variable}`}
-        style={fontVars}
-      >
-        <Navbar />
-        <div className="page-content">{children}</div>
-        <Footer />
-      </div>
-    </>
+    <div
+      className={`site-public ${dmSans.variable} ${courierPrime.variable} ${cairo.variable}`}
+      style={fontVars}
+    >
+      <Navbar />
+      <div className="page-content">{children}</div>
+      <Footer />
+    </div>
   );
 }

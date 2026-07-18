@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "@/lib/i18n/navigation";
 import { useTranslations } from "next-intl";
 import { apiPost, ApiClientError } from "@/lib/api-client";
+import { FaWhatsapp } from "react-icons/fa";
 import styles from "./book-form.module.scss";
 
 export type BookableTrip = { id: number; name: string; image: string | null; description: string | null };
@@ -35,6 +36,28 @@ export default function BookFormClient({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<{ type: "success" | "error"; message: string } | null>(null);
 
+  // Popup Redirect Modal state
+  const [showPopup, setShowPopup] = useState(false);
+  const [countdown, setCountdown] = useState(5);
+  const [redirectUrl, setRedirectUrl] = useState("");
+
+  useEffect(() => {
+    if (!showPopup) return;
+    if (countdown <= 0) {
+      // Timeout: Redirect user to WhatsApp and forward parent tab to trips page
+      window.open(redirectUrl, "_blank");
+      router.push("/journeys");
+      setShowPopup(false);
+      return;
+    }
+
+    const timer = setTimeout(() => {
+      setCountdown((prev) => prev - 1);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, [showPopup, countdown, redirectUrl, router]);
+
   function validateForm(): boolean {
     const newErrors: FormErrors = {};
     if (!selectedTripId) newErrors.tripId = t("trap_id_required");
@@ -60,15 +83,44 @@ export default function BookFormClient({
     setErrors((prev) => ({ ...prev, [name]: undefined }));
   }
 
+  const handleManualRedirect = () => {
+    window.open(redirectUrl, "_blank");
+    router.push("/journeys");
+    setShowPopup(false);
+  };
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!validateForm()) return;
     setIsSubmitting(true);
     setSubmitStatus(null);
 
+    const tripName = trip ? trip.name : trips.find(t2 => String(t2.id) === selectedTripId)?.name || "";
+
+    const message = `Hello Bedouin Trails, I want to book a trip:
+Trip: ${tripName}
+Name: ${formData.firstName} ${formData.lastName}
+Email: ${formData.email}
+Phone: ${formData.phone}
+Adults: ${formData.numberOfAdults}
+Children: ${formData.numberOfChildren}
+Start Date: ${formData.startDate}
+End Date: ${formData.endDate}
+Additional Notes: ${formData.description || "None"}`;
+
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=201002717380&text=${encodeURIComponent(message)}`;
+
     try {
-      await apiPost("/api/orders", { ...formData, trapId: Number(selectedTripId) });
-      setSubmitStatus({ type: "success", message: t("booking_success") });
+      try {
+        await apiPost("/api/orders", { ...formData, trapId: Number(selectedTripId) });
+      } catch (dbErr) {
+        console.warn("Database order saving skipped/failed: ", dbErr);
+      }
+
+      setRedirectUrl(whatsappUrl);
+      setShowPopup(true);
+      setCountdown(5);
+
       setFormData({
         firstName: "",
         lastName: "",
@@ -228,11 +280,6 @@ export default function BookFormClient({
               <div className={`${styles["status-message"]} ${styles[submitStatus.type]}`}>
                 <div className={styles["status-icon"]}>{submitStatus.type === "success" ? "✓" : "✗"}</div>
                 <p>{submitStatus.message}</p>
-                {submitStatus.type === "success" && (
-                  <button className={styles["view-booking-link"]} onClick={() => router.push("/my-journeys")}>
-                    {t("view_booking")}
-                  </button>
-                )}
               </div>
             )}
           </div>
@@ -251,6 +298,25 @@ export default function BookFormClient({
           />
         </div>
       </div>
+
+      {showPopup && (
+        <div className={styles.redirectModalOverlay}>
+          <div className={styles.redirectModal}>
+            <FaWhatsapp className={styles.icon} />
+            <h2>{t("whatsapp_redirect_title") || "Confirm Your Booking"}</h2>
+            <p>
+              {t("whatsapp_redirect_desc") ||
+                "Please send the prepared booking message on WhatsApp to confirm your safari package details with our guides."}
+            </p>
+            <div className={styles.countdownText}>
+              {t("redirecting_in") || "Redirecting in"} {countdown}s...
+            </div>
+            <button className={styles.actionButton} onClick={handleManualRedirect}>
+              <FaWhatsapp /> {t("go_to_whatsapp") || "Go to WhatsApp Now"}
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

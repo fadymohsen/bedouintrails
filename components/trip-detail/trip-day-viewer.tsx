@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import SafeImage from "@/components/safe-image/safe-image";
 import styles from "./trip-detail.module.scss";
 
 export type TripDayCardData = { id: number; title: string; description: string | null; image: string | null };
@@ -21,14 +22,6 @@ export default function TripDayViewer({
   const [currentDay, setCurrentDay] = useState(days[0]?.dayNumber ?? 1);
   const currentDayData = days.find((day) => day.dayNumber === currentDay);
 
-  function goToPrevDay() {
-    if (currentDay > 1) setCurrentDay(currentDay - 1);
-  }
-
-  function goToNextDay() {
-    if (currentDay < days.length) setCurrentDay(currentDay + 1);
-  }
-
   return (
     <div className={styles["part-2"]}>
       <h1>{t("trip_details")}</h1>
@@ -38,9 +31,6 @@ export default function TripDayViewer({
           <p>{interfaceFrom}</p>
         </div>
         <div className={styles["days-navigation-container"]}>
-          <button className={styles["nav-arrow-btn"]} onClick={goToPrevDay} disabled={currentDay <= 1}>
-            <span className={styles["arrow-icon"]}>‹</span>
-          </button>
           <div className={styles["days-strip"]}>
             {days.map((day) => (
               <div
@@ -53,9 +43,6 @@ export default function TripDayViewer({
               </div>
             ))}
           </div>
-          <button className={styles["nav-arrow-btn"]} onClick={goToNextDay} disabled={currentDay >= days.length}>
-            <span className={styles["arrow-icon"]}>›</span>
-          </button>
         </div>
         <div className={styles["start-end"]}>
           <p className={styles.pointLabel}>{t("end_point")}</p>
@@ -65,15 +52,15 @@ export default function TripDayViewer({
 
       <div className={styles.journeyDesCard}>
         {currentDayData && currentDayData.cards.length > 0 ? (
-          currentDayData.cards.map((card, index) => (
+          currentDayData.cards.map((card) => (
             <div className={styles["step-card"]} key={card.id}>
-              <div className={styles.badge}>{index + 1}</div>
+              <div className={styles.badge}>{currentDay}</div>
               <div className={styles["image-wrapper"]} style={{ position: "relative" }}>
-                {card.image && <Image src={card.image} alt={card.title} fill style={{ objectFit: "cover" }} />}
+                {card.image && <SafeImage src={card.image} alt={card.title} fill style={{ objectFit: "cover" }} />}
               </div>
               <div className={styles.content}>
                 <h3>
-                  {t("day")} {currentDay} - {t("card_label")}: {card.title}
+                  {t("day")} {currentDay}: {card.title}
                 </h3>
                 <p>{card.description}</p>
               </div>

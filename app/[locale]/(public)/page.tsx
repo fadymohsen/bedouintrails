@@ -6,6 +6,7 @@ import { prisma } from "@/lib/prisma";
 import type { Locale } from "@/lib/i18n/config";
 import { mapTrapForCard } from "@/lib/mappers/trap";
 import { mapSliderForHero, mapBlogForHomeSection, mapFaq, mapAboutUs, mapReviewForTestimonial } from "@/lib/mappers/misc";
+import SafeImage from "@/components/safe-image/safe-image";
 import HeroCarousel from "@/components/carousel/hero-carousel";
 import TripCarousel from "@/components/carousel/trip-carousel";
 import Card from "@/components/card/card";
@@ -183,13 +184,13 @@ export default async function HomePage() {
         <div className={styles.spotlightSection}>
           <ScrollReveal className={styles.spotlightCard}>
             {spotlightImages[0] && (
-              <div className={`${styles.spotlightPolaroid} ${styles.left}`} style={{ position: "relative" }}>
-                <Image src={spotlightImages[0]} alt={spotlightName ?? ""} fill style={{ objectFit: "cover" }} />
+              <div className={`${styles.spotlightPolaroid} ${styles.left}`}>
+                <SafeImage src={spotlightImages[0]} alt={spotlightName ?? ""} width={170} height={150} />
               </div>
             )}
             {spotlightImages[1] && (
-              <div className={`${styles.spotlightPolaroid} ${styles.right}`} style={{ position: "relative" }}>
-                <Image src={spotlightImages[1]} alt={spotlightName ?? ""} fill style={{ objectFit: "cover" }} />
+              <div className={`${styles.spotlightPolaroid} ${styles.right}`}>
+                <SafeImage src={spotlightImages[1]} alt={spotlightName ?? ""} width={170} height={150} />
               </div>
             )}
             <span className={styles.spotlightEyebrow}>{t("featured_journeys")}</span>
@@ -250,8 +251,8 @@ export default async function HomePage() {
           <div className={styles.historyGrid}>
             {historyEntries.map((entry, i) => (
               <ScrollReveal key={entry.id} className={styles.historyItem} delay={i * 100}>
-                <Image src={entry.image ?? "/img/adventure3.webp"} alt={entry.title} loading="lazy" width={400} height={300} />
                 <h3>{entry.title}</h3>
+                <SafeImage src={entry.image || `/img/adventure${i % 2 === 0 ? "3" : "4"}.webp`} alt={entry.title} loading="lazy" width={400} height={300} style={{ objectFit: "cover", borderRadius: "20px" }} />
                 <p>{entry.description}</p>
                 {HISTORY_LINKS[i] && (
                   <Link href={HISTORY_LINKS[i].href} className={styles.textLink}>
@@ -275,7 +276,7 @@ export default async function HomePage() {
           <div className={styles.journalList}>
             {homeBlogs.map((blog, i) => (
               <ScrollReveal key={blog.id} as="div" className={styles.journalItem} delay={i * 100}>
-                <Image src={blog.image ?? "/img/adventure.webp"} alt={blog.title} loading="lazy" width={400} height={300} />
+                <SafeImage src={blog.image || `/img/adventure${i % 2 === 0 ? "" : "1"}.webp`} alt={blog.title} loading="lazy" width={400} height={300} style={{ objectFit: "cover", borderRadius: "20px" }} />
                 <div>
                   <span className={styles.journalEyebrow}>{t("blogs")}</span>
                   <h3 className={styles.journalTitle}>{blog.title}</h3>
@@ -313,7 +314,7 @@ export default async function HomePage() {
               rel="noopener noreferrer"
               href="https://www.instagram.com/the.white.and.black.desert?igsh=aHdjbzB6ajJ5dTBk"
             >
-              <Image src={card.image ?? "/img/adventure1.webp"} alt={card.name} loading="lazy" width={300} height={300} />
+              <SafeImage src={card.image || "/img/adventure1.webp"} alt={card.name} loading="lazy" width={300} height={300} style={{ objectFit: "cover", borderRadius: "20px" }} />
               <div className={styles.socialLabel}>
                 <strong>{card.name}</strong>
               </div>

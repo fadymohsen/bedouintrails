@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "@/lib/i18n/navigation";
 import { useTranslations } from "next-intl";
+import SafeImage from "@/components/safe-image/safe-image";
 import styles from "./carousel.module.scss";
 
 type TripHeroCarouselProps = {
@@ -36,11 +37,24 @@ export default function TripHeroCarousel({ images, isOrder = false, orderStatus,
           <div
             key={index}
             className={`${styles.bgLayer} ${index === activeIndex ? styles.active : ""}`}
-            style={{
-              backgroundImage: `linear-gradient(0deg, rgba(30, 30, 30, 0.16), rgba(30, 30, 30, 0.16)), url(${image})`,
-            }}
+            style={{ overflow: "hidden" }}
           >
-            <div className={styles.card_nav}>
+            <SafeImage
+              src={image}
+              alt="Desert safari slide"
+              fill
+              style={{ objectFit: "cover", zIndex: -2 }}
+              priority={index === 0}
+            />
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                background: "linear-gradient(0deg, rgba(30, 30, 30, 0.16), rgba(30, 30, 30, 0.16))",
+                zIndex: -1,
+              }}
+            />
+            <div className={styles.card_nav} style={{ position: "relative", zIndex: 1 }}>
               <div className={styles["content-logo"]}>
                 <Image src="/img/bedouin-trail.webp" alt="Bedouin Trail Logo" loading="lazy" width={120} height={40} />
               </div>
@@ -73,7 +87,7 @@ export default function TripHeroCarousel({ images, isOrder = false, orderStatus,
           return (
             <div key={index} className={`${styles.thumbNode} ${posClass}`} onClick={() => setActiveIndex(index)}>
               <div className={styles.imgBox} style={{ position: "relative", overflow: "hidden" }}>
-                <Image src={image} alt="Desert safari slide" fill style={{ objectFit: "cover" }} />
+                <SafeImage src={image} alt="Desert safari slide thumbnail" fill style={{ objectFit: "cover" }} />
               </div>
               {position === 0 && <div className={styles.activeFrame} />}
             </div>

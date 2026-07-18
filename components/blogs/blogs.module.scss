@@ -68,7 +68,6 @@
 
   @media (max-width: 992px) {
     flex: auto;
-    order: 1;
   }
 
   .image-container {
@@ -160,8 +159,46 @@
   height: fit-content;
 
   @media (max-width: 992px) {
-    order: 2;
     flex: auto;
+  }
+
+  @media (max-width: 768px) {
+    background: transparent;
+    padding: 0;
+
+    h2 {
+      margin-bottom: 16px;
+      padding-left: 8px;
+    }
+
+    .article-links {
+      flex-direction: row;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding: 4px 8px 16px 8px;
+      gap: 12px;
+      -webkit-overflow-scrolling: touch;
+      
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    .link-item {
+      flex: 0 0 280px;
+      scroll-snap-align: start;
+      background: fr.$surface-2;
+      padding: 16px 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+      &.active {
+        border-inline-start: none;
+        border-bottom: 3px solid fr.$brand-primary;
+        background: fr.$surface-3;
+      }
+    }
   }
 
   h2 {
@@ -231,6 +268,151 @@
       .title {
         color: fr.$text-heading;
       }
+    }
+  }
+}
+
+// ---- Blogs Grid List ----
+.blogs-grid-container {
+  max-width: fr.$section-max-width;
+  margin: 0 auto;
+  padding: 50px 24px 60px;
+}
+
+.blogs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  width: 100%;
+
+  @media (max-width: 992px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+.blog-card {
+  background: fr.$surface-2;
+  border-radius: fr.$radius;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid hsla(0, 0%, 100%, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  text-decoration: none;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    border-color: fr.$brand-primary;
+  }
+
+  .card-image-wrapper {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-content {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 12px;
+
+    .eyebrow {
+      font-family: fr.$font-accent;
+      font-size: fr.$accent-small-size;
+      color: fr.$brand-primary;
+      text-transform: uppercase;
+    }
+
+    h3 {
+      font-family: fr.$font-display;
+      font-size: 1.3rem;
+      line-height: 1.3em;
+      color: fr.$text-heading;
+      margin: 0;
+      font-weight: 400;
+    }
+
+    p {
+      font-family: fr.$font-body;
+      font-size: fr.$body-small-size;
+      line-height: fr.$body-small-line;
+      color: fr.$text-body-muted;
+      margin: 0;
+      flex-grow: 1;
+    }
+
+    .read-more-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: fr.$brand-primary;
+      font-weight: 600;
+      font-size: 14px;
+      margin-top: auto;
+    }
+  }
+}
+
+// ---- Read Next Banner ----
+.read-next-container {
+  margin-top: 50px;
+  padding-top: 30px;
+  border-top: 1px solid hsla(0, 0%, 100%, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  .next-label {
+    font-family: fr.$font-accent;
+    font-size: 12px;
+    color: fr.$brand-primary;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .next-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: fr.$surface-2;
+    padding: 24px 30px;
+    border-radius: fr.$radius;
+    text-decoration: none;
+    border: 1px solid hsla(0, 0%, 100%, 0.06);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+
+    &:hover {
+      transform: translateX(4px);
+      border-color: fr.$brand-primary;
+
+      .arrow-icon {
+        transform: translateX(6px);
+      }
+    }
+
+    h3 {
+      font-family: fr.$font-display;
+      font-size: 1.4rem;
+      color: fr.$text-heading;
+      margin: 0;
+      font-weight: 400;
+    }
+
+    .arrow-icon {
+      font-size: 1.8rem;
+      color: fr.$brand-primary;
+      transition: transform 0.2s ease;
     }
   }
 }

@@ -21,6 +21,11 @@
   flex-direction: column;
   align-items: center;
   gap: fr.$gap-lg;
+
+  @media (max-width: 900px) {
+    padding: 24px 16px 0px 16px;
+    gap: fr.$gap-md;
+  }
 }
 
 .columns {
@@ -30,8 +35,9 @@
   gap: fr.$gap-md;
 
   @media (max-width: 900px) {
-    grid-template-columns: 1fr;
-    text-align: center;
+    grid-template-columns: 1fr 1fr;
+    gap: fr.$gap-sm;
+    text-align: start;
   }
 }
 
@@ -42,6 +48,29 @@
 
   @media (max-width: 900px) {
     align-items: center;
+    text-align: center;
+
+    &:last-child {
+      grid-column: span 2;
+      margin-top: 16px;
+    }
+  }
+}
+
+.footerLogoRowCentered {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  margin-bottom: fr.$gap-md;
+
+  img {
+    width: 160px;
+    height: 160px;
+  }
+
+  @media (max-width: 768px) {
+    display: flex;
   }
 }
 

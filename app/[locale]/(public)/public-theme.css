@@ -28,19 +28,31 @@
 
   background: var(--surface-1);
   color: var(--text-body);
+}
+
+.site-public,
+.site-public * {
   font-family: var(--font-dm-sans), sans-serif;
 }
 
 .site-public h1,
+.site-public h1 *,
 .site-public h2,
+.site-public h2 *,
 .site-public h3,
+.site-public h3 *,
 .site-public h4,
+.site-public h4 *,
 .site-public h5,
-.site-public .display {
-  font-family: var(--font-tanker), sans-serif;
+.site-public h5 *,
+.site-public h6,
+.site-public h6 *,
+.site-public .display,
+.site-public .display * {
+  font-family: var(--font-tanker), sans-serif !important;
   color: var(--text-heading);
   font-weight: 400;
-  margin: 0;
+  margin: 0 0 0.5rem 0;
 }
 
 /* Exact desktop sizes from Framer's TextStyles (Heading 1-5 + Display). Framer
@@ -49,22 +61,22 @@
    the same desktop-down-to-mobile scaling instead of an exact per-breakpoint match. */
 .site-public h1 {
   font-size: clamp(2.25rem, 4vw + 1rem, 4rem); /* 64px desktop */
-  line-height: 1em;
+  line-height: 1.15em;
 }
 
 .site-public .display {
   font-size: clamp(2.5rem, 5vw + 1rem, 4.75rem); /* 76px desktop */
-  line-height: 1em;
+  line-height: 1.15em;
 }
 
 .site-public h2 {
   font-size: clamp(1.75rem, 3vw + 1rem, 2.8125rem); /* 45px desktop */
-  line-height: 1.1em;
+  line-height: 1.2em;
 }
 
 .site-public h3 {
   font-size: clamp(1.5rem, 2vw + 1rem, 2rem); /* 32px desktop */
-  line-height: 1.2em;
+  line-height: 1.25em;
 }
 
 .site-public h4 {
@@ -79,8 +91,12 @@
 
 .site-public p {
   font-size: 1rem; /* 16px, Body */
-  line-height: 1.5em;
-  margin: 0;
+  line-height: 1.6em;
+  margin: 0 0 1rem 0;
+}
+
+.site-public p:last-child {
+  margin-bottom: 0;
 }
 
 .site-public .lead {

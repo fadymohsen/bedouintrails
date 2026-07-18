@@ -39,7 +39,6 @@ export default function NavbarClient({ user }: { user: NavbarUser }) {
     { path: "/about", label: t("about") },
     { path: "/journeys", label: t("journeys") },
     { path: "/blogs", label: t("blogs") },
-    { path: "/my-journeys", label: t("my_journeys") },
     { path: "/faq", label: t("faq") },
     { path: "/contact", label: t("contact") },
   ];
@@ -66,7 +65,6 @@ export default function NavbarClient({ user }: { user: NavbarUser }) {
       </div>
 
       <div className={styles.navDropdown} ref={dropdownRef}>
-        <span className={styles.navDropdown__activeLabel}>{activeLinkLabel}</span>
         <button
           className={`${styles.navDropdown__trigger} ${dropdownOpen ? styles.open : ""}`}
           onClick={() => setDropdownOpen((prev) => !prev)}
@@ -77,51 +75,42 @@ export default function NavbarClient({ user }: { user: NavbarUser }) {
         <LanguageSwitcher />
         {dropdownOpen && (
           <div className={styles.navDropdown__menu} style={{ direction: navDirection }}>
-            {navLinks.map((link) => (
-              <div
-                key={link.path}
-                className={`${styles.navDropdown__item} ${isActive(link.path) ? styles.active : ""}`}
-              >
-                <Link href={link.path} onClick={() => setDropdownOpen(false)}>
-                  {link.label}
-                </Link>
+            <div className={styles.navDropdown__menuHeader}>
+              <div className={styles.navDropdown__menuLogo}>
+                <Image src="/img/logo.png" alt="Bedouin Trails" width={40} height={40} />
               </div>
-            ))}
-
-            <div className={styles.navDropdown__divider} />
-
-            <div className={styles.navDropdown__auth}>
-              {user ? (
-                <Link
-                  href="/profile"
-                  className={styles.navDropdown__profile}
+              <div className={styles.navDropdown__menuHeaderActions}>
+                <LanguageSwitcher />
+                <button
+                  className={styles.navDropdown__closeBtn}
                   onClick={() => setDropdownOpen(false)}
+                  aria-label="Close navigation"
                 >
-                  <Image src={user.image || "/img/profile-img.png"} alt={user.firstName || "User"} width={32} height={32} />
-                  <span>{user.firstName}</span>
-                  <FaBars size={18} />
-                </Link>
-              ) : (
-                <Link href="/auth" className={styles.navDropdown__login} onClick={() => setDropdownOpen(false)}>
-                  {t("login")}
-                </Link>
-              )}
+                  <span style={{ fontSize: "32px", color: "white", lineHeight: 1 }}>&times;</span>
+                </button>
+              </div>
             </div>
+
+            <div className={styles.navDropdown__links}>
+              {navLinks.map((link) => (
+                <div
+                  key={link.path}
+                  className={`${styles.navDropdown__item} ${isActive(link.path) ? styles.active : ""}`}
+                >
+                  <Link href={link.path} onClick={() => setDropdownOpen(false)}>
+                    {link.label}
+                  </Link>
+                </div>
+              ))}
+            </div>
+
+            {/* Auth block and divider removed */}
           </div>
         )}
       </div>
 
       <div className={styles.profile}>
-        {user ? (
-          <Link href="/profile" className={styles.userProfile}>
-            <IoSettingsOutline size={30} />
-            <Image src={user.image || "/img/profile-img.png"} alt={user.firstName || "User Profile"} width={40} height={40} />
-          </Link>
-        ) : (
-          <Link href="/auth" className={styles.loginBtnNav}>
-            {t("login")}
-          </Link>
-        )}
+        {/* Profile and login button actions hidden */}
         <LanguageSwitcher />
       </div>
     </div>

@@ -1,7 +1,7 @@
-import Image from "next/image";
 import { Link } from "@/lib/i18n/navigation";
 import { FaStar } from "react-icons/fa";
 import { useTranslations } from "next-intl";
+import SafeImage from "@/components/safe-image/safe-image";
 import type { TripCardData } from "@/lib/mappers/trap";
 import styles from "./card.module.scss";
 
@@ -27,7 +27,7 @@ export default function Card({ data, href }: CardProps) {
           </div>
         )}
 
-        <Image
+        <SafeImage
           src={data.image || "/img/adventure1.webp"}
           alt={data.name}
           loading="lazy"

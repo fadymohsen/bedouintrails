@@ -123,14 +123,6 @@
   position: relative;
   overflow: visible;
 
-  &__activeLabel {
-    font-family: fr.$font-body;
-    font-size: 13px;
-    font-weight: 600;
-    white-space: nowrap;
-    color: fr.$link-unhovered;
-  }
-
   &__trigger {
     display: flex;
     align-items: center;
@@ -156,69 +148,106 @@
 
   &__menu {
     position: fixed;
-    top: 7%;
-    right: 6%;
-    transform: translateX(-50%);
-    min-width: 200px;
-    max-width: calc(100vw - 32px);
-    background: fr.$surface-2;
-    border: 1.5px solid hsla(0, 0%, 100%, 0.1);
-    border-radius: fr.$radius;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-    overflow: hidden;
-    z-index: 9999;
-    animation: dropdownFade 0.18s ease;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: fr.$surface-1;
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+    padding: 24px 24px 48px;
+    box-sizing: border-box;
+    animation: fullscreenFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  &__menuHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 24px;
+    border-bottom: 1px solid hsla(0, 0%, 100%, 0.08);
+    padding-bottom: 16px;
+  }
+
+  &__menuHeaderActions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  &__closeBtn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    color: #fff;
+    padding: 0;
+  }
+
+  &__links {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
   }
 
   &__item {
+    text-align: center;
+
     a {
-      display: block;
-      padding: 12px 18px;
-      font-family: fr.$font-body;
-      font-size: 14px;
-      color: fr.$link-unhovered;
+      font-family: fr.$font-display;
+      font-size: clamp(1.8rem, 6vw, 2.5rem);
+      color: fr.$text-heading;
       text-decoration: none;
-      transition: background 0.15s;
+      transition: color 0.2s ease;
+      display: block;
+      padding: 10px 20px;
 
       &:hover {
-        background: fr.$surface-3;
-        color: fr.$link-hovered;
+        color: fr.$brand-primary;
       }
     }
 
     &.active a {
       color: fr.$brand-primary;
       font-weight: 600;
-      background: fr.$surface-3;
-      border-inline-start: 3px solid fr.$brand-primary;
     }
   }
 
   &__divider {
     height: 1px;
-    background: hsla(0, 0%, 100%, 0.1);
-    margin: 4px 0;
+    background: hsla(0, 0%, 100%, 0.08);
+    margin: 16px 0;
   }
 
   &__auth {
-    padding: 15px 15px;
+    padding: 16px 0;
+    display: flex;
+    justify-content: center;
+    width: 100%;
   }
 
   &__login {
-    display: flex;
-    width: 100%;
-    text-align: center;
+    display: inline-flex;
     justify-content: center;
-    padding: 8px;
+    align-items: center;
+    padding: 14px 48px;
     background: fr.$brand-primary;
     color: #fff;
-    border-radius: 8px;
+    border-radius: 100px;
     font-family: fr.$font-body;
     font-weight: 600;
-    font-size: 12px;
+    font-size: 16px;
     text-decoration: none;
     transition: background 0.2s;
-    box-sizing: border-box;
 
     &:hover {
       background: fr.$brand-primary-hovered;
@@ -228,11 +257,12 @@
   &__profile {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 8px 10px;
-    border-radius: 8px;
-    text-decoration: none;
+    gap: 12px;
+    padding: 12px 24px;
+    border-radius: 100px;
+    background: fr.$surface-2;
     color: fr.$link-unhovered;
+    text-decoration: none;
     transition: background 0.15s;
 
     &:hover {
@@ -248,9 +278,8 @@
     }
 
     span {
-      flex: 1;
       font-family: fr.$font-body;
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 500;
     }
   }
@@ -262,14 +291,13 @@
   margin: 10px;
 }
 
-@keyframes dropdownFade {
+@keyframes fullscreenFadeIn {
   from {
     opacity: 0;
-    transform: translateX(-50%) translateY(-6px);
+    transform: translateY(-20px);
   }
-
   to {
     opacity: 1;
-    transform: translateX(-50%) translateY(0);
+    transform: translateY(0);
   }
 }

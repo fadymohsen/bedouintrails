@@ -11,10 +11,12 @@ export function localize(
   en: string,
   ar: string | null | undefined,
   locale: Locale,
-  i18n?: Record<string, string> | null,
+  i18n?: any,
 ): string {
   if (locale === "en") return en;
   if (locale === "ar" && ar) return ar;
-  if (i18n && i18n[locale]) return i18n[locale];
+  if (i18n && typeof i18n === "object" && (i18n as any)[locale]) {
+    return (i18n as any)[locale];
+  }
   return en;
 }

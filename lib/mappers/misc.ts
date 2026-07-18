@@ -2,24 +2,26 @@ import type { Locale } from "@/lib/i18n/config";
 import { localize } from "@/lib/i18n/localized";
 import type { HeroSlide } from "@/components/carousel/hero-carousel";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type I18nJson = Record<string, string> | any;
+
 type SliderLike = {
   image: string;
   titleEn: string | null;
   titleAr: string | null;
+  titleI18n?: I18nJson;
   descriptionEn: string | null;
   descriptionAr: string | null;
+  descriptionI18n?: I18nJson;
 };
 
 export function mapSliderForHero(slider: SliderLike, locale: Locale): HeroSlide {
   return {
     image: slider.image,
-    title: localize(slider.titleEn ?? "", slider.titleAr, locale),
-    description: localize(slider.descriptionEn ?? "", slider.descriptionAr, locale),
+    title: localize(slider.titleEn ?? "", slider.titleAr, locale, slider.titleI18n),
+    description: localize(slider.descriptionEn ?? "", slider.descriptionAr, locale, slider.descriptionI18n),
   };
 }
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type I18nJson = Record<string, string> | any;
 
 type BlogLike = {
   id: number;
@@ -56,16 +58,18 @@ type AboutUsLike = {
   id: number;
   titleEn: string;
   titleAr: string | null;
+  titleI18n?: I18nJson;
   descriptionEn: string;
   descriptionAr: string | null;
+  descriptionI18n?: I18nJson;
   image: string | null;
 };
 
 export function mapAboutUs(entry: AboutUsLike, locale: Locale) {
   return {
     id: entry.id,
-    title: localize(entry.titleEn, entry.titleAr, locale),
-    description: localize(entry.descriptionEn, entry.descriptionAr, locale),
+    title: localize(entry.titleEn, entry.titleAr, locale, entry.titleI18n),
+    description: localize(entry.descriptionEn, entry.descriptionAr, locale, entry.descriptionI18n),
     image: entry.image,
   };
 }
@@ -87,12 +91,20 @@ export function mapReviewForTestimonial(review: ReviewLike) {
   };
 }
 
-type FaqLike = { id: number; questionEn: string; questionAr: string | null; answerEn: string; answerAr: string | null };
+type FaqLike = {
+  id: number;
+  questionEn: string;
+  questionAr: string | null;
+  questionI18n?: I18nJson;
+  answerEn: string;
+  answerAr: string | null;
+  answerI18n?: I18nJson;
+};
 
 export function mapFaq(faq: FaqLike, locale: Locale) {
   return {
     id: faq.id,
-    question: localize(faq.questionEn, faq.questionAr, locale),
-    answer: localize(faq.answerEn, faq.answerAr, locale),
+    question: localize(faq.questionEn, faq.questionAr, locale, faq.questionI18n),
+    answer: localize(faq.answerEn, faq.answerAr, locale, faq.answerI18n),
   };
 }

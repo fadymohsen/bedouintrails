@@ -30,12 +30,20 @@
 
 .sectionHeadTop {
   padding-top: calc(fr.$gap-xl + fr.$gap-lg);
+
+  @media (max-width: 768px) {
+    padding-top: 48px;
+  }
 }
 
 .sectionHeadCenter {
   justify-content: center;
   padding-bottom: fr.$gap-xl;
   text-align: center;
+
+  @media (max-width: 768px) {
+    padding-bottom: 32px;
+  }
 }
 
 .adventuresSlider {
@@ -46,6 +54,10 @@
   display: flex;
   justify-content: center;
   padding: 0 24px fr.$gap-xl;
+
+  @media (max-width: 768px) {
+    padding-bottom: 48px;
+  }
 }
 
 .sectionLink {
@@ -74,6 +86,13 @@
   margin: 0 auto;
   padding: fr.$gap-lg fr.$gap-md;
   gap: fr.$gap-xl;
+
+  @media (max-width: 768px) {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    padding: 24px 12px;
+  }
 }
 
 .trustItem {
@@ -93,11 +112,22 @@
     height: 80%;
     width: 1px;
     background: hsla(0, 0%, 100%, 0.12);
+
+    @media (max-width: 768px) {
+      inset-inline-start: 0;
+      top: 20%;
+      height: 60%;
+    }
   }
 
   h3 {
     font-size: fr.$h2-size;
     line-height: fr.$h2-line;
+
+    @media (max-width: 768px) {
+      font-size: clamp(1.4rem, 4vw, 2.2rem);
+      margin-bottom: 2px;
+    }
   }
 
   p {
@@ -105,6 +135,10 @@
     font-size: fr.$accent-small-size;
     color: fr.$text-body-muted;
     margin: 0;
+
+    @media (max-width: 768px) {
+      font-size: clamp(0.7rem, 2.2vw, 0.95rem);
+    }
   }
 }
 
@@ -142,6 +176,12 @@
     grid-template-columns: 1fr;
     gap: fr.$gap-md;
     padding: 48px 24px;
+    margin-bottom: 48px;
+  }
+
+  @media (max-width: 768px) {
+    padding: 32px 16px;
+    margin-bottom: 48px;
   }
 }
 
@@ -294,6 +334,10 @@
   max-width: fr.$section-max-width;
   margin: 0 auto;
   padding: 0 24px fr.$gap-xl;
+
+  @media (max-width: 768px) {
+    padding-bottom: 48px;
+  }
 }
 
 .spotlightCard {
@@ -384,6 +428,10 @@
   @media (max-width: 900px) {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  @media (max-width: 768px) {
+    padding-bottom: 48px;
+  }
 }
 
 .activityTile {
@@ -430,6 +478,10 @@
   flex-direction: column;
   align-items: center;
   gap: fr.$gap-md;
+
+  @media (max-width: 768px) {
+    padding: 48px 16px;
+  }
 }
 
 .testimonialQuote {
@@ -458,15 +510,18 @@
 
 // ---- Why choose us ----
 .whyChooseSection {
-  display: grid;
-  grid-template-columns: 1fr 1.3fr;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
   gap: fr.$gap-lg;
   max-width: fr.$section-max-width;
   margin: 0 auto;
   padding: fr.$section-padding;
 
-  @media (max-width: 900px) {
-    grid-template-columns: 1fr;
+  @media (max-width: 768px) {
+    padding: 48px 16px;
+    gap: fr.$gap-md;
   }
 
   h2 {
@@ -474,6 +529,7 @@
     line-height: fr.$display-line;
     text-transform: uppercase;
     margin: 0;
+    text-align: center;
 
     @media (max-width: 768px) {
       font-size: 2.4rem;
@@ -482,15 +538,23 @@
 }
 
 .whyChooseList {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: fr.$gap-lg;
+  width: 100%;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+    gap: fr.$gap-md;
+  }
 }
 
 .whyChooseItem {
   display: flex;
+  flex-direction: column;
   gap: fr.$gap-md;
-  align-items: flex-start;
+  align-items: center;
+  text-align: center;
 
   .icon {
     flex-shrink: 0;
@@ -503,6 +567,7 @@
     background: fr.$surface-3;
     color: fr.$brand-primary;
     font-size: 1.2rem;
+    margin-bottom: 4px;
   }
 
   h3 {
@@ -521,11 +586,14 @@
     margin: 0;
   }
 }
-
 // ---- History / purpose (about-us entries) ----
 .historySection {
   padding: fr.$section-padding;
   padding-top: 0;
+
+  @media (max-width: 768px) {
+    padding: 0 16px 48px;
+  }
 }
 
 .historyHeading {
@@ -563,7 +631,7 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: fr.$gap-sm;
+  gap: 20px;
 
   img {
     width: 100%;
@@ -595,6 +663,10 @@
   margin: 0 auto;
   padding: fr.$section-padding;
   padding-top: 0;
+
+  @media (max-width: 768px) {
+    padding: 0 16px 48px;
+  }
 }
 
 .journalList {
@@ -639,7 +711,7 @@
   font-size: fr.$h4-size;
   line-height: fr.$h4-line;
   font-weight: 400;
-  margin: 6px 0 8px;
+  margin: 8px 0 12px;
 }
 
 .journalExcerpt {
@@ -647,7 +719,7 @@
   font-size: fr.$body-small-size;
   line-height: fr.$body-small-line;
   color: fr.$text-body-muted;
-  margin: 0 0 10px;
+  margin: 0 0 16px;
 }
 
 .no-faqs {
@@ -665,6 +737,10 @@
   max-width: 900px;
   margin: 0 auto;
   padding: fr.$section-padding;
+
+  @media (max-width: 768px) {
+    padding: 48px 16px;
+  }
 
   h2 {
     text-align: center;
@@ -805,6 +881,10 @@
   align-items: center;
   gap: fr.$gap-lg;
   text-align: center;
+
+  @media (max-width: 768px) {
+    padding: 48px 16px;
+  }
 }
 
 .socialGrid {
@@ -815,6 +895,12 @@
 
   @media (max-width: 640px) {
     grid-template-columns: repeat(2, 1fr);
+
+    & > :last-child {
+      grid-column: span 2;
+      justify-self: center;
+      width: calc(50% - 6px);
+    }
   }
 }
 

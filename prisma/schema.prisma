@@ -68,13 +68,17 @@ model Trap {
   id                Int        @id @default(autoincrement())
   nameEn            String     @map("name_en")
   nameAr            String?    @map("name_ar")
+  nameI18n          Json?      @map("name_i18n")
   slug              String     @unique
   interfaceFromEn   String     @map("interface_from_en")
   interfaceFromAr   String?    @map("interface_from_ar")
+  interfaceFromI18n Json?      @map("interface_from_i18n")
   interfaceToEn     String     @map("interface_to_en")
   interfaceToAr     String?    @map("interface_to_ar")
+  interfaceToI18n   Json?      @map("interface_to_i18n")
   descriptionEn     String?    @db.Text @map("description_en")
   descriptionAr     String?    @db.Text @map("description_ar")
+  descriptionI18n   Json?      @map("description_i18n")
   duration          Int        @default(0)
   countPeople       Int        @default(0) @map("count_people")
   status            TrapStatus @default(active)
@@ -117,13 +121,15 @@ model TrapDay {
 }
 
 model TrapDayCard {
-  id            Int      @id @default(autoincrement())
-  trapDayId     Int      @map("trap_day_id")
-  titleEn       String   @map("title_en")
-  titleAr       String?  @map("title_ar")
-  descriptionEn String?  @db.Text @map("description_en")
-  descriptionAr String?  @db.Text @map("description_ar")
-  image         String?
+  id              Int      @id @default(autoincrement())
+  trapDayId       Int      @map("trap_day_id")
+  titleEn         String   @map("title_en")
+  titleAr         String?  @map("title_ar")
+  titleI18n       Json?    @map("title_i18n")
+  descriptionEn   String?  @db.Text @map("description_en")
+  descriptionAr   String?  @db.Text @map("description_ar")
+  descriptionI18n Json?    @map("description_i18n")
+  image           String?
   createdAt     DateTime @default(now()) @map("created_at")
   updatedAt     DateTime @updatedAt @map("updated_at")
 
@@ -174,24 +180,28 @@ model Review {
 }
 
 model Slider {
-  id            Int      @id @default(autoincrement())
-  image         String
-  titleEn       String?  @map("title_en")
-  titleAr       String?  @map("title_ar")
-  descriptionEn String?  @db.Text @map("description_en")
-  descriptionAr String?  @db.Text @map("description_ar")
-  createdAt     DateTime @default(now()) @map("created_at")
+  id              Int      @id @default(autoincrement())
+  image           String
+  titleEn         String?  @map("title_en")
+  titleAr         String?  @map("title_ar")
+  titleI18n       Json?    @map("title_i18n")
+  descriptionEn   String?  @db.Text @map("description_en")
+  descriptionAr   String?  @db.Text @map("description_ar")
+  descriptionI18n Json?    @map("description_i18n")
+  createdAt       DateTime @default(now()) @map("created_at")
   updatedAt     DateTime @updatedAt @map("updated_at")
 
   @@map("sliders")
 }
 
 model CommonQuestion {
-  id        Int      @id @default(autoincrement())
-  questionEn String  @map("question_en")
-  questionAr String? @map("question_ar")
-  answerEn   String  @db.Text @map("answer_en")
-  answerAr   String? @db.Text @map("answer_ar")
+  id           Int      @id @default(autoincrement())
+  questionEn   String   @map("question_en")
+  questionAr   String?  @map("question_ar")
+  questionI18n Json?    @map("question_i18n")
+  answerEn     String   @db.Text @map("answer_en")
+  answerAr     String?  @db.Text @map("answer_ar")
+  answerI18n   Json?    @map("answer_i18n")
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
@@ -202,8 +212,10 @@ model Article {
   id              Int      @id @default(autoincrement())
   titleEn         String   @map("title_en")
   titleAr         String?  @map("title_ar")
+  titleI18n       Json?    @map("title_i18n")
   descriptionEn   String   @db.Text @map("description_en")
   descriptionAr   String?  @db.Text @map("description_ar")
+  descriptionI18n Json?    @map("description_i18n")
   slug            String   @unique
   image           String?
   metaTitle       String?  @map("meta_title")
@@ -215,12 +227,14 @@ model Article {
 }
 
 model AboutUs {
-  id            Int      @id @default(autoincrement())
-  titleEn       String   @map("title_en")
-  titleAr       String?  @map("title_ar")
-  descriptionEn String   @db.Text @map("description_en")
-  descriptionAr String?  @db.Text @map("description_ar")
-  image         String?
+  id              Int      @id @default(autoincrement())
+  titleEn         String   @map("title_en")
+  titleAr         String?  @map("title_ar")
+  titleI18n       Json?    @map("title_i18n")
+  descriptionEn   String   @db.Text @map("description_en")
+  descriptionAr   String?  @db.Text @map("description_ar")
+  descriptionI18n Json?    @map("description_i18n")
+  image           String?
   createdAt     DateTime @default(now()) @map("created_at")
   updatedAt     DateTime @updatedAt @map("updated_at")
 

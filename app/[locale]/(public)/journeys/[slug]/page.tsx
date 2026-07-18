@@ -7,10 +7,14 @@ import { getTrapBySlug } from "@/lib/services/traps";
 import { NotFoundError } from "@/lib/services/errors";
 import { localize } from "@/lib/i18n/localized";
 import { mapReviewForTestimonial } from "@/lib/mappers/misc";
+import { mapTrapForCard } from "@/lib/mappers/trap";
+import { prisma } from "@/lib/prisma";
 import type { Locale } from "@/lib/i18n/config";
 import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
 import TripHeroCarousel from "@/components/carousel/trip-hero-carousel";
 import TripDayViewer from "@/components/trip-detail/trip-day-viewer";
+import TripCarousel from "@/components/carousel/trip-carousel";
+import Card from "@/components/card/card";
 import styles from "@/components/trip-detail/trip-detail.module.scss";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://bedouintrails.com";
@@ -34,7 +38,7 @@ export async function generateMetadata({
   if (!trip) return {};
 
   const locale = (await getLocale()) as Locale;
-  const name = localize(trip.nameEn, trip.nameAr, locale);
+  const name = localize(trip.nameEn, trip.nameAr, locale, trip.nameI18n);
   const url = `${SITE_URL}/journeys/${slug}`;
   const image = trip.galleries[0]?.image ?? `${SITE_URL}/og-image.jpg`;
 
@@ -42,7 +46,7 @@ export async function generateMetadata({
     title: `${trip.metaTitle || name} | Bedouin Trails`,
     description:
       trip.metaDescription ||
-      `${name} - ${localize(trip.interfaceFromEn, trip.interfaceFromAr, locale)} → ${localize(trip.interfaceToEn, trip.interfaceToAr, locale)}. Book your spot now | Bedouin Trails`,
+      `${name} - ${localize(trip.interfaceFromEn, trip.interfaceFromAr, locale, trip.interfaceFromI18n)} → ${localize(trip.interfaceToEn, trip.interfaceToAr, locale, trip.interfaceToI18n)}. Book your spot now | Bedouin Trails`,
     alternates: {
       canonical: url,
     },
@@ -70,21 +74,41 @@ export default async function TripDetailPage({ params }: { params: Promise<{ slu
   const locale = (await getLocale()) as Locale;
   const t = await getTranslations();
 
-  const name = localize(trip.nameEn, trip.nameAr, locale);
-  const interfaceFrom = localize(trip.interfaceFromEn, trip.interfaceFromAr, locale);
-  const interfaceTo = localize(trip.interfaceToEn, trip.interfaceToAr, locale);
+  const name = localize(trip.nameEn, trip.nameAr, locale, trip.nameI18n);
+  const interfaceFrom = localize(trip.interfaceFromEn, trip.interfaceFromAr, locale, trip.interfaceFromI18n);
+  const interfaceTo = localize(trip.interfaceToEn, trip.interfaceToAr, locale, trip.interfaceToI18n);
   const url = `${SITE_URL}/journeys/${slug}`;
-  const images = trip.galleries.map((g) => g.image);
+  
+  const images = Array.from(
+    new Set([
+      ...trip.galleries.map((g) => g.image),
+      ...trip.trapDays.flatMap((day) => day.cards.map((card) => card.image)).filter(Boolean),
+    ])
+  );
   const reviews = trip.reviews.map(mapReviewForTestimonial);
   const days = trip.trapDays.map((day) => ({
     dayNumber: day.dayNumber,
     cards: day.cards.map((card) => ({
       id: card.id,
-      title: localize(card.titleEn, card.titleAr, locale),
-      description: localize(card.descriptionEn ?? "", card.descriptionAr, locale),
+      title: localize(card.titleEn, card.titleAr, locale, card.titleI18n),
+      description: localize(card.descriptionEn ?? "", card.descriptionAr, locale, card.descriptionI18n),
       image: card.image,
     })),
   }));
+
+  // Query 3 related trips (excluding current trip)
+  const relatedTrips = await prisma.trap.findMany({
+    where: {
+      status: "active",
+      slug: { not: slug },
+    },
+    include: {
+      galleries: { take: 1, orderBy: { id: "asc" } },
+    },
+    take: 3,
+    orderBy: { createdAt: "desc" },
+  });
+  const relatedCards = relatedTrips.map((trap) => mapTrapForCard(trap, locale));
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -133,12 +157,11 @@ export default async function TripDetailPage({ params }: { params: Promise<{ slu
           <h1>{name}</h1>
           <div className={styles.dates}>
             <div className={styles.start}>
-              <p>{interfaceFrom}</p>
+              <h3>{interfaceFrom}</h3>
               <p>{t("departure_point")}</p>
             </div>
-            <img src="/img/small-logo.png" alt="Bedouin Trails desert safari company logo" />
             <div className={styles.end}>
-              <p>{interfaceTo}</p>
+              <h3>{interfaceTo}</h3>
               <p>{t("destination_point")}</p>
             </div>
           </div>
@@ -159,7 +182,19 @@ export default async function TripDetailPage({ params }: { params: Promise<{ slu
         </div>
       </div>
 
-      <TripDayViewer days={days} interfaceFrom={interfaceFrom} interfaceTo={interfaceTo} />
+      <div className={styles["part-2"]}>
+        <TripDayViewer days={days} interfaceFrom={interfaceFrom} interfaceTo={interfaceTo} />
+      </div>
+      {relatedCards.length > 0 && (
+        <div className={styles.relatedTripsSection}>
+          <h2>{t("related_trips_title") || "Related Trips"}</h2>
+          <div className={styles.relatedGrid}>
+            {relatedCards.map((card) => (
+              <Card key={card.id} data={card} />
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
