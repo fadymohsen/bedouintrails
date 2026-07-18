@@ -82,7 +82,7 @@ export default async function TripDetailPage({ params }: { params: Promise<{ slu
   const images = Array.from(
     new Set([
       ...trip.galleries.map((g) => g.image),
-      ...trip.trapDays.flatMap((day) => day.cards.map((card) => card.image)).filter(Boolean),
+      ...trip.trapDays.flatMap((day) => day.cards.map((card) => card.image)).filter((img): img is string => img !== null),
     ])
   );
   const reviews = trip.reviews.map(mapReviewForTestimonial);
