@@ -169,7 +169,7 @@ export default async function HomePage() {
                 <div className={styles.grainOverlay} />
               </div>
               <div className={styles.pillSmall}>
-                <Image src="/img/adventure1.webp" alt="Group dancing near Elephant Rock" width={300} height={400} />
+                <Image src="/img/salt-lake.webp" alt="Tourists floating in a crystal-clear salt lake in Egypt's Western Desert" width={300} height={400} />
                 <div className={styles.grainOverlay} />
               </div>
             </div>
