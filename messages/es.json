@@ -260,6 +260,7 @@
   "search_by_trip_name": "Buscar por nombre del viaje",
   "see_more": "ver más",
   "select_trip": "Selecciona un viaje",
+  "select_trip_first": "Seleccione un viaje arriba para habilitar las fechas",
   "send_enquiry": "Enviar Consulta",
   "send_message": "Enviar Mensaje",
   "service_rating": "Calificación del servicio",

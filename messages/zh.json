@@ -260,6 +260,7 @@
   "search_by_trip_name": "按旅行名称搜索",
   "see_more": "查看更多",
   "select_trip": "选择行程",
+  "select_trip_first": "请先在上方选择行程以启用日期",
   "send_enquiry": "发送查询",
   "send_message": "发送留言",
   "service_rating": "Evaluación del Servicio",

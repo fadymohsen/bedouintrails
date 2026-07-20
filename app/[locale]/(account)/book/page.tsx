@@ -28,6 +28,7 @@ export default async function BookPage() {
     name: localize(trap.nameEn, trap.nameAr, locale),
     image: getLocalFallbackImage(trap.galleries[0]?.image ?? null),
     description: localize(trap.descriptionEn ?? "", trap.descriptionAr, locale) || null,
+    duration: trap.duration,
   }));
 
   return <BookFormClient trip={null} trips={trips} />;

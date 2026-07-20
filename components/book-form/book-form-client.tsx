@@ -7,7 +7,19 @@ import { apiPost, ApiClientError } from "@/lib/api-client";
 import { FaWhatsapp, FaCalendarAlt, FaUserFriends, FaMapMarkerAlt } from "react-icons/fa";
 import styles from "./book-form.module.scss";
 
-export type BookableTrip = { id: number; name: string; image: string | null; description: string | null };
+export type BookableTrip = {
+  id: number;
+  name: string;
+  image: string | null;
+  description: string | null;
+  duration: number;
+};
+
+function addDays(dateStr: string, days: number): string {
+  const d = new Date(dateStr);
+  d.setDate(d.getDate() + days);
+  return d.toISOString().slice(0, 10);
+}
 
 type FormErrors = Partial<Record<"tripId" | "firstName" | "lastName" | "email" | "phone" | "startDate" | "endDate", string>>;
 
@@ -37,11 +49,10 @@ export default function BookFormClient({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<{ type: "success" | "error"; message: string } | null>(null);
 
-  const tripDurationDays = useMemo(() => {
-    if (!formData.startDate || !formData.endDate || formData.endDate < formData.startDate) return null;
-    const diffMs = new Date(formData.endDate).getTime() - new Date(formData.startDate).getTime();
-    return Math.round(diffMs / 86400000);
-  }, [formData.startDate, formData.endDate]);
+  const selectedTrip = trip ?? trips.find((t2) => String(t2.id) === selectedTripId) ?? null;
+  // Each trip has a fixed itinerary length — the client picks only the start
+  // date, the end date is locked to exactly that many days, never more.
+  const durationDays = selectedTrip ? Math.max(selectedTrip.duration, 1) : null;
 
   // Popup Redirect Modal state
   const [showPopup, setShowPopup] = useState(false);
@@ -120,13 +131,10 @@ export default function BookFormClient({
     const numValue = type === "number" ? parseInt(value) || 0 : value;
 
     if (name === "startDate") {
-      // Keep the range valid: if the new start lands on or after the current
-      // end date, clear the end date instead of silently leaving a start-after-end range.
-      setFormData((prev) => ({
-        ...prev,
-        startDate: value,
-        endDate: prev.endDate && prev.endDate < value ? "" : prev.endDate,
-      }));
+      // The end date isn't picked by the user — it's locked to the trip's
+      // fixed duration so the booked range can never exceed it.
+      const endDate = value && durationDays ? addDays(value, durationDays - 1) : "";
+      setFormData((prev) => ({ ...prev, startDate: value, endDate }));
       setErrors((prev) => ({ ...prev, startDate: undefined, endDate: undefined }));
       return;
     }
@@ -208,8 +216,18 @@ Additional Notes: ${formData.description || "None"}`;
                   <select
                     value={selectedTripId}
                     onChange={(e) => {
-                      setSelectedTripId(e.target.value);
-                      setErrors((prev) => ({ ...prev, tripId: undefined }));
+                      const newTripId = e.target.value;
+                      const newTrip = trips.find((t2) => String(t2.id) === newTripId) ?? null;
+                      const newDuration = newTrip ? Math.max(newTrip.duration, 1) : null;
+                      setSelectedTripId(newTripId);
+                      // Switching trips changes the fixed duration — recompute the
+                      // end date from the same start date instead of leaving a
+                      // range that belonged to the previous trip's length.
+                      setFormData((prev) => ({
+                        ...prev,
+                        endDate: prev.startDate && newDuration ? addDays(prev.startDate, newDuration - 1) : "",
+                      }));
+                      setErrors((prev) => ({ ...prev, tripId: undefined, startDate: undefined, endDate: undefined }));
                     }}
                     className={errors.tripId ? styles.error : ""}
                   >
@@ -293,6 +311,14 @@ Additional Notes: ${formData.description || "None"}`;
                   <span>{t("trip_dates")}</span>
                 </div>
 
+                {durationDays !== null && (
+                  <div className={styles["duration-chip"]}>
+                    {durationDays === 1
+                      ? t("duration_same_day")
+                      : t("duration_days_count", { count: durationDays })}
+                  </div>
+                )}
+
                 <div className={styles["form-row-split"]}>
                   <div className={styles["form-field"]}>
                     <label>{t("start_date")}</label>
@@ -302,9 +328,11 @@ Additional Notes: ${formData.description || "None"}`;
                       value={formData.startDate}
                       onChange={handleChange}
                       min={todayStr}
+                      disabled={!selectedTrip}
                       className={errors.startDate ? styles.error : ""}
                     />
                     {errors.startDate && <span className={styles["field-error"]}>{errors.startDate}</span>}
+                    {!selectedTrip && <span className={styles["field-hint"]}>{t("select_trip_first")}</span>}
                   </div>
                   <div className={styles["form-field"]}>
                     <label>{t("end_date")}</label>
@@ -312,22 +340,13 @@ Additional Notes: ${formData.description || "None"}`;
                       type="date"
                       name="endDate"
                       value={formData.endDate}
-                      onChange={handleChange}
-                      min={formData.startDate || todayStr}
-                      disabled={!formData.startDate}
+                      readOnly
+                      disabled
                       className={errors.endDate ? styles.error : ""}
                     />
                     {errors.endDate && <span className={styles["field-error"]}>{errors.endDate}</span>}
                   </div>
                 </div>
-
-                {tripDurationDays !== null && tripDurationDays >= 0 && (
-                  <div className={styles["duration-chip"]}>
-                    {tripDurationDays === 0
-                      ? t("duration_same_day")
-                      : t("duration_days_count", { count: tripDurationDays })}
-                  </div>
-                )}
               </div>
 
               <div className={styles["form-field"]}>

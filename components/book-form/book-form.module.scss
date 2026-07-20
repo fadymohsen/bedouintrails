@@ -331,6 +331,13 @@ $font-body: v.$font-body;
     margin-top: 5px;
     font-family: $font-body;
   }
+
+  .field-hint {
+    color: $text-light;
+    font-size: 0.75rem;
+    margin-top: 5px;
+    font-family: $font-body;
+  }
 }
 
 // Form Row Split
