@@ -76,6 +76,9 @@ function CardForm({
       />
       <div className={styles.field}>
         <label>Image {card && "(leave empty to keep current)"}</label>
+        {card?.image && (
+          <img src={getLocalFallbackImage(card.image)} alt="" className={styles.imagePreview} />
+        )}
         <input type="file" name="image" accept="image/*" />
       </div>
       <div style={{ display: "flex", gap: 8 }}>
@@ -108,9 +111,9 @@ function DayCard({ tripId, day }: { tripId: number; day: TripDay }) {
   }
 
   return (
-    <div className={styles.card}>
-      <div className={styles.header} style={{ marginBottom: 12 }}>
-        <h3 style={{ margin: 0 }}>Day {day.dayNumber}</h3>
+    <div className={styles.daySection}>
+      <div className={styles.daySectionHeader}>
+        <h3>Day {day.dayNumber}</h3>
         <button
           className={styles.dangerBtn}
           onClick={() => {
@@ -126,36 +129,44 @@ function DayCard({ tripId, day }: { tripId: number; day: TripDay }) {
 
       {error && <div className={styles.errorBanner}>{error}</div>}
 
+      {day.cards.length === 0 && !adding && <p className={styles.emptyState}>No cards yet for this day.</p>}
+
       {day.cards.map((card) =>
         editingId === card.id ? (
           <CardForm key={card.id} tripId={tripId} dayId={day.id} card={card} onDone={() => setEditingId(null)} />
         ) : (
-          <div key={card.id} style={{ display: "flex", gap: 12, alignItems: "center", padding: "10px 0", borderBottom: "1px solid #eee" }}>
-            {card.image && <img src={getLocalFallbackImage(card.image)} alt="" className={styles.thumb} />}
-            <div style={{ flex: 1 }}>
+          <div key={card.id} className={styles.dayCardRow}>
+            {card.image ? (
+              <img src={getLocalFallbackImage(card.image)} alt="" className={styles.dayCardThumb} />
+            ) : (
+              <div className={styles.dayCardThumbPlaceholder} />
+            )}
+            <div className={styles.dayCardBody}>
               <strong>{card.titleEn}</strong>
-              <p style={{ margin: 0, fontSize: "0.85rem", color: "#777" }}>{card.descriptionEn}</p>
+              <p>{card.descriptionEn}</p>
             </div>
-            <button className={styles.secondaryBtn} onClick={() => setEditingId(card.id)}>
-              Edit
-            </button>
-            <button
-              className={styles.dangerBtn}
-              onClick={() => run(() => deleteTrapDayCardAction(tripId, card.id))}
-              disabled={pending}
-            >
-              Delete
-            </button>
+            <div className={styles.dayCardActions}>
+              <button className={styles.secondaryBtn} onClick={() => setEditingId(card.id)}>
+                Edit
+              </button>
+              <button
+                className={styles.dangerBtn}
+                onClick={() => run(() => deleteTrapDayCardAction(tripId, card.id))}
+                disabled={pending}
+              >
+                Delete
+              </button>
+            </div>
           </div>
         )
       )}
 
       {adding ? (
-        <div style={{ marginTop: 12 }}>
+        <div style={{ marginTop: 16 }}>
           <CardForm tripId={tripId} dayId={day.id} onDone={() => setAdding(false)} />
         </div>
       ) : (
-        <button className={styles.secondaryBtn} style={{ marginTop: 12 }} onClick={() => setAdding(true)}>
+        <button className={styles.secondaryBtn} style={{ marginTop: 16 }} onClick={() => setAdding(true)}>
           + Add card
         </button>
       )}
@@ -165,14 +176,30 @@ function DayCard({ tripId, day }: { tripId: number; day: TripDay }) {
 
 export default function TripDaysManager({ tripId, days }: { tripId: number; days: TripDay[] }) {
   const [pending, startTransition] = useTransition();
+  const [error, setError] = useState<string | null>(null);
+
+  function handleAddDay() {
+    setError(null);
+    startTransition(async () => {
+      try {
+        await addTrapDayAction(tripId);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Failed to add day. Please try again.");
+      }
+    });
+  }
 
   return (
     <div>
+      {days.length === 0 && <p className={styles.emptyState}>No days yet — add the first one to start the itinerary.</p>}
+
       {days.map((day) => (
         <DayCard key={day.id} tripId={tripId} day={day} />
       ))}
 
-      <button className={styles.primaryBtn} onClick={() => startTransition(() => addTrapDayAction(tripId))} disabled={pending}>
+      {error && <div className={styles.errorBanner}>{error}</div>}
+
+      <button className={styles.primaryBtn} onClick={handleAddDay} disabled={pending}>
         {pending ? "Adding..." : "+ Add Day"}
       </button>
     </div>

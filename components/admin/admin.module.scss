@@ -298,6 +298,90 @@ $success: v.$gold-success;
   color: #999;
 }
 
+// Day-by-day itinerary editor (trip-days-manager). Not nested under .table,
+// so it needs its own explicit sizing instead of relying on img.thumb above.
+.daySection {
+  margin-bottom: 20px;
+  border: 1px solid $border;
+  border-radius: l.$radius-md;
+  padding: l.$space-4 l.$space-5;
+  background: #fff;
+}
+
+.daySectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid $border;
+
+  h3 {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: $dark;
+  }
+}
+
+.dayCardRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+
+  &:last-of-type {
+    border-bottom: none;
+  }
+}
+
+.dayCardThumb {
+  flex-shrink: 0;
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: l.$radius-sm;
+  background: $bg;
+}
+
+.dayCardThumbPlaceholder {
+  flex-shrink: 0;
+  width: 64px;
+  height: 64px;
+  border-radius: l.$radius-sm;
+  background: $bg;
+  border: 1px dashed $border;
+}
+
+.dayCardBody {
+  flex: 1;
+  min-width: 0;
+
+  strong {
+    display: block;
+    font-size: 0.95rem;
+    color: $dark;
+  }
+
+  p {
+    margin: 2px 0 0;
+    font-size: 0.82rem;
+    color: #777;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+}
+
+.dayCardActions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
 .form {
   display: flex;
   flex-direction: column;
