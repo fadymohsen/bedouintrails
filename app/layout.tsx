@@ -45,8 +45,13 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // The x-next-intl-locale header is only set for public [locale] routes
+  // (the proxy skips locale handling entirely for /admin). When it's absent
+  // we're on an English-only route like /admin, so default to en/ltr rather
+  // than the site's Arabic default — an admin dashboard has no business
+  // rendering RTL.
   const headerList = await headers();
-  const locale = (headerList.get("x-next-intl-locale") ?? "ar") as Locale;
+  const locale = (headerList.get("x-next-intl-locale") ?? "en") as Locale;
   const dir = isRtl(locale) ? "rtl" : "ltr";
 
   return (

@@ -8,14 +8,20 @@ import {
   updateTrapDayCardAction,
   deleteTrapDayCardAction,
 } from "@/app/admin/(dashboard)/trips/actions";
+import I18nField from "./i18n-field";
 import styles from "./admin.module.scss";
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type I18nJson = Record<string, string> | any;
 
 export type TripDayCard = {
   id: number;
   titleEn: string;
   titleAr: string | null;
+  titleI18n?: I18nJson;
   descriptionEn: string | null;
   descriptionAr: string | null;
+  descriptionI18n?: I18nJson;
   image: string | null;
 };
 export type TripDay = { id: number; dayNumber: number; cards: TripDayCard[] };
@@ -48,26 +54,18 @@ function CardForm({
 
   return (
     <form onSubmit={handleSubmit} className={styles.form} style={{ maxWidth: "100%" }}>
-      <div className={styles.formRow}>
-        <div className={styles.field}>
-          <label>Title (English)</label>
-          <input name="titleEn" required defaultValue={card?.titleEn} />
-        </div>
-        <div className={styles.field}>
-          <label>Title (Arabic)</label>
-          <input name="titleAr" defaultValue={card?.titleAr ?? ""} dir="rtl" />
-        </div>
-      </div>
-      <div className={styles.formRow}>
-        <div className={styles.field}>
-          <label>Description (English)</label>
-          <textarea name="descriptionEn" rows={2} defaultValue={card?.descriptionEn ?? ""} />
-        </div>
-        <div className={styles.field}>
-          <label>Description (Arabic)</label>
-          <textarea name="descriptionAr" rows={2} defaultValue={card?.descriptionAr ?? ""} dir="rtl" />
-        </div>
-      </div>
+      <I18nField
+        name="title"
+        label="Title"
+        initial={{ en: card?.titleEn, ar: card?.titleAr ?? "", ...card?.titleI18n }}
+      />
+      <I18nField
+        name="description"
+        label="Description"
+        multiline
+        rows={2}
+        initial={{ en: card?.descriptionEn ?? "", ar: card?.descriptionAr ?? "", ...card?.descriptionI18n }}
+      />
       <div className={styles.field}>
         <label>Image {card && "(leave empty to keep current)"}</label>
         <input type="file" name="image" accept="image/*" />

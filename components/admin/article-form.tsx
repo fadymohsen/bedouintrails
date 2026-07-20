@@ -1,13 +1,19 @@
 "use client";
 
 import { useActionState } from "react";
+import I18nField from "./i18n-field";
 import styles from "./admin.module.scss";
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type I18nJson = Record<string, string> | any;
 
 export type ArticleFormValues = {
   titleEn: string;
   titleAr: string;
+  titleI18n?: I18nJson;
   descriptionEn: string;
   descriptionAr: string;
+  descriptionI18n?: I18nJson;
   metaTitle: string;
   metaDescription: string;
   image?: string | null;
@@ -31,27 +37,18 @@ export default function ArticleForm({
       {state?.error && <div className={styles.errorBanner}>{state.error}</div>}
       {state?.success && <div className={styles.card}>Saved.</div>}
 
-      <div className={styles.formRow}>
-        <div className={styles.field}>
-          <label>Title (English)</label>
-          <input name="titleEn" required defaultValue={initial?.titleEn} />
-        </div>
-        <div className={styles.field}>
-          <label>Title (Arabic)</label>
-          <input name="titleAr" defaultValue={initial?.titleAr} dir="rtl" />
-        </div>
-      </div>
+      <I18nField
+        name="title"
+        label="Title"
+        initial={{ en: initial?.titleEn, ar: initial?.titleAr, ...initial?.titleI18n }}
+      />
 
-      <div className={styles.formRow}>
-        <div className={styles.field}>
-          <label>Description (English)</label>
-          <textarea name="descriptionEn" rows={4} required defaultValue={initial?.descriptionEn} />
-        </div>
-        <div className={styles.field}>
-          <label>Description (Arabic)</label>
-          <textarea name="descriptionAr" rows={4} defaultValue={initial?.descriptionAr} dir="rtl" />
-        </div>
-      </div>
+      <I18nField
+        name="description"
+        label="Description"
+        multiline
+        initial={{ en: initial?.descriptionEn, ar: initial?.descriptionAr, ...initial?.descriptionI18n }}
+      />
 
       <div className={styles.formRow}>
         <div className={styles.field}>

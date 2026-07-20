@@ -35,8 +35,10 @@ export default async function EditCommonQuestionPage({ params }: { params: Promi
           initial={{
             questionEn: question.questionEn,
             questionAr: question.questionAr ?? "",
+            questionI18n: question.questionI18n ?? undefined,
             answerEn: question.answerEn,
             answerAr: question.answerAr ?? "",
+            answerI18n: question.answerI18n ?? undefined,
           }}
           action={boundUpdate}
           submitLabel="Save Changes"

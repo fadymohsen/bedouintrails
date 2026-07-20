@@ -9,9 +9,11 @@ import { createAboutUs, updateAboutUs, deleteAboutUs } from "@/lib/services/admi
 function formToAboutUsInput(form: FormData) {
   return aboutUsFormSchema.parse({
     titleEn: form.get("titleEn"),
-    titleAr: form.get("titleAr") || undefined,
+    titleAr: form.get("titleAr"),
+    titleI18n: form.get("titleI18n"),
     descriptionEn: form.get("descriptionEn"),
-    descriptionAr: form.get("descriptionAr") || undefined,
+    descriptionAr: form.get("descriptionAr"),
+    descriptionI18n: form.get("descriptionI18n"),
   });
 }
 

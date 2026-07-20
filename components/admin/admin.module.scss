@@ -349,6 +349,90 @@ $success: v.$gold-success;
   }
 }
 
+// Multi-language field — tab bar switches which language's input/textarea
+// is visible; the actual submitted values live in three hidden inputs
+// (see I18nField) built from all nine languages' local state.
+.i18nField {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  grid-column: 1 / -1;
+}
+
+.i18nFieldLabel {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #444;
+}
+
+.langTabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.langTab {
+  position: relative;
+  padding: 6px 12px;
+  border: 1px solid $border;
+  border-radius: l.$radius-pill;
+  background: #fff;
+  color: #555;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    border-color: $primary;
+  }
+}
+
+.langTabActive {
+  background: $primary;
+  border-color: $primary;
+  color: #fff;
+}
+
+.langTabFilled:not(.langTabActive)::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  right: 4px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: $success;
+}
+
+.langTabRequired {
+  color: #ff8a8a;
+  margin-inline-start: 2px;
+
+  .langTabActive & {
+    color: #ffe0e0;
+  }
+}
+
+.langPanel {
+  input,
+  textarea {
+    width: 100%;
+    padding: l.$space-3;
+    border: 1px solid $border;
+    border-radius: l.$radius-sm;
+    font-size: 16px;
+    font-family: inherit;
+    min-height: 44px;
+    box-sizing: border-box;
+
+    &:focus {
+      outline: none;
+      border-color: $primary;
+    }
+  }
+}
+
 .checkboxField {
   display: flex;
   flex-direction: row;

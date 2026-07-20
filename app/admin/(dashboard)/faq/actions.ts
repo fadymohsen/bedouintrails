@@ -13,9 +13,11 @@ import {
 function formToCommonQuestionInput(form: FormData) {
   return commonQuestionFormSchema.parse({
     questionEn: form.get("questionEn"),
-    questionAr: form.get("questionAr") || undefined,
+    questionAr: form.get("questionAr"),
+    questionI18n: form.get("questionI18n"),
     answerEn: form.get("answerEn"),
-    answerAr: form.get("answerAr") || undefined,
+    answerAr: form.get("answerAr"),
+    answerI18n: form.get("answerI18n"),
   });
 }
 

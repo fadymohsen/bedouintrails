@@ -35,8 +35,10 @@ export default async function EditArticlePage({ params }: { params: Promise<{ id
           initial={{
             titleEn: article.titleEn,
             titleAr: article.titleAr ?? "",
+            titleI18n: article.titleI18n ?? undefined,
             descriptionEn: article.descriptionEn,
             descriptionAr: article.descriptionAr ?? "",
+            descriptionI18n: article.descriptionI18n ?? undefined,
             metaTitle: article.metaTitle ?? "",
             metaDescription: article.metaDescription ?? "",
             image: article.image,

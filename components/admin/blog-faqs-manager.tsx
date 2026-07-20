@@ -2,9 +2,21 @@
 
 import { useState, useTransition } from "react";
 import { addBlogFaqAction, updateBlogFaqAction, deleteBlogFaqAction } from "@/app/admin/(dashboard)/blogs/actions";
+import I18nField from "./i18n-field";
 import styles from "./admin.module.scss";
 
-export type BlogFaqItem = { id: number; questionEn: string; questionAr: string; answerEn: string; answerAr: string };
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type I18nJson = Record<string, string> | any;
+
+export type BlogFaqItem = {
+  id: number;
+  questionEn: string;
+  questionAr: string;
+  questionI18n?: I18nJson;
+  answerEn: string;
+  answerAr: string;
+  answerI18n?: I18nJson;
+};
 
 function FaqForm({ blogId, faq, onDone }: { blogId: number; faq?: BlogFaqItem; onDone: () => void }) {
   const [pending, startTransition] = useTransition();
@@ -24,26 +36,18 @@ function FaqForm({ blogId, faq, onDone }: { blogId: number; faq?: BlogFaqItem; o
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
-      <div className={styles.formRow}>
-        <div className={styles.field}>
-          <label>Question (English)</label>
-          <input name="questionEn" required defaultValue={faq?.questionEn} />
-        </div>
-        <div className={styles.field}>
-          <label>Question (Arabic)</label>
-          <input name="questionAr" required defaultValue={faq?.questionAr} dir="rtl" />
-        </div>
-      </div>
-      <div className={styles.formRow}>
-        <div className={styles.field}>
-          <label>Answer (English)</label>
-          <textarea name="answerEn" required rows={3} defaultValue={faq?.answerEn} />
-        </div>
-        <div className={styles.field}>
-          <label>Answer (Arabic)</label>
-          <textarea name="answerAr" required rows={3} defaultValue={faq?.answerAr} dir="rtl" />
-        </div>
-      </div>
+      <I18nField
+        name="question"
+        label="Question"
+        initial={{ en: faq?.questionEn, ar: faq?.questionAr, ...faq?.questionI18n }}
+      />
+      <I18nField
+        name="answer"
+        label="Answer"
+        multiline
+        rows={3}
+        initial={{ en: faq?.answerEn, ar: faq?.answerAr, ...faq?.answerI18n }}
+      />
       <div style={{ display: "flex", gap: 8 }}>
         <button type="submit" className={styles.primaryBtn} disabled={pending}>
           {pending ? "Saving..." : faq ? "Save" : "Add FAQ"}

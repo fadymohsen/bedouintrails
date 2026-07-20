@@ -10,8 +10,10 @@ function formToSliderInput(form: FormData) {
   return sliderFormSchema.parse({
     titleEn: form.get("titleEn") || undefined,
     titleAr: form.get("titleAr") || undefined,
+    titleI18n: form.get("titleI18n"),
     descriptionEn: form.get("descriptionEn") || undefined,
     descriptionAr: form.get("descriptionAr") || undefined,
+    descriptionI18n: form.get("descriptionI18n"),
   });
 }
 

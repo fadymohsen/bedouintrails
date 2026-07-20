@@ -35,8 +35,10 @@ export default async function EditAboutUsPage({ params }: { params: Promise<{ id
           initial={{
             titleEn: aboutUs.titleEn,
             titleAr: aboutUs.titleAr ?? "",
+            titleI18n: aboutUs.titleI18n ?? undefined,
             descriptionEn: aboutUs.descriptionEn,
             descriptionAr: aboutUs.descriptionAr ?? "",
+            descriptionI18n: aboutUs.descriptionI18n ?? undefined,
             image: aboutUs.image,
           }}
           action={boundUpdate}

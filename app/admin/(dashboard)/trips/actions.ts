@@ -17,13 +17,17 @@ import { createTrapDayCard, updateTrapDayCard, deleteTrapDayCard } from "@/lib/s
 function formToTrapInput(form: FormData) {
   return trapFormSchema.parse({
     nameEn: form.get("nameEn"),
-    nameAr: form.get("nameAr") || undefined,
+    nameAr: form.get("nameAr"),
+    nameI18n: form.get("nameI18n"),
     interfaceFromEn: form.get("interfaceFromEn"),
-    interfaceFromAr: form.get("interfaceFromAr") || undefined,
+    interfaceFromAr: form.get("interfaceFromAr"),
+    interfaceFromI18n: form.get("interfaceFromI18n"),
     interfaceToEn: form.get("interfaceToEn"),
-    interfaceToAr: form.get("interfaceToAr") || undefined,
+    interfaceToAr: form.get("interfaceToAr"),
+    interfaceToI18n: form.get("interfaceToI18n"),
     descriptionEn: form.get("descriptionEn") || undefined,
     descriptionAr: form.get("descriptionAr") || undefined,
+    descriptionI18n: form.get("descriptionI18n"),
     duration: form.get("duration") || 0,
     status: form.get("status") || "active",
     metaTitle: form.get("metaTitle") || undefined,
@@ -86,9 +90,11 @@ export async function addTrapDayCardAction(tripId: number, dayId: number, form: 
   await requireAdmin("manage_trips");
   const input = trapDayCardFormSchema.parse({
     titleEn: form.get("titleEn"),
-    titleAr: form.get("titleAr") || undefined,
+    titleAr: form.get("titleAr"),
+    titleI18n: form.get("titleI18n"),
     descriptionEn: form.get("descriptionEn") || undefined,
     descriptionAr: form.get("descriptionAr") || undefined,
+    descriptionI18n: form.get("descriptionI18n"),
   });
   const imageFile = form.get("image");
   await createTrapDayCard(dayId, input, imageFile instanceof File && imageFile.size > 0 ? imageFile : null);
@@ -99,9 +105,11 @@ export async function updateTrapDayCardAction(tripId: number, cardId: number, fo
   await requireAdmin("manage_trips");
   const input = trapDayCardFormSchema.parse({
     titleEn: form.get("titleEn"),
-    titleAr: form.get("titleAr") || undefined,
+    titleAr: form.get("titleAr"),
+    titleI18n: form.get("titleI18n"),
     descriptionEn: form.get("descriptionEn") || undefined,
     descriptionAr: form.get("descriptionAr") || undefined,
+    descriptionI18n: form.get("descriptionI18n"),
   });
   const imageFile = form.get("image");
   await updateTrapDayCard(cardId, input, imageFile instanceof File && imageFile.size > 0 ? imageFile : null);

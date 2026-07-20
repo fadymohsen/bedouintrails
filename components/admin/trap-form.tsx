@@ -1,17 +1,25 @@
 "use client";
 
 import { useActionState } from "react";
+import I18nField from "./i18n-field";
 import styles from "./admin.module.scss";
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type I18nJson = Record<string, string> | any;
 
 export type TrapFormValues = {
   nameEn: string;
   nameAr: string;
+  nameI18n?: I18nJson;
   interfaceFromEn: string;
   interfaceFromAr: string;
+  interfaceFromI18n?: I18nJson;
   interfaceToEn: string;
   interfaceToAr: string;
+  interfaceToI18n?: I18nJson;
   descriptionEn: string;
   descriptionAr: string;
+  descriptionI18n?: I18nJson;
   duration: number;
   status: "active" | "inactive";
   metaTitle: string;
@@ -36,49 +44,30 @@ export default function TrapForm({
       {state?.error && <div className={styles.errorBanner}>{state.error}</div>}
       {state?.success && <div className={styles.card}>Saved.</div>}
 
-      <div className={styles.formRow}>
-        <div className={styles.field}>
-          <label>Name (English)</label>
-          <input name="nameEn" required defaultValue={initial?.nameEn} />
-        </div>
-        <div className={styles.field}>
-          <label>Name (Arabic)</label>
-          <input name="nameAr" defaultValue={initial?.nameAr} dir="rtl" />
-        </div>
-      </div>
+      <I18nField
+        name="name"
+        label="Name"
+        initial={{ en: initial?.nameEn, ar: initial?.nameAr, ...initial?.nameI18n }}
+      />
 
-      <div className={styles.formRow}>
-        <div className={styles.field}>
-          <label>From (English)</label>
-          <input name="interfaceFromEn" required defaultValue={initial?.interfaceFromEn} />
-        </div>
-        <div className={styles.field}>
-          <label>From (Arabic)</label>
-          <input name="interfaceFromAr" defaultValue={initial?.interfaceFromAr} dir="rtl" />
-        </div>
-      </div>
+      <I18nField
+        name="interfaceFrom"
+        label="From"
+        initial={{ en: initial?.interfaceFromEn, ar: initial?.interfaceFromAr, ...initial?.interfaceFromI18n }}
+      />
 
-      <div className={styles.formRow}>
-        <div className={styles.field}>
-          <label>To (English)</label>
-          <input name="interfaceToEn" required defaultValue={initial?.interfaceToEn} />
-        </div>
-        <div className={styles.field}>
-          <label>To (Arabic)</label>
-          <input name="interfaceToAr" defaultValue={initial?.interfaceToAr} dir="rtl" />
-        </div>
-      </div>
+      <I18nField
+        name="interfaceTo"
+        label="To"
+        initial={{ en: initial?.interfaceToEn, ar: initial?.interfaceToAr, ...initial?.interfaceToI18n }}
+      />
 
-      <div className={styles.formRow}>
-        <div className={styles.field}>
-          <label>Description (English)</label>
-          <textarea name="descriptionEn" rows={4} defaultValue={initial?.descriptionEn} />
-        </div>
-        <div className={styles.field}>
-          <label>Description (Arabic)</label>
-          <textarea name="descriptionAr" rows={4} defaultValue={initial?.descriptionAr} dir="rtl" />
-        </div>
-      </div>
+      <I18nField
+        name="description"
+        label="Description"
+        multiline
+        initial={{ en: initial?.descriptionEn, ar: initial?.descriptionAr, ...initial?.descriptionI18n }}
+      />
 
       <div className={styles.formRow}>
         <div className={styles.field}>

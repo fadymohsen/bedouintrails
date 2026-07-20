@@ -35,8 +35,10 @@ export default async function EditSliderPage({ params }: { params: Promise<{ id:
           initial={{
             titleEn: slider.titleEn ?? "",
             titleAr: slider.titleAr ?? "",
+            titleI18n: slider.titleI18n ?? undefined,
             descriptionEn: slider.descriptionEn ?? "",
             descriptionAr: slider.descriptionAr ?? "",
+            descriptionI18n: slider.descriptionI18n ?? undefined,
             image: slider.image,
           }}
           action={boundUpdate}

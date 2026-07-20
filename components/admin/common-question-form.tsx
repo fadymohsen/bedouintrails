@@ -1,13 +1,19 @@
 "use client";
 
 import { useActionState } from "react";
+import I18nField from "./i18n-field";
 import styles from "./admin.module.scss";
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type I18nJson = Record<string, string> | any;
 
 export type CommonQuestionFormValues = {
   questionEn: string;
   questionAr: string;
+  questionI18n?: I18nJson;
   answerEn: string;
   answerAr: string;
+  answerI18n?: I18nJson;
 };
 
 type ActionState = { success?: boolean; error?: string } | undefined;
@@ -28,27 +34,18 @@ export default function CommonQuestionForm({
       {state?.error && <div className={styles.errorBanner}>{state.error}</div>}
       {state?.success && <div className={styles.card}>Saved.</div>}
 
-      <div className={styles.formRow}>
-        <div className={styles.field}>
-          <label>Question (English)</label>
-          <input name="questionEn" required defaultValue={initial?.questionEn} />
-        </div>
-        <div className={styles.field}>
-          <label>Question (Arabic)</label>
-          <input name="questionAr" defaultValue={initial?.questionAr} dir="rtl" />
-        </div>
-      </div>
+      <I18nField
+        name="question"
+        label="Question"
+        initial={{ en: initial?.questionEn, ar: initial?.questionAr, ...initial?.questionI18n }}
+      />
 
-      <div className={styles.formRow}>
-        <div className={styles.field}>
-          <label>Answer (English)</label>
-          <textarea name="answerEn" rows={4} required defaultValue={initial?.answerEn} />
-        </div>
-        <div className={styles.field}>
-          <label>Answer (Arabic)</label>
-          <textarea name="answerAr" rows={4} defaultValue={initial?.answerAr} dir="rtl" />
-        </div>
-      </div>
+      <I18nField
+        name="answer"
+        label="Answer"
+        multiline
+        initial={{ en: initial?.answerEn, ar: initial?.answerAr, ...initial?.answerI18n }}
+      />
 
       <button type="submit" className={styles.primaryBtn} disabled={pending}>
         {pending ? "Saving..." : submitLabel}

@@ -9,9 +9,11 @@ import { createArticle, updateArticle, deleteArticle } from "@/lib/services/admi
 function formToArticleInput(form: FormData) {
   return articleFormSchema.parse({
     titleEn: form.get("titleEn"),
-    titleAr: form.get("titleAr") || undefined,
+    titleAr: form.get("titleAr"),
+    titleI18n: form.get("titleI18n"),
     descriptionEn: form.get("descriptionEn"),
-    descriptionAr: form.get("descriptionAr") || undefined,
+    descriptionAr: form.get("descriptionAr"),
+    descriptionI18n: form.get("descriptionI18n"),
     metaTitle: form.get("metaTitle") || undefined,
     metaDescription: form.get("metaDescription") || undefined,
   });
