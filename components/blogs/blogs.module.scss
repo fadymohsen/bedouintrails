@@ -1,17 +1,13 @@
 @use "@/styles/framer-tokens" as fr;
 
 .blogs-page {
-  display: flex;
-  gap: fr.$gap-lg;
   padding: fr.$section-padding;
   max-width: fr.$section-max-width;
   margin: 0 auto;
   background: fr.$surface-1;
 
   @media (max-width: 992px) {
-    flex-direction: column;
     padding: 48px 24px;
-    gap: fr.$gap-md;
   }
 }
 
@@ -64,12 +60,6 @@
 }
 
 .content-section {
-  flex: 3;
-
-  @media (max-width: 992px) {
-    flex: auto;
-  }
-
   .image-container {
     width: 100%;
   }
@@ -81,7 +71,7 @@
     border-radius: fr.$radius;
     margin-bottom: fr.$gap-md;
 
-    @media (max-width: 768px) {
+    @media (max-width: 992px) {
       height: 260px;
     }
   }
@@ -100,7 +90,7 @@
       font-weight: 400;
       margin: 0 0 fr.$gap-md;
 
-      @media (max-width: 768px) {
+      @media (max-width: 992px) {
         font-size: 2.2rem;
       }
     }
@@ -162,102 +152,6 @@
       font-family: fr.$font-body;
 
       strong {
-        color: fr.$text-heading;
-      }
-    }
-  }
-}
-
-.sidebar {
-  flex: 1;
-  background: fr.$surface-2;
-  padding: fr.$gap-md;
-  border-radius: fr.$radius;
-  height: fit-content;
-
-  @media (max-width: 992px) {
-    flex: auto;
-  }
-
-  @media (max-width: 768px) {
-    display: none;
-  }
-
-  h2 {
-    font-family: fr.$font-display;
-    font-size: fr.$h4-size;
-    color: fr.$text-heading;
-    font-weight: 400;
-    margin: 0 0 fr.$gap-md;
-  }
-
-  .article-links {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .link-item {
-    display: flex;
-    // Titles run long in some languages and wrap to several lines in this
-    // narrow column — center-aligning left the bullet/arrow floating next
-    // to the middle of the block instead of the first line.
-    align-items: flex-start;
-    gap: 10px;
-    padding: 14px 16px;
-    border-radius: fr.$radius;
-    text-decoration: none;
-    transition: background-color 0.2s ease;
-
-    .bullet {
-      width: 6px;
-      height: 6px;
-      margin-top: 7px;
-      border-radius: 50%;
-      background: fr.$text-body-muted;
-      flex-shrink: 0;
-    }
-
-    .title {
-      flex: 1;
-      font-family: fr.$font-body;
-      font-size: fr.$body-small-size;
-      font-weight: 600;
-      line-height: 1.4;
-      color: fr.$link-unhovered;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 3;
-      overflow: hidden;
-    }
-
-    .arrow {
-      flex-shrink: 0;
-      width: 6px;
-      height: 6px;
-      margin-top: 7px;
-      border-inline-end: 2px solid fr.$text-body-muted;
-      border-top: 2px solid fr.$text-body-muted;
-      transform: rotate(45deg);
-    }
-
-    &:hover {
-      background: fr.$surface-3;
-
-      .title {
-        color: fr.$text-heading;
-      }
-    }
-
-    &.active {
-      background: fr.$surface-3;
-      border-inline-start: 3px solid fr.$brand-primary;
-
-      .bullet {
-        background: fr.$brand-primary;
-      }
-
-      .title {
         color: fr.$text-heading;
       }
     }

@@ -84,23 +84,6 @@ export default function BlogLayout({
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <aside className={styles.sidebar}>
-        <h2>{t("latest_articles")}</h2>
-        <nav className={styles["article-links"]}>
-          {blogs.map((blog) => (
-            <Link
-              key={blog.id}
-              href={`/blogs/${blog.slug}`}
-              className={`${styles["link-item"]} ${current.slug === blog.slug ? styles.active : ""}`}
-            >
-              <span className={styles.bullet} />
-              <span className={styles.title}>{localize(blog.titleEn, blog.titleAr, locale, blog.titleI18n)}</span>
-              <span className={styles.arrow} />
-            </Link>
-          ))}
-        </nav>
-      </aside>
-
       <main className={styles["content-section"]}>
         <article>
           <div className={styles["image-container"]}>
