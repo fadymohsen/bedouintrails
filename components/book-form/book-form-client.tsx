@@ -72,13 +72,11 @@ export default function BookFormClient({
   useEffect(() => {
     if (!showPopup) return;
     if (countdown <= 0) {
-      // Timeout: redirect to WhatsApp and forward the parent tab to the trips
-      // page — navigating away unmounts this form, so there's no need to
-      // reset its state here too (that would just be an extra setState call
-      // inside the effect).
-      window.open(redirectUrl, "_blank");
-      router.push("/journeys");
-      setShowPopup(false);
+      // Timeout: navigate this tab to WhatsApp directly. window.open() here
+      // would get blocked by the browser's popup blocker since a setTimeout
+      // callback isn't a direct user gesture — a same-tab location change is
+      // real navigation and is never blocked.
+      window.location.href = redirectUrl;
       return;
     }
 
@@ -87,7 +85,7 @@ export default function BookFormClient({
     }, 1000);
 
     return () => clearTimeout(timer);
-  }, [showPopup, countdown, redirectUrl, router]);
+  }, [showPopup, countdown, redirectUrl]);
 
   function validateForm(): boolean {
     const newErrors: FormErrors = {};
