@@ -5,6 +5,7 @@ import { isLocale } from "@/lib/i18n/config";
 import { routing } from "@/i18n/routing";
 import type { Metadata } from "next";
 import { SITE_URL, buildAlternates } from "@/lib/seo";
+import LocaleDirSync from "@/components/locale-dir-sync/locale-dir-sync";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -39,6 +40,7 @@ export default async function LocaleLayout({
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
+      <LocaleDirSync />
       {children}
     </NextIntlClientProvider>
   );
