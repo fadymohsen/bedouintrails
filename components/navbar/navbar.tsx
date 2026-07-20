@@ -7,11 +7,16 @@ export default async function Navbar() {
   let user: { firstName: string; image: string | null } | null = null;
 
   if (session) {
-    const record = await prisma.user.findUnique({
-      where: { id: session.uid },
-      select: { firstName: true, image: true },
-    });
-    if (record) user = record;
+    try {
+      const record = await prisma.user.findUnique({
+        where: { id: session.uid },
+        select: { firstName: true, image: true },
+      });
+      if (record) user = record;
+    } catch {
+      // A transient DB hiccup here shouldn't take down the whole page —
+      // fall back to a logged-out navbar instead of crashing.
+    }
   }
 
   return <NavbarClient user={user} />;
