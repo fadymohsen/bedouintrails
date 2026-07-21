@@ -194,6 +194,12 @@ $success: v.$gold-success;
   }
 }
 
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: l.$space-3;
+}
+
 .dangerBtn {
   background: #fff;
   border: 1px solid $danger;

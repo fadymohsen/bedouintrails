@@ -9,9 +9,14 @@ export default async function AdminBlogsPage() {
     <div>
       <div className={styles.header}>
         <h1 className={styles.title}>Blogs</h1>
-        <Link href="/admin/blogs/new" className={styles.primaryBtn}>
-          + New Post
-        </Link>
+        <div className={styles.headerActions}>
+          <Link href="/admin/blogs/import" className={styles.secondaryBtn}>
+            Import from Markdown
+          </Link>
+          <Link href="/admin/blogs/new" className={styles.primaryBtn}>
+            + New Post
+          </Link>
+        </div>
       </div>
 
       <div className={styles.card}>
