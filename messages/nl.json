@@ -347,5 +347,6 @@
   "meta_title_auth": "Inloggen | Bedouin Trails",
   "meta_desc_auth": "Log in of maak een account aan om woestijnsafari's te boeken met Bedouin Trails.",
   "meta_title_not_found": "Pagina Niet Gevonden | Bedouin Trails",
-  "meta_desc_not_found": "De pagina die u zoekt bestaat niet of is verplaatst."
+  "meta_desc_not_found": "De pagina die u zoekt bestaat niet of is verplaatst.",
+  "related_trips_title": "Gerelateerde Safari's"
 }

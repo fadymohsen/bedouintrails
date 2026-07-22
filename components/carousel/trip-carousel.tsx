@@ -1,5 +1,6 @@
 "use client";
 
+import type { ComponentProps } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, FreeMode } from "swiper/modules";
 import "swiper/css";
@@ -27,23 +28,35 @@ export default function TripCarousel({ data }: { data: TripCardData[] }) {
     <div className={styles.marqueeWrapper}>
       <Swiper
         modules={[Autoplay, FreeMode]}
-        slidesPerView={1.2}
+        // Below 768px: one card at a time, snapping to the next every 3s.
+        // At 768px+ this flips to the continuous marquee (see breakpoints).
+        slidesPerView={1}
         spaceBetween={40}
         loop
-        freeMode
-        speed={8000}
+        freeMode={false}
+        speed={600}
         autoplay={{
-          delay: 0,
+          delay: 3000,
           disableOnInteraction: false,
           pauseOnMouseEnter: false,
           stopOnLastSlide: false,
         }}
         allowTouchMove
-        breakpoints={{
-          768: { slidesPerView: 2 },
-          1024: { slidesPerView: 3 },
-          1440: { slidesPerView: 4 },
-        }}
+        // Swiper applies freeMode/autoplay breakpoint overrides fine at
+        // runtime, but its own SwiperOptions["breakpoints"] type only lists
+        // the layout params (slidesPerView, spaceBetween, ...) — hence the cast.
+        breakpoints={
+          {
+            768: {
+              slidesPerView: 2,
+              freeMode: true,
+              speed: 8000,
+              autoplay: { delay: 0, disableOnInteraction: false, pauseOnMouseEnter: false, stopOnLastSlide: false },
+            },
+            1024: { slidesPerView: 3 },
+            1440: { slidesPerView: 4 },
+          } as ComponentProps<typeof Swiper>["breakpoints"]
+        }
         onTouchStart={(swiper) => {
           swiper.autoplay.stop();
           swiper.autoplay.start();

@@ -347,5 +347,6 @@
   "meta_title_auth": "登录 | Bedouin Trails",
   "meta_desc_auth": "登录或创建账户以预订Bedouin Trails的沙漠Safari之旅。",
   "meta_title_not_found": "页面未找到 | Bedouin Trails",
-  "meta_desc_not_found": "您查找的页面不存在或已被移动。"
+  "meta_desc_not_found": "您查找的页面不存在或已被移动。",
+  "related_trips_title": "相关Safari之旅"
 }

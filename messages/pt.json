@@ -347,5 +347,6 @@
   "meta_title_auth": "Entrar | Bedouin Trails",
   "meta_desc_auth": "Entre ou crie uma conta para reservar safáris no deserto com a Bedouin Trails.",
   "meta_title_not_found": "Página Não Encontrada | Bedouin Trails",
-  "meta_desc_not_found": "A página que procura não existe ou foi movida."
+  "meta_desc_not_found": "A página que procura não existe ou foi movida.",
+  "related_trips_title": "Safáris Relacionados"
 }

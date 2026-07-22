@@ -347,5 +347,6 @@
   "meta_title_auth": "Accedi | Bedouin Trails",
   "meta_desc_auth": "Accedi o crea un account per prenotare safari nel deserto con Bedouin Trails.",
   "meta_title_not_found": "Pagina Non Trovata | Bedouin Trails",
-  "meta_desc_not_found": "La pagina che stai cercando non esiste o è stata spostata."
+  "meta_desc_not_found": "La pagina che stai cercando non esiste o è stata spostata.",
+  "related_trips_title": "Safari Correlati"
 }

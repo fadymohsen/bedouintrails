@@ -9,6 +9,7 @@
 // ---- Shared section heading row (heading + "see all" link) ----
 .sectionHead {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-end;
   max-width: fr.$section-max-width;
@@ -23,6 +24,12 @@
     text-transform: uppercase;
     margin: 0;
 
+    // Fixed 76px with no mobile scaling let the heading eat most of the
+    // row's width on narrow screens, squeezing the nowrap "read more" link
+    // until it got clipped by the ancestor's overflow: hidden.
+    @include l.md-down {
+      font-size: clamp(1.8rem, 7vw, 2.4rem);
+    }
   }
 }
 

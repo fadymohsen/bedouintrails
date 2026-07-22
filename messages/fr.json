@@ -347,5 +347,6 @@
   "meta_title_auth": "Connexion | Bedouin Trails",
   "meta_desc_auth": "Connectez-vous ou créez un compte pour réserver des safaris dans le désert avec Bedouin Trails.",
   "meta_title_not_found": "Page Non Trouvée | Bedouin Trails",
-  "meta_desc_not_found": "La page que vous recherchez n'existe pas ou a été déplacée."
+  "meta_desc_not_found": "La page que vous recherchez n'existe pas ou a été déplacée.",
+  "related_trips_title": "Safaris Similaires"
 }
