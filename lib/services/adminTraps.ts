@@ -1,7 +1,7 @@
 import "server-only";
 import { prisma } from "@/lib/prisma";
 import { slugify } from "@/lib/slugify";
-import { uploadImage, deleteImage } from "@/lib/blob";
+import { uploadImage } from "@/lib/blob";
 import { NotFoundError } from "./errors";
 import type { TrapFormInput } from "@/lib/validators/trap";
 
@@ -53,14 +53,11 @@ export async function updateTrap(id: number, input: TrapFormInput) {
 }
 
 export async function deleteTrap(id: number) {
-  const trap = await prisma.trap.findUnique({ where: { id }, include: { galleries: true, trapDays: { include: { cards: true } } } });
+  const trap = await prisma.trap.findUnique({ where: { id } });
   if (!trap) throw new NotFoundError("Trip not found.");
 
-  await Promise.all([
-    ...trap.galleries.map((g) => deleteImage(g.image)),
-    ...trap.trapDays.flatMap((d) => d.cards.map((c) => deleteImage(c.image))),
-  ]);
-
+  // Images can be reused across entities via the media library picker, so
+  // we never delete blobs on entity deletion — they may be referenced elsewhere.
   await prisma.trap.delete({ where: { id } });
 }
 
@@ -69,9 +66,12 @@ export async function addGalleryImages(trapId: number, files: File[]) {
   await prisma.gallery.createMany({ data: urls.map((image) => ({ trapId, image })) });
 }
 
+export async function addGalleryImageUrls(trapId: number, urls: string[]) {
+  await prisma.gallery.createMany({ data: urls.map((image) => ({ trapId, image })) });
+}
+
 export async function deleteGalleryImage(galleryId: number) {
   const gallery = await prisma.gallery.findUnique({ where: { id: galleryId } });
   if (!gallery) throw new NotFoundError("Image not found.");
-  await deleteImage(gallery.image);
   await prisma.gallery.delete({ where: { id: galleryId } });
 }

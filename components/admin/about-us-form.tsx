@@ -2,7 +2,7 @@
 
 import { useActionState } from "react";
 import I18nField from "./i18n-field";
-import { getLocalFallbackImage } from "@/lib/image-fallback";
+import { ImageField } from "./media-picker";
 import styles from "./admin.module.scss";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -49,17 +49,7 @@ export default function AboutUsForm({
         initial={{ en: initial?.descriptionEn, ar: initial?.descriptionAr, ...initial?.descriptionI18n }}
       />
 
-      {initial?.image && (
-        <div className={styles.field}>
-          <label>Current image</label>
-          <img src={getLocalFallbackImage(initial.image)} alt="" className={styles.imagePreview} />
-        </div>
-      )}
-
-      <div className={styles.field}>
-        <label>Image {initial ? "(leave empty to keep current)" : ""}</label>
-        <input type="file" name="image" accept="image/*" />
-      </div>
+      <ImageField label="Image" currentImage={initial?.image} />
 
       <button type="submit" className={styles.primaryBtn} disabled={pending}>
         {pending ? "Saving..." : submitLabel}

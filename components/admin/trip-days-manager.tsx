@@ -9,6 +9,7 @@ import {
   deleteTrapDayCardAction,
 } from "@/app/admin/(dashboard)/trips/actions";
 import I18nField from "./i18n-field";
+import { ImageField } from "./media-picker";
 import { getLocalFallbackImage } from "@/lib/image-fallback";
 import styles from "./admin.module.scss";
 
@@ -74,13 +75,7 @@ function CardForm({
         rows={2}
         initial={{ en: card?.descriptionEn ?? "", ar: card?.descriptionAr ?? "", ...card?.descriptionI18n }}
       />
-      <div className={styles.field}>
-        <label>Image {card && "(leave empty to keep current)"}</label>
-        {card?.image && (
-          <img src={getLocalFallbackImage(card.image)} alt="" className={styles.imagePreview} />
-        )}
-        <input type="file" name="image" accept="image/*" />
-      </div>
+      <ImageField label="Image" currentImage={card?.image} />
       <div style={{ display: "flex", gap: 8 }}>
         <button type="submit" className={styles.primaryBtn} disabled={pending}>
           {pending ? "Saving..." : card ? "Save" : "Add card"}

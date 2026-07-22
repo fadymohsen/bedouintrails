@@ -1,7 +1,12 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { addGalleryImagesAction, deleteGalleryImageAction } from "@/app/admin/(dashboard)/trips/actions";
+import {
+  addGalleryImagesAction,
+  addGalleryImageUrlsAction,
+  deleteGalleryImageAction,
+} from "@/app/admin/(dashboard)/trips/actions";
+import { LibraryPickerButton } from "./media-picker";
 import { getLocalFallbackImage } from "@/lib/image-fallback";
 import styles from "./admin.module.scss";
 
@@ -37,6 +42,17 @@ export default function TripGalleryManager({ tripId, images }: { tripId: number;
     });
   }
 
+  function handleAddFromLibrary(urls: string[]) {
+    setError(null);
+    startTransition(async () => {
+      try {
+        await addGalleryImageUrlsAction(tripId, urls);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Failed to add images. Please try again.");
+      }
+    });
+  }
+
   return (
     <div>
       <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginBottom: 20 }}>
@@ -61,9 +77,12 @@ export default function TripGalleryManager({ tripId, images }: { tripId: number;
       <form onSubmit={handleUpload} className={styles.field}>
         <label>Add images</label>
         <input type="file" name="images" accept="image/*" multiple />
-        <button type="submit" className={styles.secondaryBtn} disabled={pending} style={{ width: "fit-content" }}>
-          {pending ? "Uploading..." : "Upload"}
-        </button>
+        <div style={{ display: "flex", gap: 8 }}>
+          <button type="submit" className={styles.secondaryBtn} disabled={pending} style={{ width: "fit-content" }}>
+            {pending ? "Uploading..." : "Upload"}
+          </button>
+          <LibraryPickerButton label="Add from library" onSelectMultiple={handleAddFromLibrary} />
+        </div>
       </form>
     </div>
   );

@@ -2,7 +2,7 @@
 
 import { useActionState } from "react";
 import I18nField from "./i18n-field";
-import { getLocalFallbackImage } from "@/lib/image-fallback";
+import { ImageField } from "./media-picker";
 import styles from "./admin.module.scss";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -93,11 +93,7 @@ export default function BlogForm({
         initial={{ en: initial?.metaDescriptionEn, ar: initial?.metaDescriptionAr, ...initial?.metaDescriptionI18n }}
       />
 
-      <div className={styles.field}>
-        <label>Cover image {initial && "(leave empty to keep current)"}</label>
-        {initial?.image && <img src={getLocalFallbackImage(initial.image)} alt="" className={styles.imagePreview} />}
-        <input type="file" name="image" accept="image/*" />
-      </div>
+      <ImageField label="Cover image" currentImage={initial?.image} />
 
       <div className={styles.checkboxField}>
         <input type="checkbox" name="isPublished" id="isPublished" defaultChecked={initial?.isPublished} />

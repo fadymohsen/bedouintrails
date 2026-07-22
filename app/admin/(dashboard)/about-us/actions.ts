@@ -19,13 +19,22 @@ function formToAboutUsInput(form: FormData) {
 
 type ActionState = { success?: boolean; error?: string } | undefined;
 
+function readImageInputs(form: FormData) {
+  const imageFile = form.get("image");
+  const imageUrl = form.get("imageUrl");
+  return {
+    file: imageFile instanceof File && imageFile.size > 0 ? imageFile : null,
+    url: typeof imageUrl === "string" && imageUrl.trim() ? imageUrl.trim() : null,
+  };
+}
+
 export async function createAboutUsAction(_prevState: unknown, form: FormData): Promise<ActionState> {
   await requireAdmin("manage_website");
   let aboutUsId: number;
   try {
     const input = formToAboutUsInput(form);
-    const imageFile = form.get("image");
-    const aboutUs = await createAboutUs(input, imageFile instanceof File && imageFile.size > 0 ? imageFile : null);
+    const { file, url } = readImageInputs(form);
+    const aboutUs = await createAboutUs(input, file, url);
     aboutUsId = aboutUs.id;
   } catch (err) {
     return { error: err instanceof Error ? err.message : "Failed to save. Please try again." };
@@ -38,8 +47,8 @@ export async function updateAboutUsAction(aboutUsId: number, _prevState: unknown
   await requireAdmin("manage_website");
   try {
     const input = formToAboutUsInput(form);
-    const imageFile = form.get("image");
-    await updateAboutUs(aboutUsId, input, imageFile instanceof File && imageFile.size > 0 ? imageFile : null);
+    const { file, url } = readImageInputs(form);
+    await updateAboutUs(aboutUsId, input, file, url);
   } catch (err) {
     return { error: err instanceof Error ? err.message : "Failed to save. Please try again." };
   }

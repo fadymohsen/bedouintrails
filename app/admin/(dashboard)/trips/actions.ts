@@ -9,6 +9,7 @@ import {
   updateTrap,
   deleteTrap,
   addGalleryImages,
+  addGalleryImageUrls,
   deleteGalleryImage,
 } from "@/lib/services/adminTraps";
 import { createTrapDay, deleteTrapDay } from "@/lib/services/trapDays";
@@ -68,6 +69,12 @@ export async function addGalleryImagesAction(tripId: number, form: FormData) {
   revalidatePath(`/admin/trips/${tripId}`);
 }
 
+export async function addGalleryImageUrlsAction(tripId: number, urls: string[]) {
+  await requireAdmin("manage_trips");
+  if (urls.length > 0) await addGalleryImageUrls(tripId, urls);
+  revalidatePath(`/admin/trips/${tripId}`);
+}
+
 export async function deleteGalleryImageAction(tripId: number, galleryId: number) {
   await requireAdmin("manage_trips");
   await deleteGalleryImage(galleryId);
@@ -86,6 +93,15 @@ export async function deleteTrapDayAction(tripId: number, dayId: number) {
   revalidatePath(`/admin/trips/${tripId}`);
 }
 
+function readImageInputs(form: FormData) {
+  const imageFile = form.get("image");
+  const imageUrl = form.get("imageUrl");
+  return {
+    file: imageFile instanceof File && imageFile.size > 0 ? imageFile : null,
+    url: typeof imageUrl === "string" && imageUrl.trim() ? imageUrl.trim() : null,
+  };
+}
+
 export async function addTrapDayCardAction(tripId: number, dayId: number, form: FormData) {
   await requireAdmin("manage_trips");
   const input = trapDayCardFormSchema.parse({
@@ -96,8 +112,8 @@ export async function addTrapDayCardAction(tripId: number, dayId: number, form: 
     descriptionAr: form.get("descriptionAr") || undefined,
     descriptionI18n: form.get("descriptionI18n"),
   });
-  const imageFile = form.get("image");
-  await createTrapDayCard(dayId, input, imageFile instanceof File && imageFile.size > 0 ? imageFile : null);
+  const { file, url } = readImageInputs(form);
+  await createTrapDayCard(dayId, input, file, url);
   revalidatePath(`/admin/trips/${tripId}`);
 }
 
@@ -111,8 +127,8 @@ export async function updateTrapDayCardAction(tripId: number, cardId: number, fo
     descriptionAr: form.get("descriptionAr") || undefined,
     descriptionI18n: form.get("descriptionI18n"),
   });
-  const imageFile = form.get("image");
-  await updateTrapDayCard(cardId, input, imageFile instanceof File && imageFile.size > 0 ? imageFile : null);
+  const { file, url } = readImageInputs(form);
+  await updateTrapDayCard(cardId, input, file, url);
   revalidatePath(`/admin/trips/${tripId}`);
 }
 

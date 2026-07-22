@@ -1,7 +1,7 @@
 import "server-only";
 import { prisma } from "@/lib/prisma";
 import { slugify } from "@/lib/slugify";
-import { uploadImage, deleteImage } from "@/lib/blob";
+import { uploadImage } from "@/lib/blob";
 import { NotFoundError } from "./errors";
 import type { ArticleFormInput } from "@/lib/validators/article";
 
@@ -30,23 +30,26 @@ export async function getArticle(id: number) {
   return article;
 }
 
-export async function createArticle(input: ArticleFormInput, imageFile: File | null) {
+export async function createArticle(input: ArticleFormInput, imageFile: File | null, imageUrl: string | null) {
   const slug = await uniqueSlug(input.titleEn);
-  const image = imageFile ? await uploadImage(imageFile, "uploads/images/articles") : null;
+  const image = imageFile ? await uploadImage(imageFile, "uploads/images/articles") : imageUrl;
   return prisma.article.create({ data: { ...input, slug, image } });
 }
 
-export async function updateArticle(id: number, input: ArticleFormInput, imageFile: File | null) {
+export async function updateArticle(
+  id: number,
+  input: ArticleFormInput,
+  imageFile: File | null,
+  imageUrl: string | null
+) {
   const existing = await prisma.article.findUnique({ where: { id } });
   if (!existing) throw new NotFoundError("Article not found.");
 
   const slug = existing.titleEn === input.titleEn ? existing.slug : await uniqueSlug(input.titleEn, id);
 
-  let image = existing.image;
-  if (imageFile) {
-    image = await uploadImage(imageFile, "uploads/images/articles");
-    await deleteImage(existing.image);
-  }
+  // Images can be reused across entities via the media library picker, so an
+  // old image is never deleted here — it may still be referenced elsewhere.
+  const image = imageFile ? await uploadImage(imageFile, "uploads/images/articles") : imageUrl ?? existing.image;
 
   return prisma.article.update({ where: { id }, data: { ...input, slug, image } });
 }
@@ -54,6 +57,5 @@ export async function updateArticle(id: number, input: ArticleFormInput, imageFi
 export async function deleteArticle(id: number) {
   const article = await prisma.article.findUnique({ where: { id } });
   if (!article) throw new NotFoundError("Article not found.");
-  await deleteImage(article.image);
   await prisma.article.delete({ where: { id } });
 }

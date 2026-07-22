@@ -1,6 +1,6 @@
 import "server-only";
 import { prisma } from "@/lib/prisma";
-import { uploadImage, deleteImage } from "@/lib/blob";
+import { uploadImage } from "@/lib/blob";
 import { NotFoundError } from "./errors";
 import type { AboutUsFormInput } from "@/lib/validators/aboutUs";
 
@@ -14,20 +14,23 @@ export async function getAboutUs(id: number) {
   return aboutUs;
 }
 
-export async function createAboutUs(input: AboutUsFormInput, imageFile: File | null) {
-  const image = imageFile ? await uploadImage(imageFile, "uploads/images/about-us") : null;
+export async function createAboutUs(input: AboutUsFormInput, imageFile: File | null, imageUrl: string | null) {
+  const image = imageFile ? await uploadImage(imageFile, "uploads/images/about-us") : imageUrl;
   return prisma.aboutUs.create({ data: { ...input, image } });
 }
 
-export async function updateAboutUs(id: number, input: AboutUsFormInput, imageFile: File | null) {
+export async function updateAboutUs(
+  id: number,
+  input: AboutUsFormInput,
+  imageFile: File | null,
+  imageUrl: string | null
+) {
   const existing = await prisma.aboutUs.findUnique({ where: { id } });
   if (!existing) throw new NotFoundError("About Us entry not found.");
 
-  let image = existing.image;
-  if (imageFile) {
-    image = await uploadImage(imageFile, "uploads/images/about-us");
-    await deleteImage(existing.image);
-  }
+  // Images can be reused across entities via the media library picker, so an
+  // old image is never deleted here — it may still be referenced elsewhere.
+  const image = imageFile ? await uploadImage(imageFile, "uploads/images/about-us") : imageUrl ?? existing.image;
 
   return prisma.aboutUs.update({ where: { id }, data: { ...input, image } });
 }
@@ -35,6 +38,5 @@ export async function updateAboutUs(id: number, input: AboutUsFormInput, imageFi
 export async function deleteAboutUs(id: number) {
   const aboutUs = await prisma.aboutUs.findUnique({ where: { id } });
   if (!aboutUs) throw new NotFoundError("About Us entry not found.");
-  await deleteImage(aboutUs.image);
   await prisma.aboutUs.delete({ where: { id } });
 }

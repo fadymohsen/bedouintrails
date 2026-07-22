@@ -1,7 +1,7 @@
 import "server-only";
 import { prisma } from "@/lib/prisma";
 import { slugify } from "@/lib/slugify";
-import { uploadImage, deleteImage } from "@/lib/blob";
+import { uploadImage } from "@/lib/blob";
 import { NotFoundError } from "./errors";
 import type { BlogFormInput } from "@/lib/validators/blog";
 
@@ -31,25 +31,28 @@ export async function getBlogForAdmin(id: number) {
   return blog;
 }
 
-export async function createBlog(input: BlogFormInput, imageFile: File | null) {
+export async function createBlog(input: BlogFormInput, imageFile: File | null, imageUrl: string | null) {
   const slug = await uniqueSlug(input.titleEn);
-  const image = imageFile ? await uploadImage(imageFile, "uploads/images/blogs") : null;
+  const image = imageFile ? await uploadImage(imageFile, "uploads/images/blogs") : imageUrl;
   return prisma.blog.create({
     data: { ...input, slug, image, publishedAt: input.isPublished ? new Date() : null },
   });
 }
 
-export async function updateBlog(id: number, input: BlogFormInput, imageFile: File | null) {
+export async function updateBlog(
+  id: number,
+  input: BlogFormInput,
+  imageFile: File | null,
+  imageUrl: string | null
+) {
   const existing = await prisma.blog.findUnique({ where: { id } });
   if (!existing) throw new NotFoundError("Blog post not found.");
 
   const slug = existing.titleEn === input.titleEn ? existing.slug : await uniqueSlug(input.titleEn, id);
 
-  let image = existing.image;
-  if (imageFile) {
-    image = await uploadImage(imageFile, "uploads/images/blogs");
-    await deleteImage(existing.image);
-  }
+  // Images can be reused across entities via the media library picker, so an
+  // old image is never deleted here — it may still be referenced elsewhere.
+  const image = imageFile ? await uploadImage(imageFile, "uploads/images/blogs") : imageUrl ?? existing.image;
 
   const publishedAt = input.isPublished ? existing.publishedAt ?? new Date() : null;
 
@@ -59,6 +62,5 @@ export async function updateBlog(id: number, input: BlogFormInput, imageFile: Fi
 export async function deleteBlog(id: number) {
   const blog = await prisma.blog.findUnique({ where: { id } });
   if (!blog) throw new NotFoundError("Blog post not found.");
-  await deleteImage(blog.image);
   await prisma.blog.delete({ where: { id } });
 }
