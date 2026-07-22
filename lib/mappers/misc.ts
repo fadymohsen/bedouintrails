@@ -16,9 +16,41 @@ type SliderLike = {
   descriptionI18n?: I18nJson;
 };
 
+const HERO_STOCK_IMAGES = [
+  "/img/adventure.webp",
+  "/img/adventure1.webp",
+  "/img/adventure3.webp",
+  "/img/adventure4.webp",
+  "/img/bg.webp",
+  "/img/camel-ride.webp",
+  "/img/camel-ride1.webp",
+  "/img/events.webp",
+  "/img/faq-bg.webp",
+  "/img/faq-img.webp",
+  "/img/godl.webp",
+  "/img/quad-bike.webp",
+  "/img/salt-lake.webp",
+  "/img/western-desert-hero.webp",
+];
+
+// The original hero slider images live on the retired api.bedouintrails.com
+// host (DNS no longer resolves), so those specific URLs 404 forever.
+// Deterministically swap in a local stock photo for those only — real
+// uploads (Vercel Blob) still render as-is.
+function getHeroStockImage(src: string): string {
+  let hash = 0;
+  for (let i = 0; i < src.length; i++) {
+    hash = src.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  return HERO_STOCK_IMAGES[Math.abs(hash) % HERO_STOCK_IMAGES.length];
+}
+
 export function mapSliderForHero(slider: SliderLike, locale: Locale): HeroSlide {
+  const image = slider.image.includes("api.bedouintrails.com")
+    ? getHeroStockImage(slider.image)
+    : getLocalFallbackImage(slider.image);
   return {
-    image: getLocalFallbackImage(slider.image),
+    image,
     title: localize(slider.titleEn ?? "", slider.titleAr, locale, slider.titleI18n),
     description: localize(slider.descriptionEn ?? "", slider.descriptionAr, locale, slider.descriptionI18n),
   };
