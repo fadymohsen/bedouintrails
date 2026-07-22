@@ -20,6 +20,10 @@ export async function uploadImage(file: File, folder: string): Promise<string> {
   const blob = await put(key, file, {
     access: "public",
     addRandomSuffix: false,
+    // @vercel/blob defaults to OIDC auth when no token is passed explicitly,
+    // which isn't provisioned for local dev and throws — pass the static
+    // token directly so uploads work outside a deployed Vercel environment.
+    token: process.env.BLOB_READ_WRITE_TOKEN,
   });
 
   return blob.url;
@@ -27,5 +31,5 @@ export async function uploadImage(file: File, folder: string): Promise<string> {
 
 export async function deleteImage(url: string | null | undefined): Promise<void> {
   if (!url) return;
-  await del(url);
+  await del(url, { token: process.env.BLOB_READ_WRITE_TOKEN });
 }

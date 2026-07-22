@@ -32,6 +32,7 @@ export default async function EditAboutUsPage({ params }: { params: Promise<{ id
       </div>
       <div className={styles.card}>
         <AboutUsForm
+          key={aboutUsId}
           initial={{
             titleEn: aboutUs.titleEn,
             titleAr: aboutUs.titleAr ?? "",

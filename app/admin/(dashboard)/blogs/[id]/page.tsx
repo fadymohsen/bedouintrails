@@ -34,6 +34,7 @@ export default async function EditBlogPage({ params }: { params: Promise<{ id: s
 
       <div className={styles.card}>
         <BlogForm
+          key={blogId}
           action={boundUpdate}
           submitLabel="Save Changes"
           initial={{

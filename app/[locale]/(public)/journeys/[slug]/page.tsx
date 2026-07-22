@@ -182,7 +182,7 @@ export default async function TripDetailPage({ params }: { params: Promise<{ slu
       </div>
 
       <div className={styles["part-2"]}>
-        <TripDayViewer days={days} interfaceFrom={interfaceFrom} interfaceTo={interfaceTo} />
+        <TripDayViewer key={trip.id} days={days} interfaceFrom={interfaceFrom} interfaceTo={interfaceTo} />
       </div>
       {relatedCards.length > 0 && (
         <div className={styles.relatedTripsSection}>

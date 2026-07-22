@@ -32,6 +32,7 @@ export default async function EditTripPage({ params }: { params: Promise<{ id: s
       </div>
 
       <TripEditTabs
+        key={tripId}
         tripId={tripId}
         updateAction={boundUpdate}
         initial={{

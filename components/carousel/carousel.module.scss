@@ -255,14 +255,27 @@
   overflow: hidden;
   padding: 8px 0;
   // Fades the leading/trailing edge cards instead of hard-cutting mid-word
-  // titles, so the continuous ticker reads as intentional, not broken.
-  mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%);
-  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%);
+  // titles, so the continuous ticker reads as intentional, not broken. Below
+  // 768px the carousel shows one full card at a time instead (see
+  // TripCarousel's breakpoints) — the same fade there ate into that single
+  // card's actual content at both edges, so it's desktop-only.
+  @media (min-width: 768px) {
+    mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%);
+  }
 
   :global(.swiper-slide) {
-    margin: 0 12px;
+    // Swiper's own spaceBetween prop already sets the gap between slides —
+    // this extra margin stacked on top of it was fine when mobile only
+    // ever peeked at slides (slidesPerView: 1.2), but now that mobile shows
+    // one full-width slide, the combined margin pushed it past the
+    // container width, and overflow: hidden above clipped the card.
     cursor: grab;
     height: auto;
+
+    @media (min-width: 768px) {
+      margin: 0 12px;
+    }
 
     &:active {
       cursor: grabbing;

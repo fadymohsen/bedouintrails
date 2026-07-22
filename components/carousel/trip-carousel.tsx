@@ -30,7 +30,9 @@ export default function TripCarousel({ data }: { data: TripCardData[] }) {
         modules={[Autoplay, FreeMode]}
         // Below 768px: one card at a time, snapping to the next every 3s.
         // At 768px+ this flips to the continuous marquee (see breakpoints).
-        slidesPerView={1}
+        // 1.1/2.2/3.3/4.4 rather than 1/2/3/4 — cards are sized by how many
+        // fit in the row, so this is what makes each card ~10% smaller.
+        slidesPerView={1.1}
         spaceBetween={40}
         loop
         freeMode={false}
@@ -48,13 +50,13 @@ export default function TripCarousel({ data }: { data: TripCardData[] }) {
         breakpoints={
           {
             768: {
-              slidesPerView: 2,
+              slidesPerView: 2.2,
               freeMode: true,
               speed: 8000,
               autoplay: { delay: 0, disableOnInteraction: false, pauseOnMouseEnter: false, stopOnLastSlide: false },
             },
-            1024: { slidesPerView: 3 },
-            1440: { slidesPerView: 4 },
+            1024: { slidesPerView: 3.3 },
+            1440: { slidesPerView: 4.4 },
           } as ComponentProps<typeof Swiper>["breakpoints"]
         }
         onTouchStart={(swiper) => {

@@ -32,6 +32,7 @@ export default async function EditSliderPage({ params }: { params: Promise<{ id:
       </div>
       <div className={styles.card}>
         <SliderForm
+          key={sliderId}
           initial={{
             titleEn: slider.titleEn ?? "",
             titleAr: slider.titleAr ?? "",

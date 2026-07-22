@@ -32,6 +32,7 @@ export default async function EditArticlePage({ params }: { params: Promise<{ id
       </div>
       <div className={styles.card}>
         <ArticleForm
+          key={articleId}
           initial={{
             titleEn: article.titleEn,
             titleAr: article.titleAr ?? "",
