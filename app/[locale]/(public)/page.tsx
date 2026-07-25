@@ -251,6 +251,7 @@ export default async function HomePage() {
         </div>
       </ScrollReveal>
 
+      {/* historySection hidden
       {historyEntries.length > 0 && (
         <div className={styles.historySection}>
           <ScrollReveal as="h2" className={styles.historyHeading}>
@@ -272,6 +273,7 @@ export default async function HomePage() {
           </div>
         </div>
       )}
+      */}
 
       {homeBlogs.length > 0 && (
         <div className={styles.journalSection}>
