@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Link } from "@/lib/i18n/navigation";
 import { useTranslations } from "next-intl";
-import { FaFacebook, FaInstagram, FaWhatsapp, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaWhatsapp, FaEnvelope, FaMapMarkerAlt, FaTripadvisor } from "react-icons/fa";
 import styles from "./footer.module.scss";
 
 export default function Footer() {
@@ -48,7 +48,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <FaMapMarkerAlt /> Egypt - Cairo
+                <FaMapMarkerAlt /> Egypt - Giza
               </a>
             </div>
           </div>
@@ -81,6 +81,15 @@ export default function Footer() {
             aria-label="Facebook"
           >
             <FaFacebook />
+          </a>
+          <a
+            className={styles.socialButton}
+            href="https://ar.tripadvisor.com/Attraction_Review-g294202-d34391404-Reviews-Bedouin_Trails-Giza_Giza_Governorate.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="TripAdvisor"
+          >
+            <FaTripadvisor />
           </a>
         </div>
 
