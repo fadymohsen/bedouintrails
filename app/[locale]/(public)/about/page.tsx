@@ -47,7 +47,7 @@ export default async function AboutPage() {
       name: "Bedouin Trails",
       url: SITE_URL,
       logo: `${SITE_URL}/img/logo.png`,
-      address: { "@type": "PostalAddress", addressCountry: "EG", addressLocality: "Cairo" },
+      address: { "@type": "PostalAddress", addressCountry: "EG", addressLocality: "Giza" },
       contactPoint: { "@type": "ContactPoint", telephone: "+20-10-02717380", contactType: "reservations", availableLanguage: ["English", "Arabic"] },
     },
   };
