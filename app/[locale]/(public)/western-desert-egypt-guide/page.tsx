@@ -39,7 +39,7 @@ export default async function WesternDesertGuidePage() {
     "@type": "Article",
     headline: "Complete Guide to Egypt's Western Desert",
     description:
-      "The ultimate guide to exploring Egypt's Western Desert including the White Desert, Black Desert, Bahariya Oasis, Siwa Oasis, and Djara Cave.",
+      "The ultimate guide to exploring Egypt's Western Desert including the White Desert, Black Desert, Bahariya Oasis, Siwa Oasis, and Jara Cave.",
     url,
     publisher: { "@type": "Organization", name: "Bedouin Trails", url: SITE_URL },
     mainEntityOfPage: url,
@@ -97,7 +97,7 @@ export default async function WesternDesertGuidePage() {
 
         <h3>{t("guide_western_djara_h3")}</h3>
         <p>
-          <Link href="/djara-cave">{t("guide_western_djara_link")}</Link> {t("guide_western_djara_p")}
+          <Link href="/jara-cave">{t("guide_western_djara_link")}</Link> {t("guide_western_djara_p")}
         </p>
 
         <h3>{t("guide_western_agabat_h3")}</h3>
@@ -122,7 +122,7 @@ export default async function WesternDesertGuidePage() {
           </li>
           <li>
             <strong>{t("guide_western_duration_li3_bold")}</strong> — {t("guide_western_duration_li3_text")}{" "}
-            <Link href="/djara-cave">{t("guide_western_duration_li3_link")}</Link> {t("guide_western_duration_li3_cont")}
+            <Link href="/jara-cave">{t("guide_western_duration_li3_link")}</Link> {t("guide_western_duration_li3_cont")}
           </li>
           <li>
             <strong>{t("guide_western_duration_li4_bold")}</strong> — {t("guide_western_duration_li4_text")}{" "}

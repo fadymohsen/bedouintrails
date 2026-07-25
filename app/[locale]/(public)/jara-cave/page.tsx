@@ -5,7 +5,7 @@ import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
 import styles from "@/components/guides/guides.module.scss";
 
 import { SITE_URL, buildAlternates } from "@/lib/seo";
-const PATH = "/djara-cave";
+const PATH = "/jara-cave";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
@@ -30,17 +30,17 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function DjaraCavePage() {
+export default async function JaraCavePage() {
   const t = await getTranslations();
   const url = `${SITE_URL}${PATH}`;
 
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "TouristAttraction",
-    name: "Djara Cave",
+    name: "Jara Cave",
     alternateName: "كهف الجارة",
     description:
-      "Djara Cave is a prehistoric cave in Egypt's Western Desert containing Neolithic rock art and murals dating back to 7700–5300 BC, depicting humans, animals, and hunting scenes from when the Sahara was green.",
+      "Jara Cave is a prehistoric cave in Egypt's Western Desert containing Neolithic rock art and murals dating back to 7700–5300 BC, depicting humans, animals, and hunting scenes from when the Sahara was green.",
     url,
     geo: { "@type": "GeoCoordinates", latitude: "27.55", longitude: "28.65" },
     touristType: ["History enthusiasts", "Adventure seekers", "Archaeologists"],

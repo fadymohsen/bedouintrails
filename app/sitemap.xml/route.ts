@@ -15,7 +15,7 @@ const STATIC_PATHS = [
   "/faq",
   "/contact",
   "/desert-yoga-retreat",
-  "/djara-cave",
+  "/jara-cave",
   "/camel-trek",
   "/white-desert-tour-from-cairo",
   "/black-desert-egypt",
