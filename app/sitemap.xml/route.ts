@@ -32,6 +32,8 @@ const STATIC_PATHS = [
   "/white-desert-camping",
   "/multi-day-desert-trek",
   "/bahariya-oasis",
+  "/white-desert-egypt",
+  "/desert-trekking-egypt",
 ];
 
 interface SitemapEntry {
