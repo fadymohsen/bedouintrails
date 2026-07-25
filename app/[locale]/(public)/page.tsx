@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Link } from "@/lib/i18n/navigation";
-import { FaArrowRight, FaInstagram, FaCompass, FaBoxOpen, FaMapMarkedAlt } from "react-icons/fa";
+import { FaArrowRight, FaInstagram, FaCompass, FaBoxOpen, FaMapMarkedAlt, FaStar } from "react-icons/fa";
 import { getTranslations, getLocale } from "next-intl/server";
 import { prisma } from "@/lib/prisma";
 import type { Locale } from "@/lib/i18n/config";
@@ -102,11 +102,11 @@ export default async function HomePage() {
     logo: `${SITE_URL}/img/logo.png`,
     image: `${SITE_URL}/og-image.jpg`,
     description:
-      "Egyptian desert safari tour company based in Cairo, organizing White Desert safari tours, camel treks, desert trekking, and multi-day desert tours.",
+      "Egyptian desert safari tour company based in Giza, organizing White Desert safari tours, camel treks, desert trekking, and multi-day desert tours from Giza to Bahariya Oasis and the Western Desert.",
     address: {
       "@type": "PostalAddress",
       addressCountry: "EG",
-      addressLocality: "Cairo",
+      addressLocality: "Giza",
     },
     contactPoint: {
       "@type": "ContactPoint",
@@ -117,6 +117,7 @@ export default async function HomePage() {
     sameAs: [
       "https://www.instagram.com/the.white.and.black.desert",
       "https://www.facebook.com/profile.php?id=61587717913002",
+      "https://ar.tripadvisor.com/Attraction_Review-g294202-d34391404-Reviews-Bedouin_Trails-Giza_Giza_Governorate.html",
     ],
   };
 
@@ -217,15 +218,20 @@ export default async function HomePage() {
 
       <ScrollReveal as="div" className={styles.activitiesGrid}>
         {ACTIVITY_IMAGES.map((item) => (
-          <div key={item.key} className={styles.activityTile}>
+          <Link key={item.key} href="/journeys" className={styles.activityTile}>
             <Image src={item.img} alt={t(item.key)} loading="lazy" width={300} height={200} />
             <h3>{t(item.key)}</h3>
-          </div>
+          </Link>
         ))}
       </ScrollReveal>
 
       {testimonial?.comment && (
         <ScrollReveal as="section" className={styles.testimonialSection}>
+          <div className={styles.testimonialStars}>
+            {Array.from({ length: testimonial.stars }, (_, i) => (
+              <FaStar key={i} />
+            ))}
+          </div>
           <p className={styles.testimonialBody}>&ldquo;{testimonial.comment}&rdquo;</p>
           <p className={styles.testimonialAuthor}>{testimonial.userName}</p>
         </ScrollReveal>

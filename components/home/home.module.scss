@@ -447,6 +447,9 @@
   border-radius: fr.$radius;
   overflow: hidden;
   aspect-ratio: 3 / 4;
+  text-decoration: none;
+  color: inherit;
+  display: block;
 
   img {
     width: 100%;
@@ -499,6 +502,13 @@
   color: fr.$brand-primary;
   margin: 0;
   text-transform: uppercase;
+}
+
+.testimonialStars {
+  display: flex;
+  gap: 6px;
+  font-size: 1.2rem;
+  color: fr.$brand-primary;
 }
 
 .testimonialBody {
