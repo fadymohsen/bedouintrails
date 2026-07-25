@@ -74,7 +74,7 @@ export default async function AboutPage() {
           <p>{t("our_clients")}</p>
         </div>
         <div className={styles.trustItem}>
-          <h3>+5</h3>
+          <h3>+15</h3>
           <p>{t("experience_years")}</p>
         </div>
       </ScrollReveal>
