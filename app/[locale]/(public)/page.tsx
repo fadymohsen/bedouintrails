@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Link } from "@/lib/i18n/navigation";
-import { FaArrowRight, FaInstagram, FaCompass, FaBoxOpen, FaMapMarkedAlt, FaStar } from "react-icons/fa";
+import { FaArrowRight, FaInstagram, FaCompass, FaBoxOpen, FaMapMarkedAlt } from "react-icons/fa";
 import { getTranslations, getLocale } from "next-intl/server";
 import { prisma } from "@/lib/prisma";
 import type { Locale } from "@/lib/i18n/config";
@@ -11,6 +11,7 @@ import { mapSliderForHero, mapBlogForHomeSection, mapFaq, mapAboutUs, mapReviewF
 import SafeImage from "@/components/safe-image/safe-image";
 import HeroCarousel from "@/components/carousel/hero-carousel";
 import TripCarousel from "@/components/carousel/trip-carousel";
+import ReviewCarousel from "@/components/carousel/review-carousel";
 import Card from "@/components/card/card";
 import FaqAccordion from "@/components/faq-accordion/faq-accordion";
 import ScrollReveal from "@/components/scroll-reveal/scroll-reveal";
@@ -225,17 +226,17 @@ export default async function HomePage() {
         ))}
       </ScrollReveal>
 
-      {testimonial?.comment && (
-        <ScrollReveal as="section" className={styles.testimonialSection}>
-          <div className={styles.testimonialStars}>
-            {Array.from({ length: testimonial.stars }, (_, i) => (
-              <FaStar key={i} />
-            ))}
-          </div>
-          <p className={styles.testimonialBody}>&ldquo;{testimonial.comment}&rdquo;</p>
-          <p className={styles.testimonialAuthor}>{testimonial.userName}</p>
-        </ScrollReveal>
-      )}
+      <ScrollReveal as="section" className={styles.testimonialSection}>
+        <h2>{t("what_our_guests_say")}</h2>
+        <ReviewCarousel
+          data={[
+            { id: -1, userName: t("review_1_name"), userImage: null, stars: 5, comment: t("review_1_comment") },
+            { id: -2, userName: t("review_2_name"), userImage: null, stars: 5, comment: t("review_2_comment") },
+            { id: -3, userName: t("review_3_name"), userImage: null, stars: 5, comment: t("review_3_comment") },
+            ...(testimonial?.comment ? [testimonial] : []),
+          ]}
+        />
+      </ScrollReveal>
 
       <ScrollReveal as="div" className={styles.whyChooseSection}>
         <h2>{t("why_choose_us")}</h2>

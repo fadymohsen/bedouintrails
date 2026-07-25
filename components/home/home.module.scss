@@ -481,17 +481,29 @@
 
 // ---- Testimonial ----
 .testimonialSection {
-  max-width: 900px;
+  max-width: fr.$section-max-width;
   margin: 0 auto;
   padding: l.$section-y l.$gutter;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: fr.$gap-md;
+  gap: fr.$gap-lg;
 
   @media (max-width: 768px) {
     padding: l.$section-y-mobile l.$gutter-mobile;
+    gap: fr.$gap-md;
+  }
+
+  h2 {
+    font-size: fr.$display-size;
+    line-height: fr.$display-line;
+    text-transform: uppercase;
+    margin: 0;
+
+    @include l.md-down {
+      font-size: clamp(1.8rem, 7vw, 2.4rem);
+    }
   }
 }
 
