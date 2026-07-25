@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Link } from "@/lib/i18n/navigation";
-import { FaArrowRight, FaInstagram, FaCompass, FaBoxOpen, FaMapMarkedAlt } from "react-icons/fa";
+import { FaArrowRight, FaInstagram, FaCompass, FaBoxOpen, FaMapMarkedAlt, FaTripadvisor } from "react-icons/fa";
 import { getTranslations, getLocale } from "next-intl/server";
 import { prisma } from "@/lib/prisma";
 import type { Locale } from "@/lib/i18n/config";
@@ -145,6 +145,26 @@ export default async function HomePage() {
         </div>
       </ScrollReveal>
 
+      <ScrollReveal as="div" className={styles.whyChooseSection}>
+        <h2>{t("why_choose_us")}</h2>
+        <div className={styles.whyChooseList}>
+          {[1, 2, 3].map((n, i) => {
+            const Icon = WHY_CHOOSE_ICONS[i];
+            return (
+              <div key={n} className={styles.whyChooseItem}>
+                <div className={styles.icon}>
+                  <Icon />
+                </div>
+                <div>
+                  <h3>{t(`why_choose_us_${n}_title` as any)}</h3>
+                  <p>{t(`why_choose_us_${n}_body` as any)}</p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </ScrollReveal>
+
       <ScrollReveal className={`${styles.sectionHead} ${styles.sectionHeadTop} ${styles.sectionHeadCenter}`}>
         <h2>{t("featured_journeys")}</h2>
       </ScrollReveal>
@@ -157,28 +177,33 @@ export default async function HomePage() {
         </Link>
       </div>
 
-      <ScrollReveal as="div" className={styles.expertSection}>
-        <div className={styles.collageWrap}>
-          <div className={styles.scene}>
-            <div className={styles.collageWrapper}>
-              <div className={styles.pillLarge}>
-                <Image src="/img/adventure.webp" alt="ATV rider celebrating on sand dunes" width={400} height={500} sizes="(max-width: 480px) 220px, 300px" />
-                <div className={styles.grainOverlay} />
-              </div>
-              <div className={styles.pillSmall}>
-                <Image src="/img/salt-lake.webp" alt="Tourists floating in a crystal-clear salt lake in Egypt's Western Desert" width={300} height={400} sizes="(max-width: 480px) 150px, 210px" />
-                <div className={styles.grainOverlay} />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className={styles.expertText}>
-          <h2>{t("our_safari_story")}</h2>
-          <p>{t("safari_experience_message")}</p>
-          <Link href="/about" className={styles.textLink}>
-            {t("about")} <FaArrowRight size={13} />
+      <ScrollReveal as="div" className={styles.activitiesGrid}>
+        {ACTIVITY_IMAGES.map((item) => (
+          <Link key={item.key} href="/journeys" className={styles.activityTile}>
+            <Image src={item.img} alt={t(item.key)} loading="lazy" width={300} height={200} />
+            <h3>{t(item.key)}</h3>
           </Link>
-        </div>
+        ))}
+      </ScrollReveal>
+
+      <ScrollReveal as="section" className={styles.testimonialSection}>
+        <h2>{t("what_our_guests_say")}</h2>
+        <ReviewCarousel
+          data={[
+            { id: -1, userName: t("review_1_name"), userImage: null, stars: 5, comment: t("review_1_comment") },
+            { id: -2, userName: t("review_2_name"), userImage: null, stars: 5, comment: t("review_2_comment") },
+            { id: -3, userName: t("review_3_name"), userImage: null, stars: 5, comment: t("review_3_comment") },
+            ...(testimonial?.comment ? [testimonial] : []),
+          ]}
+        />
+        <a
+          className={styles.tripadvisorLink}
+          href="https://ar.tripadvisor.com/Attraction_Review-g294202-d34391404-Reviews-Bedouin_Trails-Giza_Giza_Governorate.html"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <FaTripadvisor size={20} /> {t("see_all_reviews_tripadvisor")}
+        </a>
       </ScrollReveal>
 
       {spotlightTrap && (
@@ -208,47 +233,41 @@ export default async function HomePage() {
         </div>
       )}
 
-      <ScrollReveal as="div" className={styles.activitiesGrid}>
-        {ACTIVITY_IMAGES.map((item) => (
-          <Link key={item.key} href="/journeys" className={styles.activityTile}>
-            <Image src={item.img} alt={t(item.key)} loading="lazy" width={300} height={200} />
-            <h3>{t(item.key)}</h3>
-          </Link>
-        ))}
-      </ScrollReveal>
-
-      <ScrollReveal as="section" className={styles.testimonialSection}>
-        <h2>{t("what_our_guests_say")}</h2>
-        <ReviewCarousel
-          data={[
-            { id: -1, userName: t("review_1_name"), userImage: null, stars: 5, comment: t("review_1_comment") },
-            { id: -2, userName: t("review_2_name"), userImage: null, stars: 5, comment: t("review_2_comment") },
-            { id: -3, userName: t("review_3_name"), userImage: null, stars: 5, comment: t("review_3_comment") },
-            ...(testimonial?.comment ? [testimonial] : []),
-          ]}
-        />
-      </ScrollReveal>
-
-      <ScrollReveal as="div" className={styles.whyChooseSection}>
-        <h2>{t("why_choose_us")}</h2>
-        <div className={styles.whyChooseList}>
-          {[1, 2, 3].map((n, i) => {
-            const Icon = WHY_CHOOSE_ICONS[i];
-            return (
-              <div key={n} className={styles.whyChooseItem}>
-                <div className={styles.icon}>
-                  <Icon />
-                </div>
-                <div>
-                  <h3>{t(`why_choose_us_${n}_title` as any)}</h3>
-                  <p>{t(`why_choose_us_${n}_body` as any)}</p>
-                </div>
+      <ScrollReveal as="div" className={styles.expertSection}>
+        <div className={styles.collageWrap}>
+          <div className={styles.scene}>
+            <div className={styles.collageWrapper}>
+              <div className={styles.pillLarge}>
+                <Image src="/img/adventure.webp" alt="ATV rider celebrating on sand dunes" width={400} height={500} sizes="(max-width: 480px) 220px, 300px" />
+                <div className={styles.grainOverlay} />
               </div>
-            );
-          })}
+              <div className={styles.pillSmall}>
+                <Image src="/img/salt-lake.webp" alt="Tourists floating in a crystal-clear salt lake in Egypt's Western Desert" width={300} height={400} sizes="(max-width: 480px) 150px, 210px" />
+                <div className={styles.grainOverlay} />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className={styles.expertText}>
+          <h2>{t("our_safari_story")}</h2>
+          <p>{t("safari_experience_message")}</p>
+          <Link href="/about" className={styles.textLink}>
+            {t("about")} <FaArrowRight size={13} />
+          </Link>
         </div>
       </ScrollReveal>
 
+      <ScrollReveal as="div" className={styles.faqSection}>
+        <h2>{t("faq_title")}</h2>
+        <div className={styles["faq-accordion"]}>
+          <FaqAccordion faqs={homeFaqs} />
+        </div>
+        <div className={styles.faqFooterLine}>
+          <Link href="/contact" className={styles.pillButton}>
+            {t("contact_us")}
+          </Link>
+        </div>
+      </ScrollReveal>
 
       {homeBlogs.length > 0 && (
         <div className={styles.journalSection}>
@@ -275,18 +294,6 @@ export default async function HomePage() {
           </div>
         </div>
       )}
-
-      <ScrollReveal as="div" className={styles.faqSection}>
-        <h2>{t("faq_title")}</h2>
-        <div className={styles["faq-accordion"]}>
-          <FaqAccordion faqs={homeFaqs} />
-        </div>
-        <div className={styles.faqFooterLine}>
-          <Link href="/contact" className={styles.pillButton}>
-            {t("contact_us")}
-          </Link>
-        </div>
-      </ScrollReveal>
 
       <ScrollReveal as="div" className={styles.socialSection}>
         <h2 className={styles.socialHandle}>@the.white.and.black.desert</h2>
