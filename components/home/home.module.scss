@@ -374,6 +374,12 @@
   text-transform: uppercase;
   margin: 0;
 
+  // Keep long titles (any language) from running under the absolutely
+  // positioned polaroid photos on either side of the card.
+  @media (min-width: 1025px) {
+    max-width: 620px;
+    margin-inline: auto;
+  }
 }
 
 .spotlightMeta {
