@@ -17,6 +17,7 @@
     width: 100%;
     max-width: 500px;
     box-sizing: border-box;
+    overflow: hidden;
 
     @include l.md-down {
         padding: l.$space-5;
@@ -77,6 +78,10 @@
             line-height: 1.6;
             color: fr.$text-body-muted;
             margin: 0;
+            display: -webkit-box;
+            -webkit-line-clamp: 8;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
     }
 
