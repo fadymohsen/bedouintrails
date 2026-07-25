@@ -44,7 +44,7 @@ export default function Footer() {
                 <FaEnvelope /> info@bedouintrails.com
               </a>
               <a
-                href="https://www.google.com/maps?q=28.345849,28.8724675&z=17&hl=en"
+                href="https://www.google.com/maps?q=28.3458203,28.8724705&z=17&hl=en"
                 target="_blank"
                 rel="noopener noreferrer"
               >
