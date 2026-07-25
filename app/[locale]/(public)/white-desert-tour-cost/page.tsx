@@ -43,6 +43,9 @@ export default async function TourCostPage() {
         url, image: `${SITE_URL}/og-image.jpg`,
         publisher: { "@type": "Organization", name: "Bedouin Trails", logo: { "@type": "ImageObject", url: `${SITE_URL}/img/logo.png` } },
         mainEntityOfPage: url,
+        author: { "@type": "Organization", name: "Bedouin Trails" },
+        datePublished: "2025-01-15",
+        dateModified: "2026-07-26",
       }) }} />
       <Breadcrumbs
         items={[

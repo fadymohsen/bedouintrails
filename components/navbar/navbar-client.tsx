@@ -43,6 +43,17 @@ export default function NavbarClient({ user }: { user: NavbarUser }) {
     { path: "/contact", label: t("contact") },
   ];
 
+  const guideLinks = [
+    { path: "/white-desert-tour-from-cairo", label: t("guide_whitetour_breadcrumb") },
+    { path: "/egypt-safari-tours", label: t("guide_safaritours_breadcrumb") },
+    { path: "/bahariya-oasis", label: t("guide_bahariya_breadcrumb") },
+    { path: "/black-desert-egypt", label: t("guide_black_breadcrumb") },
+    { path: "/camel-trek", label: t("guide_camel_breadcrumb") },
+    { path: "/desert-yoga-retreat", label: t("guide_yoga_breadcrumb") },
+    { path: "/multi-day-desert-trek", label: t("guide_trek_breadcrumb") },
+    { path: "/white-desert-camping", label: t("guide_camping_breadcrumb") },
+  ];
+
   const isActive = (path: string) => pathname === path;
   const activeLink = navLinks.find((link) => isActive(link.path));
   const activeLinkLabel = activeLink?.label ?? t("home");
@@ -93,6 +104,18 @@ export default function NavbarClient({ user }: { user: NavbarUser }) {
 
             <div className={styles.navDropdown__links}>
               {navLinks.map((link) => (
+                <div
+                  key={link.path}
+                  className={`${styles.navDropdown__item} ${isActive(link.path) ? styles.active : ""}`}
+                >
+                  <Link href={link.path} onClick={() => setDropdownOpen(false)}>
+                    {link.label}
+                  </Link>
+                </div>
+              ))}
+              <div className={styles.navDropdown__divider} />
+              <div className={styles.navDropdown__sectionTitle}>{t("travel_guides")}</div>
+              {guideLinks.map((link) => (
                 <div
                   key={link.path}
                   className={`${styles.navDropdown__item} ${isActive(link.path) ? styles.active : ""}`}

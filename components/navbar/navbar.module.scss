@@ -231,8 +231,17 @@
 
   &__divider {
     height: 1px;
+    width: 60%;
     background: hsla(0, 0%, 100%, 0.08);
-    margin: 16px 0;
+    margin: 8px 0;
+  }
+
+  &__sectionTitle {
+    font-family: fr.$font-accent;
+    font-size: fr.$accent-small-size;
+    color: fr.$text-body-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
 
   &__auth {

@@ -29,7 +29,19 @@ export default function Footer() {
             <nav className={styles.footerMenu}>
               <Link href="/journeys">{t("safari_trips")}</Link>
               <Link href="/blogs">{t("blogs")}</Link>
-              <Link href="/contact">{t("contact")}</Link>
+              <Link href="/faq">{t("faq")}</Link>
+            </nav>
+          </div>
+
+          <div className={styles.col}>
+            <h5 className={styles.colTitle}>{t("travel_guides")}</h5>
+            <nav className={styles.footerMenu}>
+              <Link href="/white-desert-tour-from-cairo">{t("guide_whitetour_breadcrumb")}</Link>
+              <Link href="/egypt-safari-tours">{t("guide_safaritours_breadcrumb")}</Link>
+              <Link href="/bahariya-oasis">{t("guide_bahariya_breadcrumb")}</Link>
+              <Link href="/black-desert-egypt">{t("guide_black_breadcrumb")}</Link>
+              <Link href="/desert-yoga-retreat">{t("guide_yoga_breadcrumb")}</Link>
+              <Link href="/multi-day-desert-trek">{t("guide_trek_breadcrumb")}</Link>
             </nav>
           </div>
 

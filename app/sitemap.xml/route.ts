@@ -53,7 +53,7 @@ function buildEntry(locale: string, entry: SitemapEntry): string {
     )
     .join("\n");
 
-  const xDefault = `      <xhtml:link rel="alternate" hreflang="x-default" href="${SITE_URL}/${defaultLocale}${isHome ? "" : entry.path}" />`;
+  const xDefault = `      <xhtml:link rel="alternate" hreflang="x-default" href="${SITE_URL}/en${isHome ? "" : entry.path}" />`;
 
   return `  <url>
     <loc>${url}</loc>

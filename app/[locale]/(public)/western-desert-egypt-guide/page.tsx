@@ -43,6 +43,9 @@ export default async function WesternDesertGuidePage() {
     url,
     publisher: { "@type": "Organization", name: "Bedouin Trails", url: SITE_URL },
     mainEntityOfPage: url,
+    author: { "@type": "Organization", name: "Bedouin Trails" },
+    datePublished: "2025-01-15",
+    dateModified: "2026-07-26",
   };
 
   return (

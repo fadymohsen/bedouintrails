@@ -9,8 +9,9 @@ export function buildAlternates(path: string) {
   for (const loc of locales) {
     languages[loc] = `${SITE_URL}/${loc}${path === "/" ? "" : path}`;
   }
+  languages["x-default"] = `${SITE_URL}/en${path === "/" ? "" : path}`;
   return {
-    canonical: path === "/" ? SITE_URL : `${SITE_URL}${path}`,
+    canonical: `${SITE_URL}/en${path === "/" ? "" : path}`,
     languages,
   };
 }
