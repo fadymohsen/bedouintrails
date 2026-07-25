@@ -85,28 +85,4 @@
         }
     }
 
-    .avatar-wrapper {
-        width: 96px;
-        height: 96px;
-        flex-shrink: 0;
-
-        @include l.md-down {
-            width: 80px;
-            height: 80px;
-        }
-
-        @include l.sm-down {
-            width: 64px;
-            height: 64px;
-            order: 1;
-        }
-
-        .avatar-img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 1px solid hsla(0, 0%, 100%, 0.2);
-        }
-    }
 }
