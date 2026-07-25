@@ -48,8 +48,18 @@ export default function HeroCarousel({ slides, ctaHref = "/journeys", featuredTr
           <div
             key={index}
             className={`${styles.bgLayer} ${index === activeIndex ? styles.active : ""}`}
-            style={{ backgroundImage: `url(${slide.image})` }}
-          />
+          >
+            <Image
+              src={slide.image}
+              alt={slide.title || "Desert safari adventure"}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1328px) 100vw, 1328px"
+              priority={index === 0}
+              loading={index === 0 ? "eager" : "lazy"}
+              quality={80}
+              style={{ objectFit: "cover" }}
+            />
+          </div>
         ))}
       </div>
 

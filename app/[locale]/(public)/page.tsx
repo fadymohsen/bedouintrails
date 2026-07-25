@@ -7,12 +7,11 @@ import type { Locale } from "@/lib/i18n/config";
 import { localize } from "@/lib/i18n/localized";
 import { getLocalFallbackImage } from "@/lib/image-fallback";
 import { mapTrapForCard } from "@/lib/mappers/trap";
-import { mapSliderForHero, mapBlogForHomeSection, mapFaq, mapAboutUs, mapReviewForTestimonial } from "@/lib/mappers/misc";
+import { mapSliderForHero, mapBlogForHomeSection, mapFaq, mapReviewForTestimonial } from "@/lib/mappers/misc";
 import SafeImage from "@/components/safe-image/safe-image";
 import HeroCarousel from "@/components/carousel/hero-carousel";
 import TripCarousel from "@/components/carousel/trip-carousel";
 import ReviewCarousel from "@/components/carousel/review-carousel";
-import Card from "@/components/card/card";
 import FaqAccordion from "@/components/faq-accordion/faq-accordion";
 import ScrollReveal from "@/components/scroll-reveal/scroll-reveal";
 import styles from "@/components/home/home.module.scss";
@@ -37,17 +36,11 @@ const ACTIVITY_IMAGES = [
 
 const WHY_CHOOSE_ICONS = [FaCompass, FaBoxOpen, FaMapMarkedAlt];
 
-const HISTORY_LINKS = [
-  { href: "/about", labelKey: "about" as const },
-  { href: "/journeys", labelKey: "all_tours" as const },
-  { href: "/blogs", labelKey: "blogs" as const },
-];
-
 export default async function HomePage() {
   const locale = (await getLocale()) as Locale;
   const t = await getTranslations();
 
-  const [sliders, traps, spotlightTrap, blogs, faqs, aboutUsEntries, topReview, trapCount] =
+  const [sliders, traps, spotlightTrap, blogs, faqs, topReview, trapCount] =
     await Promise.all([
       prisma.slider.findMany({ orderBy: { createdAt: "desc" } }),
       prisma.trap.findMany({
@@ -67,7 +60,6 @@ export default async function HomePage() {
         orderBy: { publishedAt: "desc" },
       }),
       prisma.commonQuestion.findMany({ orderBy: { createdAt: "asc" }, take: 8 }),
-      prisma.aboutUs.findMany({ orderBy: { id: "asc" }, take: 3 }),
       prisma.review.findFirst({
         where: { comment: { not: null } },
         orderBy: [{ stars: "desc" }, { createdAt: "desc" }],
@@ -88,7 +80,6 @@ export default async function HomePage() {
   const socialCards = tripCards.slice(0, 3);
   const homeBlogs = blogs.map((b) => mapBlogForHomeSection(b, locale));
   const homeFaqs = faqs.map((f) => mapFaq(f, locale));
-  const historyEntries = aboutUsEntries.map((entry) => mapAboutUs(entry, locale));
   const testimonial = topReview ? mapReviewForTestimonial(topReview) : null;
   const spotlightName = spotlightTrap
     ? localize(spotlightTrap.nameEn, spotlightTrap.nameAr, locale, spotlightTrap.nameI18n)
@@ -171,11 +162,11 @@ export default async function HomePage() {
           <div className={styles.scene}>
             <div className={styles.collageWrapper}>
               <div className={styles.pillLarge}>
-                <Image src="/img/adventure.webp" alt="ATV rider celebrating on sand dunes" width={400} height={500} />
+                <Image src="/img/adventure.webp" alt="ATV rider celebrating on sand dunes" width={400} height={500} sizes="(max-width: 480px) 220px, 300px" />
                 <div className={styles.grainOverlay} />
               </div>
               <div className={styles.pillSmall}>
-                <Image src="/img/salt-lake.webp" alt="Tourists floating in a crystal-clear salt lake in Egypt's Western Desert" width={300} height={400} />
+                <Image src="/img/salt-lake.webp" alt="Tourists floating in a crystal-clear salt lake in Egypt's Western Desert" width={300} height={400} sizes="(max-width: 480px) 150px, 210px" />
                 <div className={styles.grainOverlay} />
               </div>
             </div>
@@ -258,29 +249,6 @@ export default async function HomePage() {
         </div>
       </ScrollReveal>
 
-      {/* historySection hidden
-      {historyEntries.length > 0 && (
-        <div className={styles.historySection}>
-          <ScrollReveal as="h2" className={styles.historyHeading}>
-            {t("our_journey_heading")}
-          </ScrollReveal>
-          <div className={styles.historyGrid}>
-            {historyEntries.map((entry, i) => (
-              <ScrollReveal key={entry.id} className={styles.historyItem} delay={i * 100}>
-                <h3>{entry.title}</h3>
-                <SafeImage src={entry.image || `/img/adventure${i % 2 === 0 ? "3" : "4"}.webp`} alt={entry.title} loading="lazy" width={400} height={300} style={{ objectFit: "cover", borderRadius: "20px" }} />
-                <p>{entry.description}</p>
-                {HISTORY_LINKS[i] && (
-                  <Link href={HISTORY_LINKS[i].href} className={styles.textLink}>
-                    {t(HISTORY_LINKS[i].labelKey)} <FaArrowRight size={13} />
-                  </Link>
-                )}
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      )}
-      */}
 
       {homeBlogs.length > 0 && (
         <div className={styles.journalSection}>

@@ -147,23 +147,6 @@
   }
 }
 
-// ---- Featured adventures grid ----
-.adventuresGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: fr.$gap-md;
-  max-width: fr.$section-max-width;
-  margin: 0 auto;
-  padding: l.$section-y l.$gutter;
-
-  @media (max-width: 1024px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-  }
-}
 
 // ---- Expert / founder intro (dual photo collage + text) ----
 .expertSection {
@@ -507,36 +490,6 @@
   }
 }
 
-.testimonialQuote {
-  font-family: fr.$font-display;
-  font-size: fr.$h2-size;
-  line-height: fr.$h2-line;
-  color: fr.$brand-primary;
-  margin: 0;
-  text-transform: uppercase;
-}
-
-.testimonialStars {
-  display: flex;
-  gap: 6px;
-  font-size: 1.2rem;
-  color: fr.$brand-primary;
-}
-
-.testimonialBody {
-  font-family: fr.$font-display;
-  font-size: fr.$h4-size;
-  line-height: fr.$h4-line;
-  color: fr.$text-heading;
-  margin: 0;
-  text-transform: uppercase;
-}
-
-.testimonialAuthor {
-  font-family: fr.$font-body;
-  font-size: fr.$body-size;
-  color: fr.$text-body-muted;
-}
 
 // ---- Why choose us ----
 .whyChooseSection {
@@ -609,78 +562,6 @@
     font-family: fr.$font-body;
     font-size: fr.$body-size;
     line-height: fr.$body-line;
-    color: fr.$text-body-muted;
-    margin: 0;
-  }
-}
-// ---- History / purpose (about-us entries) ----
-.historySection {
-  padding: l.$section-y l.$gutter;
-  padding-top: 0;
-
-  @media (max-width: 768px) {
-    padding: l.$section-y-mobile l.$gutter-mobile;
-  }
-}
-
-.historyHeading {
-  text-align: center;
-  font-size: fr.$display-size;
-  line-height: fr.$display-line;
-  text-transform: uppercase;
-  max-width: fr.$section-max-width;
-  // No space separated this from the three cards below it — heading and
-  // subheadings ran together with zero gap.
-  margin: l.$space-6 auto l.$space-8;
-
-  @include l.md-down {
-    margin-block: l.$space-5 l.$space-7;
-  }
-
-  .accent {
-    color: fr.$brand-primary;
-    display: block;
-  }
-}
-
-.historyGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: fr.$gap-md;
-  max-width: fr.$section-max-width;
-  margin: 0 auto;
-
-  @media (max-width: 1024px) {
-    grid-template-columns: 1fr;
-  }
-}
-
-.historyItem {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 20px;
-
-  img {
-    width: 100%;
-    aspect-ratio: 4 / 5;
-    object-fit: cover;
-    border-radius: fr.$radius;
-  }
-
-  h3 {
-    font-family: fr.$font-display;
-    font-size: fr.$h4-size;
-    line-height: fr.$h4-line;
-    font-weight: 400;
-    margin: 0;
-  }
-
-  p {
-    font-family: fr.$font-body;
-    font-size: fr.$body-small-size;
-    line-height: fr.$body-small-line;
     color: fr.$text-body-muted;
     margin: 0;
   }
