@@ -12,9 +12,11 @@ let cache: MediaItem[] | null = null;
 function useMediaLibrary(open: boolean) {
   const [items, setItems] = useState<MediaItem[] | null>(cache);
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    if (!open || cache) return;
+  function load() {
+    setLoading(true);
+    setError(null);
     fetch("/api/admin/media")
       .then((res) => {
         if (!res.ok) throw new Error("Failed to load media library.");
@@ -24,10 +26,17 @@ function useMediaLibrary(open: boolean) {
         cache = data.items;
         setItems(data.items);
       })
-      .catch((err) => setError(err instanceof Error ? err.message : "Failed to load media library."));
+      .catch((err) => setError(err instanceof Error ? err.message : "Failed to load media library."))
+      .finally(() => setLoading(false));
+  }
+
+  useEffect(() => {
+    if (!open || cache) return;
+    load();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
-  return { items, error };
+  return { items, error, loading, refresh: load };
 }
 
 function MediaPickerModal({
@@ -43,7 +52,7 @@ function MediaPickerModal({
   onSelect?: (url: string) => void;
   onSelectMultiple?: (urls: string[]) => void;
 }) {
-  const { items, error } = useMediaLibrary(open);
+  const { items, error, loading, refresh } = useMediaLibrary(open);
   const [query, setQuery] = useState("");
   const [selected, setSelected] = useState<string[]>([]);
 
@@ -77,6 +86,14 @@ function MediaPickerModal({
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
+          <button
+            type="button"
+            className={adminStyles.secondaryBtn}
+            onClick={refresh}
+            disabled={loading}
+          >
+            {loading ? "Refreshing..." : "Refresh"}
+          </button>
           <button type="button" className={styles.closeBtn} onClick={onClose} aria-label="Close">
             &times;
           </button>
