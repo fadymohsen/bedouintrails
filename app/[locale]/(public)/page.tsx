@@ -298,7 +298,7 @@ export default async function HomePage() {
       <ScrollReveal as="div" className={styles.socialSection}>
         <h2 className={styles.socialHandle}>@the.white.and.black.desert</h2>
         <div className={styles.socialGrid}>
-          {socialCards.map((card) => (
+          {socialCards.slice(0, 1).map((card) => (
             <a
               key={card.id}
               className={styles.socialTile}
@@ -312,6 +312,12 @@ export default async function HomePage() {
               </div>
             </a>
           ))}
+          <a className={styles.socialTile} target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/the.white.and.black.desert?igsh=aHdjbzB6ajJ5dTBk">
+            <Image src="/img/social-2.jpg" alt="Desert meditation in the White Desert" loading="lazy" width={300} height={400} style={{ objectFit: "cover", borderRadius: "20px" }} />
+          </a>
+          <a className={styles.socialTile} target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/the.white.and.black.desert?igsh=aHdjbzB6ajJ5dTBk">
+            <Image src="/img/social-3.jpg" alt="Travelers exploring the Black Desert at sunset" loading="lazy" width={300} height={400} style={{ objectFit: "cover", borderRadius: "20px" }} />
+          </a>
         </div>
         <a
           className={styles.pillButton}
