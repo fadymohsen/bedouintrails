@@ -55,15 +55,15 @@
   min-height: 300px;
 
   @include l.lg-down {
-    min-height: 260px;
+    min-height: 280px;
   }
 
   @include l.md-down {
-    min-height: 240px;
+    min-height: 300px;
   }
 
   @include l.sm-down {
-    min-height: 220px;
+    min-height: 320px;
   }
 }
 
