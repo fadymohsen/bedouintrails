@@ -77,6 +77,7 @@ export default async function HomePage() {
     return mapTrapForCard({ ...trap, rate }, locale);
   });
   const featuredCards = tripCards.slice(0, 3);
+  const socialCards = tripCards.slice(0, 3);
   const homeBlogs = blogs.map((b) => mapBlogForHomeSection(b, locale));
   const homeFaqs = faqs.map((f) => mapFaq(f, locale));
   const testimonial = topReview ? mapReviewForTestimonial(topReview) : null;
@@ -297,19 +298,18 @@ export default async function HomePage() {
       <ScrollReveal as="div" className={styles.socialSection}>
         <h2 className={styles.socialHandle}>@the.white.and.black.desert</h2>
         <div className={styles.socialGrid}>
-          {[
-            { img: "/img/social-1.jpg", alt: "Black Desert landscape at sunset" },
-            { img: "/img/social-2.jpg", alt: "Floating in a crystal-clear salt lake in Siwa Oasis" },
-            { img: "/img/social-3.jpg", alt: "Travelers exploring the Black Desert" },
-          ].map((item, i) => (
+          {socialCards.map((card) => (
             <a
-              key={i}
+              key={card.id}
               className={styles.socialTile}
               target="_blank"
               rel="noopener noreferrer"
               href="https://www.instagram.com/the.white.and.black.desert?igsh=aHdjbzB6ajJ5dTBk"
             >
-              <Image src={item.img} alt={item.alt} loading="lazy" width={300} height={400} style={{ objectFit: "cover", borderRadius: "20px" }} />
+              <SafeImage src={card.image || "/img/adventure1.webp"} alt={card.name} loading="lazy" width={300} height={300} style={{ objectFit: "cover", borderRadius: "20px" }} />
+              <div className={styles.socialLabel}>
+                <strong>{card.name}</strong>
+              </div>
             </a>
           ))}
         </div>
