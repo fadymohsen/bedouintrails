@@ -46,6 +46,27 @@
   }
 }
 
+// Reserves height for the tallest realistic title+description pairing so the
+// CTA button below stays put — contentItem is absolutely positioned inside
+// (for the crossfade), so without this the stack would collapse to 0 height
+// and the button would sit at the very top, overlapping the title.
+.contentStack {
+  position: relative;
+  min-height: 300px;
+
+  @include l.lg-down {
+    min-height: 260px;
+  }
+
+  @include l.md-down {
+    min-height: 240px;
+  }
+
+  @include l.sm-down {
+    min-height: 220px;
+  }
+}
+
 .contentItem {
   position: absolute;
   top: 0;

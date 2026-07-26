@@ -64,12 +64,14 @@ export default function HeroCarousel({ slides, ctaHref = "/journeys", featuredTr
       </div>
 
       <div className={styles.mainContent}>
-        {slides.map((slide, index) => (
-          <div key={index} className={`${styles.contentItem} ${index === activeIndex ? styles.active : styles.exit}`}>
-            <h1>{slide.title}</h1>
-            <p>{slide.description}</p>
-          </div>
-        ))}
+        <div className={styles.contentStack}>
+          {slides.map((slide, index) => (
+            <div key={index} className={`${styles.contentItem} ${index === activeIndex ? styles.active : styles.exit}`}>
+              <h1>{slide.title}</h1>
+              <p>{slide.description}</p>
+            </div>
+          ))}
+        </div>
         <Link href={ctaHref} className={styles.heroCta}>
           {t("begin_your_journey")}
         </Link>
