@@ -32,7 +32,7 @@
 .columns {
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr 1.3fr;
+  grid-template-columns: 1fr 1fr 1.3fr 1.3fr;
   gap: l.$space-7;
 
   @include l.md-down {

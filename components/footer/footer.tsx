@@ -47,7 +47,6 @@ export default function Footer() {
 
           <div className={styles.col}>
             <h5 className={styles.colTitle}>{t("contact_us")}</h5>
-            <p className={styles.colText}>{t("about_footer_title")}</p>
             <div className={styles.contactLinks}>
               <a href="https://wa.link/qtrpve/" target="_blank" rel="noopener noreferrer">
                 <FaWhatsapp /> +20 10 02717380
