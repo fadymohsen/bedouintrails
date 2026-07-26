@@ -299,7 +299,7 @@ export default async function HomePage() {
         <div className={styles.socialGrid}>
           {[
             { img: "/img/social-1.jpg", alt: "Black Desert landscape at sunset" },
-            { img: "/img/social-2.jpg", alt: "Desert meditation in the White Desert" },
+            { img: "/img/social-2.jpg", alt: "Floating in a crystal-clear salt lake in Siwa Oasis" },
             { img: "/img/social-3.jpg", alt: "Travelers exploring the Black Desert" },
           ].map((item, i) => (
             <a
