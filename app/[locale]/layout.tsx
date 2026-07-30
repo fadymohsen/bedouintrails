@@ -3,24 +3,10 @@ import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { isLocale } from "@/lib/i18n/config";
 import { routing } from "@/i18n/routing";
-import type { Metadata } from "next";
-import { SITE_URL, buildAlternates } from "@/lib/seo";
 import LocaleDirSync from "@/components/locale-dir-sync/locale-dir-sync";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
-}
-
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
-  const { locale } = await params;
-
-  return {
-    alternates: buildAlternates(`/`, locale),
-  };
 }
 
 export default async function LocaleLayout({
