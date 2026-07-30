@@ -37,7 +37,7 @@ export async function generateMetadata({
   return {
     title: `${metaTitle} | Bedouin Trails`,
     description: metaDescription,
-    alternates: buildAlternates(`/blogs/${slug}`),
+    alternates: buildAlternates(`/blogs/${slug}`, locale),
     openGraph: {
       title: metaTitle,
       description: metaDescription,

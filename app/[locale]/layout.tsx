@@ -19,7 +19,7 @@ export async function generateMetadata({
   const { locale } = await params;
 
   return {
-    alternates: buildAlternates(`/`),
+    alternates: buildAlternates(`/`, locale),
   };
 }
 

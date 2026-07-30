@@ -14,6 +14,13 @@ const nextConfig: NextConfig = {
   sassOptions: {
     includePaths: ["./styles"],
   },
+  redirects: async () => [
+    {
+      source: "/:locale/djara-cave",
+      destination: "/:locale/jara-cave",
+      permanent: true,
+    },
+  ],
   headers: async () => [
     {
       source: "/(.*)",

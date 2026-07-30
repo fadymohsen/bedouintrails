@@ -1,6 +1,6 @@
 import { Link } from "@/lib/i18n/navigation";
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, getLocale } from "next-intl/server";
 import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
 import styles from "@/components/guides/guides.module.scss";
 
@@ -9,12 +9,13 @@ const PATH = "/how-to-get-to-white-desert";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
+  const locale = await getLocale();
   const url = `${SITE_URL}${PATH}`;
   return {
     title: t("guide_howto_title"),
     description: t("guide_howto_meta_desc"),
     keywords: t("guide_howto_meta_keywords"),
-    alternates: buildAlternates(PATH),
+    alternates: buildAlternates(PATH, locale),
     openGraph: {
       title: t("guide_howto_og_title"),
       description: t("guide_howto_og_desc"),

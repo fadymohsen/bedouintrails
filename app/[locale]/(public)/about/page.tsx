@@ -15,12 +15,13 @@ import { SITE_URL, buildAlternates } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
+  const locale = await getLocale();
   const title = t("meta_title_about");
   const description = t("meta_desc_about");
   return {
     title,
     description,
-    alternates: buildAlternates("/about"),
+    alternates: buildAlternates("/about", locale),
     openGraph: { title, description, url: `${SITE_URL}/about`, images: [`${SITE_URL}/og-image.jpg`] },
     twitter: { card: "summary_large_image", title, description, images: [`${SITE_URL}/og-image.jpg`] },
   };

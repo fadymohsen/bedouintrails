@@ -14,13 +14,14 @@ import { SITE_URL, buildAlternates } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
+  const locale = await getLocale();
   const title = t("meta_title_blogs");
   const description = t("meta_desc_blogs");
   const url = `${SITE_URL}/blogs`;
   return {
     title,
     description,
-    alternates: buildAlternates("/blogs"),
+    alternates: buildAlternates("/blogs", locale),
     openGraph: { title, description, url, images: [`${SITE_URL}/og-image.jpg`] },
     twitter: { card: "summary_large_image", title, description, images: [`${SITE_URL}/og-image.jpg`] },
   };

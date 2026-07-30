@@ -48,7 +48,7 @@ export async function generateMetadata({
     description:
       trip.metaDescription ||
       `${name} - ${localize(trip.interfaceFromEn, trip.interfaceFromAr, locale, trip.interfaceFromI18n)} → ${localize(trip.interfaceToEn, trip.interfaceToAr, locale, trip.interfaceToI18n)}. Book your spot now | Bedouin Trails`,
-    alternates: buildAlternates(`/journeys/${slug}`),
+    alternates: buildAlternates(`/journeys/${slug}`, locale),
     openGraph: {
       title: trip.metaTitle || name,
       description: trip.metaDescription || name,
