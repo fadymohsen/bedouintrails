@@ -1,6 +1,6 @@
 import { Link } from "@/lib/i18n/navigation";
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, getLocale } from "next-intl/server";
 import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
 import styles from "@/components/guides/guides.module.scss";
 
@@ -9,13 +9,14 @@ const PATH = "/white-desert-tour-cost";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
+  const locale = await getLocale();
   const url = `${SITE_URL}${PATH}`;
   return {
     title: t("guide_cost_title"),
     description: t("guide_cost_meta_desc"),
     keywords:
       "White Desert tour cost, White Desert tour price, Egypt desert tour cost, how much White Desert safari, Egypt Safari Tours price, Bahariya Oasis tour cost, desert camping Egypt price, White Desert tour from Cairo cost",
-    alternates: buildAlternates(PATH),
+    alternates: buildAlternates(PATH, locale),
     openGraph: {
       title: t("guide_cost_og_title"),
       description: t("guide_cost_og_desc"),

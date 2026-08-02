@@ -8,7 +8,8 @@ export async function generateMetadata() {
   return {
     title: t("meta_title_not_found"),
     description: t("meta_desc_not_found"),
-    robots: "noindex",
+    robots: { index: false, follow: false },
+    alternates: {},
   };
 }
 

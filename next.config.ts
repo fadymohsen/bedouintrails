@@ -14,6 +14,51 @@ const nextConfig: NextConfig = {
   sassOptions: {
     includePaths: ["./styles"],
   },
+  redirects: async () => [
+    // Renamed page: djara-cave → jara-cave
+    {
+      source: "/:locale/djara-cave",
+      destination: "/:locale/jara-cave",
+      permanent: true,
+    },
+    // Old ID-based journey URLs: /journeys/12/slug → /en/journeys/slug
+    {
+      source: "/journeys/:id(\\d+)/:slug",
+      destination: "/en/journeys/:slug",
+      permanent: true,
+    },
+    // Old ID-based journey URLs with locale
+    {
+      source: "/:locale/journeys/:id(\\d+)/:slug",
+      destination: "/:locale/journeys/:slug",
+      permanent: true,
+    },
+    // Old /cardpage URLs → journeys
+    {
+      source: "/cardpage/:id",
+      destination: "/en/journeys",
+      permanent: true,
+    },
+    // Old query param blog URLs: /blogs?article=N → /en/blogs
+    {
+      source: "/blogs",
+      has: [{ type: "query", key: "article" }],
+      destination: "/en/blogs",
+      permanent: true,
+    },
+    // No-locale journey URLs → /en/ version
+    {
+      source: "/journeys/:slug",
+      destination: "/en/journeys/:slug",
+      permanent: true,
+    },
+    // No-locale blog URLs → /en/ version
+    {
+      source: "/blogs/:slug",
+      destination: "/en/blogs/:slug",
+      permanent: true,
+    },
+  ],
   headers: async () => [
     {
       source: "/(.*)",

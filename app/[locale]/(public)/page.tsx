@@ -20,10 +20,11 @@ import { SITE_URL, buildAlternates } from "@/lib/seo";
 
 export async function generateMetadata() {
   const t = await getTranslations();
+  const locale = await getLocale();
   return {
     title: t("meta_title_home"),
     description: t("meta_desc_home"),
-    alternates: buildAlternates("/"),
+    alternates: buildAlternates("/", locale),
   };
 }
 

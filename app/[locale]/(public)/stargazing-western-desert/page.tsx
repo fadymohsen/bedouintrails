@@ -1,6 +1,6 @@
 import { Link } from "@/lib/i18n/navigation";
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, getLocale } from "next-intl/server";
 import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
 import styles from "@/components/guides/guides.module.scss";
 
@@ -9,13 +9,14 @@ const PATH = "/stargazing-western-desert";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
+  const locale = await getLocale();
   const url = `${SITE_URL}${PATH}`;
   return {
     title: t("guide_stars_title"),
     description: t("guide_stars_meta_desc"),
     keywords:
       "stargazing Western Desert, stargazing Egypt, White Desert stars, dark sky Egypt, Milky Way Egypt, desert stargazing, White Desert Camping, night sky Western Desert, astrophotography Egypt desert",
-    alternates: buildAlternates(PATH),
+    alternates: buildAlternates(PATH, locale),
     openGraph: {
       title: t("guide_stars_og_title"),
       description: t("guide_stars_og_desc"),

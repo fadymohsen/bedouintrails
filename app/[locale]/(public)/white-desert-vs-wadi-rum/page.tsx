@@ -1,6 +1,6 @@
 import { Link } from "@/lib/i18n/navigation";
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, getLocale } from "next-intl/server";
 import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
 import styles from "@/components/guides/guides.module.scss";
 
@@ -9,13 +9,14 @@ const PATH = "/white-desert-vs-wadi-rum";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
+  const locale = await getLocale();
   const url = `${SITE_URL}${PATH}`;
   return {
     title: t("guide_compare_title"),
     description: t("guide_compare_meta_desc"),
     keywords:
       "White Desert vs Wadi Rum, Egypt desert or Jordan desert, White Desert Egypt, Wadi Rum comparison, desert safari comparison, best desert experience, Egypt Safari Tours, White Desert Safari",
-    alternates: buildAlternates(PATH),
+    alternates: buildAlternates(PATH, locale),
     openGraph: {
       title: t("guide_compare_og_title"),
       description: t("guide_compare_og_desc"),

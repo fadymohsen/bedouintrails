@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, getLocale } from "next-intl/server";
 import type { Metadata } from "next";
 import { FaFacebook, FaInstagram, FaWhatsapp, FaEnvelope } from "react-icons/fa";
 import PageHero from "@/components/page-hero/page-hero";
@@ -10,12 +10,13 @@ import { SITE_URL, buildAlternates } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
+  const locale = await getLocale();
   const title = t("meta_title_contact");
   const description = t("meta_desc_contact");
   const url = `${SITE_URL}/contact`;
   return {
     title, description,
-    alternates: buildAlternates("/contact"),
+    alternates: buildAlternates("/contact", locale),
     openGraph: { title, description, url, images: [`${SITE_URL}/og-image.jpg`] },
     twitter: { card: "summary_large_image", title, description, images: [`${SITE_URL}/og-image.jpg`] },
   };
