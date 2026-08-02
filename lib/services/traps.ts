@@ -67,7 +67,10 @@ export async function getTrapBySlug(slug: string) {
   const trap = await prisma.trap.findUnique({
     where: { slug },
     include: {
-      trapDays: { include: { cards: true }, orderBy: { dayNumber: "asc" } },
+      trapDays: {
+        include: { cards: { orderBy: { id: "asc" } } },
+        orderBy: { dayNumber: "asc" },
+      },
       galleries: true,
       reviews: { include: { user: { select: { firstName: true, lastName: true, image: true } } } },
     },

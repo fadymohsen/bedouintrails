@@ -32,7 +32,10 @@ export async function getTrapForAdmin(id: number) {
     where: { id },
     include: {
       galleries: true,
-      trapDays: { include: { cards: true }, orderBy: { dayNumber: "asc" } },
+      trapDays: {
+        include: { cards: { orderBy: { id: "asc" } } },
+        orderBy: { dayNumber: "asc" },
+      },
     },
   });
   if (!trap) throw new NotFoundError("Trip not found.");

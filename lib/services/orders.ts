@@ -44,7 +44,7 @@ export async function createOrder(userId: number, input: CreateOrderInput) {
       data: { countPeople: { increment: peopleCount } },
     });
 
-    return order;
+    return { ...order, tripName: trap.nameEn };
   });
 }
 
@@ -66,7 +66,10 @@ export async function getOrderDetails(orderId: number, userId: number) {
     include: {
       trap: {
         include: {
-          trapDays: { include: { cards: true }, orderBy: { dayNumber: "asc" } },
+          trapDays: {
+            include: { cards: { orderBy: { id: "asc" } } },
+            orderBy: { dayNumber: "asc" },
+          },
           galleries: true,
         },
       },
