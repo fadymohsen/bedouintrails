@@ -52,16 +52,14 @@ export default function TripDayViewer({
 
       <div className={styles.journeyDesCard}>
         {currentDayData && currentDayData.cards.length > 0 ? (
-          currentDayData.cards.map((card) => (
+          currentDayData.cards.map((card, index) => (
             <div className={styles["step-card"]} key={card.id}>
-              <div className={styles.badge}>{currentDay}</div>
+              <div className={styles.badge}>{index + 1}</div>
               <div className={styles["image-wrapper"]} style={{ position: "relative" }}>
                 {card.image && <SafeImage src={card.image} alt={card.title} fill style={{ objectFit: "cover" }} />}
               </div>
               <div className={styles.content}>
-                <h3>
-                  {t("day")} {currentDay}: {card.title}
-                </h3>
+                <h3>{card.title}</h3>
                 <p>{card.description}</p>
               </div>
             </div>
