@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import { useRouter } from "@/lib/i18n/navigation";
+import { useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
 import { useTranslations } from "next-intl";
 import SafeImage from "@/components/safe-image/safe-image";
 import styles from "./carousel.module.scss";
@@ -16,84 +16,40 @@ type TripHeroCarouselProps = {
 
 export default function TripHeroCarousel({ images, isOrder = false, orderStatus, onCancel }: TripHeroCarouselProps) {
   const t = useTranslations();
-  const router = useRouter();
-  const [activeIndex, setActiveIndex] = useState(0);
   const slides = images.length > 0 ? images : ["/img/adventure.webp"];
-
-  useEffect(() => {
-    if (slides.length <= 1) return;
-    const timer = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % slides.length);
-    }, 5000);
-    return () => clearInterval(timer);
-  }, [slides.length]);
-
+  const [activeIndex, setActiveIndex] = useState(0);
   const canCancel = isOrder && orderStatus !== "cancelled" && orderStatus !== "paid" && orderStatus !== "accepted";
 
   return (
-    <div className={styles.heroContainer}>
-      <div className={styles.mainBg}>
-        {slides.map((image, index) => (
-          <div
-            key={index}
-            className={`${styles.bgLayer} ${index === activeIndex ? styles.active : ""}`}
-            style={{ overflow: "hidden" }}
-          >
-            <SafeImage
-              src={image}
-              alt="Desert safari slide"
-              fill
-              style={{ objectFit: "cover", zIndex: -2 }}
-              priority={index === 0}
-            />
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-                background: "linear-gradient(0deg, rgba(30, 30, 30, 0.16), rgba(30, 30, 30, 0.16))",
-                zIndex: -1,
-              }}
-            />
-            <div className={styles.card_nav} style={{ position: "relative", zIndex: 1 }}>
-              <div className={styles["content-logo"]}>
-                <Image src="/img/bedouin-trail.webp" alt="Bedouin Trail Logo" loading="lazy" width={120} height={40} />
-              </div>
-              <div className={styles.backBtn}>
-                <button className={styles.btn} onClick={() => router.back()} aria-label="Back" />
-                {canCancel && onCancel && (
-                  <button onClick={onCancel} className={styles["cancell-btn"]}>
-                    {t("cancel")}
-                  </button>
-                )}
-              </div>
-            </div>
-          </div>
-        ))}
+    <div className={styles.galleryWrap}>
+      {canCancel && onCancel && (
+        <div className={styles.galleryActions}>
+          <button onClick={onCancel} className={styles["cancell-btn"]}>
+            {t("cancel")}
+          </button>
+        </div>
+      )}
+
+      <div className={styles.galleryMainPhoto}>
+        <SafeImage src={slides[activeIndex]} alt="Desert safari photo" fill style={{ objectFit: "cover" }} priority />
       </div>
 
-      <div className={styles.thumbnailTrack}>
-        {slides.map((image, index) => {
-          let position = index - activeIndex;
-          if (position < 0) position += slides.length;
-          const posClass =
-            position === 0
-              ? styles.pos0
-              : position === 1
-                ? styles.pos1
-                : position === 2
-                  ? styles.pos2
-                  : styles.posOther;
-
-          return (
-            <div key={index} className={`${styles.thumbNode} ${posClass}`} onClick={() => setActiveIndex(index)}>
-              <div className={styles.imgBox} style={{ position: "relative", overflow: "hidden" }}>
-                <SafeImage src={image} alt="Desert safari slide thumbnail" fill style={{ objectFit: "cover" }} />
-              </div>
-              {position === 0 && <div className={styles.activeFrame} />}
-            </div>
-          );
-        })}
-      </div>
+      {slides.length > 1 && (
+        <Swiper slidesPerView="auto" spaceBetween={10} className={styles.galleryThumbSwiper}>
+          {slides.map((image, index) => (
+            <SwiperSlide key={index} className={styles.galleryThumbSlide}>
+              <button
+                type="button"
+                className={`${styles.galleryThumbBtn} ${index === activeIndex ? styles.active : ""}`}
+                onClick={() => setActiveIndex(index)}
+                aria-label={`Photo ${index + 1}`}
+              >
+                <SafeImage src={image} alt="Desert safari thumbnail" fill style={{ objectFit: "cover" }} />
+              </button>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      )}
     </div>
   );
 }

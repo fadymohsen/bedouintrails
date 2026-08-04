@@ -519,7 +519,7 @@
 
         .day-item {
             text-align: center;
-            padding: 14px 15px;
+            padding: 20px 24px;
             cursor: pointer;
             min-width: 60px;
             border-radius: 10px;
@@ -648,7 +648,7 @@
                     .day-item {
                         flex: 0 0 auto;
                         /* prevent shrinking */
-                        padding: 0 10px;
+                        padding: 16px 18px;
 
                         .day-label {
                             font-size: 12px;
@@ -714,12 +714,14 @@
                 }
 
                 .content {
+                    text-align: start;
 
                     h3 {
                         font-size: 1.4rem;
                         margin-bottom: 12px;
                         line-height: 1.4;
                         color: fr.$text-heading;
+                        text-align: start;
                     }
 
                     p {
@@ -727,6 +729,7 @@
                         color: fr.$text-body-muted;
                         line-height: 1.6;
                         margin: 0;
+                        text-align: start;
                     }
                 }
             }

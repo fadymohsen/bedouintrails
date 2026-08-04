@@ -365,85 +365,79 @@
   }
 }
 
-// ---- Trip-detail hero variant (trip-hero-carousel, card_page=true) ----
-.card_nav {
-  display: flex;
-  background-color: transparent;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: clamp(10px, 1.5vh, 15px) 2%;
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 100;
-  direction: ltr;
-  pointer-events: none;
+// ---- Trip-detail gallery (trip-hero-carousel) ----
+// One big selected photo, with a horizontally swipeable strip of thumbnails
+// below it to change the selection — no dark overlay, no back button.
+.galleryWrap {
+  max-width: l.$container-max;
+  margin: l.$space-5 auto;
+  padding-inline: l.$gutter;
 
-  .content-logo img {
-    width: clamp(90px, 12vw, 140px);
-    height: auto;
-    filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.2));
-
-    @media (max-width: 768px) {
-      width: clamp(70px, 10vw, 110px);
-    }
-
-    @media (max-width: 480px) {
-      width: clamp(50px, 8vw, 80px);
-    }
+  @include l.md-down {
+    margin-block: l.$space-4;
+    padding-inline: l.$gutter-mobile;
   }
+}
 
-  .backBtn {
-    display: flex;
-    align-items: center;
-    position: relative;
-    pointer-events: auto;
-    gap: 5px;
+.galleryActions {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: l.$space-3;
+}
 
-    .btn {
-      width: 44px;
-      height: 44px;
-      border: none;
-      background: fr.$ui-glass-bg;
-      backdrop-filter: blur(6px);
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      z-index: 3;
-      flex-shrink: 0;
-      left: 30px;
+.cancell-btn {
+  background-color: #cf5050;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  padding: 8px 24px;
+  font-size: 16px;
+  color: #ffffff;
+  white-space: nowrap;
+  cursor: pointer;
+  border: none;
+}
 
-      &::before {
-        content: "";
-        width: 8px;
-        height: 8px;
-        border-left: 2px solid #fff;
-        border-bottom: 2px solid #fff;
-        transform: rotate(45deg);
-      }
+.galleryMainPhoto {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: l.$radius-md;
+  overflow: hidden;
+  background: fr.$surface-2;
+  margin-bottom: 12px;
 
-      &:hover {
-        background: hsla(0, 0%, 0%, 0.3);
-      }
-    }
+  @include l.md-down {
+    aspect-ratio: 4 / 3;
+  }
+}
 
-    .cancell-btn {
-      background-color: #cf5050;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 50px;
-      padding: 6px 24px;
-      font-size: 16px;
-      color: #ffffff;
-      white-space: nowrap;
-      position: relative;
-      z-index: 2;
-    }
+.galleryThumbSwiper {
+  width: 100%;
+}
+
+.galleryThumbSlide {
+  width: 110px;
+
+  @include l.md-down {
+    width: 80px;
+  }
+}
+
+.galleryThumbBtn {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: l.$radius-sm;
+  overflow: hidden;
+  border: 2px solid transparent;
+  padding: 0;
+  cursor: pointer;
+  background: fr.$surface-2;
+
+  &.active {
+    border-color: fr.$brand-primary;
   }
 }
