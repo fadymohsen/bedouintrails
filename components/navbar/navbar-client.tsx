@@ -52,6 +52,7 @@ export default function NavbarClient({ user }: { user: NavbarUser }) {
     { path: "/desert-yoga-retreat", label: t("guide_yoga_breadcrumb") },
     { path: "/multi-day-desert-trek", label: t("guide_trek_breadcrumb") },
     { path: "/white-desert-camping", label: t("guide_camping_breadcrumb") },
+    { path: "/white-desert-safari", label: t("guide_wdsafari_breadcrumb") },
   ];
 
   const isActive = (path: string) => pathname === path;
