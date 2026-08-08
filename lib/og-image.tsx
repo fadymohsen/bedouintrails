@@ -24,8 +24,28 @@ async function getLogo() {
   return cachedLogo;
 }
 
-export async function generateOgImage(title: string, subtitle?: string) {
-  const [bg, logo] = await Promise.all([getBg(), getLogo()]);
+async function resolveBg(bgUrl?: string | null): Promise<string> {
+  if (!bgUrl) return getBg();
+  if (bgUrl.startsWith("http")) {
+    try {
+      const res = await fetch(bgUrl);
+      const buf = Buffer.from(await res.arrayBuffer());
+      const ct = res.headers.get("content-type") || "image/jpeg";
+      return `data:${ct};base64,${buf.toString("base64")}`;
+    } catch {
+      return getBg();
+    }
+  }
+  try {
+    const local = bgUrl.startsWith("/") ? bgUrl.slice(1) : bgUrl;
+    return getBase64(local);
+  } catch {
+    return getBg();
+  }
+}
+
+export async function generateOgImage(title: string, subtitle?: string, bgUrl?: string | null) {
+  const [bg, logo] = await Promise.all([resolveBg(bgUrl), getLogo()]);
 
   return new ImageResponse(
     (
