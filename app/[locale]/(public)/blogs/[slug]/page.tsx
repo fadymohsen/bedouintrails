@@ -32,7 +32,7 @@ export async function generateMetadata({
   const title = localize(blog.titleEn, blog.titleAr, locale, blog.titleI18n as Record<string, string> | null);
   const metaTitle = localize(blog.metaTitleEn ?? "", blog.metaTitleAr, locale, blog.metaTitleI18n as Record<string, string> | null) || title;
   const metaDescription = localize(blog.metaDescriptionEn ?? "", blog.metaDescriptionAr, locale, blog.metaDescriptionI18n as Record<string, string> | null) || title;
-  const url = `${SITE_URL}/blogs/${slug}`;
+  const url = `${SITE_URL}/${locale}/blogs/${slug}`;
 
   return {
     title: `${metaTitle} | Bedouin Trails`,

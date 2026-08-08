@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
   const title = t("meta_title_faq");
   const description = t("meta_desc_faq");
-  const url = `${SITE_URL}/faq`;
+  const url = `${SITE_URL}/${locale}/faq`;
   return {
     title, description,
     alternates: buildAlternates("/faq", locale),
@@ -48,8 +48,8 @@ export default async function FaqPage() {
     <div className={styles.faq}>
       <Breadcrumbs
         items={[
-          { name: "Home", url: `${SITE_URL}/` },
-          { name: "FAQ", url: `${SITE_URL}/faq` },
+          { name: "Home", url: `${SITE_URL}/${locale}` },
+          { name: "FAQ", url: `${SITE_URL}/${locale}/faq` },
         ]}
       />
       {faqJsonLd && (

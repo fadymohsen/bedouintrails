@@ -13,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
   const title = t("meta_title_contact");
   const description = t("meta_desc_contact");
-  const url = `${SITE_URL}/contact`;
+  const url = `${SITE_URL}/${locale}/contact`;
   return {
     title, description,
     alternates: buildAlternates("/contact", locale),
@@ -23,21 +23,21 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function ContactPage() {
-  const t = await getTranslations();
+  const [t, locale] = await Promise.all([getTranslations(), getLocale()]);
 
   const contactJsonLd = {
     "@context": "https://schema.org",
     "@type": "ContactPage",
     name: t("meta_title_contact"),
     description: t("meta_desc_contact"),
-    url: `${SITE_URL}/contact`,
+    url: `${SITE_URL}/${locale}/contact`,
     mainEntity: {
       "@type": "TravelAgency",
       name: "Bedouin Trails",
       url: SITE_URL,
       telephone: "+20-10-02717380",
       email: "info@bedouintrails.com",
-      address: { "@type": "PostalAddress", addressCountry: "EG", addressLocality: "Cairo" },
+      address: { "@type": "PostalAddress", addressCountry: "EG", addressLocality: "Giza" },
     },
   };
 

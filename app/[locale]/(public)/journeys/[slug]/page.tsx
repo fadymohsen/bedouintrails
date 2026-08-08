@@ -40,7 +40,7 @@ export async function generateMetadata({
 
   const locale = (await getLocale()) as Locale;
   const name = localize(trip.nameEn, trip.nameAr, locale, trip.nameI18n);
-  const url = `${SITE_URL}/journeys/${slug}`;
+  const url = `${SITE_URL}/${locale}/journeys/${slug}`;
   const image = trip.galleries[0]?.image ?? `${SITE_URL}/og-image.jpg`;
 
   return {
@@ -76,8 +76,8 @@ export default async function TripDetailPage({ params }: { params: Promise<{ slu
   const name = localize(trip.nameEn, trip.nameAr, locale, trip.nameI18n);
   const interfaceFrom = localize(trip.interfaceFromEn, trip.interfaceFromAr, locale, trip.interfaceFromI18n);
   const interfaceTo = localize(trip.interfaceToEn, trip.interfaceToAr, locale, trip.interfaceToI18n);
-  const url = `${SITE_URL}/journeys/${slug}`;
-  
+  const url = `${SITE_URL}/${locale}/journeys/${slug}`;
+
   const images = Array.from(
     new Set([
       ...trip.galleries.map((g) => getLocalFallbackImage(g.image)),
@@ -140,8 +140,8 @@ export default async function TripDetailPage({ params }: { params: Promise<{ slu
     <div className={styles.Card_page}>
       <Breadcrumbs
         items={[
-          { name: "Home", url: `${SITE_URL}/` },
-          { name: "Journeys", url: `${SITE_URL}/journeys` },
+          { name: "Home", url: `${SITE_URL}/${locale}` },
+          { name: "Journeys", url: `${SITE_URL}/${locale}/journeys` },
           { name, url },
         ]}
       />

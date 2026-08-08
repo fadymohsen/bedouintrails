@@ -10,7 +10,7 @@ const PATH = "/how-to-get-to-white-desert";
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
   const locale = await getLocale();
-  const url = `${SITE_URL}${PATH}`;
+  const url = `${SITE_URL}/${locale}${PATH}`;
   return {
     title: t("guide_howto_title"),
     description: t("guide_howto_meta_desc"),
@@ -32,8 +32,8 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function HowToGetTherePage() {
-  const t = await getTranslations();
-  const url = `${SITE_URL}${PATH}`;
+  const [t, locale] = await Promise.all([getTranslations(), getLocale()]);
+  const url = `${SITE_URL}/${locale}${PATH}`;
 
   return (
     <div className={styles["guide-page"]}>
@@ -49,7 +49,7 @@ export default async function HowToGetTherePage() {
       }) }} />
       <Breadcrumbs
         items={[
-          { name: t("breadcrumb_home"), url: `${SITE_URL}/` },
+          { name: t("breadcrumb_home"), url: `${SITE_URL}/${locale}` },
           { name: t("guide_howto_breadcrumb"), url },
         ]}
       />

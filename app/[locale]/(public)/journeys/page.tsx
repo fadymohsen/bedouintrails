@@ -13,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
   const title = t("meta_title_journeys");
   const description = t("meta_desc_journeys");
-  const url = `${SITE_URL}/journeys`;
+  const url = `${SITE_URL}/${locale}/journeys`;
   return {
     title, description,
     alternates: buildAlternates("/journeys", locale),
@@ -40,7 +40,7 @@ export default async function JourneysPage() {
             item: {
               "@type": "TouristTrip",
               name: trip.name,
-              url: `${SITE_URL}/journeys/${trip.slug}`,
+              url: `${SITE_URL}/${locale}/journeys/${trip.slug}`,
               ...(trip.rate > 0
                 ? {
                     aggregateRating: {
@@ -60,8 +60,8 @@ export default async function JourneysPage() {
     <div>
       <Breadcrumbs
         items={[
-          { name: "Home", url: `${SITE_URL}/` },
-          { name: "Journeys", url: `${SITE_URL}/journeys` },
+          { name: "Home", url: `${SITE_URL}/${locale}` },
+          { name: "Journeys", url: `${SITE_URL}/${locale}/journeys` },
         ]}
       />
       {itemListJsonLd && (

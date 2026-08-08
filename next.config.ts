@@ -63,6 +63,37 @@ const nextConfig: NextConfig = {
       destination: "/en/blogs/:slug",
       permanent: true,
     },
+    // Deleted old journey slugs from previous Framer site → journeys index
+    {
+      source: "/:locale/journeys/oases-the-white-desert-and-cairo",
+      destination: "/:locale/journeys",
+      permanent: true,
+    },
+    {
+      source: "/:locale/journeys/two-nights-camping-in-the-black-and-white-desert",
+      destination: "/:locale/journeys",
+      permanent: true,
+    },
+    {
+      source: "/:locale/journeys/3-nights-and-4-days-in-siwa-oasis",
+      destination: "/:locale/journeys",
+      permanent: true,
+    },
+    {
+      source: "/:locale/journeys/black-and-white-desert-and-jar-cave",
+      destination: "/:locale/journeys",
+      permanent: true,
+    },
+    {
+      source: "/:locale/journeys/3-nights-in-the-black-and-white-desert-and-khara-cave",
+      destination: "/:locale/journeys",
+      permanent: true,
+    },
+    {
+      source: "/:locale/journeys/desert-silence-walking-and-camels",
+      destination: "/:locale/journeys",
+      permanent: true,
+    },
   ],
   headers: async () => [
     {

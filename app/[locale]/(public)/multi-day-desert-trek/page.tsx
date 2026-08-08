@@ -10,7 +10,7 @@ const PATH = "/multi-day-desert-trek";
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
   const locale = await getLocale();
-  const url = `${SITE_URL}${PATH}`;
+  const url = `${SITE_URL}/${locale}${PATH}`;
   return {
     title: t("guide_trek_title"),
     description: t("guide_trek_meta_desc"),
@@ -32,8 +32,8 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function MultiDayDesertTrekPage() {
-  const t = await getTranslations();
-  const url = `${SITE_URL}${PATH}`;
+  const [t, locale] = await Promise.all([getTranslations(), getLocale()]);
+  const url = `${SITE_URL}/${locale}${PATH}`;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -54,7 +54,7 @@ export default async function MultiDayDesertTrekPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Breadcrumbs
         items={[
-          { name: t("breadcrumb_home"), url: `${SITE_URL}/` },
+          { name: t("breadcrumb_home"), url: `${SITE_URL}/${locale}` },
           { name: t("guide_trek_breadcrumb"), url },
         ]}
       />

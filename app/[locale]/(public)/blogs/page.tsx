@@ -17,7 +17,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
   const title = t("meta_title_blogs");
   const description = t("meta_desc_blogs");
-  const url = `${SITE_URL}/blogs`;
+  const url = `${SITE_URL}/${locale}/blogs`;
   return {
     title,
     description,
@@ -44,8 +44,8 @@ export default async function BlogsIndexPage() {
     <div style={{ background: "var(--surface-1)" }}>
       <Breadcrumbs
         items={[
-          { name: "Home", url: `${SITE_URL}/` },
-          { name: "Blogs", url: `${SITE_URL}/blogs` },
+          { name: "Home", url: `${SITE_URL}/${locale}` },
+          { name: "Blogs", url: `${SITE_URL}/${locale}/blogs` },
         ]}
       />
 

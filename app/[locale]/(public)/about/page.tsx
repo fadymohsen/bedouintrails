@@ -22,7 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title,
     description,
     alternates: buildAlternates("/about", locale),
-    openGraph: { title, description, url: `${SITE_URL}/about`, images: [`${SITE_URL}/og-image.jpg`] },
+    openGraph: { title, description, url: `${SITE_URL}/${locale}/about`, images: [`${SITE_URL}/og-image.jpg`] },
     twitter: { card: "summary_large_image", title, description, images: [`${SITE_URL}/og-image.jpg`] },
   };
 }
@@ -42,7 +42,7 @@ export default async function AboutPage() {
     "@type": "AboutPage",
     name: t("meta_title_about"),
     description: t("meta_desc_about"),
-    url: `${SITE_URL}/about`,
+    url: `${SITE_URL}/${locale}/about`,
     mainEntity: {
       "@type": "TravelAgency",
       name: "Bedouin Trails",
@@ -58,8 +58,8 @@ export default async function AboutPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutJsonLd) }} />
       <Breadcrumbs
         items={[
-          { name: "Home", url: `${SITE_URL}/` },
-          { name: "About", url: `${SITE_URL}/about` },
+          { name: "Home", url: `${SITE_URL}/${locale}` },
+          { name: "About", url: `${SITE_URL}/${locale}/about` },
         ]}
       />
 
