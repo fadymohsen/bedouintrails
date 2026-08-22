@@ -123,8 +123,8 @@ export default async function HomePage() {
   ];
 
   const heroSlides = [
-    ...sliders.map((s) => mapSliderForHero(s, locale)),
     ...STATIC_HERO_SLIDES,
+    ...sliders.map((s) => mapSliderForHero(s, locale)),
   ];
   const tripCards = traps.map((trap) => {
     const rate =
