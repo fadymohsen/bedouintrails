@@ -22,34 +22,25 @@ export default function TripGalleryManager({ tripId, images }: { tripId: number;
     const form = new FormData(formEl);
     setError(null);
     startTransition(async () => {
-      try {
-        await addGalleryImagesAction(tripId, form);
-        formEl.reset();
-      } catch (err) {
-        setError(err instanceof Error ? err.message : "Upload failed. Please try again.");
-      }
+      const result = await addGalleryImagesAction(tripId, form);
+      if (result?.error) setError(result.error);
+      else formEl.reset();
     });
   }
 
   function handleDelete(galleryId: number) {
     setError(null);
     startTransition(async () => {
-      try {
-        await deleteGalleryImageAction(tripId, galleryId);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : "Delete failed. Please try again.");
-      }
+      const result = await deleteGalleryImageAction(tripId, galleryId);
+      if (result?.error) setError(result.error);
     });
   }
 
   function handleAddFromLibrary(urls: string[]) {
     setError(null);
     startTransition(async () => {
-      try {
-        await addGalleryImageUrlsAction(tripId, urls);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : "Failed to add images. Please try again.");
-      }
+      const result = await addGalleryImageUrlsAction(tripId, urls);
+      if (result?.error) setError(result.error);
     });
   }
 

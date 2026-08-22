@@ -77,23 +77,38 @@ export async function deleteTrapAction(tripId: number) {
   redirect("/admin/trips");
 }
 
-export async function addGalleryImagesAction(tripId: number, form: FormData) {
+export async function addGalleryImagesAction(tripId: number, form: FormData): Promise<{ error?: string }> {
   await requireAdmin("manage_trips");
-  const files = form.getAll("images").filter((f): f is File => f instanceof File && f.size > 0);
-  if (files.length > 0) await addGalleryImages(tripId, files);
-  revalidatePath(`/admin/trips/${tripId}`);
+  try {
+    const files = form.getAll("images").filter((f): f is File => f instanceof File && f.size > 0);
+    if (files.length > 0) await addGalleryImages(tripId, files);
+    revalidatePath(`/admin/trips/${tripId}`);
+    return {};
+  } catch (err) {
+    return { error: err instanceof Error ? err.message : "Upload failed. Please try again." };
+  }
 }
 
-export async function addGalleryImageUrlsAction(tripId: number, urls: string[]) {
+export async function addGalleryImageUrlsAction(tripId: number, urls: string[]): Promise<{ error?: string }> {
   await requireAdmin("manage_trips");
-  if (urls.length > 0) await addGalleryImageUrls(tripId, urls);
-  revalidatePath(`/admin/trips/${tripId}`);
+  try {
+    if (urls.length > 0) await addGalleryImageUrls(tripId, urls);
+    revalidatePath(`/admin/trips/${tripId}`);
+    return {};
+  } catch (err) {
+    return { error: err instanceof Error ? err.message : "Failed to add images." };
+  }
 }
 
-export async function deleteGalleryImageAction(tripId: number, galleryId: number) {
+export async function deleteGalleryImageAction(tripId: number, galleryId: number): Promise<{ error?: string }> {
   await requireAdmin("manage_trips");
-  await deleteGalleryImage(galleryId);
-  revalidatePath(`/admin/trips/${tripId}`);
+  try {
+    await deleteGalleryImage(galleryId);
+    revalidatePath(`/admin/trips/${tripId}`);
+    return {};
+  } catch (err) {
+    return { error: err instanceof Error ? err.message : "Delete failed. Please try again." };
+  }
 }
 
 export async function addTrapDayAction(tripId: number) {
