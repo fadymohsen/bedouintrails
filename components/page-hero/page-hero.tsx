@@ -5,11 +5,12 @@ type PageHeroProps = {
   subtitle?: string;
   image: string;
   eyebrow?: string;
+  backgroundPosition?: string;
 };
 
-export default function PageHero({ title, subtitle, image, eyebrow }: PageHeroProps) {
+export default function PageHero({ title, subtitle, image, eyebrow, backgroundPosition }: PageHeroProps) {
   return (
-    <div className={styles.pageHero} style={{ backgroundImage: `url(${image})` }}>
+    <div className={styles.pageHero} style={{ backgroundImage: `url(${image})`, backgroundPosition }}>
       <div className={styles.overlay} />
       <div className={styles.content}>
         {eyebrow && <span className={styles.eyebrow}>{eyebrow}</span>}

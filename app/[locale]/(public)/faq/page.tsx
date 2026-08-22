@@ -56,7 +56,7 @@ export default async function FaqPage() {
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       )}
 
-      <PageHero title={t("faq_title")} image="/img/hero-faq.jpg" eyebrow={t("faq")} />
+      <PageHero title={t("faq_title")} image="/img/hero-faq.jpg" eyebrow={t("faq")} backgroundPosition="bottom" />
 
       <div className={styles["faq-container"]}>
         <div className={styles["faq-accordion"]}>
