@@ -4,8 +4,10 @@ import createNextIntlPlugin from "next-intl/plugin";
 const withNextIntl = createNextIntlPlugin();
 
 const nextConfig: NextConfig = {
-  serverActions: {
-    bodySizeLimit: "20mb",
+  experimental: {
+    serverActions: {
+      bodySizeLimit: "20mb",
+    },
   },
   images: {
     remotePatterns: [
