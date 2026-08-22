@@ -19,8 +19,8 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title, description,
     alternates: buildAlternates("/faq", locale),
-    openGraph: { title, description, url, images: [`${SITE_URL}/og-image.jpg`] },
-    twitter: { card: "summary_large_image", title, description, images: [`${SITE_URL}/og-image.jpg`] },
+    openGraph: { title, description, url, images: [`${SITE_URL}/img/hero-faq.jpg`] },
+    twitter: { card: "summary_large_image", title, description, images: [`${SITE_URL}/img/hero-faq.jpg`] },
   };
 }
 
