@@ -56,7 +56,7 @@ export default async function DesertYogaRetreatPage() {
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <div className={styles["guide-hero"]} style={{ backgroundImage: "url('/img/western-desert-hero.webp')" }}>
+      <div className={styles["guide-hero"]} style={{ backgroundImage: "url('/img/western-desert-hero.webp')", backgroundPosition: "bottom center" }}>
         <h1>{t("guide_yoga_h1")}</h1>
       </div>
 
