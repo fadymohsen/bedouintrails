@@ -21,31 +21,29 @@ export async function createOrder(userId: number, input: CreateOrderInput) {
 
   const peopleCount = input.numberOfAdults + input.numberOfChildren;
 
-  return prisma.$transaction(async (tx) => {
-    const order = await tx.order.create({
-      data: {
-        userId,
-        trapId: input.trapId,
-        firstName: input.firstName,
-        lastName: input.lastName,
-        email: input.email,
-        phone: input.phone,
-        description: input.description,
-        numberOfAdults: input.numberOfAdults,
-        numberOfChildren: input.numberOfChildren,
-        startDate: input.startDate,
-        endDate: input.endDate,
-        status: "pending",
-      },
-    });
-
-    await tx.trap.update({
-      where: { id: input.trapId },
-      data: { countPeople: { increment: peopleCount } },
-    });
-
-    return { ...order, tripName: trap.nameEn };
+  const order = await prisma.order.create({
+    data: {
+      userId,
+      trapId: input.trapId,
+      firstName: input.firstName,
+      lastName: input.lastName,
+      email: input.email,
+      phone: input.phone,
+      description: input.description,
+      numberOfAdults: input.numberOfAdults,
+      numberOfChildren: input.numberOfChildren,
+      startDate: input.startDate,
+      endDate: input.endDate,
+      status: "pending",
+    },
   });
+
+  await prisma.trap.update({
+    where: { id: input.trapId },
+    data: { countPeople: { increment: peopleCount } },
+  });
+
+  return { ...order, tripName: trap.nameEn };
 }
 
 export async function getMyOrders(userId: number) {

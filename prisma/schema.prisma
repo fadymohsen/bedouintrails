@@ -81,6 +81,7 @@ model Trap {
   descriptionI18n   Json?      @map("description_i18n")
   duration          Int        @default(0)
   countPeople       Int        @default(0) @map("count_people")
+  sortOrder         Int        @default(0) @map("sort_order")
   status            TrapStatus @default(active)
   metaTitle         String?    @map("meta_title")
   metaDescription   String?    @db.Text @map("meta_description")

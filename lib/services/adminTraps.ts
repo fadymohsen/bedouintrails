@@ -23,8 +23,16 @@ async function uniqueSlug(name: string, excludeId?: number): Promise<string> {
 export async function listAllTraps() {
   return prisma.trap.findMany({
     include: { galleries: { take: 1, orderBy: { id: "asc" } } },
-    orderBy: { createdAt: "desc" },
+    orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }],
   });
+}
+
+export async function reorderTraps(orderedIds: number[]) {
+  await Promise.all(
+    orderedIds.map((id, index) =>
+      prisma.trap.update({ where: { id }, data: { sortOrder: index } })
+    )
+  );
 }
 
 export async function getTrapForAdmin(id: number) {

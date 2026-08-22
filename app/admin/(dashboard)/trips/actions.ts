@@ -11,6 +11,7 @@ import {
   addGalleryImages,
   addGalleryImageUrls,
   deleteGalleryImage,
+  reorderTraps,
 } from "@/lib/services/adminTraps";
 import { createTrapDay, deleteTrapDay } from "@/lib/services/trapDays";
 import { createTrapDayCard, updateTrapDayCard, deleteTrapDayCard } from "@/lib/services/trapDayCards";
@@ -58,6 +59,12 @@ export async function updateTrapAction(tripId: number, _prevState: unknown, form
     const msg = err instanceof Error ? err.message : "Failed to save trip.";
     return { error: msg };
   }
+}
+
+export async function reorderTrapsAction(orderedIds: number[]) {
+  await requireAdmin("manage_trips");
+  await reorderTraps(orderedIds);
+  revalidatePath("/admin/trips");
 }
 
 export async function deleteTrapAction(tripId: number) {
