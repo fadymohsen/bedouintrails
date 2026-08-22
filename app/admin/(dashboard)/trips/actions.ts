@@ -48,11 +48,16 @@ export async function createTrapAction(_prevState: unknown, form: FormData): Pro
 
 export async function updateTrapAction(tripId: number, _prevState: unknown, form: FormData) {
   await requireAdmin("manage_trips");
-  const input = formToTrapInput(form);
-  await updateTrap(tripId, input);
-  revalidatePath("/admin/trips");
-  revalidatePath(`/admin/trips/${tripId}`);
-  return { success: true };
+  try {
+    const input = formToTrapInput(form);
+    await updateTrap(tripId, input);
+    revalidatePath("/admin/trips");
+    revalidatePath(`/admin/trips/${tripId}`);
+    return { success: true };
+  } catch (err: unknown) {
+    const msg = err instanceof Error ? err.message : "Failed to save trip.";
+    return { error: msg };
+  }
 }
 
 export async function deleteTrapAction(tripId: number) {
