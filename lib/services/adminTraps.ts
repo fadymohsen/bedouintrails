@@ -74,11 +74,15 @@ export async function deleteTrap(id: number) {
 
 export async function addGalleryImages(trapId: number, files: File[]) {
   const urls = await Promise.all(files.map((f) => uploadImage(f, "uploads/images/traps")));
-  await prisma.gallery.createMany({ data: urls.map((image) => ({ trapId, image })) });
+  for (const image of urls) {
+    await prisma.gallery.create({ data: { trapId, image } });
+  }
 }
 
 export async function addGalleryImageUrls(trapId: number, urls: string[]) {
-  await prisma.gallery.createMany({ data: urls.map((image) => ({ trapId, image })) });
+  for (const image of urls) {
+    await prisma.gallery.create({ data: { trapId, image } });
+  }
 }
 
 export async function deleteGalleryImage(galleryId: number) {
