@@ -46,7 +46,7 @@ export default async function HomePage() {
       prisma.trap.findMany({
         where: { status: "active" },
         take: 10,
-        orderBy: { createdAt: "desc" },
+        orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }],
         include: { galleries: { take: 1, orderBy: { id: "asc" } }, reviews: { select: { stars: true } } },
       }),
       prisma.trap.findFirst({

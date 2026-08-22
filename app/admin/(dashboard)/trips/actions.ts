@@ -67,6 +67,9 @@ export async function reorderTrapsAction(orderedIds: number[]) {
   revalidatePath("/admin/trips");
 }
 
+// Alias used by the client component
+export const reorderTripsAction = reorderTrapsAction;
+
 export async function deleteTrapAction(tripId: number) {
   await requireAdmin("manage_trips");
   await deleteTrap(tripId);
