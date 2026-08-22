@@ -31,7 +31,7 @@ export async function listActiveTraps(filters: TrapFilters = {}) {
         : {}),
     },
     include: activeTrapInclude,
-    orderBy: { createdAt: "desc" },
+    orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }],
   });
 
   const [durations, fromLocations, toLocations] = await Promise.all([

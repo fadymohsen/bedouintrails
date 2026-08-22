@@ -105,7 +105,7 @@ export default async function TripDetailPage({ params }: { params: Promise<{ slu
       galleries: { take: 1, orderBy: { id: "asc" } },
     },
     take: 3,
-    orderBy: { createdAt: "desc" },
+    orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }],
   });
   const relatedCards = relatedTrips.map((trap) => mapTrapForCard(trap, locale));
 

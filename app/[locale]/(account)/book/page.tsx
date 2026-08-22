@@ -20,7 +20,7 @@ export default async function BookPage() {
   const traps = await prisma.trap.findMany({
     where: { status: "active" },
     include: { galleries: { take: 1, orderBy: { id: "asc" } } },
-    orderBy: { createdAt: "desc" },
+    orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }],
   });
 
   const trips = traps.map((trap) => ({
