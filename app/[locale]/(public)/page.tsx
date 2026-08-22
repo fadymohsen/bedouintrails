@@ -72,18 +72,18 @@ export default async function HomePage() {
   const isAr = locale === "ar";
   const STATIC_HERO_SLIDES = [
     {
-      image: "/img/hero-whale-valley.jpg",
-      title: isAr ? "وادي الحيتان — جوهرة الصحراء الغربية" : "Valley of the Whales — A Desert UNESCO Wonder",
-      description: isAr
-        ? "استكشف بقايا حيتان عمرها ٤٠ مليون سنة وسط الصحراء المصرية البكر في موقع التراث العالمي"
-        : "Walk through 40 million years of prehistoric history in Egypt's breathtaking UNESCO World Heritage Site",
-    },
-    {
       image: "/img/hero-camel-safari.jpg",
       title: isAr ? "رحلة السفاري بالجمال" : "Camel Safari Across the Desert",
       description: isAr
         ? "اركب الجمال على الطريقة البدوية الأصيلة واستمتع بمناظر الصحراء الغربية الخلابة"
         : "Experience Egypt's vast desert landscapes the authentic Bedouin way, on the back of a camel",
+    },
+    {
+      image: "/img/hero-whale-valley.jpg",
+      title: isAr ? "وادي الحيتان — جوهرة الصحراء الغربية" : "Valley of the Whales — A Desert UNESCO Wonder",
+      description: isAr
+        ? "استكشف بقايا حيتان عمرها ٤٠ مليون سنة وسط الصحراء المصرية البكر في موقع التراث العالمي"
+        : "Walk through 40 million years of prehistoric history in Egypt's breathtaking UNESCO World Heritage Site",
     },
     {
       image: "/img/hero-white-desert-group.jpg",
