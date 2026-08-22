@@ -20,13 +20,13 @@ export async function generateMetadata(): Promise<Metadata> {
       title: t("guide_yoga_og_title"),
       description: t("guide_yoga_og_desc"),
       url,
-      images: [`${SITE_URL}/og-image.jpg`],
+      images: [`${SITE_URL}/img/western-desert-hero.webp`],
     },
     twitter: {
       card: "summary_large_image",
       title: t("guide_yoga_twitter_title"),
       description: t("guide_yoga_twitter_desc"),
-      images: [`${SITE_URL}/og-image.jpg`],
+      images: [`${SITE_URL}/img/western-desert-hero.webp`],
     },
   };
 }
