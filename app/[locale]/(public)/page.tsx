@@ -7,7 +7,7 @@ import type { Locale } from "@/lib/i18n/config";
 import { localize } from "@/lib/i18n/localized";
 import { getLocalFallbackImage } from "@/lib/image-fallback";
 import { mapTrapForCard } from "@/lib/mappers/trap";
-import { mapSliderForHero, mapBlogForHomeSection, mapFaq, mapReviewForTestimonial } from "@/lib/mappers/misc";
+import { mapBlogForHomeSection, mapFaq, mapReviewForTestimonial } from "@/lib/mappers/misc";
 import SafeImage from "@/components/safe-image/safe-image";
 import HeroCarousel from "@/components/carousel/hero-carousel";
 import TripCarousel from "@/components/carousel/trip-carousel";
@@ -41,9 +41,8 @@ export default async function HomePage() {
   const locale = (await getLocale()) as Locale;
   const t = await getTranslations();
 
-  const [sliders, traps, spotlightTrap, blogs, faqs, topReview, trapCount] =
+  const [traps, spotlightTrap, blogs, faqs, topReview, trapCount] =
     await Promise.all([
-      prisma.slider.findMany({ orderBy: { createdAt: "desc" } }),
       prisma.trap.findMany({
         where: { status: "active" },
         take: 10,
@@ -69,62 +68,14 @@ export default async function HomePage() {
       prisma.trap.count(),
     ]);
 
-  const isAr = locale === "ar";
-  const STATIC_HERO_SLIDES = [
-    {
-      image: "/img/hero-camel-safari.jpg",
-      title: isAr ? "رحلة السفاري بالجمال" : "Camel Safari Across the Desert",
-      description: isAr
-        ? "اركب الجمال على الطريقة البدوية الأصيلة واستمتع بمناظر الصحراء الغربية الخلابة"
-        : "Experience Egypt's vast desert landscapes the authentic Bedouin way, on the back of a camel",
-    },
-    {
-      image: "/img/hero-whale-valley.jpg",
-      title: isAr ? "وادي الحيتان — جوهرة الصحراء الغربية" : "Valley of the Whales — A Desert UNESCO Wonder",
-      description: isAr
-        ? "استكشف بقايا حيتان عمرها ٤٠ مليون سنة وسط الصحراء المصرية البكر في موقع التراث العالمي"
-        : "Walk through 40 million years of prehistoric history in Egypt's breathtaking UNESCO World Heritage Site",
-    },
-    {
-      image: "/img/hero-white-desert-group.jpg",
-      title: isAr ? "جولات الصحراء البيضاء الجماعية" : "White Desert Group Adventures",
-      description: isAr
-        ? "انضم إلى مغامرين من كل أنحاء العالم وأنشئ ذكريات لا تُنسى وسط التكوينات الجيرية المذهلة"
-        : "Join fellow adventurers from around the world and create unforgettable memories among the iconic chalk formations",
-    },
-    {
-      image: "/img/hero-wadi-rayan-waterfall.jpg",
-      title: isAr ? "شلالات وادي الريان — واحة خفية" : "Wadi El Rayan Waterfalls — Egypt's Hidden Oasis",
-      description: isAr
-        ? "اكتشف الشلالات الطبيعية الوحيدة في مصر — واحة خضراء مذهلة في قلب الصحراء الغربية"
-        : "Discover Egypt's only natural waterfalls — a stunning green oasis tucked in the heart of the Western Desert",
-    },
-    {
-      image: "/img/hero-white-desert-trek.jpg",
-      title: isAr ? "التنزه في الصحراء البيضاء" : "Trekking Through the White Desert",
-      description: isAr
-        ? "اشق طريقك بين تماثيل الطباشير البيضاء الساحرة في واحدة من أجمل مناطق الصحراء في العالم"
-        : "Trek through an otherworldly landscape of sculpted chalk pillars and golden dunes in Egypt's White Desert",
-    },
-    {
-      image: "/img/hero-jara-cave.jpg",
-      title: isAr ? "كهف جارا — أسرار الأعماق" : "Jara Cave — Secrets Beneath the Desert",
-      description: isAr
-        ? "ادخل إلى أكبر كهف طبيعي في مصر وانبهر بعالم من الصواعد والنوازل على ضوء الشموع"
-        : "Step inside Egypt's largest cave and marvel at a candlelit world of ancient stalactites and stalagmites",
-    },
-    {
-      image: "/img/hero-blue-lagoon.jpg",
-      title: isAr ? "البحيرات الزرقاء الكريستالية" : "Crystal Blue Desert Lagoons",
-      description: isAr
-        ? "اسبح في مياه فيروزية نقية مختبئة وسط صحراء مصر الغربية — تجربة لا تصدق"
-        : "Swim in pristine turquoise waters hidden deep within Egypt's Western Desert — an unforgettable escape",
-    },
-  ];
-
   const heroSlides = [
-    ...STATIC_HERO_SLIDES,
-    ...sliders.map((s) => mapSliderForHero(s, locale)),
+    { image: "/img/hero-camel-safari.jpg", title: t("hero_slide_1_title"), description: t("hero_slide_1_desc") },
+    { image: "/img/hero-whale-valley.jpg", title: t("hero_slide_2_title"), description: t("hero_slide_2_desc") },
+    { image: "/img/hero-white-desert-group.jpg", title: t("hero_slide_3_title"), description: t("hero_slide_3_desc") },
+    { image: "/img/hero-wadi-rayan-waterfall.jpg", title: t("hero_slide_4_title"), description: t("hero_slide_4_desc") },
+    { image: "/img/hero-white-desert-trek.jpg", title: t("hero_slide_5_title"), description: t("hero_slide_5_desc") },
+    { image: "/img/hero-jara-cave.jpg", title: t("hero_slide_6_title"), description: t("hero_slide_6_desc") },
+    { image: "/img/hero-blue-lagoon.jpg", title: t("hero_slide_7_title"), description: t("hero_slide_7_desc") },
   ];
   const tripCards = traps.map((trap) => {
     const rate =
