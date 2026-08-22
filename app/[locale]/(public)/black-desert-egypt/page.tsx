@@ -20,13 +20,13 @@ export async function generateMetadata(): Promise<Metadata> {
       title: t("guide_black_og_title"),
       description: t("guide_black_og_desc"),
       url,
-      images: [`${SITE_URL}/img/adventure3.webp`],
+      images: [`${SITE_URL}/img/hero-black-desert.jpg`],
     },
     twitter: {
       card: "summary_large_image",
       title: t("guide_black_twitter_title"),
       description: t("guide_black_twitter_desc"),
-      images: [`${SITE_URL}/img/adventure3.webp`],
+      images: [`${SITE_URL}/img/hero-black-desert.jpg`],
     },
   };
 }
@@ -57,7 +57,7 @@ export default async function BlackDesertPage() {
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <div className={styles["guide-hero"]} style={{ backgroundImage: "url('/img/adventure3.webp')" }}>
+      <div className={styles["guide-hero"]} style={{ backgroundImage: "url('/img/hero-black-desert.jpg')" }}>
         <h1>{t("guide_black_h1")}</h1>
       </div>
 
