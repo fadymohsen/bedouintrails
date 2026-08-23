@@ -78,7 +78,6 @@ export default async function HomePage() {
     return mapTrapForCard({ ...trap, rate }, locale);
   });
   const featuredCards = tripCards.slice(0, 3);
-  const socialCards = tripCards.slice(0, 3);
   const homeBlogs = blogs.map((b) => mapBlogForHomeSection(b, locale));
   const homeFaqs = faqs.map((f) => mapFaq(f, locale));
   const testimonial = topReview ? mapReviewForTestimonial(topReview) : null;
@@ -239,11 +238,11 @@ export default async function HomePage() {
           <div className={styles.scene}>
             <div className={styles.collageWrapper}>
               <div className={styles.pillLarge}>
-                <Image src="/img/adventure.webp" alt="ATV rider celebrating on sand dunes" width={400} height={500} sizes="(max-width: 480px) 220px, 300px" />
+                <Image src="/img/night-camp.jpg" alt="Bedouin camp tent under a starry desert sky" width={400} height={500} sizes="(max-width: 480px) 220px, 300px" />
                 <div className={styles.grainOverlay} />
               </div>
               <div className={styles.pillSmall}>
-                <Image src="/img/salt-lake.webp" alt="Tourists floating in a crystal-clear salt lake in Egypt's Western Desert" width={300} height={400} sizes="(max-width: 480px) 150px, 210px" />
+                <Image src="/img/desert-drive.jpg" alt="4x4 driving across the sand dunes of Egypt's Western Desert" width={300} height={400} sizes="(max-width: 480px) 150px, 210px" />
                 <div className={styles.grainOverlay} />
               </div>
             </div>
@@ -299,20 +298,9 @@ export default async function HomePage() {
       <ScrollReveal as="div" className={styles.socialSection}>
         <h2 className={styles.socialHandle}>@the.white.and.black.desert</h2>
         <div className={styles.socialGrid}>
-          {socialCards.slice(0, 1).map((card) => (
-            <a
-              key={card.id}
-              className={styles.socialTile}
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://www.instagram.com/the.white.and.black.desert?igsh=aHdjbzB6ajJ5dTBk"
-            >
-              <SafeImage src={card.image || "/img/adventure1.webp"} alt={card.name} loading="lazy" width={300} height={300} style={{ objectFit: "cover", borderRadius: "20px" }} />
-              <div className={styles.socialLabel}>
-                <strong>{card.name}</strong>
-              </div>
-            </a>
-          ))}
+          <a className={styles.socialTile} target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/the.white.and.black.desert?igsh=aHdjbzB6ajJ5dTBk">
+            <Image src="/img/social-1.jpg" alt="White Desert dunes at sunset" loading="lazy" width={300} height={400} style={{ objectFit: "cover", borderRadius: "20px" }} />
+          </a>
           <a className={styles.socialTile} target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/the.white.and.black.desert?igsh=aHdjbzB6ajJ5dTBk">
             <Image src="/img/social-2.jpg" alt="Desert meditation in the White Desert" loading="lazy" width={300} height={400} style={{ objectFit: "cover", borderRadius: "20px" }} />
           </a>
