@@ -1,6 +1,7 @@
 import { Link } from "@/lib/i18n/navigation";
 import type { Metadata } from "next";
 import { getTranslations, getLocale } from "next-intl/server";
+import Image from "next/image";
 import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
 import styles from "@/components/guides/guides.module.scss";
 
@@ -20,13 +21,13 @@ export async function generateMetadata(): Promise<Metadata> {
       title: t("guide_safaritours_og_title"),
       description: t("guide_safaritours_og_desc"),
       url,
-      images: [`${SITE_URL}/og-image.jpg`],
+      images: [`${SITE_URL}/img/egypt-safari-camel-trek.jpg`],
     },
     twitter: {
       card: "summary_large_image",
       title: t("guide_safaritours_twitter_title"),
       description: t("guide_safaritours_twitter_desc"),
-      images: [`${SITE_URL}/og-image.jpg`],
+      images: [`${SITE_URL}/img/egypt-safari-camel-trek.jpg`],
     },
   };
 }
@@ -41,7 +42,7 @@ export default async function EgyptSafariToursPage() {
     headline: "Egypt Safari Tours — Complete Guide to Desert Adventures",
     description: "Discover the best Egypt safari tours including White Desert safaris, camel treks, desert camping, and multi-day desert expeditions from Cairo.",
     url,
-    image: `${SITE_URL}/og-image.jpg`,
+    image: `${SITE_URL}/img/egypt-safari-camel-trek.jpg`,
     publisher: { "@type": "Organization", name: "Bedouin Trails", logo: { "@type": "ImageObject", url: `${SITE_URL}/img/logo.png` } },
     mainEntityOfPage: url,
     author: { "@type": "Organization", name: "Bedouin Trails" },
@@ -59,8 +60,17 @@ export default async function EgyptSafariToursPage() {
         ]}
       />
 
-      <div className={styles["guide-hero"]} style={{ backgroundImage: "url('/img/bg.webp')" }}>
+      <div className={styles["guide-hero"]} style={{ backgroundImage: "url('/img/egypt-safari-camel-trek.jpg')" }}>
         <h1>{t("guide_safaritours_h1")}</h1>
+      </div>
+
+      <div className={styles["article-image"]}>
+        <Image
+          src="/img/egypt-safari-camel-trek.jpg"
+          alt="Tourists riding camels through the White Desert, Egypt"
+          width={1200}
+          height={900}
+        />
       </div>
 
       <div className={styles["guide-content"]}>

@@ -1,6 +1,7 @@
 import { Link } from "@/lib/i18n/navigation";
 import type { Metadata } from "next";
 import { getTranslations, getLocale } from "next-intl/server";
+import Image from "next/image";
 import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
 import styles from "@/components/guides/guides.module.scss";
 
@@ -20,13 +21,13 @@ export async function generateMetadata(): Promise<Metadata> {
       title: t("guide_bahariya_og_title"),
       description: t("guide_bahariya_og_desc"),
       url,
-      images: [`${SITE_URL}/og-image.jpg`],
+      images: [`${SITE_URL}/img/bahariya-oasis-palms.jpg`],
     },
     twitter: {
       card: "summary_large_image",
       title: t("guide_bahariya_twitter_title"),
       description: t("guide_bahariya_twitter_desc"),
-      images: [`${SITE_URL}/og-image.jpg`],
+      images: [`${SITE_URL}/img/bahariya-oasis-palms.jpg`],
     },
   };
 }
@@ -41,7 +42,7 @@ export default async function BahariyaOasisPage() {
     name: "Bahariya Oasis",
     description: "Bahariya Oasis is the gateway to Egypt's White Desert and Black Desert, located 370 km southwest of Cairo in the Western Desert.",
     url,
-    image: `${SITE_URL}/og-image.jpg`,
+    image: `${SITE_URL}/img/bahariya-oasis-palms.jpg`,
     address: { "@type": "PostalAddress", addressCountry: "EG", addressRegion: "Giza Governorate" },
     touristType: ["Adventure seekers", "Nature lovers", "Culture enthusiasts"],
     isAccessibleForFree: false,
@@ -57,8 +58,17 @@ export default async function BahariyaOasisPage() {
         ]}
       />
 
-      <div className={styles["guide-hero"]} style={{ backgroundImage: "url('/img/bg.webp')" }}>
+      <div className={styles["guide-hero"]} style={{ backgroundImage: "url('/img/bahariya-oasis-palms.jpg')" }}>
         <h1>{t("guide_bahariya_h1")}</h1>
+      </div>
+
+      <div className={styles["article-image"]}>
+        <Image
+          src="/img/bahariya-oasis-palms.jpg"
+          alt="Lush palm trees of Bahariya Oasis with desert mountains in the background"
+          width={1270}
+          height={952}
+        />
       </div>
 
       <div className={styles["guide-content"]}>

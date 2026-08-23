@@ -1,6 +1,7 @@
 import { Link } from "@/lib/i18n/navigation";
 import type { Metadata } from "next";
 import { getTranslations, getLocale } from "next-intl/server";
+import Image from "next/image";
 import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
 import styles from "@/components/guides/guides.module.scss";
 
@@ -20,13 +21,13 @@ export async function generateMetadata(): Promise<Metadata> {
       title: t("guide_wdsafari_og_title"),
       description: t("guide_wdsafari_og_desc"),
       url,
-      images: [`${SITE_URL}/og-image.jpg`],
+      images: [`${SITE_URL}/img/white-desert-camping.jpg`],
     },
     twitter: {
       card: "summary_large_image",
       title: t("guide_wdsafari_twitter_title"),
       description: t("guide_wdsafari_twitter_desc"),
-      images: [`${SITE_URL}/og-image.jpg`],
+      images: [`${SITE_URL}/img/white-desert-camping.jpg`],
     },
   };
 }
@@ -42,7 +43,7 @@ export default async function WhiteDesertSafariPage() {
     description:
       "Everything you need to know about a White Desert safari in Egypt — tour options, what's included, the route, best time to go, and how to book from Cairo.",
     url,
-    image: `${SITE_URL}/og-image.jpg`,
+    image: `${SITE_URL}/img/white-desert-camping.jpg`,
     publisher: {
       "@type": "Organization",
       name: "Bedouin Trails",
@@ -64,8 +65,17 @@ export default async function WhiteDesertSafariPage() {
         ]}
       />
 
-      <div className={styles["guide-hero"]} style={{ backgroundImage: "url('/img/bg.webp')" }}>
+      <div className={styles["guide-hero"]} style={{ backgroundImage: "url('/img/white-desert-camping.jpg')" }}>
         <h1>{t("guide_wdsafari_h1")}</h1>
+      </div>
+
+      <div className={styles["article-image"]}>
+        <Image
+          src="/img/white-desert-camping.jpg"
+          alt="Desert camping setup with tent and campfire in Egypt's White Desert"
+          width={1270}
+          height={952}
+        />
       </div>
 
       <div className={styles["guide-content"]}>

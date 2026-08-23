@@ -1,6 +1,7 @@
 import { Link } from "@/lib/i18n/navigation";
 import type { Metadata } from "next";
 import { getTranslations, getLocale } from "next-intl/server";
+import Image from "next/image";
 import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
 import styles from "@/components/guides/guides.module.scss";
 
@@ -20,13 +21,13 @@ export async function generateMetadata(): Promise<Metadata> {
       title: t("guide_trek_og_title"),
       description: t("guide_trek_og_desc"),
       url,
-      images: [`${SITE_URL}/og-image.jpg`],
+      images: [`${SITE_URL}/img/multi-day-desert-trek.jpg`],
     },
     twitter: {
       card: "summary_large_image",
       title: t("guide_trek_twitter_title"),
       description: t("guide_trek_twitter_desc"),
-      images: [`${SITE_URL}/og-image.jpg`],
+      images: [`${SITE_URL}/img/multi-day-desert-trek.jpg`],
     },
   };
 }
@@ -41,7 +42,7 @@ export default async function MultiDayDesertTrekPage() {
     headline: "Multi-Day Desert Trek Egypt — Sahara Hiking & Trekking Guide",
     description: "Plan your multi-day desert trek in Egypt. From 2-day White Desert hikes to week-long Sahara expeditions with camel support, explore desert trekking options with Bedouin Trails.",
     url,
-    image: `${SITE_URL}/og-image.jpg`,
+    image: `${SITE_URL}/img/multi-day-desert-trek.jpg`,
     publisher: { "@type": "Organization", name: "Bedouin Trails", logo: { "@type": "ImageObject", url: `${SITE_URL}/img/logo.png` } },
     mainEntityOfPage: url,
     author: { "@type": "Organization", name: "Bedouin Trails" },
@@ -59,8 +60,17 @@ export default async function MultiDayDesertTrekPage() {
         ]}
       />
 
-      <div className={styles["guide-hero"]} style={{ backgroundImage: "url('/img/bg.webp')" }}>
+      <div className={styles["guide-hero"]} style={{ backgroundImage: "url('/img/multi-day-desert-trek.jpg')" }}>
         <h1>{t("guide_trek_h1")}</h1>
+      </div>
+
+      <div className={styles["article-image"]}>
+        <Image
+          src="/img/multi-day-desert-trek.jpg"
+          alt="Group of trekkers hiking through the White Desert landscape, Egypt"
+          width={900}
+          height={1200}
+        />
       </div>
 
       <div className={styles["guide-content"]}>

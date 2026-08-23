@@ -45,6 +45,20 @@
     }
   }
 
+  .article-image {
+    width: 100%;
+    max-width: 900px;
+    margin-inline: auto;
+    margin-block-end: l.$space-5;
+
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: l.$radius-lg;
+      display: block;
+    }
+  }
+
   .guide-content {
     width: 100%;
     max-width: 900px;
