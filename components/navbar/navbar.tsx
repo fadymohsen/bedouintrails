@@ -19,5 +19,16 @@ export default async function Navbar() {
     }
   }
 
-  return <NavbarClient user={user} />;
+  let articles: { slug: string; titleEn: string; titleI18n: unknown }[] = [];
+  try {
+    articles = await prisma.blog.findMany({
+      where: { isPublished: true },
+      select: { slug: true, titleEn: true, titleI18n: true },
+      orderBy: { createdAt: "desc" },
+    });
+  } catch {
+    // fall back to empty list if DB is unreachable
+  }
+
+  return <NavbarClient user={user} articles={articles} />;
 }

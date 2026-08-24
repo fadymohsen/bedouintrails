@@ -28,7 +28,7 @@ export default function Footer() {
             <h5 className={styles.colTitle}>{t("explore")}</h5>
             <nav className={styles.footerMenu}>
               <Link href="/journeys">{t("safari_trips")}</Link>
-              <Link href="/blogs">{t("blogs")}</Link>
+              <Link href="/blogs">{t("articles")}</Link>
               <Link href="/faq">{t("faq")}</Link>
             </nav>
           </div>

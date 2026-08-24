@@ -12,8 +12,9 @@ import { isRtl, type Locale } from "@/lib/i18n/config";
 import styles from "./navbar.module.scss";
 
 type NavbarUser = { firstName: string; image: string | null } | null;
+type NavbarArticle = { slug: string; titleEn: string; titleI18n: unknown };
 
-export default function NavbarClient({ user }: { user: NavbarUser }) {
+export default function NavbarClient({ user, articles = [] }: { user: NavbarUser; articles?: NavbarArticle[] }) {
   const t = useTranslations();
   const locale = useLocale() as Locale;
   const pathname = usePathname();
@@ -127,6 +128,25 @@ export default function NavbarClient({ user }: { user: NavbarUser }) {
                   </Link>
                 </div>
               ))}
+              {articles.length > 0 && (
+                <>
+                  <div className={styles.navDropdown__divider} />
+                  <div className={styles.navDropdown__sectionTitle}>{t("articles")}</div>
+                  {articles.map((article) => {
+                    const title = (article.titleI18n as Record<string, string> | null)?.[locale] ?? article.titleEn;
+                    return (
+                      <div
+                        key={article.slug}
+                        className={`${styles.navDropdown__item} ${isActive(`/blogs/${article.slug}`) ? styles.active : ""}`}
+                      >
+                        <Link href={`/blogs/${article.slug}`} onClick={() => setDropdownOpen(false)}>
+                          {title}
+                        </Link>
+                      </div>
+                    );
+                  })}
+                </>
+              )}
             </div>
 
             {/* Auth block and divider removed */}
