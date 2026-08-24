@@ -11,6 +11,7 @@ export type HeroSlide = {
   image: string;
   title: string;
   description: string;
+  objectPosition?: string;
 };
 
 export type HeroFeaturedTrip = {
@@ -57,7 +58,7 @@ export default function HeroCarousel({ slides, ctaHref = "/journeys", featuredTr
               priority={index === 0}
               loading={index === 0 ? "eager" : "lazy"}
               quality={80}
-              style={{ objectFit: "cover" }}
+              style={{ objectFit: "cover", objectPosition: slide.objectPosition ?? "center" }}
             />
           </div>
         ))}

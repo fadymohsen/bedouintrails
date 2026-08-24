@@ -8,6 +8,8 @@ export const sliderFormSchema = z.object({
   descriptionEn: z.string().optional(),
   descriptionAr: z.string().optional(),
   descriptionI18n: i18nField(),
+  objectPosition: z.string().default("center"),
+  sortOrder: z.coerce.number().int().default(0),
 });
 
 export type SliderFormInput = z.infer<typeof sliderFormSchema>;

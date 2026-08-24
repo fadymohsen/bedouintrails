@@ -183,6 +183,8 @@ model Review {
 model Slider {
   id              Int      @id @default(autoincrement())
   image           String
+  objectPosition  String   @default("center") @map("object_position")
+  sortOrder       Int      @default(0) @map("sort_order")
   titleEn         String?  @map("title_en")
   titleAr         String?  @map("title_ar")
   titleI18n       Json?    @map("title_i18n")
@@ -190,7 +192,7 @@ model Slider {
   descriptionAr   String?  @db.Text @map("description_ar")
   descriptionI18n Json?    @map("description_i18n")
   createdAt       DateTime @default(now()) @map("created_at")
-  updatedAt     DateTime @updatedAt @map("updated_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
 
   @@map("sliders")
 }

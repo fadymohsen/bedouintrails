@@ -6,8 +6,9 @@ import styles from "./admin.module.scss";
 
 const NAV_ITEMS = [
   { href: "/admin", label: "Dashboard" },
+  { href: "/admin/sliders", label: "Hero Slides" },
   { href: "/admin/trips", label: "Trips" },
-{ href: "/admin/articles", label: "Articles" },
+  { href: "/admin/articles", label: "Articles" },
   { href: "/admin/about-us", label: "About Us" },
   { href: "/admin/faq", label: "Common Questions" },
   { href: "/admin/blogs", label: "Blogs" },

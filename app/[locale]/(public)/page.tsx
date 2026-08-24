@@ -41,7 +41,7 @@ export default async function HomePage() {
   const locale = (await getLocale()) as Locale;
   const t = await getTranslations();
 
-  const [traps, spotlightTrap, blogs, faqs, topReview, trapCount] =
+  const [traps, spotlightTrap, blogs, faqs, topReview, trapCount, dbSliders] =
     await Promise.all([
       prisma.trap.findMany({
         where: { status: "active" },
@@ -66,9 +66,10 @@ export default async function HomePage() {
         include: { user: { select: { firstName: true, lastName: true, image: true } } },
       }),
       prisma.trap.count(),
+      prisma.slider.findMany({ orderBy: [{ sortOrder: "asc" }, { createdAt: "asc" }] }),
     ]);
 
-  const heroSlides = [
+  const fallbackSlides = [
     { image: "/img/hero-camel-safari.jpg", title: t("hero_slide_1_title"), description: t("hero_slide_1_desc") },
     { image: "/img/hero-whale-valley.jpg", title: t("hero_slide_2_title"), description: t("hero_slide_2_desc") },
     { image: "/img/hero-white-desert-group.jpg", title: t("hero_slide_3_title"), description: t("hero_slide_3_desc") },
@@ -77,6 +78,16 @@ export default async function HomePage() {
     { image: "/img/hero-jara-cave.jpg", title: t("hero_slide_6_title"), description: t("hero_slide_6_desc") },
     { image: "/img/hero-blue-lagoon.jpg", title: t("hero_slide_7_title"), description: t("hero_slide_7_desc") },
   ];
+
+  const heroSlides =
+    dbSliders.length > 0
+      ? dbSliders.map((s) => ({
+          image: getLocalFallbackImage(s.image),
+          title: localize(s.titleEn ?? "", s.titleAr ?? "", locale, s.titleI18n as Record<string, string> | null),
+          description: localize(s.descriptionEn ?? "", s.descriptionAr ?? "", locale, s.descriptionI18n as Record<string, string> | null),
+          objectPosition: s.objectPosition,
+        }))
+      : fallbackSlides;
   const tripCards = traps.map((trap) => {
     const rate =
       trap.reviews.length > 0

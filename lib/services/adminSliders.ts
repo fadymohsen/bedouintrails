@@ -5,7 +5,13 @@ import { NotFoundError } from "./errors";
 import type { SliderFormInput } from "@/lib/validators/slider";
 
 export async function listSliders() {
-  return prisma.slider.findMany({ orderBy: { createdAt: "desc" } });
+  return prisma.slider.findMany({ orderBy: [{ sortOrder: "asc" }, { createdAt: "asc" }] });
+}
+
+export async function reorderSliders(ids: number[]) {
+  await Promise.all(
+    ids.map((id, index) => prisma.slider.update({ where: { id }, data: { sortOrder: index } }))
+  );
 }
 
 export async function getSlider(id: number) {
