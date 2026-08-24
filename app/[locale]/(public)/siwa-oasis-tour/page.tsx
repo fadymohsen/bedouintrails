@@ -85,7 +85,7 @@ export default async function SiwaOasisTourPage() {
 
       <div
         className={styles["guide-hero"]}
-        style={{ backgroundImage: "url('/img/adventure1.webp')" }}
+        style={{ backgroundImage: "url('/img/hero-siwa-oasis.jpg')" }}
       >
         <h1>{t("guide_siwa_h1")}</h1>
       </div>

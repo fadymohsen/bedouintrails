@@ -57,7 +57,7 @@ export default async function WhiteDesertTourPage() {
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <div className={styles["guide-hero"]} style={{ backgroundImage: "url('/img/hero-white-desert-night.jpg')" }}>
+      <div className={styles["guide-hero"]} style={{ backgroundImage: "url('/img/hero-white-desert-tour-cairo.jpg')" }}>
         <h1>{t("guide_whitetour_h1")}</h1>
       </div>
 

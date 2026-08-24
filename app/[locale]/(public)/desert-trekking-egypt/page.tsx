@@ -70,7 +70,7 @@ export default async function DesertTrekkingEgyptPage() {
         ]}
       />
 
-      <div className={styles["guide-hero"]} style={{ backgroundImage: "url('/img/bg.webp')" }}>
+      <div className={styles["guide-hero"]} style={{ backgroundImage: "url('/img/hero-desert-trekking.jpg')" }}>
         <h1>{t("guide_dtrek_h1")}</h1>
       </div>
 

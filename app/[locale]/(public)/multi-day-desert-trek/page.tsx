@@ -60,7 +60,7 @@ export default async function MultiDayDesertTrekPage() {
         ]}
       />
 
-      <div className={styles["guide-hero"]} style={{ backgroundImage: "url('/img/multi-day-desert-trek.jpg')" }}>
+      <div className={styles["guide-hero"]} style={{ backgroundImage: "url('/img/hero-multi-day-trek.jpg')" }}>
         <h1>{t("guide_trek_h1")}</h1>
       </div>
 

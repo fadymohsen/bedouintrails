@@ -70,7 +70,7 @@ export default async function JaraCavePage() {
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <div className={styles["guide-hero"]} style={{ backgroundImage: "url('/img/adventure1.webp')" }}>
+      <div className={styles["guide-hero"]} style={{ backgroundImage: "url('/img/hero-jara-cave.jpg')" }}>
         <h1>{t("guide_djara_h1")}</h1>
       </div>
 
