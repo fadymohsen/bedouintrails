@@ -67,45 +67,9 @@ export default async function ArticlesPage() {
         eyebrow={t("articles")}
       />
 
-      {/* ── Travel Guides ── */}
-      <div className={styles["blogs-grid-container"]}>
-        <h2
-          style={{
-            fontFamily: "var(--font-display)",
-            fontSize: "clamp(1.6rem, 3vw, 2.2rem)",
-            color: "var(--text-heading)",
-            fontWeight: 400,
-            marginBottom: "32px",
-            textTransform: "uppercase",
-            letterSpacing: "0.04em",
-          }}
-        >
-          {t("articles_guides_heading")}
-        </h2>
-        <div className={styles["blogs-grid"]}>
-          {GUIDE_LINKS.map((guide) => (
-            <Link href={guide.path} key={guide.path} className={styles["blog-card"]}>
-              <div className={styles["card-image-wrapper"]}>
-                <SafeImage
-                  src={guide.img}
-                  alt={t(guide.key as Parameters<typeof t>[0])}
-                  fill
-                  style={{ objectFit: "cover" }}
-                />
-              </div>
-              <div className={styles["card-content"]}>
-                <span className={styles.eyebrow}>{t("travel_guides")}</span>
-                <h3>{t(guide.key as Parameters<typeof t>[0])}</h3>
-                <span className={styles["read-more-link"]}>{t("read_story") || "Read Guide"} →</span>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </div>
-
       {/* ── Blog Articles ── */}
       {blogs.length > 0 && (
-        <div className={styles["blogs-grid-container"]} style={{ paddingTop: 0 }}>
+        <div className={styles["blogs-grid-container"]}>
           <h2
             style={{
               fontFamily: "var(--font-display)",
@@ -149,6 +113,42 @@ export default async function ArticlesPage() {
           </div>
         </div>
       )}
+
+      {/* ── Travel Guides ── */}
+      <div className={styles["blogs-grid-container"]} style={{ paddingTop: 0 }}>
+        <h2
+          style={{
+            fontFamily: "var(--font-display)",
+            fontSize: "clamp(1.6rem, 3vw, 2.2rem)",
+            color: "var(--text-heading)",
+            fontWeight: 400,
+            marginBottom: "32px",
+            textTransform: "uppercase",
+            letterSpacing: "0.04em",
+          }}
+        >
+          {t("articles_guides_heading")}
+        </h2>
+        <div className={styles["blogs-grid"]}>
+          {GUIDE_LINKS.map((guide) => (
+            <Link href={guide.path} key={guide.path} className={styles["blog-card"]}>
+              <div className={styles["card-image-wrapper"]}>
+                <SafeImage
+                  src={guide.img}
+                  alt={t(guide.key as Parameters<typeof t>[0])}
+                  fill
+                  style={{ objectFit: "cover" }}
+                />
+              </div>
+              <div className={styles["card-content"]}>
+                <span className={styles.eyebrow}>{t("travel_guides")}</span>
+                <h3>{t(guide.key as Parameters<typeof t>[0])}</h3>
+                <span className={styles["read-more-link"]}>{t("read_story") || "Read Guide"} →</span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
