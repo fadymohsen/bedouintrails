@@ -149,14 +149,10 @@ const DEFAULT_SLIDES = [
   },
 ];
 
-export async function seedDefaultSlidersAction(): Promise<ActionState> {
+export async function seedDefaultSlidersAction(): Promise<void> {
   await requireAdmin("manage_website");
-  try {
-    const { prisma } = await import("@/lib/prisma");
-    await prisma.slider.createMany({ data: DEFAULT_SLIDES });
-  } catch (err) {
-    return { error: err instanceof Error ? err.message : "Failed to seed slides." };
-  }
+  const { prisma } = await import("@/lib/prisma");
+  await prisma.slider.createMany({ data: DEFAULT_SLIDES });
   revalidatePath("/admin/sliders");
   revalidatePath("/");
   redirect("/admin/sliders");
