@@ -20,13 +20,13 @@ export async function generateMetadata(): Promise<Metadata> {
       title: t("guide_whitetour_og_title"),
       description: t("guide_whitetour_og_desc"),
       url,
-      images: [`${SITE_URL}/img/hero-white-desert-night.jpg`],
+      images: [`${SITE_URL}/img/hero-white-desert-tour-cairo.jpg`],
     },
     twitter: {
       card: "summary_large_image",
       title: t("guide_whitetour_twitter_title"),
       description: t("guide_whitetour_twitter_desc"),
-      images: [`${SITE_URL}/img/hero-white-desert-night.jpg`],
+      images: [`${SITE_URL}/img/hero-white-desert-tour-cairo.jpg`],
     },
   };
 }

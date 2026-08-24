@@ -82,3 +82,82 @@ export async function reorderSlidersAction(_prevState: unknown, form: FormData):
   revalidatePath("/");
   return { success: true };
 }
+
+const DEFAULT_SLIDES = [
+  {
+    image: "/img/hero-camel-safari.jpg",
+    titleEn: "Camel Safari Across the Desert",
+    titleAr: "رحلة السفاري بالجمال",
+    descriptionEn: "Experience Egypt's vast desert landscapes the authentic Bedouin way, on the back of a camel",
+    descriptionAr: "اركب الجمال على الطريقة البدوية الأصيلة واستمتع بمناظر الصحراء الغربية الخلابة",
+    objectPosition: "center",
+    sortOrder: 0,
+  },
+  {
+    image: "/img/hero-whale-valley.jpg",
+    titleEn: "Valley of the Whales — A Desert UNESCO Wonder",
+    titleAr: "وادي الحيتان — جوهرة الصحراء الغربية",
+    descriptionEn: "Walk through 40 million years of prehistoric history in Egypt's breathtaking UNESCO World Heritage Site",
+    descriptionAr: "استكشف بقايا حيتان عمرها ٤٠ مليون سنة وسط الصحراء المصرية البكر في موقع التراث العالمي",
+    objectPosition: "center",
+    sortOrder: 1,
+  },
+  {
+    image: "/img/hero-white-desert-group.jpg",
+    titleEn: "White Desert Group Adventures",
+    titleAr: "جولات الصحراء البيضاء الجماعية",
+    descriptionEn: "Join fellow adventurers from around the world and create unforgettable memories among the iconic chalk formations",
+    descriptionAr: "انضم إلى مغامرين من كل أنحاء العالم وأنشئ ذكريات لا تُنسى وسط التكوينات الجيرية المذهلة",
+    objectPosition: "center",
+    sortOrder: 2,
+  },
+  {
+    image: "/img/hero-wadi-rayan-waterfall.jpg",
+    titleEn: "Wadi El Rayan Waterfalls — Egypt's Hidden Oasis",
+    titleAr: "شلالات وادي الريان — واحة خفية",
+    descriptionEn: "Discover Egypt's only natural waterfalls — a stunning green oasis tucked in the heart of the Western Desert",
+    descriptionAr: "اكتشف الشلالات الطبيعية الوحيدة في مصر — واحة خضراء مذهلة في قلب الصحراء الغربية",
+    objectPosition: "center",
+    sortOrder: 3,
+  },
+  {
+    image: "/img/hero-white-desert-trek.jpg",
+    titleEn: "Trekking Through the White Desert",
+    titleAr: "التنزه في الصحراء البيضاء",
+    descriptionEn: "Trek through an otherworldly landscape of sculpted chalk pillars and golden dunes in Egypt's White Desert",
+    descriptionAr: "اشق طريقك بين تماثيل الطباشير البيضاء الساحرة في واحدة من أجمل مناطق الصحراء في العالم",
+    objectPosition: "center",
+    sortOrder: 4,
+  },
+  {
+    image: "/img/hero-jara-cave.jpg",
+    titleEn: "Jara Cave — Secrets Beneath the Desert",
+    titleAr: "كهف جارا — أسرار الأعماق",
+    descriptionEn: "Step inside Egypt's largest cave and marvel at a candlelit world of ancient stalactites and stalagmites",
+    descriptionAr: "ادخل إلى أكبر كهف طبيعي في مصر وانبهر بعالم من الصواعد والنوازل على ضوء الشموع",
+    objectPosition: "center",
+    sortOrder: 5,
+  },
+  {
+    image: "/img/hero-blue-lagoon.jpg",
+    titleEn: "Crystal Blue Desert Lagoons",
+    titleAr: "البحيرات الزرقاء الكريستالية",
+    descriptionEn: "Swim in pristine turquoise waters hidden deep within Egypt's Western Desert — an unforgettable escape",
+    descriptionAr: "اسبح في مياه فيروزية نقية مختبئة وسط صحراء مصر الغربية — تجربة لا تصدق",
+    objectPosition: "center",
+    sortOrder: 6,
+  },
+];
+
+export async function seedDefaultSlidersAction(): Promise<ActionState> {
+  await requireAdmin("manage_website");
+  try {
+    const { prisma } = await import("@/lib/prisma");
+    await prisma.slider.createMany({ data: DEFAULT_SLIDES });
+  } catch (err) {
+    return { error: err instanceof Error ? err.message : "Failed to seed slides." };
+  }
+  revalidatePath("/admin/sliders");
+  revalidatePath("/");
+  redirect("/admin/sliders");
+}

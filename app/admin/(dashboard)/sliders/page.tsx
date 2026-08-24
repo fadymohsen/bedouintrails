@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { listSliders } from "@/lib/services/adminSliders";
+import { seedDefaultSlidersAction } from "./actions";
 import styles from "@/components/admin/admin.module.scss";
 
 export default async function AdminSlidersPage() {
@@ -20,9 +21,16 @@ export default async function AdminSlidersPage() {
         </p>
 
         {sliders.length === 0 ? (
-          <p className={styles.emptyState}>
-            No slides yet. The homepage will use the default built-in slides until you add slides here.
-          </p>
+          <div style={{ textAlign: "center", padding: "40px 0" }}>
+            <p className={styles.emptyState} style={{ marginBottom: 20 }}>
+              No slides yet. The homepage currently shows the 7 built-in default slides.
+            </p>
+            <form action={seedDefaultSlidersAction}>
+              <button type="submit" className={styles.primaryBtn}>
+                Load Default Slides into Dashboard
+              </button>
+            </form>
+          </div>
         ) : (
           <table className={styles.table}>
             <thead>
