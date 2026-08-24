@@ -43,6 +43,7 @@ export default function Footer() {
               <Link href="/desert-yoga-retreat">{t("guide_yoga_breadcrumb")}</Link>
               <Link href="/multi-day-desert-trek">{t("guide_trek_breadcrumb")}</Link>
               <Link href="/white-desert-safari">{t("guide_wdsafari_breadcrumb")}</Link>
+              <Link href="/siwa-oasis-tour">{t("guide_siwa_breadcrumb")}</Link>
             </nav>
           </div>
 
