@@ -47,16 +47,11 @@ function CardForm({
     const form = new FormData(e.currentTarget);
     setError(null);
     startTransition(async () => {
-      try {
-        if (card) {
-          await updateTrapDayCardAction(tripId, card.id, form);
-        } else {
-          await addTrapDayCardAction(tripId, dayId, form);
-        }
-        onDone();
-      } catch (err) {
-        setError(err instanceof Error ? err.message : "Failed to save. Please try again.");
-      }
+      const result = card
+        ? await updateTrapDayCardAction(tripId, card.id, form)
+        : await addTrapDayCardAction(tripId, dayId, form);
+      if (result?.error) setError(result.error);
+      else onDone();
     });
   }
 
@@ -94,14 +89,11 @@ function DayCard({ tripId, day }: { tripId: number; day: TripDay }) {
   const [editingId, setEditingId] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  function run(action: () => Promise<void>) {
+  function run(action: () => Promise<{ error?: string }>) {
     setError(null);
     startTransition(async () => {
-      try {
-        await action();
-      } catch (err) {
-        setError(err instanceof Error ? err.message : "Action failed. Please try again.");
-      }
+      const result = await action();
+      if (result?.error) setError(result.error);
     });
   }
 
@@ -176,11 +168,8 @@ export default function TripDaysManager({ tripId, days }: { tripId: number; days
   function handleAddDay() {
     setError(null);
     startTransition(async () => {
-      try {
-        await addTrapDayAction(tripId);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : "Failed to add day. Please try again.");
-      }
+      const result = await addTrapDayAction(tripId);
+      if (result?.error) setError(result.error);
     });
   }
 

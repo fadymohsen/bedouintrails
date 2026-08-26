@@ -111,16 +111,26 @@ export async function deleteGalleryImageAction(tripId: number, galleryId: number
   }
 }
 
-export async function addTrapDayAction(tripId: number) {
+export async function addTrapDayAction(tripId: number): Promise<{ error?: string }> {
   await requireAdmin("manage_trips");
-  await createTrapDay(tripId);
-  revalidatePath(`/admin/trips/${tripId}`);
+  try {
+    await createTrapDay(tripId);
+    revalidatePath(`/admin/trips/${tripId}`);
+    return {};
+  } catch (err) {
+    return { error: err instanceof Error ? err.message : "Failed to add day. Please try again." };
+  }
 }
 
-export async function deleteTrapDayAction(tripId: number, dayId: number) {
+export async function deleteTrapDayAction(tripId: number, dayId: number): Promise<{ error?: string }> {
   await requireAdmin("manage_trips");
-  await deleteTrapDay(dayId);
-  revalidatePath(`/admin/trips/${tripId}`);
+  try {
+    await deleteTrapDay(dayId);
+    revalidatePath(`/admin/trips/${tripId}`);
+    return {};
+  } catch (err) {
+    return { error: err instanceof Error ? err.message : "Failed to delete day. Please try again." };
+  }
 }
 
 function readImageInputs(form: FormData) {
@@ -132,38 +142,53 @@ function readImageInputs(form: FormData) {
   };
 }
 
-export async function addTrapDayCardAction(tripId: number, dayId: number, form: FormData) {
+export async function addTrapDayCardAction(tripId: number, dayId: number, form: FormData): Promise<{ error?: string }> {
   await requireAdmin("manage_trips");
-  const input = trapDayCardFormSchema.parse({
-    titleEn: form.get("titleEn"),
-    titleAr: form.get("titleAr"),
-    titleI18n: form.get("titleI18n"),
-    descriptionEn: form.get("descriptionEn") || undefined,
-    descriptionAr: form.get("descriptionAr") || undefined,
-    descriptionI18n: form.get("descriptionI18n"),
-  });
-  const { file, url } = readImageInputs(form);
-  await createTrapDayCard(dayId, input, file, url);
-  revalidatePath(`/admin/trips/${tripId}`);
+  try {
+    const input = trapDayCardFormSchema.parse({
+      titleEn: form.get("titleEn"),
+      titleAr: form.get("titleAr"),
+      titleI18n: form.get("titleI18n"),
+      descriptionEn: form.get("descriptionEn") || undefined,
+      descriptionAr: form.get("descriptionAr") || undefined,
+      descriptionI18n: form.get("descriptionI18n"),
+    });
+    const { file, url } = readImageInputs(form);
+    await createTrapDayCard(dayId, input, file, url);
+    revalidatePath(`/admin/trips/${tripId}`);
+    return {};
+  } catch (err) {
+    return { error: err instanceof Error ? err.message : "Failed to save card. Please try again." };
+  }
 }
 
-export async function updateTrapDayCardAction(tripId: number, cardId: number, form: FormData) {
+export async function updateTrapDayCardAction(tripId: number, cardId: number, form: FormData): Promise<{ error?: string }> {
   await requireAdmin("manage_trips");
-  const input = trapDayCardFormSchema.parse({
-    titleEn: form.get("titleEn"),
-    titleAr: form.get("titleAr"),
-    titleI18n: form.get("titleI18n"),
-    descriptionEn: form.get("descriptionEn") || undefined,
-    descriptionAr: form.get("descriptionAr") || undefined,
-    descriptionI18n: form.get("descriptionI18n"),
-  });
-  const { file, url } = readImageInputs(form);
-  await updateTrapDayCard(cardId, input, file, url);
-  revalidatePath(`/admin/trips/${tripId}`);
+  try {
+    const input = trapDayCardFormSchema.parse({
+      titleEn: form.get("titleEn"),
+      titleAr: form.get("titleAr"),
+      titleI18n: form.get("titleI18n"),
+      descriptionEn: form.get("descriptionEn") || undefined,
+      descriptionAr: form.get("descriptionAr") || undefined,
+      descriptionI18n: form.get("descriptionI18n"),
+    });
+    const { file, url } = readImageInputs(form);
+    await updateTrapDayCard(cardId, input, file, url);
+    revalidatePath(`/admin/trips/${tripId}`);
+    return {};
+  } catch (err) {
+    return { error: err instanceof Error ? err.message : "Failed to save card. Please try again." };
+  }
 }
 
-export async function deleteTrapDayCardAction(tripId: number, cardId: number) {
+export async function deleteTrapDayCardAction(tripId: number, cardId: number): Promise<{ error?: string }> {
   await requireAdmin("manage_trips");
-  await deleteTrapDayCard(cardId);
-  revalidatePath(`/admin/trips/${tripId}`);
+  try {
+    await deleteTrapDayCard(cardId);
+    revalidatePath(`/admin/trips/${tripId}`);
+    return {};
+  } catch (err) {
+    return { error: err instanceof Error ? err.message : "Failed to delete card. Please try again." };
+  }
 }
