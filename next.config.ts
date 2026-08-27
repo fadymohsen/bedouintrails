@@ -25,80 +25,91 @@ const nextConfig: NextConfig = {
     includePaths: ["./styles"],
   },
   redirects: async () => [
-    // Renamed page: djara-cave → jara-cave
+    // ── Renamed page: djara-cave → jara-cave ────────────────────────────
     {
       source: "/:locale/djara-cave",
       destination: "/:locale/jara-cave",
       permanent: true,
     },
-    // Old ID-based journey URLs: /journeys/12/slug → /en/journeys/slug
+    // No-locale djara-cave (caught by middleware but explicit is faster)
     {
-      source: "/journeys/:id(\\d+)/:slug",
-      destination: "/en/journeys/:slug",
+      source: "/djara-cave",
+      destination: "/en/jara-cave",
       permanent: true,
     },
-    // Old ID-based journey URLs with locale
-    {
-      source: "/:locale/journeys/:id(\\d+)/:slug",
-      destination: "/:locale/journeys/:slug",
-      permanent: true,
-    },
-    // Old /cardpage URLs → journeys
-    {
-      source: "/cardpage/:id",
-      destination: "/en/journeys",
-      permanent: true,
-    },
-    // Old query param blog URLs: /blogs?article=N → /en/blogs
+
+    // ── Old ID-based journey URLs ────────────────────────────────────────
+    { source: "/journeys/:id(\\d+)/:slug", destination: "/en/journeys/:slug", permanent: true },
+    { source: "/:locale/journeys/:id(\\d+)/:slug", destination: "/:locale/journeys/:slug", permanent: true },
+
+    // ── Old /cardpage URLs ───────────────────────────────────────────────
+    { source: "/cardpage/:id", destination: "/en/journeys", permanent: true },
+
+    // ── Old query-param blog URLs: /blogs?article=N ──────────────────────
     {
       source: "/blogs",
       has: [{ type: "query", key: "article" }],
       destination: "/en/blogs",
       permanent: true,
     },
-    // No-locale journey URLs → /en/ version
+    // Locale-prefixed variant: /:locale/blogs?article=N
     {
-      source: "/journeys/:slug",
-      destination: "/en/journeys/:slug",
+      source: "/:locale/blogs",
+      has: [{ type: "query", key: "article" }],
+      destination: "/:locale/blogs",
       permanent: true,
     },
-    // No-locale blog URLs → /en/ version
-    {
-      source: "/blogs/:slug",
-      destination: "/en/blogs/:slug",
-      permanent: true,
-    },
-    // Deleted old journey slugs from previous Framer site → journeys index
-    {
-      source: "/:locale/journeys/oases-the-white-desert-and-cairo",
-      destination: "/:locale/journeys",
-      permanent: true,
-    },
-    {
-      source: "/:locale/journeys/two-nights-camping-in-the-black-and-white-desert",
-      destination: "/:locale/journeys",
-      permanent: true,
-    },
-    {
-      source: "/:locale/journeys/3-nights-and-4-days-in-siwa-oasis",
-      destination: "/:locale/journeys",
-      permanent: true,
-    },
-    {
-      source: "/:locale/journeys/black-and-white-desert-and-jar-cave",
-      destination: "/:locale/journeys",
-      permanent: true,
-    },
-    {
-      source: "/:locale/journeys/3-nights-in-the-black-and-white-desert-and-khara-cave",
-      destination: "/:locale/journeys",
-      permanent: true,
-    },
-    {
-      source: "/:locale/journeys/desert-silence-walking-and-camels",
-      destination: "/:locale/journeys",
-      permanent: true,
-    },
+
+    // ── Dead Framer blog slugs — locale-prefixed ─────────────────────────
+    // Must come before generic /:locale/blogs/:slug to avoid chaining to 404
+    { source: "/:locale/blogs/egypt-desert-safari-cost-budget-guide", destination: "/:locale/blogs", permanent: true },
+    { source: "/:locale/blogs/what-to-pack-egypt-desert-safari", destination: "/:locale/blogs", permanent: true },
+    { source: "/:locale/blogs/is-egypt-desert-safe-to-visit", destination: "/:locale/blogs", permanent: true },
+    { source: "/:locale/blogs/best-time-visit-egypt-desert", destination: "/:locale/blogs", permanent: true },
+    { source: "/:locale/blogs/how-to-plan-egypt-desert-safari", destination: "/:locale/blogs", permanent: true },
+    { source: "/:locale/blogs/white-desert-camping-egypt", destination: "/:locale/blogs", permanent: true },
+    { source: "/:locale/blogs/fayoum-oasis-travel-guide", destination: "/:locale/blogs", permanent: true },
+    { source: "/:locale/blogs/dakhla-oasis-egypt-guide", destination: "/:locale/blogs", permanent: true },
+    { source: "/:locale/blogs/oasis-circle-egypt-complete-guide", destination: "/:locale/blogs", permanent: true },
+    { source: "/:locale/blogs/kharga-oasis-egypt-guide", destination: "/:locale/blogs", permanent: true },
+    { source: "/:locale/blogs/camel-safari-egypt-guide", destination: "/:locale/blogs", permanent: true },
+    { source: "/:locale/blogs/siwa-oasis-travel-guide", destination: "/:locale/blogs", permanent: true },
+
+    // ── Dead Framer blog slugs — no-locale ──────────────────────────────
+    // Must come before generic /blogs/:slug to avoid chaining to 404
+    { source: "/blogs/egypt-desert-safari-cost-budget-guide", destination: "/en/blogs", permanent: true },
+    { source: "/blogs/what-to-pack-egypt-desert-safari", destination: "/en/blogs", permanent: true },
+    { source: "/blogs/is-egypt-desert-safe-to-visit", destination: "/en/blogs", permanent: true },
+    { source: "/blogs/best-time-visit-egypt-desert", destination: "/en/blogs", permanent: true },
+    { source: "/blogs/how-to-plan-egypt-desert-safari", destination: "/en/blogs", permanent: true },
+    { source: "/blogs/white-desert-camping-egypt", destination: "/en/blogs", permanent: true },
+    { source: "/blogs/fayoum-oasis-travel-guide", destination: "/en/blogs", permanent: true },
+    { source: "/blogs/dakhla-oasis-egypt-guide", destination: "/en/blogs", permanent: true },
+    { source: "/blogs/oasis-circle-egypt-complete-guide", destination: "/en/blogs", permanent: true },
+    { source: "/blogs/kharga-oasis-egypt-guide", destination: "/en/blogs", permanent: true },
+    { source: "/blogs/camel-safari-egypt-guide", destination: "/en/blogs", permanent: true },
+    { source: "/blogs/siwa-oasis-travel-guide", destination: "/en/blogs", permanent: true },
+
+    // ── No-locale generic redirects (add /en/ prefix) ────────────────────
+    { source: "/journeys/:slug", destination: "/en/journeys/:slug", permanent: true },
+    { source: "/blogs/:slug", destination: "/en/blogs/:slug", permanent: true },
+
+    // ── Dead Framer journey slugs — locale-prefixed ──────────────────────
+    { source: "/:locale/journeys/oases-the-white-desert-and-cairo", destination: "/:locale/journeys", permanent: true },
+    { source: "/:locale/journeys/two-nights-camping-in-the-black-and-white-desert", destination: "/:locale/journeys", permanent: true },
+    { source: "/:locale/journeys/3-nights-and-4-days-in-siwa-oasis", destination: "/:locale/journeys", permanent: true },
+    { source: "/:locale/journeys/black-and-white-desert-and-jar-cave", destination: "/:locale/journeys", permanent: true },
+    { source: "/:locale/journeys/3-nights-in-the-black-and-white-desert-and-khara-cave", destination: "/:locale/journeys", permanent: true },
+    { source: "/:locale/journeys/desert-silence-walking-and-camels", destination: "/:locale/journeys", permanent: true },
+    // Additional dead Framer journey slugs
+    { source: "/:locale/journeys/walking-and-meditation-trip", destination: "/:locale/journeys", permanent: true },
+    { source: "/:locale/journeys/siwa-oasis-3-days-2-nights", destination: "/:locale/journeys", permanent: true },
+    { source: "/:locale/journeys/the-five-oases-of-egypt", destination: "/:locale/journeys", permanent: true },
+    { source: "/:locale/journeys/one-night-in-the-black-and-white-desert", destination: "/:locale/journeys", permanent: true },
+    { source: "/:locale/journeys/2-day-1-night-program-in-fayoum-oasis", destination: "/:locale/journeys", permanent: true },
+    { source: "/:locale/journeys/3-days-2-nights-black-and-white-desert-bahariya-oasis-tour", destination: "/:locale/journeys", permanent: true },
+    { source: "/:locale/journeys/13-days-12-nights-complete-oases-deserts-pyramids-expedition", destination: "/:locale/journeys", permanent: true },
+    { source: "/:locale/journeys/4-nights-in-the-black-and-white-desert", destination: "/:locale/journeys", permanent: true },
   ],
   headers: async () => [
     {
