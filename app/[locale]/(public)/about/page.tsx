@@ -13,6 +13,8 @@ import styles from "@/components/about/about.module.scss";
 
 import { SITE_URL, buildAlternates } from "@/lib/seo";
 
+export const revalidate = 86400;
+
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
   const locale = await getLocale();

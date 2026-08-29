@@ -19,10 +19,8 @@
     max-width: l.$container-max;
     min-height: 420px;
     margin-block-end: l.$space-5;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
     border-radius: l.$radius-lg;
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: flex-end;

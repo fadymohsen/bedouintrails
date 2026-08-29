@@ -2,10 +2,14 @@ import { Link } from "@/lib/i18n/navigation";
 import type { Metadata } from "next";
 import { getTranslations, getLocale } from "next-intl/server";
 import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
+import GuideHero from "@/components/guides/guide-hero";
+import RelatedTrips from "@/components/guides/related-trips";
 import styles from "@/components/guides/guides.module.scss";
 
+import type { Locale } from "@/lib/i18n/config";
 import { SITE_URL, buildAlternates } from "@/lib/seo";
 const PATH = "/desert-yoga-retreat";
+export const revalidate = 86400;
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
@@ -37,13 +41,17 @@ export default async function DesertYogaRetreatPage() {
 
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "TouristTrip",
-    name: "Desert Yoga Retreat in Egypt's White Desert",
+    "@type": "Article",
+    headline: "Desert Yoga Retreat in Egypt's White Desert — Complete Guide",
     description:
       "A unique yoga and meditation retreat experience in the heart of Egypt's Western Desert, combining desert camping with mindfulness practices under the Saharan sky.",
-    touristType: ["Yoga practitioners", "Meditation seekers", "Wellness travelers"],
     url,
-    provider: { "@type": "TravelAgency", name: "Bedouin Trails", url: SITE_URL },
+    image: `${SITE_URL}/img/western-desert-hero.webp`,
+    publisher: { "@type": "Organization", name: "Bedouin Trails", logo: { "@type": "ImageObject", url: `${SITE_URL}/img/logo.png` } },
+    mainEntityOfPage: url,
+    author: { "@type": "Organization", name: "Bedouin Trails" },
+    datePublished: "2025-01-15",
+    dateModified: "2026-07-26",
   };
 
   return (
@@ -56,9 +64,7 @@ export default async function DesertYogaRetreatPage() {
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <div className={styles["guide-hero"]} style={{ backgroundImage: "url('/img/western-desert-hero.webp')", backgroundPosition: "bottom center" }}>
-        <h1>{t("guide_yoga_h1")}</h1>
-      </div>
+      <GuideHero src="/img/western-desert-hero.webp" alt="Desert yoga retreat Egypt White Desert" h1={t("guide_yoga_h1")} objectPosition="bottom center" />
 
       <div className={styles["guide-content"]}>
         <p>{t("guide_yoga_intro_p")}</p>
@@ -107,6 +113,8 @@ export default async function DesertYogaRetreatPage() {
             </div>
           ))}
         </div>
+
+        <RelatedTrips locale={locale as Locale} heading="Featured Desert Tours" ctaLabel="View Tour" />
 
         <div className={styles["cta-section"]}>
           <p>{t("guide_yoga_cta")}</p>

@@ -2,10 +2,14 @@ import { Link } from "@/lib/i18n/navigation";
 import type { Metadata } from "next";
 import { getTranslations, getLocale } from "next-intl/server";
 import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
+import GuideHero from "@/components/guides/guide-hero";
+import RelatedTrips from "@/components/guides/related-trips";
 import styles from "@/components/guides/guides.module.scss";
 
+import type { Locale } from "@/lib/i18n/config";
 import { SITE_URL, buildAlternates } from "@/lib/seo";
 const PATH = "/white-desert-tour-cost";
+export const revalidate = 86400;
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
@@ -21,13 +25,13 @@ export async function generateMetadata(): Promise<Metadata> {
       title: t("guide_cost_og_title"),
       description: t("guide_cost_og_desc"),
       url,
-      images: [`${SITE_URL}/og-image.jpg`],
+      images: [`${SITE_URL}/img/white-desert-camping.jpg`],
     },
     twitter: {
       card: "summary_large_image",
       title: t("guide_cost_twitter_title"),
       description: t("guide_cost_twitter_desc"),
-      images: [`${SITE_URL}/og-image.jpg`],
+      images: [`${SITE_URL}/img/white-desert-camping.jpg`],
     },
   };
 }
@@ -41,7 +45,7 @@ export default async function TourCostPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
         "@context": "https://schema.org", "@type": "Article",
         headline: t("guide_cost_h1"), description: t("guide_cost_meta_desc"),
-        url, image: `${SITE_URL}/og-image.jpg`,
+        url, image: `${SITE_URL}/img/white-desert-camping.jpg`,
         publisher: { "@type": "Organization", name: "Bedouin Trails", logo: { "@type": "ImageObject", url: `${SITE_URL}/img/logo.png` } },
         mainEntityOfPage: url,
         author: { "@type": "Organization", name: "Bedouin Trails" },
@@ -55,9 +59,7 @@ export default async function TourCostPage() {
         ]}
       />
 
-      <div className={styles["guide-hero"]} style={{ backgroundImage: "url('/img/bg.webp')" }}>
-        <h1>{t("guide_cost_h1")}</h1>
-      </div>
+      <GuideHero src="/img/white-desert-camping.jpg" alt="White Desert tour cost price guide Egypt" h1={t("guide_cost_h1")} />
 
       <div className={styles["guide-content"]}>
         <p>{t("guide_cost_intro_p")}</p>
@@ -108,6 +110,8 @@ export default async function TourCostPage() {
         <h2>{t("guide_cost_worth_h2")}</h2>
         <p>{t("guide_cost_worth_p1")}</p>
         <p>{t("guide_cost_worth_p2")}</p>
+
+        <RelatedTrips locale={locale as Locale} heading="Featured Desert Tours" ctaLabel="View Tour" />
 
         <div className={styles["cta-section"]}>
           <p>{t("guide_cost_cta")}</p>

@@ -2,10 +2,14 @@ import { Link } from "@/lib/i18n/navigation";
 import type { Metadata } from "next";
 import { getTranslations, getLocale } from "next-intl/server";
 import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
+import GuideHero from "@/components/guides/guide-hero";
+import RelatedTrips from "@/components/guides/related-trips";
 import styles from "@/components/guides/guides.module.scss";
 
+import type { Locale } from "@/lib/i18n/config";
 import { SITE_URL, buildAlternates } from "@/lib/seo";
 const PATH = "/camel-trek";
+export const revalidate = 86400;
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
@@ -20,13 +24,13 @@ export async function generateMetadata(): Promise<Metadata> {
       title: t("guide_camel_og_title"),
       description: t("guide_camel_og_desc"),
       url,
-      images: [`${SITE_URL}/og-image.jpg`],
+      images: [`${SITE_URL}/img/camel-ride.webp`],
     },
     twitter: {
       card: "summary_large_image",
       title: t("guide_camel_twitter_title"),
       description: t("guide_camel_twitter_desc"),
-      images: [`${SITE_URL}/og-image.jpg`],
+      images: [`${SITE_URL}/img/camel-ride.webp`],
     },
   };
 }
@@ -37,13 +41,17 @@ export default async function CamelTrekPage() {
 
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "TouristTrip",
-    name: "Camel Trek in Egypt's Western Desert",
+    "@type": "Article",
+    headline: "Camel Trek in Egypt's Western Desert — Complete Guide",
     description:
       "Multi-day camel trekking adventure through the White Desert, Black Desert, and Sahara landscapes with experienced Bedouin guides and traditional camping.",
-    touristType: ["Adventure seekers", "Nature lovers", "Culture enthusiasts"],
     url,
-    provider: { "@type": "TravelAgency", name: "Bedouin Trails", url: SITE_URL },
+    image: `${SITE_URL}/img/camel-ride.webp`,
+    publisher: { "@type": "Organization", name: "Bedouin Trails", logo: { "@type": "ImageObject", url: `${SITE_URL}/img/logo.png` } },
+    mainEntityOfPage: url,
+    author: { "@type": "Organization", name: "Bedouin Trails" },
+    datePublished: "2025-01-15",
+    dateModified: "2026-08-30",
   };
 
   return (
@@ -56,9 +64,7 @@ export default async function CamelTrekPage() {
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <div className={styles["guide-hero"]} style={{ backgroundImage: "url('/img/camel-ride.webp')" }}>
-        <h1>{t("guide_camel_h1")}</h1>
-      </div>
+      <GuideHero src="/img/camel-ride.webp" alt="Camel trek Egypt Western Desert" h1={t("guide_camel_h1")} />
 
       <div className={styles["guide-content"]}>
         <p>{t("guide_camel_intro_p")}</p>
@@ -109,6 +115,8 @@ export default async function CamelTrekPage() {
             </div>
           ))}
         </div>
+
+        <RelatedTrips locale={locale as Locale} heading="Featured Desert Tours" ctaLabel="View Tour" />
 
         <div className={styles["cta-section"]}>
           <p>{t("guide_camel_cta")}</p>

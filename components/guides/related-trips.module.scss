@@ -1,0 +1,73 @@
+@use "@/styles/framer-tokens" as fr;
+@use "@/styles/layout" as l;
+
+.related-trips {
+  width: 100%;
+  max-width: 900px;
+  margin-block: l.$space-8 0;
+  padding-inline: l.$gutter;
+
+  h2 {
+    color: fr.$text-heading;
+    margin-bottom: l.$space-5;
+    padding-bottom: l.$space-2;
+    border-bottom: 2px solid fr.$brand-primary;
+  }
+}
+
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: l.$space-4;
+
+  @include l.md-down {
+    grid-template-columns: 1fr;
+  }
+}
+
+.trip-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: l.$radius-md;
+  overflow: hidden;
+  background: fr.$surface-2;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.trip-image {
+  position: relative;
+  height: 160px;
+  width: 100%;
+}
+
+.trip-info {
+  padding: l.$space-3 l.$space-4;
+  display: flex;
+  flex-direction: column;
+  gap: l.$space-1;
+
+  h3 {
+    color: fr.$text-heading;
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin: 0;
+  }
+}
+
+.trip-duration {
+  color: fr.$text-muted;
+  font-size: 0.8rem;
+}
+
+.trip-cta {
+  color: fr.$brand-primary;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-top: l.$space-1;
+}

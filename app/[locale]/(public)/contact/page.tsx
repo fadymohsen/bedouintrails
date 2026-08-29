@@ -8,6 +8,8 @@ import styles from "@/components/contact/contact.module.scss";
 
 import { SITE_URL, buildAlternates } from "@/lib/seo";
 
+export const revalidate = 86400;
+
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
   const locale = await getLocale();
@@ -66,7 +68,7 @@ export default async function ContactPage() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Image src="/img/googlemaps.webp" alt="Bedouin Trails office location, Cairo, Egypt" loading="lazy" width={600} height={300} />
+            <Image src="/img/googlemaps.webp" alt="Bedouin Trails office location, Giza, Egypt" loading="lazy" width={600} height={300} />
           </a>
 
           <div className={styles.socialRow}>

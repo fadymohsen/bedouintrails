@@ -2,10 +2,14 @@ import { Link } from "@/lib/i18n/navigation";
 import type { Metadata } from "next";
 import { getTranslations, getLocale } from "next-intl/server";
 import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
+import GuideHero from "@/components/guides/guide-hero";
+import RelatedTrips from "@/components/guides/related-trips";
 import styles from "@/components/guides/guides.module.scss";
 
+import type { Locale } from "@/lib/i18n/config";
 import { SITE_URL, buildAlternates } from "@/lib/seo";
 const PATH = "/white-desert-camping";
+export const revalidate = 86400;
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
@@ -20,13 +24,13 @@ export async function generateMetadata(): Promise<Metadata> {
       title: t("guide_camping_og_title"),
       description: t("guide_camping_og_desc"),
       url,
-      images: [`${SITE_URL}/og-image.jpg`],
+      images: [`${SITE_URL}/img/white-desert-camping.jpg`],
     },
     twitter: {
       card: "summary_large_image",
       title: t("guide_camping_twitter_title"),
       description: t("guide_camping_twitter_desc"),
-      images: [`${SITE_URL}/og-image.jpg`],
+      images: [`${SITE_URL}/img/white-desert-camping.jpg`],
     },
   };
 }
@@ -41,7 +45,7 @@ export default async function WhiteDesertCampingPage() {
     headline: "White Desert Camping — Overnight Desert Experience in Egypt",
     description: "Everything you need to know about camping in Egypt's White Desert — from what to expect, what's provided, best season, and how to book your overnight desert camping adventure.",
     url,
-    image: `${SITE_URL}/og-image.jpg`,
+    image: `${SITE_URL}/img/white-desert-camping.jpg`,
     publisher: { "@type": "Organization", name: "Bedouin Trails", logo: { "@type": "ImageObject", url: `${SITE_URL}/img/logo.png` } },
     mainEntityOfPage: url,
     author: { "@type": "Organization", name: "Bedouin Trails" },
@@ -59,9 +63,7 @@ export default async function WhiteDesertCampingPage() {
         ]}
       />
 
-      <div className={styles["guide-hero"]} style={{ backgroundImage: "url('/img/bg.webp')" }}>
-        <h1>{t("guide_camping_h1")}</h1>
-      </div>
+      <GuideHero src="/img/white-desert-camping.jpg" alt="White Desert camping overnight experience Egypt" h1={t("guide_camping_h1")} />
 
       <div className={styles["guide-content"]}>
         <p>{t("guide_camping_intro_p")}</p>
@@ -101,6 +103,8 @@ export default async function WhiteDesertCampingPage() {
             </div>
           ))}
         </div>
+
+        <RelatedTrips locale={locale as Locale} heading="Featured Desert Tours" ctaLabel="View Tour" />
 
         <div className={styles["cta-section"]}>
           <p>{t("guide_camping_cta")}</p>

@@ -20,6 +20,14 @@ import styles from "@/components/trip-detail/trip-detail.module.scss";
 
 import { SITE_URL, buildAlternates } from "@/lib/seo";
 
+export async function generateStaticParams() {
+  const traps = await prisma.trap.findMany({
+    where: { status: "active" },
+    select: { slug: true },
+  });
+  return traps.map((trap) => ({ slug: trap.slug }));
+}
+
 async function loadTrip(slug: string) {
   try {
     return await getTrapBySlug(slug);

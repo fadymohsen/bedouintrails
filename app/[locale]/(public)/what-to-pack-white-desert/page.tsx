@@ -2,10 +2,14 @@ import { Link } from "@/lib/i18n/navigation";
 import type { Metadata } from "next";
 import { getTranslations, getLocale } from "next-intl/server";
 import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
+import GuideHero from "@/components/guides/guide-hero";
+import RelatedTrips from "@/components/guides/related-trips";
 import styles from "@/components/guides/guides.module.scss";
 
+import type { Locale } from "@/lib/i18n/config";
 import { SITE_URL, buildAlternates } from "@/lib/seo";
 const PATH = "/what-to-pack-white-desert";
+export const revalidate = 86400;
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
@@ -20,13 +24,13 @@ export async function generateMetadata(): Promise<Metadata> {
       title: t("guide_packing_og_title"),
       description: t("guide_packing_og_desc"),
       url,
-      images: [`${SITE_URL}/og-image.jpg`],
+      images: [`${SITE_URL}/img/adventure.webp`],
     },
     twitter: {
       card: "summary_large_image",
       title: t("guide_packing_twitter_title"),
       description: t("guide_packing_twitter_desc"),
-      images: [`${SITE_URL}/og-image.jpg`],
+      images: [`${SITE_URL}/img/adventure.webp`],
     },
   };
 }
@@ -40,7 +44,7 @@ export default async function PackingGuidePage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
         "@context": "https://schema.org", "@type": "Article",
         headline: t("guide_packing_h1"), description: t("guide_packing_meta_desc"),
-        url, image: `${SITE_URL}/og-image.jpg`,
+        url, image: `${SITE_URL}/img/adventure.webp`,
         publisher: { "@type": "Organization", name: "Bedouin Trails", logo: { "@type": "ImageObject", url: `${SITE_URL}/img/logo.png` } },
         mainEntityOfPage: url,
         author: { "@type": "Organization", name: "Bedouin Trails" },
@@ -54,9 +58,7 @@ export default async function PackingGuidePage() {
         ]}
       />
 
-      <div className={styles["guide-hero"]} style={{ backgroundImage: "url('/img/adventure.webp')" }}>
-        <h1>{t("guide_packing_h1")}</h1>
-      </div>
+      <GuideHero src="/img/adventure.webp" alt="What to pack for White Desert Egypt packing list" h1={t("guide_packing_h1")} />
 
       <div className={styles["guide-content"]}>
         <p>{t("guide_packing_intro_p")}</p>
@@ -153,6 +155,8 @@ export default async function PackingGuidePage() {
 
         <h3>{t("guide_packing_spring_h3")}</h3>
         <p>{t("guide_packing_spring_p")}</p>
+
+        <RelatedTrips locale={locale as Locale} heading="Featured Desert Tours" ctaLabel="View Tour" />
 
         <div className={styles["cta-section"]}>
           <p>{t("guide_packing_cta")}</p>

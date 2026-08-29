@@ -2,10 +2,14 @@ import { Link } from "@/lib/i18n/navigation";
 import type { Metadata } from "next";
 import { getTranslations, getLocale } from "next-intl/server";
 import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
+import GuideHero from "@/components/guides/guide-hero";
+import RelatedTrips from "@/components/guides/related-trips";
 import styles from "@/components/guides/guides.module.scss";
 
+import type { Locale } from "@/lib/i18n/config";
 import { SITE_URL, buildAlternates } from "@/lib/seo";
 const PATH = "/black-desert-egypt";
+export const revalidate = 86400;
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
@@ -43,8 +47,12 @@ export default async function BlackDesertPage() {
     description:
       "The Black Desert in Egypt's Western Desert is a volcanic landscape of dark dolerite-covered hills and mountains between Bahariya Oasis and the White Desert. A key stop on Egypt desert safari tours.",
     url,
+    image: `${SITE_URL}/img/hero-black-desert.jpg`,
     geo: { "@type": "GeoCoordinates", latitude: "28.0", longitude: "28.7" },
     touristType: ["Adventure seekers", "Photographers", "Nature lovers"],
+    author: { "@type": "Organization", name: "Bedouin Trails" },
+    datePublished: "2025-01-15",
+    dateModified: "2026-08-30",
   };
 
   return (
@@ -57,9 +65,7 @@ export default async function BlackDesertPage() {
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <div className={styles["guide-hero"]} style={{ backgroundImage: "url('/img/hero-black-desert.jpg')" }}>
-        <h1>{t("guide_black_h1")}</h1>
-      </div>
+      <GuideHero src="/img/hero-black-desert.jpg" alt="Black Desert Egypt volcanic landscape" h1={t("guide_black_h1")} />
 
       <div className={styles["guide-content"]}>
         <p>{t("guide_black_intro_p")}</p>
@@ -121,6 +127,8 @@ export default async function BlackDesertPage() {
             </div>
           ))}
         </div>
+
+        <RelatedTrips locale={locale as Locale} heading="Featured Desert Tours" ctaLabel="View Tour" />
 
         <div className={styles["cta-section"]}>
           <p>{t("guide_black_cta")}</p>

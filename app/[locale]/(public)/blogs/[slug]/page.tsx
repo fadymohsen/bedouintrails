@@ -65,5 +65,32 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
 
   if (!blog) notFound();
 
-  return <BlogLayout blogs={blogs} current={blog} locale={locale} t={t} />;
+  const title = localize(blog.titleEn, blog.titleAr, locale, blog.titleI18n as Record<string, string> | null);
+  const metaTitle = localize(blog.metaTitleEn ?? "", blog.metaTitleAr, locale, blog.metaTitleI18n as Record<string, string> | null) || title;
+  const url = `${SITE_URL}/${locale}/blogs/${slug}`;
+
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: metaTitle,
+    description: localize(blog.metaDescriptionEn ?? "", blog.metaDescriptionAr, locale, blog.metaDescriptionI18n as Record<string, string> | null) || title,
+    url,
+    image: blog.image ? `${SITE_URL}${getLocalFallbackImage(blog.image)}` : `${SITE_URL}/og-image.jpg`,
+    mainEntityOfPage: url,
+    author: { "@type": "Organization", name: "Bedouin Trails", url: SITE_URL },
+    publisher: {
+      "@type": "Organization",
+      name: "Bedouin Trails",
+      logo: { "@type": "ImageObject", url: `${SITE_URL}/img/logo.png` },
+    },
+    datePublished: blog.publishedAt?.toISOString() ?? blog.createdAt.toISOString(),
+    dateModified: blog.updatedAt.toISOString(),
+  };
+
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
+      <BlogLayout blogs={blogs} current={blog} locale={locale} t={t} />
+    </>
+  );
 }

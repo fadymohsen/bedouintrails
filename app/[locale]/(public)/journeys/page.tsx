@@ -8,6 +8,8 @@ import JourneysFilterGrid from "@/components/journeys/journeys-filter-grid";
 
 import { SITE_URL, buildAlternates } from "@/lib/seo";
 
+export const revalidate = 3600;
+
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
   const locale = await getLocale();

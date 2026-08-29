@@ -15,11 +15,6 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "framerusercontent.com" },
       { protocol: "https", hostname: "api.bedouintrails.com" },
     ],
-    // Vercel's paid image optimization quota was exceeded (402
-    // OPTIMIZED_IMAGE_REQUEST_PAYMENT_REQUIRED), breaking every real photo
-    // site-wide. Serve images as-is instead of routing them through the
-    // metered optimizer.
-    unoptimized: true,
   },
   sassOptions: {
     includePaths: ["./styles"],

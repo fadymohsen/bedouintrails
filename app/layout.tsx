@@ -8,6 +8,20 @@ import "@fontsource/el-messiri/700.css";
 import "./globals.css";
 import { isRtl, type Locale } from "@/lib/i18n/config";
 
+const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://bedouintrails.com").replace(/\/+$/, "");
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Bedouin Trails",
+  url: SITE_URL,
+  potentialAction: {
+    "@type": "SearchAction",
+    target: `${SITE_URL}/en/journeys?q={search_term_string}`,
+    "query-input": "required name=search_term_string",
+  },
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL(
     (process.env.NEXT_PUBLIC_SITE_URL ?? "https://bedouintrails.com").replace(/\/+$/, "")
@@ -56,7 +70,13 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} dir={dir}>
-      <body>{children}</body>
+      <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
+        {children}
+      </body>
     </html>
   );
 }

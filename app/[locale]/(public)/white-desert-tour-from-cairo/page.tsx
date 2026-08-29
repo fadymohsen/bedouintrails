@@ -2,10 +2,14 @@ import { Link } from "@/lib/i18n/navigation";
 import type { Metadata } from "next";
 import { getTranslations, getLocale } from "next-intl/server";
 import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
+import GuideHero from "@/components/guides/guide-hero";
+import RelatedTrips from "@/components/guides/related-trips";
 import styles from "@/components/guides/guides.module.scss";
 
+import type { Locale } from "@/lib/i18n/config";
 import { SITE_URL, buildAlternates } from "@/lib/seo";
 const PATH = "/white-desert-tour-from-cairo";
+export const revalidate = 86400;
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
@@ -37,14 +41,17 @@ export default async function WhiteDesertTourPage() {
 
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "TouristTrip",
-    name: "2 Day White Desert Tour from Cairo",
+    "@type": "Article",
+    headline: "White Desert Tour from Cairo — Complete Guide & Booking Info",
     description:
       "A 2-day White Desert safari tour from Cairo including Bahariya Oasis, Black Desert, Crystal Mountain, and overnight camping in the White Desert under the stars.",
-    touristType: ["Adventure seekers", "Nature lovers", "Photographers"],
     url,
-    itinerary: { "@type": "ItemList", numberOfItems: 2, description: "2 days from Cairo to White Desert via Bahariya Oasis" },
-    provider: { "@type": "TravelAgency", name: "Bedouin Trails", url: SITE_URL },
+    image: `${SITE_URL}/img/hero-white-desert-tour-cairo.jpg`,
+    publisher: { "@type": "Organization", name: "Bedouin Trails", logo: { "@type": "ImageObject", url: `${SITE_URL}/img/logo.png` } },
+    mainEntityOfPage: url,
+    author: { "@type": "Organization", name: "Bedouin Trails" },
+    datePublished: "2025-01-15",
+    dateModified: "2026-08-30",
   };
 
   return (
@@ -57,9 +64,7 @@ export default async function WhiteDesertTourPage() {
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <div className={styles["guide-hero"]} style={{ backgroundImage: "url('/img/hero-white-desert-tour-cairo.jpg')" }}>
-        <h1>{t("guide_whitetour_h1")}</h1>
-      </div>
+      <GuideHero src="/img/hero-white-desert-tour-cairo.jpg" alt="White Desert tour from Cairo Egypt" h1={t("guide_whitetour_h1")} />
 
       <div className={styles["guide-content"]}>
         <p>{t("guide_whitetour_intro_p")}</p>
@@ -120,6 +125,8 @@ export default async function WhiteDesertTourPage() {
             </div>
           ))}
         </div>
+
+        <RelatedTrips locale={locale as Locale} heading="Featured Desert Tours" ctaLabel="View Tour" />
 
         <div className={styles["cta-section"]}>
           <p>{t("guide_whitetour_cta")}</p>

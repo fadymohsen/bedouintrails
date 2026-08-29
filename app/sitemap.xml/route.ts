@@ -39,6 +39,40 @@ const STATIC_PATHS = [
   "/articles",
 ];
 
+// Fixed lastModified dates per path — stable so Googlebot doesn't see every
+// static page as "just modified" on every crawl.
+const STATIC_LAST_MODIFIED: Record<string, Date> = {
+  "/": new Date("2026-08-30"),
+  "/journeys": new Date("2026-08-30"),
+  "/blogs": new Date("2026-08-30"),
+  "/articles": new Date("2026-08-30"),
+  "/about": new Date("2026-08-24"),
+  "/contact": new Date("2026-07-26"),
+  "/faq": new Date("2026-07-26"),
+  "/desert-yoga-retreat": new Date("2026-07-26"),
+  "/jara-cave": new Date("2026-08-24"),
+  "/camel-trek": new Date("2026-08-30"),
+  "/white-desert-tour-from-cairo": new Date("2026-08-30"),
+  "/black-desert-egypt": new Date("2026-08-30"),
+  "/western-desert-egypt-guide": new Date("2026-07-26"),
+  "/how-to-get-to-white-desert": new Date("2026-07-26"),
+  "/what-to-pack-white-desert": new Date("2026-07-26"),
+  "/best-time-to-visit-white-desert": new Date("2026-07-26"),
+  "/white-desert-tour-cost": new Date("2026-08-30"),
+  "/white-desert-vs-wadi-rum": new Date("2026-07-26"),
+  "/stargazing-western-desert": new Date("2026-07-26"),
+  "/crystal-mountain-egypt": new Date("2026-08-30"),
+  "/desert-safety-guide": new Date("2026-07-26"),
+  "/egypt-safari-tours": new Date("2026-07-26"),
+  "/white-desert-camping": new Date("2026-07-26"),
+  "/multi-day-desert-trek": new Date("2026-07-26"),
+  "/bahariya-oasis": new Date("2026-08-30"),
+  "/white-desert-egypt": new Date("2026-07-26"),
+  "/desert-trekking-egypt": new Date("2026-08-24"),
+  "/white-desert-safari": new Date("2026-08-08"),
+  "/siwa-oasis-tour": new Date("2026-08-24"),
+};
+
 interface SitemapEntry {
   path: string;
   lastModified: Date;
@@ -93,7 +127,7 @@ export async function GET() {
 
   const staticEntries: SitemapEntry[] = STATIC_PATHS.map((path) => ({
     path,
-    lastModified: now,
+    lastModified: STATIC_LAST_MODIFIED[path] ?? now,
     ...staticPriority(path),
   }));
 

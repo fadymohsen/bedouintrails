@@ -3,10 +3,14 @@ import type { Metadata } from "next";
 import { getTranslations, getLocale } from "next-intl/server";
 import Image from "next/image";
 import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
+import GuideHero from "@/components/guides/guide-hero";
+import RelatedTrips from "@/components/guides/related-trips";
 import styles from "@/components/guides/guides.module.scss";
 
+import type { Locale } from "@/lib/i18n/config";
 import { SITE_URL, buildAlternates } from "@/lib/seo";
 const PATH = "/multi-day-desert-trek";
+export const revalidate = 86400;
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
@@ -60,9 +64,7 @@ export default async function MultiDayDesertTrekPage() {
         ]}
       />
 
-      <div className={styles["guide-hero"]} style={{ backgroundImage: "url('/img/hero-multi-day-trek.jpg')" }}>
-        <h1>{t("guide_trek_h1")}</h1>
-      </div>
+      <GuideHero src="/img/hero-multi-day-trek.jpg" alt="Multi-day desert trek Egypt Sahara hiking" h1={t("guide_trek_h1")} />
 
       <div className={styles["article-image"]}>
         <Image
@@ -112,6 +114,8 @@ export default async function MultiDayDesertTrekPage() {
             </div>
           ))}
         </div>
+
+        <RelatedTrips locale={locale as Locale} heading="Featured Desert Tours" ctaLabel="View Tour" />
 
         <div className={styles["cta-section"]}>
           <p>{t("guide_trek_cta")}</p>

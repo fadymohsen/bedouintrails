@@ -13,6 +13,8 @@ import guideStyles from "@/components/guides/guides.module.scss";
 
 import { SITE_URL, buildAlternates } from "@/lib/seo";
 
+export const revalidate = 3600;
+
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
   const locale = await getLocale();
@@ -23,8 +25,8 @@ export async function generateMetadata(): Promise<Metadata> {
     title,
     description,
     alternates: buildAlternates("/articles", locale),
-    openGraph: { title, description, url, images: [`${SITE_URL}/og-image.jpg`] },
-    twitter: { card: "summary_large_image", title, description, images: [`${SITE_URL}/og-image.jpg`] },
+    openGraph: { title, description, url, images: [`${SITE_URL}/img/western-desert-hero.webp`] },
+    twitter: { card: "summary_large_image", title, description, images: [`${SITE_URL}/img/western-desert-hero.webp`] },
   };
 }
 
@@ -52,8 +54,32 @@ export default async function ArticlesPage() {
   const blogs = await listPublishedBlogs();
   const url = `${SITE_URL}/${locale}/articles`;
 
+  const itemListJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Egypt Desert Travel Guides & Blog Articles — Bedouin Trails",
+    description: "Complete collection of Egypt desert travel guides, safari resources, and blog articles by Bedouin Trails.",
+    url,
+    numberOfItems: GUIDE_LINKS.length + blogs.length,
+    itemListElement: [
+      ...blogs.map((blog, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        url: `${SITE_URL}/${locale}/blogs/${blog.slug}`,
+        name: localize(blog.titleEn, blog.titleAr, locale, blog.titleI18n as Record<string, string> | null),
+      })),
+      ...GUIDE_LINKS.map((guide, i) => ({
+        "@type": "ListItem",
+        position: blogs.length + i + 1,
+        url: `${SITE_URL}/${locale}${guide.path}`,
+        name: t(guide.key as Parameters<typeof t>[0]),
+      })),
+    ],
+  };
+
   return (
     <div style={{ background: "var(--surface-1)" }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }} />
       <Breadcrumbs
         items={[
           { name: t("home"), url: `${SITE_URL}/${locale}` },

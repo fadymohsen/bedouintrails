@@ -12,6 +12,8 @@ import styles from "@/components/blogs/blogs.module.scss";
 
 import { SITE_URL, buildAlternates } from "@/lib/seo";
 
+export const revalidate = 3600;
+
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
   const locale = await getLocale();
@@ -32,6 +34,31 @@ export default async function BlogsIndexPage() {
   const t = await getTranslations();
   const blogs = await listPublishedBlogs();
 
+  const blogListJsonLd =
+    blogs.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "Blog",
+          name: "Bedouin Trails — Desert Travel Blog",
+          description: "Travel stories, desert safari tips, and guides about Egypt's White Desert, Bahariya Oasis, and Western Desert adventures.",
+          url: `${SITE_URL}/${locale}/blogs`,
+          publisher: {
+            "@type": "Organization",
+            name: "Bedouin Trails",
+            logo: { "@type": "ImageObject", url: `${SITE_URL}/img/logo.png` },
+          },
+          blogPost: blogs.map((blog) => ({
+            "@type": "BlogPosting",
+            headline: localize(blog.titleEn, blog.titleAr, locale, blog.titleI18n as Record<string, string> | null),
+            url: `${SITE_URL}/${locale}/blogs/${blog.slug}`,
+            image: blog.image ? `${SITE_URL}${blog.image}` : `${SITE_URL}/og-image.jpg`,
+            datePublished: blog.publishedAt?.toISOString() ?? blog.createdAt?.toISOString(),
+            dateModified: blog.updatedAt?.toISOString(),
+            author: { "@type": "Organization", name: "Bedouin Trails" },
+          })),
+        }
+      : null;
+
   if (blogs.length === 0) {
     return (
       <div style={{ textAlign: "center", padding: "80px 20px" }}>
@@ -42,6 +69,9 @@ export default async function BlogsIndexPage() {
 
   return (
     <div style={{ background: "var(--surface-1)" }}>
+      {blogListJsonLd && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(blogListJsonLd) }} />
+      )}
       <Breadcrumbs
         items={[
           { name: "Home", url: `${SITE_URL}/${locale}` },

@@ -2,10 +2,14 @@ import { Link } from "@/lib/i18n/navigation";
 import type { Metadata } from "next";
 import { getTranslations, getLocale } from "next-intl/server";
 import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
+import GuideHero from "@/components/guides/guide-hero";
+import RelatedTrips from "@/components/guides/related-trips";
 import styles from "@/components/guides/guides.module.scss";
 
+import type { Locale } from "@/lib/i18n/config";
 import { SITE_URL, buildAlternates } from "@/lib/seo";
 const PATH = "/desert-safety-guide";
+export const revalidate = 86400;
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
@@ -21,13 +25,13 @@ export async function generateMetadata(): Promise<Metadata> {
       title: t("guide_safety_og_title"),
       description: t("guide_safety_og_desc"),
       url,
-      images: [`${SITE_URL}/og-image.jpg`],
+      images: [`${SITE_URL}/img/adventure4.webp`],
     },
     twitter: {
       card: "summary_large_image",
       title: t("guide_safety_og_title"),
       description: t("guide_safety_og_desc"),
-      images: [`${SITE_URL}/og-image.jpg`],
+      images: [`${SITE_URL}/img/adventure4.webp`],
     },
   };
 }
@@ -41,7 +45,7 @@ export default async function DesertSafetyPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
         "@context": "https://schema.org", "@type": "Article",
         headline: t("guide_safety_h1"), description: t("guide_safety_meta_desc"),
-        url, image: `${SITE_URL}/og-image.jpg`,
+        url, image: `${SITE_URL}/img/adventure4.webp`,
         publisher: { "@type": "Organization", name: "Bedouin Trails", logo: { "@type": "ImageObject", url: `${SITE_URL}/img/logo.png` } },
         mainEntityOfPage: url,
         author: { "@type": "Organization", name: "Bedouin Trails" },
@@ -55,9 +59,7 @@ export default async function DesertSafetyPage() {
         ]}
       />
 
-      <div className={styles["guide-hero"]} style={{ backgroundImage: "url('/img/adventure4.webp')" }}>
-        <h1>{t("guide_safety_h1")}</h1>
-      </div>
+      <GuideHero src="/img/adventure4.webp" alt="Desert safety guide Egypt Western Desert" h1={t("guide_safety_h1")} />
 
       <div className={styles["guide-content"]}>
         <p>{t("guide_safety_intro")}</p>
@@ -115,6 +117,8 @@ export default async function DesertSafetyPage() {
 
         <h2>{t("guide_safety_why_guide_h2")}</h2>
         <p>{t("guide_safety_why_guide_p")}</p>
+
+        <RelatedTrips locale={locale as Locale} heading="Featured Desert Tours" ctaLabel="View Tour" />
 
         <div className={styles["cta-section"]}>
           <p>{t("guide_safety_cta")}</p>

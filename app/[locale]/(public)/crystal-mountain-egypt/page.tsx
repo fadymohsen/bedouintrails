@@ -2,10 +2,14 @@ import { Link } from "@/lib/i18n/navigation";
 import type { Metadata } from "next";
 import { getTranslations, getLocale } from "next-intl/server";
 import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
+import GuideHero from "@/components/guides/guide-hero";
+import RelatedTrips from "@/components/guides/related-trips";
 import styles from "@/components/guides/guides.module.scss";
 
+import type { Locale } from "@/lib/i18n/config";
 import { SITE_URL, buildAlternates } from "@/lib/seo";
 const PATH = "/crystal-mountain-egypt";
+export const revalidate = 86400;
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
@@ -21,13 +25,13 @@ export async function generateMetadata(): Promise<Metadata> {
       title: t("guide_crystal_og_title"),
       description: t("guide_crystal_og_desc"),
       url,
-      images: [`${SITE_URL}/og-image.jpg`],
+      images: [`${SITE_URL}/img/godl.webp`],
     },
     twitter: {
       card: "summary_large_image",
       title: t("guide_crystal_twitter_title"),
       description: t("guide_crystal_twitter_desc"),
-      images: [`${SITE_URL}/og-image.jpg`],
+      images: [`${SITE_URL}/img/godl.webp`],
     },
   };
 }
@@ -43,8 +47,12 @@ export default async function CrystalMountainPage() {
     description:
       "Crystal Mountain is a small ridge of quartz crystals in Egypt's Western Desert located between the Black Desert and White Desert, sparkling in sunlight.",
     url,
+    image: `${SITE_URL}/img/godl.webp`,
     geo: { "@type": "GeoCoordinates", latitude: "27.65", longitude: "28.3" },
     touristType: ["Nature lovers", "Photographers", "Adventure seekers"],
+    author: { "@type": "Organization", name: "Bedouin Trails" },
+    datePublished: "2025-01-15",
+    dateModified: "2026-08-30",
   };
 
   return (
@@ -57,9 +65,7 @@ export default async function CrystalMountainPage() {
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <div className={styles["guide-hero"]} style={{ backgroundImage: "url('/img/godl.webp')" }}>
-        <h1>{t("guide_crystal_h1")}</h1>
-      </div>
+      <GuideHero src="/img/godl.webp" alt="Crystal Mountain Egypt quartz crystals Western Desert" h1={t("guide_crystal_h1")} />
 
       <div className={styles["guide-content"]}>
         <p>{t("guide_crystal_intro_p")}</p>
@@ -111,6 +117,8 @@ export default async function CrystalMountainPage() {
             <strong>{t("guide_crystal_nearby_li4_bold")}</strong> {t("guide_crystal_nearby_li4_text")}
           </li>
         </ul>
+
+        <RelatedTrips locale={locale as Locale} heading="Featured Desert Tours" ctaLabel="View Tour" />
 
         <div className={styles["cta-section"]}>
           <p>{t("guide_crystal_cta")}</p>

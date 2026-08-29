@@ -109,7 +109,7 @@ export default async function HomePage() {
     "@type": "TravelAgency",
     name: "Bedouin Trails",
     url: SITE_URL,
-    logo: `${SITE_URL}/img/logo.png`,
+    logo: { "@type": "ImageObject", url: `${SITE_URL}/img/logo.png` },
     image: `${SITE_URL}/og-image.jpg`,
     description:
       "Egyptian desert safari tour company based in Giza, organizing White Desert safari tours, camel treks, desert trekking, and multi-day desert tours from Giza to Bahariya Oasis and the Western Desert.",
@@ -117,6 +117,12 @@ export default async function HomePage() {
       "@type": "PostalAddress",
       addressCountry: "EG",
       addressLocality: "Giza",
+      addressRegion: "Giza Governorate",
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: 28.3458203,
+      longitude: 28.8724705,
     },
     contactPoint: {
       "@type": "ContactPoint",
@@ -124,6 +130,23 @@ export default async function HomePage() {
       contactType: "reservations",
       availableLanguage: ["English", "Arabic"],
     },
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        opens: "08:00",
+        closes: "22:00",
+      },
+    ],
+    priceRange: "$$",
+    currenciesAccepted: "EGP, USD, EUR",
+    paymentAccepted: "Cash, Credit Card",
+    areaServed: [
+      { "@type": "Place", name: "Egypt" },
+      { "@type": "Place", name: "White Desert National Park" },
+      { "@type": "Place", name: "Bahariya Oasis" },
+      { "@type": "Place", name: "Western Desert, Egypt" },
+    ],
     sameAs: [
       "https://www.instagram.com/the.white.and.black.desert",
       "https://www.facebook.com/profile.php?id=61587717913002",
