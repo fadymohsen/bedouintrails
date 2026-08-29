@@ -91,7 +91,7 @@ export default async function ArticlesPage() {
         title={t("articles_hero_title")}
         image="/img/hero-articles.jpg"
         eyebrow={t("articles")}
-        backgroundPosition="center bottom"
+        backgroundPosition="center 60%"
       />
 
       {/* ── Blog Articles ── */}
