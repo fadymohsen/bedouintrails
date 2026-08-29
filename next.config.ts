@@ -110,6 +110,10 @@ const nextConfig: NextConfig = {
     { source: "/:locale/journeys/3-days-2-nights-black-and-white-desert-bahariya-oasis-tour", destination: "/:locale/journeys", permanent: true },
     { source: "/:locale/journeys/13-days-12-nights-complete-oases-deserts-pyramids-expedition", destination: "/:locale/journeys", permanent: true },
     { source: "/:locale/journeys/4-nights-in-the-black-and-white-desert", destination: "/:locale/journeys", permanent: true },
+
+    // ── Renamed: 7-days → 8-days Egypt Adventure Journey ────────────────
+    { source: "/:locale/journeys/7-days-egypt-adventure-journey", destination: "/:locale/journeys/8-days-egypt-adventure-journey", permanent: true },
+    { source: "/journeys/7-days-egypt-adventure-journey", destination: "/en/journeys/8-days-egypt-adventure-journey", permanent: true },
   ],
   headers: async () => [
     {
