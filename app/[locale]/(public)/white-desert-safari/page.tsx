@@ -69,7 +69,7 @@ export default async function WhiteDesertSafariPage() {
         ]}
       />
 
-      <GuideHero src="/img/hero-white-desert-safari.jpg" alt="White Desert safari Egypt overnight tour" h1={t("guide_wdsafari_h1")} />
+      <GuideHero src="/img/hero-white-desert-safari.jpg" alt="White Desert safari Egypt overnight tour" h1={t("guide_wdsafari_h1")} objectPosition="center bottom" />
 
       <div className={styles["article-image"]}>
         <Image
