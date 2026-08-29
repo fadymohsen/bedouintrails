@@ -10,6 +10,11 @@ import BlogLayout from "@/components/blogs/blog-layout";
 
 import { SITE_URL, buildAlternates } from "@/lib/seo";
 
+export async function generateStaticParams() {
+  const blogs = await listPublishedBlogs();
+  return blogs.map((blog) => ({ slug: blog.slug }));
+}
+
 async function loadBlog(slug: string) {
   try {
     return await getBlogBySlug(slug);
@@ -75,7 +80,7 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
     headline: metaTitle,
     description: localize(blog.metaDescriptionEn ?? "", blog.metaDescriptionAr, locale, blog.metaDescriptionI18n as Record<string, string> | null) || title,
     url,
-    image: blog.image ? `${SITE_URL}${getLocalFallbackImage(blog.image)}` : `${SITE_URL}/og-image.jpg`,
+    image: blog.image ? `${SITE_URL}${getLocalFallbackImage(blog.image)}` : `${SITE_URL}/img/western-desert-hero.webp`,
     mainEntityOfPage: url,
     author: { "@type": "Organization", name: "Bedouin Trails", url: SITE_URL },
     publisher: {

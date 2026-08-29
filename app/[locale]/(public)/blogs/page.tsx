@@ -51,7 +51,7 @@ export default async function BlogsIndexPage() {
             "@type": "BlogPosting",
             headline: localize(blog.titleEn, blog.titleAr, locale, blog.titleI18n as Record<string, string> | null),
             url: `${SITE_URL}/${locale}/blogs/${blog.slug}`,
-            image: blog.image ? `${SITE_URL}${blog.image}` : `${SITE_URL}/og-image.jpg`,
+            image: blog.image ? `${SITE_URL}${blog.image}` : `${SITE_URL}/img/hero-blogs.jpg`,
             datePublished: blog.publishedAt?.toISOString() ?? blog.createdAt?.toISOString(),
             dateModified: blog.updatedAt?.toISOString(),
             author: { "@type": "Organization", name: "Bedouin Trails" },

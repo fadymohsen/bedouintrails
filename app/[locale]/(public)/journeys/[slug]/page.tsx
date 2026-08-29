@@ -49,7 +49,7 @@ export async function generateMetadata({
   const locale = (await getLocale()) as Locale;
   const name = localize(trip.nameEn, trip.nameAr, locale, trip.nameI18n);
   const url = `${SITE_URL}/${locale}/journeys/${slug}`;
-  const image = trip.galleries[0]?.image ?? `${SITE_URL}/og-image.jpg`;
+  const image = trip.galleries[0]?.image ?? `${SITE_URL}/img/western-desert-hero.webp`;
 
   return {
     title: `${trip.metaTitle || name} | Bedouin Trails`,

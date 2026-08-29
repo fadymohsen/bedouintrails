@@ -110,7 +110,7 @@ export default async function HomePage() {
     name: "Bedouin Trails",
     url: SITE_URL,
     logo: { "@type": "ImageObject", url: `${SITE_URL}/img/logo.png` },
-    image: `${SITE_URL}/og-image.jpg`,
+    image: `${SITE_URL}/img/western-desert-hero.webp`,
     description:
       "Egyptian desert safari tour company based in Giza, organizing White Desert safari tours, camel treks, desert trekking, and multi-day desert tours from Giza to Bahariya Oasis and the Western Desert.",
     address: {
