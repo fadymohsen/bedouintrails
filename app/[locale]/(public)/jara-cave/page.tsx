@@ -44,7 +44,7 @@ export default async function JaraCavePage() {
       "@context": "https://schema.org",
       "@type": "TouristAttraction",
       name: "Jara Cave",
-      alternateName: "كهف الجارة",
+      alternateName: ["Djara Cave", "كهف الجارة"],
       description:
         "Jara Cave is a prehistoric cave in Egypt's Western Desert containing Neolithic rock art and murals dating back to 7700–5300 BC, depicting humans, animals, and hunting scenes from when the Sahara was green.",
       url,
