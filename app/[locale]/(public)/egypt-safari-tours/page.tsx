@@ -1,7 +1,6 @@
 import { Link } from "@/lib/i18n/navigation";
 import type { Metadata } from "next";
 import { getTranslations, getLocale } from "next-intl/server";
-import Image from "next/image";
 import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
 import GuideHero from "@/components/guides/guide-hero";
 import RelatedTrips from "@/components/guides/related-trips";
@@ -65,15 +64,6 @@ export default async function EgyptSafariToursPage() {
       />
 
       <GuideHero src="/img/egypt-safari-camel-trek.jpg" alt="Egypt safari tours camel trekking White Desert" h1={t("guide_safaritours_h1")} />
-
-      <div className={styles["article-image"]}>
-        <Image
-          src="/img/egypt-safari-camel-trek.jpg"
-          alt="Tourists riding camels through the White Desert, Egypt"
-          width={1200}
-          height={900}
-        />
-      </div>
 
       <div className={styles["guide-content"]}>
         <p>{t("guide_safaritours_intro_p")}</p>

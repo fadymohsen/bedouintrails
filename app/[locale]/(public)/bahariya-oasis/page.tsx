@@ -1,7 +1,6 @@
 import { Link } from "@/lib/i18n/navigation";
 import type { Metadata } from "next";
 import { getTranslations, getLocale } from "next-intl/server";
-import Image from "next/image";
 import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
 import GuideHero from "@/components/guides/guide-hero";
 import RelatedTrips from "@/components/guides/related-trips";
@@ -66,15 +65,6 @@ export default async function BahariyaOasisPage() {
       />
 
       <GuideHero src="/img/bahariya-oasis-palms.jpg" alt="Bahariya Oasis palm trees Western Desert Egypt" h1={t("guide_bahariya_h1")} />
-
-      <div className={styles["article-image"]}>
-        <Image
-          src="/img/bahariya-oasis-palms.jpg"
-          alt="Lush palm trees of Bahariya Oasis with desert mountains in the background"
-          width={1270}
-          height={952}
-        />
-      </div>
 
       <div className={styles["guide-content"]}>
         <p>{t("guide_bahariya_intro_p")}</p>

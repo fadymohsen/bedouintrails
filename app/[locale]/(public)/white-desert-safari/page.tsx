@@ -1,7 +1,6 @@
 import { Link } from "@/lib/i18n/navigation";
 import type { Metadata } from "next";
 import { getTranslations, getLocale } from "next-intl/server";
-import Image from "next/image";
 import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
 import GuideHero from "@/components/guides/guide-hero";
 import RelatedTrips from "@/components/guides/related-trips";
@@ -70,15 +69,6 @@ export default async function WhiteDesertSafariPage() {
       />
 
       <GuideHero src="/img/hero-white-desert-safari.jpg" alt="White Desert safari Egypt overnight tour" h1={t("guide_wdsafari_h1")} objectPosition="center bottom" />
-
-      <div className={styles["article-image"]}>
-        <Image
-          src="/img/hero-white-desert-safari.jpg"
-          alt="Desert camping setup with tent and campfire in Egypt's White Desert"
-          width={1270}
-          height={952}
-        />
-      </div>
 
       <div className={styles["guide-content"]}>
         <p>{t("guide_wdsafari_intro_p")}</p>

@@ -1,7 +1,6 @@
 import { Link } from "@/lib/i18n/navigation";
 import type { Metadata } from "next";
 import { getTranslations, getLocale } from "next-intl/server";
-import Image from "next/image";
 import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
 import GuideHero from "@/components/guides/guide-hero";
 import RelatedTrips from "@/components/guides/related-trips";
@@ -65,15 +64,6 @@ export default async function MultiDayDesertTrekPage() {
       />
 
       <GuideHero src="/img/hero-multi-day-trek.jpg" alt="Multi-day desert trek Egypt Sahara hiking" h1={t("guide_trek_h1")} />
-
-      <div className={styles["article-image"]}>
-        <Image
-          src="/img/multi-day-desert-trek.jpg"
-          alt="Group of trekkers hiking through the White Desert landscape, Egypt"
-          width={900}
-          height={1200}
-        />
-      </div>
 
       <div className={styles["guide-content"]}>
         <p>{t("guide_trek_intro_p")}</p>
