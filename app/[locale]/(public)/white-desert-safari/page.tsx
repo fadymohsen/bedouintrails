@@ -25,13 +25,13 @@ export async function generateMetadata(): Promise<Metadata> {
       title: t("guide_wdsafari_og_title"),
       description: t("guide_wdsafari_og_desc"),
       url,
-      images: [`${SITE_URL}/img/white-desert-camping.jpg`],
+      images: [`${SITE_URL}/img/hero-white-desert-safari.jpg`],
     },
     twitter: {
       card: "summary_large_image",
       title: t("guide_wdsafari_twitter_title"),
       description: t("guide_wdsafari_twitter_desc"),
-      images: [`${SITE_URL}/img/white-desert-camping.jpg`],
+      images: [`${SITE_URL}/img/hero-white-desert-safari.jpg`],
     },
   };
 }
@@ -47,7 +47,7 @@ export default async function WhiteDesertSafariPage() {
     description:
       "Everything you need to know about a White Desert safari in Egypt — tour options, what's included, the route, best time to go, and how to book from Cairo.",
     url,
-    image: `${SITE_URL}/img/white-desert-camping.jpg`,
+    image: `${SITE_URL}/img/hero-white-desert-safari.jpg`,
     publisher: {
       "@type": "Organization",
       name: "Bedouin Trails",
@@ -69,11 +69,11 @@ export default async function WhiteDesertSafariPage() {
         ]}
       />
 
-      <GuideHero src="/img/white-desert-camping.jpg" alt="White Desert safari Egypt overnight tour" h1={t("guide_wdsafari_h1")} />
+      <GuideHero src="/img/hero-white-desert-safari.jpg" alt="White Desert safari Egypt overnight tour" h1={t("guide_wdsafari_h1")} />
 
       <div className={styles["article-image"]}>
         <Image
-          src="/img/white-desert-camping.jpg"
+          src="/img/hero-white-desert-safari.jpg"
           alt="Desert camping setup with tent and campfire in Egypt's White Desert"
           width={1270}
           height={952}

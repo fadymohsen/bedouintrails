@@ -39,7 +39,7 @@ const GUIDE_LINKS = [
   { path: "/desert-yoga-retreat", key: "guide_yoga_breadcrumb", img: "/img/western-desert-hero.webp" },
   { path: "/multi-day-desert-trek", key: "guide_trek_breadcrumb", img: "/img/hero-multi-day-trek.jpg" },
   { path: "/white-desert-camping", key: "guide_camping_breadcrumb", img: "/img/white-desert-camping.jpg" },
-  { path: "/white-desert-safari", key: "guide_wdsafari_breadcrumb", img: "/img/white-desert-camping.jpg" },
+  { path: "/white-desert-safari", key: "guide_wdsafari_breadcrumb", img: "/img/hero-white-desert-safari.jpg" },
   { path: "/siwa-oasis-tour", key: "guide_siwa_breadcrumb", img: "/img/hero-siwa-oasis.jpg" },
   { path: "/jara-cave", key: "guide_djara_breadcrumb", img: "/img/hero-jara-cave.jpg" },
   { path: "/desert-trekking-egypt", key: "guide_dtrek_breadcrumb", img: "/img/hero-desert-trekking.jpg" },
