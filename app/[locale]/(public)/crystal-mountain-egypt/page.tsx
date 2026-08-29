@@ -65,7 +65,7 @@ export default async function CrystalMountainPage() {
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <GuideHero src="/img/hero-crystal-mountain.jpg" alt="Crystal Mountain Egypt quartz crystals Western Desert" h1={t("guide_crystal_h1")} />
+      <GuideHero src="/img/hero-crystal-mountain.jpg" alt="Crystal Mountain Egypt quartz crystals Western Desert" h1={t("guide_crystal_h1")} objectPosition="top" />
 
       <div className={styles["guide-content"]}>
         <p>{t("guide_crystal_intro_p")}</p>
