@@ -44,7 +44,7 @@ const GUIDE_LINKS = [
   { path: "/jara-cave", key: "guide_djara_breadcrumb", img: "/img/hero-jara-cave.jpg" },
   { path: "/desert-trekking-egypt", key: "guide_dtrek_breadcrumb", img: "/img/hero-desert-trekking.jpg" },
   { path: "/white-desert-egypt", key: "guide_wd_breadcrumb", img: "/img/bg.webp" },
-  { path: "/crystal-mountain-egypt", key: "guide_crystal_breadcrumb", img: "/img/godl.webp" },
+  { path: "/crystal-mountain-egypt", key: "guide_crystal_breadcrumb", img: "/img/hero-crystal-mountain.jpg" },
   { path: "/western-desert-egypt-guide", key: "guide_western_breadcrumb", img: "/img/western-desert-hero.webp" },
 ];
 
