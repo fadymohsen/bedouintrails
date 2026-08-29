@@ -25,8 +25,8 @@ export async function generateMetadata(): Promise<Metadata> {
     title,
     description,
     alternates: buildAlternates("/articles", locale),
-    openGraph: { title, description, url, images: [`${SITE_URL}/img/western-desert-hero.webp`] },
-    twitter: { card: "summary_large_image", title, description, images: [`${SITE_URL}/img/western-desert-hero.webp`] },
+    openGraph: { title, description, url, images: [`${SITE_URL}/img/hero-articles.jpg`] },
+    twitter: { card: "summary_large_image", title, description, images: [`${SITE_URL}/img/hero-articles.jpg`] },
   };
 }
 
@@ -89,7 +89,7 @@ export default async function ArticlesPage() {
 
       <PageHero
         title={t("articles_hero_title")}
-        image="/img/bg.webp"
+        image="/img/hero-articles.jpg"
         eyebrow={t("articles")}
       />
 
