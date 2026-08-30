@@ -4,6 +4,7 @@ import { getTranslations, getLocale } from "next-intl/server";
 import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
 import GuideHero from "@/components/guides/guide-hero";
 import RelatedTrips from "@/components/guides/related-trips";
+import RelatedGuides from "@/components/guides/related-guides";
 import styles from "@/components/guides/guides.module.scss";
 
 import type { Locale } from "@/lib/i18n/config";
@@ -106,6 +107,13 @@ export default async function HowToGetTherePage() {
             <strong>{t("guide_howto_distance_li5")}</strong>
           </li>
         </ul>
+
+        <RelatedGuides guides={[
+          { href: "/best-time-to-visit-white-desert", labelKey: "rg_besttime" },
+          { href: "/what-to-pack-white-desert", labelKey: "rg_packing" },
+          { href: "/white-desert-tour-cost", labelKey: "rg_cost" },
+          { href: "/white-desert-tour-from-cairo", labelKey: "rg_white_tour" },
+        ]} />
 
         <RelatedTrips locale={locale as Locale} heading="Featured Desert Tours" ctaLabel="View Tour" />
 

@@ -4,6 +4,7 @@ import { getTranslations, getLocale } from "next-intl/server";
 import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
 import GuideHero from "@/components/guides/guide-hero";
 import RelatedTrips from "@/components/guides/related-trips";
+import RelatedGuides from "@/components/guides/related-guides";
 import styles from "@/components/guides/guides.module.scss";
 
 import type { Locale } from "@/lib/i18n/config";
@@ -105,6 +106,13 @@ export default async function EgyptDesertTourPage() {
             </div>
           ))}
         </div>
+
+        <RelatedGuides guides={[
+          { href: "/white-desert-egypt", labelKey: "rg_white_desert" },
+          { href: "/egypt-safari-tours", labelKey: "rg_safari_tours" },
+          { href: "/best-time-to-visit-white-desert", labelKey: "rg_besttime" },
+          { href: "/white-desert-tour-cost", labelKey: "rg_cost" },
+        ]} />
 
         <RelatedTrips locale={locale as Locale} heading="Featured Desert Tours" ctaLabel="View Tour" />
 

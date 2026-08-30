@@ -4,6 +4,7 @@ import { getTranslations, getLocale } from "next-intl/server";
 import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
 import GuideHero from "@/components/guides/guide-hero";
 import RelatedTrips from "@/components/guides/related-trips";
+import RelatedGuides from "@/components/guides/related-guides";
 import styles from "@/components/guides/guides.module.scss";
 
 import type { Locale } from "@/lib/i18n/config";
@@ -122,6 +123,13 @@ export default async function BestTimePage() {
 
         <h2>{t("guide_besttime_rain_h2")}</h2>
         <p>{t("guide_besttime_rain_p")}</p>
+
+        <RelatedGuides guides={[
+          { href: "/what-to-pack-white-desert", labelKey: "rg_packing" },
+          { href: "/how-to-get-to-white-desert", labelKey: "rg_howto" },
+          { href: "/white-desert-camping", labelKey: "rg_camping" },
+          { href: "/stargazing-western-desert", labelKey: "rg_stargazing" },
+        ]} />
 
         <RelatedTrips locale={locale as Locale} heading="Featured Desert Tours" ctaLabel="View Tour" />
 

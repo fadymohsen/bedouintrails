@@ -196,6 +196,19 @@ export default async function WesternDesertGuidePage() {
           {t("guide_western_safety_p_cont")}
         </p>
 
+        <h2>{t("guide_western_planning_h2")}</h2>
+        <p>{t("guide_western_planning_p")}</p>
+        <ul>
+          <li><Link href="/best-time-to-visit-white-desert">{t("guide_western_planning_besttime")}</Link></li>
+          <li><Link href="/how-to-get-to-white-desert">{t("guide_western_planning_howto")}</Link></li>
+          <li><Link href="/white-desert-tour-cost">{t("guide_western_planning_cost")}</Link></li>
+          <li><Link href="/stargazing-western-desert">{t("guide_western_planning_stargazing")}</Link></li>
+          <li><Link href="/white-desert-vs-wadi-rum">{t("guide_western_planning_compare")}</Link></li>
+          <li><Link href="/egypt-desert-tour">{t("guide_western_planning_edt")}</Link></li>
+          <li><Link href="/sahara-hiking-egypt">{t("guide_western_planning_hiking")}</Link></li>
+          <li><Link href="/multi-day-desert-trek">{t("guide_western_planning_trek")}</Link></li>
+        </ul>
+
         <RelatedTrips locale={locale as Locale} heading="Featured Desert Tours" ctaLabel="View Tour" />
 
         <div className={styles["cta-section"]}>

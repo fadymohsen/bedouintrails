@@ -4,6 +4,7 @@ import { getTranslations, getLocale } from "next-intl/server";
 import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
 import GuideHero from "@/components/guides/guide-hero";
 import RelatedTrips from "@/components/guides/related-trips";
+import RelatedGuides from "@/components/guides/related-guides";
 import styles from "@/components/guides/guides.module.scss";
 
 import type { Locale } from "@/lib/i18n/config";
@@ -110,6 +111,13 @@ export default async function TourCostPage() {
         <h2>{t("guide_cost_worth_h2")}</h2>
         <p>{t("guide_cost_worth_p1")}</p>
         <p>{t("guide_cost_worth_p2")}</p>
+
+        <RelatedGuides guides={[
+          { href: "/how-to-get-to-white-desert", labelKey: "rg_howto" },
+          { href: "/best-time-to-visit-white-desert", labelKey: "rg_besttime" },
+          { href: "/white-desert-safari", labelKey: "rg_white_safari" },
+          { href: "/egypt-safari-tours", labelKey: "rg_safari_tours" },
+        ]} />
 
         <RelatedTrips locale={locale as Locale} heading="Featured Desert Tours" ctaLabel="View Tour" />
 
