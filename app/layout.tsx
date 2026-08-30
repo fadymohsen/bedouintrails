@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
 import { headers } from "next/headers";
-import "@fontsource/el-messiri";
 import "@fontsource/el-messiri/400.css";
-import "@fontsource/el-messiri/500.css";
-import "@fontsource/el-messiri/600.css";
 import "@fontsource/el-messiri/700.css";
 import "./globals.css";
 import { isRtl, type Locale } from "@/lib/i18n/config";
