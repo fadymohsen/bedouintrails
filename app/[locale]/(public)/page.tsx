@@ -72,13 +72,13 @@ export default async function HomePage() {
     ]);
 
   const fallbackSlides = [
-    { image: "/img/hero-camel-safari.jpg", title: t("hero_slide_1_title"), description: t("hero_slide_1_desc") },
-    { image: "/img/hero-whale-valley.jpg", title: t("hero_slide_2_title"), description: t("hero_slide_2_desc") },
-    { image: "/img/hero-white-desert-group.jpg", title: t("hero_slide_3_title"), description: t("hero_slide_3_desc") },
-    { image: "/img/hero-wadi-rayan-waterfall.jpg", title: t("hero_slide_4_title"), description: t("hero_slide_4_desc") },
-    { image: "/img/hero-white-desert-trek.jpg", title: t("hero_slide_5_title"), description: t("hero_slide_5_desc") },
-    { image: "/img/hero-jara-cave.jpg", title: t("hero_slide_6_title"), description: t("hero_slide_6_desc") },
-    { image: "/img/hero-blue-lagoon.jpg", title: t("hero_slide_7_title"), description: t("hero_slide_7_desc") },
+    { image: "/img/hero-camel-safari.webp", title: t("hero_slide_1_title"), description: t("hero_slide_1_desc") },
+    { image: "/img/hero-whale-valley.webp", title: t("hero_slide_2_title"), description: t("hero_slide_2_desc") },
+    { image: "/img/hero-white-desert-group.webp", title: t("hero_slide_3_title"), description: t("hero_slide_3_desc") },
+    { image: "/img/hero-wadi-rayan-waterfall.webp", title: t("hero_slide_4_title"), description: t("hero_slide_4_desc") },
+    { image: "/img/hero-white-desert-trek.webp", title: t("hero_slide_5_title"), description: t("hero_slide_5_desc") },
+    { image: "/img/hero-jara-cave.webp", title: t("hero_slide_6_title"), description: t("hero_slide_6_desc") },
+    { image: "/img/hero-blue-lagoon.webp", title: t("hero_slide_7_title"), description: t("hero_slide_7_desc") },
   ];
 
   const heroSlides =

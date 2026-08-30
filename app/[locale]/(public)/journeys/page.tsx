@@ -19,7 +19,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title, description,
     alternates: buildAlternates("/journeys", locale),
-    openGraph: { title, description, url, images: [`${SITE_URL}/img/hero-journeys.jpg`] },
+    openGraph: { title, description, url, images: [`${SITE_URL}/img/hero-journeys.webp`] },
   };
 }
 

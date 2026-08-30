@@ -24,8 +24,8 @@ export async function generateMetadata(): Promise<Metadata> {
     title,
     description,
     alternates: buildAlternates("/about", locale),
-    openGraph: { title, description, url: `${SITE_URL}/${locale}/about`, images: [`${SITE_URL}/img/hero-about.jpg`] },
-    twitter: { card: "summary_large_image", title, description, images: [`${SITE_URL}/img/hero-about.jpg`] },
+    openGraph: { title, description, url: `${SITE_URL}/${locale}/about`, images: [`${SITE_URL}/img/hero-about.webp`] },
+    twitter: { card: "summary_large_image", title, description, images: [`${SITE_URL}/img/hero-about.webp`] },
   };
 }
 
@@ -65,7 +65,7 @@ export default async function AboutPage() {
         ]}
       />
 
-      <PageHero title={t("about_hero_title")} image="/img/hero-about.jpg" eyebrow={t("about")} />
+      <PageHero title={t("about_hero_title")} image="/img/hero-about.webp" eyebrow={t("about")} />
 
       <ScrollReveal as="div" className={styles.trustBar}>
         <div className={styles.trustItem}>

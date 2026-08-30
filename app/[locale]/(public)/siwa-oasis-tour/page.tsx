@@ -24,13 +24,13 @@ export async function generateMetadata(): Promise<Metadata> {
       title: t("guide_siwa_og_title"),
       description: t("guide_siwa_og_desc"),
       url,
-      images: [`${SITE_URL}/img/hero-siwa-oasis.jpg`],
+      images: [`${SITE_URL}/img/hero-siwa-oasis.webp`],
     },
     twitter: {
       card: "summary_large_image",
       title: t("guide_siwa_twitter_title"),
       description: t("guide_siwa_twitter_desc"),
-      images: [`${SITE_URL}/img/hero-siwa-oasis.jpg`],
+      images: [`${SITE_URL}/img/hero-siwa-oasis.webp`],
     },
   };
 }
@@ -87,7 +87,7 @@ export default async function SiwaOasisTourPage() {
         ]}
       />
 
-      <GuideHero src="/img/hero-siwa-oasis.jpg" alt="Siwa Oasis Egypt Great Sand Sea tour" h1={t("guide_siwa_h1")} />
+      <GuideHero src="/img/hero-siwa-oasis.webp" alt="Siwa Oasis Egypt Great Sand Sea tour" h1={t("guide_siwa_h1")} />
 
       <div className={styles["guide-content"]}>
         <p>{t("guide_siwa_intro_p")}</p>

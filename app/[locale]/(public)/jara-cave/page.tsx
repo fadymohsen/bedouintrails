@@ -24,13 +24,13 @@ export async function generateMetadata(): Promise<Metadata> {
       title: t("guide_djara_og_title"),
       description: t("guide_djara_og_desc"),
       url,
-      images: [`${SITE_URL}/img/hero-jara-cave.jpg`],
+      images: [`${SITE_URL}/img/hero-jara-cave.webp`],
     },
     twitter: {
       card: "summary_large_image",
       title: t("guide_djara_twitter_title"),
       description: t("guide_djara_twitter_desc"),
-      images: [`${SITE_URL}/img/hero-jara-cave.jpg`],
+      images: [`${SITE_URL}/img/hero-jara-cave.webp`],
     },
   };
 }
@@ -74,7 +74,7 @@ export default async function JaraCavePage() {
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <GuideHero src="/img/hero-jara-cave.jpg" alt="Jara Cave prehistoric rock art Egypt Western Desert" h1={t("guide_djara_h1")} />
+      <GuideHero src="/img/hero-jara-cave.webp" alt="Jara Cave prehistoric rock art Egypt Western Desert" h1={t("guide_djara_h1")} />
 
       <div className={styles["guide-content"]}>
         <p>{t("guide_djara_intro_p")}</p>

@@ -24,13 +24,13 @@ export async function generateMetadata(): Promise<Metadata> {
       title: t("guide_black_og_title"),
       description: t("guide_black_og_desc"),
       url,
-      images: [`${SITE_URL}/img/hero-black-desert.jpg`],
+      images: [`${SITE_URL}/img/hero-black-desert.webp`],
     },
     twitter: {
       card: "summary_large_image",
       title: t("guide_black_twitter_title"),
       description: t("guide_black_twitter_desc"),
-      images: [`${SITE_URL}/img/hero-black-desert.jpg`],
+      images: [`${SITE_URL}/img/hero-black-desert.webp`],
     },
   };
 }
@@ -47,7 +47,7 @@ export default async function BlackDesertPage() {
     description:
       "The Black Desert in Egypt's Western Desert is a volcanic landscape of dark dolerite-covered hills and mountains between Bahariya Oasis and the White Desert. A key stop on Egypt desert safari tours.",
     url,
-    image: `${SITE_URL}/img/hero-black-desert.jpg`,
+    image: `${SITE_URL}/img/hero-black-desert.webp`,
     geo: { "@type": "GeoCoordinates", latitude: "28.0", longitude: "28.7" },
     touristType: ["Adventure seekers", "Photographers", "Nature lovers"],
     author: { "@type": "Organization", name: "Bedouin Trails" },
@@ -65,7 +65,7 @@ export default async function BlackDesertPage() {
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <GuideHero src="/img/hero-black-desert.jpg" alt="Black Desert Egypt volcanic landscape" h1={t("guide_black_h1")} />
+      <GuideHero src="/img/hero-black-desert.webp" alt="Black Desert Egypt volcanic landscape" h1={t("guide_black_h1")} />
 
       <div className={styles["guide-content"]}>
         <p>{t("guide_black_intro_p")}</p>
