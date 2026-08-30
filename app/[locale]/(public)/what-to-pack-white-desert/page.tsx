@@ -156,6 +156,14 @@ export default async function PackingGuidePage() {
         <h3>{t("guide_packing_spring_h3")}</h3>
         <p>{t("guide_packing_spring_p")}</p>
 
+        <h2>{t("guide_packing_related_h2")}</h2>
+        <ul>
+          <li><Link href="/best-time-to-visit-white-desert">{t("guide_packing_related_besttime")}</Link></li>
+          <li><Link href="/desert-safety-guide">{t("guide_packing_related_safety")}</Link></li>
+          <li><Link href="/how-to-get-to-white-desert">{t("guide_packing_related_howto")}</Link></li>
+          <li><Link href="/white-desert-camping">{t("guide_packing_related_camping")}</Link></li>
+        </ul>
+
         <RelatedTrips locale={locale as Locale} heading="Featured Desert Tours" ctaLabel="View Tour" />
 
         <div className={styles["cta-section"]}>

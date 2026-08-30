@@ -93,6 +93,12 @@ export default async function CrystalMountainPage() {
           </p>
         </div>
 
+        <h2>{t("guide_crystal_besttime_h2")}</h2>
+        <p>{t("guide_crystal_besttime_p")}</p>
+
+        <h2>{t("guide_crystal_geology_h2")}</h2>
+        <p>{t("guide_crystal_geology_p")}</p>
+
         <h2>{t("guide_crystal_conservation_h2")}</h2>
         <p>{t("guide_crystal_conservation_p")}</p>
 
@@ -114,7 +120,7 @@ export default async function CrystalMountainPage() {
             <strong>{t("guide_crystal_nearby_li3_bold")}</strong> {t("guide_crystal_nearby_li3_text")}
           </li>
           <li>
-            <strong>{t("guide_crystal_nearby_li4_bold")}</strong> {t("guide_crystal_nearby_li4_text")}
+            <strong><Link href="/bahariya-oasis">{t("guide_crystal_nearby_li4_bold")}</Link></strong> {t("guide_crystal_nearby_li4_text")}
           </li>
         </ul>
 
