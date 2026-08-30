@@ -24,13 +24,13 @@ export async function generateMetadata(): Promise<Metadata> {
       title: t("guide_bahariya_og_title"),
       description: t("guide_bahariya_og_desc"),
       url,
-      images: [`${SITE_URL}/img/bahariya-oasis-palms.jpg`],
+      images: [`${SITE_URL}/img/bahariya-oasis-palms.webp`],
     },
     twitter: {
       card: "summary_large_image",
       title: t("guide_bahariya_twitter_title"),
       description: t("guide_bahariya_twitter_desc"),
-      images: [`${SITE_URL}/img/bahariya-oasis-palms.jpg`],
+      images: [`${SITE_URL}/img/bahariya-oasis-palms.webp`],
     },
   };
 }
@@ -45,7 +45,7 @@ export default async function BahariyaOasisPage() {
     name: "Bahariya Oasis",
     description: "Bahariya Oasis is the gateway to Egypt's White Desert and Black Desert, located 370 km southwest of Cairo in the Western Desert.",
     url,
-    image: `${SITE_URL}/img/bahariya-oasis-palms.jpg`,
+    image: `${SITE_URL}/img/bahariya-oasis-palms.webp`,
     address: { "@type": "PostalAddress", addressCountry: "EG", addressRegion: "Giza Governorate" },
     touristType: ["Adventure seekers", "Nature lovers", "Culture enthusiasts"],
     isAccessibleForFree: false,
@@ -65,7 +65,7 @@ export default async function BahariyaOasisPage() {
         ]}
       />
 
-      <GuideHero src="/img/bahariya-oasis-palms.jpg" alt="Bahariya Oasis palm trees Western Desert Egypt" h1={t("guide_bahariya_h1")} />
+      <GuideHero src="/img/bahariya-oasis-palms.webp" alt="Bahariya Oasis palm trees Western Desert Egypt" h1={t("guide_bahariya_h1")} />
 
       <div className={styles["guide-content"]}>
         <p>{t("guide_bahariya_intro_p")}</p>

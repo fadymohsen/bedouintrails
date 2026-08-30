@@ -26,13 +26,13 @@ export async function generateMetadata(): Promise<Metadata> {
       title: t("guide_cost_og_title"),
       description: t("guide_cost_og_desc"),
       url,
-      images: [`${SITE_URL}/img/white-desert-camping.jpg`],
+      images: [`${SITE_URL}/img/white-desert-camping.webp`],
     },
     twitter: {
       card: "summary_large_image",
       title: t("guide_cost_twitter_title"),
       description: t("guide_cost_twitter_desc"),
-      images: [`${SITE_URL}/img/white-desert-camping.jpg`],
+      images: [`${SITE_URL}/img/white-desert-camping.webp`],
     },
   };
 }
@@ -46,7 +46,7 @@ export default async function TourCostPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
         "@context": "https://schema.org", "@type": "Article",
         headline: t("guide_cost_h1"), description: t("guide_cost_meta_desc"),
-        url, image: `${SITE_URL}/img/white-desert-camping.jpg`,
+        url, image: `${SITE_URL}/img/white-desert-camping.webp`,
         publisher: { "@type": "Organization", name: "Bedouin Trails", logo: { "@type": "ImageObject", url: `${SITE_URL}/img/logo.png` } },
         mainEntityOfPage: url,
         author: { "@type": "Organization", name: "Bedouin Trails" },
@@ -60,7 +60,7 @@ export default async function TourCostPage() {
         ]}
       />
 
-      <GuideHero src="/img/white-desert-camping.jpg" alt="White Desert tour cost price guide Egypt" h1={t("guide_cost_h1")} />
+      <GuideHero src="/img/white-desert-camping.webp" alt="White Desert tour cost price guide Egypt" h1={t("guide_cost_h1")} />
 
       <div className={styles["guide-content"]}>
         <p>{t("guide_cost_intro_p")}</p>

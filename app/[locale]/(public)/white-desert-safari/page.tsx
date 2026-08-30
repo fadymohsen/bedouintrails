@@ -24,13 +24,13 @@ export async function generateMetadata(): Promise<Metadata> {
       title: t("guide_wdsafari_og_title"),
       description: t("guide_wdsafari_og_desc"),
       url,
-      images: [`${SITE_URL}/img/hero-white-desert-safari.jpg`],
+      images: [`${SITE_URL}/img/hero-white-desert-safari.webp`],
     },
     twitter: {
       card: "summary_large_image",
       title: t("guide_wdsafari_twitter_title"),
       description: t("guide_wdsafari_twitter_desc"),
-      images: [`${SITE_URL}/img/hero-white-desert-safari.jpg`],
+      images: [`${SITE_URL}/img/hero-white-desert-safari.webp`],
     },
   };
 }
@@ -46,7 +46,7 @@ export default async function WhiteDesertSafariPage() {
     description:
       "Everything you need to know about a White Desert safari in Egypt — tour options, what's included, the route, best time to go, and how to book from Cairo.",
     url,
-    image: `${SITE_URL}/img/hero-white-desert-safari.jpg`,
+    image: `${SITE_URL}/img/hero-white-desert-safari.webp`,
     publisher: {
       "@type": "Organization",
       name: "Bedouin Trails",
@@ -69,7 +69,7 @@ export default async function WhiteDesertSafariPage() {
         ]}
       />
 
-      <GuideHero src="/img/hero-white-desert-safari.jpg" alt="White Desert safari Egypt overnight tour" h1={t("guide_wdsafari_h1")} objectPosition="center bottom" />
+      <GuideHero src="/img/hero-white-desert-safari.webp" alt="White Desert safari Egypt overnight tour" h1={t("guide_wdsafari_h1")} objectPosition="center bottom" />
 
       <div className={styles["guide-content"]}>
         <p>{t("guide_wdsafari_intro_p")}</p>

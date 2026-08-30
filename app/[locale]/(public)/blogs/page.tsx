@@ -24,8 +24,8 @@ export async function generateMetadata(): Promise<Metadata> {
     title,
     description,
     alternates: buildAlternates("/blogs", locale),
-    openGraph: { title, description, url, images: [`${SITE_URL}/img/hero-blogs.jpg`] },
-    twitter: { card: "summary_large_image", title, description, images: [`${SITE_URL}/img/hero-blogs.jpg`] },
+    openGraph: { title, description, url, images: [`${SITE_URL}/img/hero-blogs.webp`] },
+    twitter: { card: "summary_large_image", title, description, images: [`${SITE_URL}/img/hero-blogs.webp`] },
   };
 }
 
@@ -51,7 +51,7 @@ export default async function BlogsIndexPage() {
             "@type": "BlogPosting",
             headline: localize(blog.titleEn, blog.titleAr, locale, blog.titleI18n as Record<string, string> | null),
             url: `${SITE_URL}/${locale}/blogs/${blog.slug}`,
-            image: blog.image ? `${SITE_URL}${blog.image}` : `${SITE_URL}/img/hero-blogs.jpg`,
+            image: blog.image ? `${SITE_URL}${blog.image}` : `${SITE_URL}/img/hero-blogs.webp`,
             datePublished: blog.publishedAt?.toISOString() ?? blog.createdAt?.toISOString(),
             dateModified: blog.updatedAt?.toISOString(),
             author: { "@type": "Organization", name: "Bedouin Trails" },
@@ -81,7 +81,7 @@ export default async function BlogsIndexPage() {
 
       <PageHero
         title={t("blogs_hero_title") || t("blogs")}
-        image="/img/hero-blogs.jpg"
+        image="/img/hero-blogs.webp"
         eyebrow={t("blogs")}
       />
 

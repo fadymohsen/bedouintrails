@@ -24,13 +24,13 @@ export async function generateMetadata(): Promise<Metadata> {
       title: t("guide_camping_og_title"),
       description: t("guide_camping_og_desc"),
       url,
-      images: [`${SITE_URL}/img/white-desert-camping.jpg`],
+      images: [`${SITE_URL}/img/white-desert-camping.webp`],
     },
     twitter: {
       card: "summary_large_image",
       title: t("guide_camping_twitter_title"),
       description: t("guide_camping_twitter_desc"),
-      images: [`${SITE_URL}/img/white-desert-camping.jpg`],
+      images: [`${SITE_URL}/img/white-desert-camping.webp`],
     },
   };
 }
@@ -45,7 +45,7 @@ export default async function WhiteDesertCampingPage() {
     headline: "White Desert Camping — Overnight Desert Experience in Egypt",
     description: "Everything you need to know about camping in Egypt's White Desert — from what to expect, what's provided, best season, and how to book your overnight desert camping adventure.",
     url,
-    image: `${SITE_URL}/img/white-desert-camping.jpg`,
+    image: `${SITE_URL}/img/white-desert-camping.webp`,
     publisher: { "@type": "Organization", name: "Bedouin Trails", logo: { "@type": "ImageObject", url: `${SITE_URL}/img/logo.png` } },
     mainEntityOfPage: url,
     author: { "@type": "Organization", name: "Bedouin Trails" },
@@ -64,7 +64,7 @@ export default async function WhiteDesertCampingPage() {
         ]}
       />
 
-      <GuideHero src="/img/white-desert-camping.jpg" alt="White Desert camping overnight experience Egypt" h1={t("guide_camping_h1")} />
+      <GuideHero src="/img/white-desert-camping.webp" alt="White Desert camping overnight experience Egypt" h1={t("guide_camping_h1")} />
 
       <div className={styles["guide-content"]}>
         <p>{t("guide_camping_intro_p")}</p>

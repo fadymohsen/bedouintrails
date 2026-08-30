@@ -24,13 +24,13 @@ export async function generateMetadata(): Promise<Metadata> {
       title: t("guide_wd_og_title"),
       description: t("guide_wd_og_desc"),
       url,
-      images: [`${SITE_URL}/img/white-desert-camping.jpg`],
+      images: [`${SITE_URL}/img/white-desert-camping.webp`],
     },
     twitter: {
       card: "summary_large_image",
       title: t("guide_wd_twitter_title"),
       description: t("guide_wd_twitter_desc"),
-      images: [`${SITE_URL}/img/white-desert-camping.jpg`],
+      images: [`${SITE_URL}/img/white-desert-camping.webp`],
     },
   };
 }
@@ -45,7 +45,7 @@ export default async function WhiteDesertEgyptPage() {
     name: "White Desert Egypt",
     description: "The White Desert (Sahara el Beyda) is a national park in Egypt's Western Desert known for surreal chalk-white rock formations, desert camping, and safari tours.",
     url,
-    image: `${SITE_URL}/img/white-desert-camping.jpg`,
+    image: `${SITE_URL}/img/white-desert-camping.webp`,
     geo: { "@type": "GeoCoordinates", latitude: 27.25, longitude: 28.05 },
     touristType: ["Adventure travelers", "Nature lovers", "Photographers", "Desert enthusiasts"],
     isAccessibleForFree: false,

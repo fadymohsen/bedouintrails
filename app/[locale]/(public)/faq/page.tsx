@@ -21,8 +21,8 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title, description,
     alternates: buildAlternates("/faq", locale),
-    openGraph: { title, description, url, images: [`${SITE_URL}/img/hero-faq.jpg`] },
-    twitter: { card: "summary_large_image", title, description, images: [`${SITE_URL}/img/hero-faq.jpg`] },
+    openGraph: { title, description, url, images: [`${SITE_URL}/img/hero-faq.webp`] },
+    twitter: { card: "summary_large_image", title, description, images: [`${SITE_URL}/img/hero-faq.webp`] },
   };
 }
 
@@ -58,7 +58,7 @@ export default async function FaqPage() {
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       )}
 
-      <PageHero title={t("faq_title")} image="/img/hero-faq.jpg" eyebrow={t("faq")} backgroundPosition="bottom" />
+      <PageHero title={t("faq_title")} image="/img/hero-faq.webp" eyebrow={t("faq")} backgroundPosition="bottom" />
 
       <div className={styles["faq-container"]}>
         <div className={styles["faq-accordion"]}>

@@ -25,13 +25,13 @@ export async function generateMetadata(): Promise<Metadata> {
       title: t("guide_hiking_og_title"),
       description: t("guide_hiking_og_desc"),
       url,
-      images: [`${SITE_URL}/img/hero-desert-trekking.jpg`],
+      images: [`${SITE_URL}/img/hero-desert-trekking.webp`],
     },
     twitter: {
       card: "summary_large_image",
       title: t("guide_hiking_twitter_title"),
       description: t("guide_hiking_twitter_desc"),
-      images: [`${SITE_URL}/img/hero-desert-trekking.jpg`],
+      images: [`${SITE_URL}/img/hero-desert-trekking.webp`],
     },
   };
 }
@@ -47,7 +47,7 @@ export default async function SaharaHikingEgyptPage() {
     description:
       "Complete guide to Sahara hiking tours in Egypt. Trek through the White Desert, Black Desert, and Bahariya Oasis with experienced Bedouin guides from Cairo.",
     url,
-    image: `${SITE_URL}/img/hero-desert-trekking.jpg`,
+    image: `${SITE_URL}/img/hero-desert-trekking.webp`,
     publisher: { "@type": "Organization", name: "Bedouin Trails", logo: { "@type": "ImageObject", url: `${SITE_URL}/img/logo.png` } },
     mainEntityOfPage: url,
     author: { "@type": "Organization", name: "Bedouin Trails" },
@@ -66,7 +66,7 @@ export default async function SaharaHikingEgyptPage() {
         ]}
       />
 
-      <GuideHero src="/img/hero-desert-trekking.jpg" alt="Sahara hiking tour Egypt Western Desert" h1={t("guide_hiking_h1")} />
+      <GuideHero src="/img/hero-desert-trekking.webp" alt="Sahara hiking tour Egypt Western Desert" h1={t("guide_hiking_h1")} />
 
       <div className={styles["guide-content"]}>
         <p>{t("guide_hiking_intro_p")}</p>

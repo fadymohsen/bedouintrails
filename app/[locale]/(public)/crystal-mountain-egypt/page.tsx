@@ -25,13 +25,13 @@ export async function generateMetadata(): Promise<Metadata> {
       title: t("guide_crystal_og_title"),
       description: t("guide_crystal_og_desc"),
       url,
-      images: [`${SITE_URL}/img/hero-crystal-mountain.jpg`],
+      images: [`${SITE_URL}/img/hero-crystal-mountain.webp`],
     },
     twitter: {
       card: "summary_large_image",
       title: t("guide_crystal_twitter_title"),
       description: t("guide_crystal_twitter_desc"),
-      images: [`${SITE_URL}/img/hero-crystal-mountain.jpg`],
+      images: [`${SITE_URL}/img/hero-crystal-mountain.webp`],
     },
   };
 }
@@ -47,7 +47,7 @@ export default async function CrystalMountainPage() {
     description:
       "Crystal Mountain is a small ridge of quartz crystals in Egypt's Western Desert located between the Black Desert and White Desert, sparkling in sunlight.",
     url,
-    image: `${SITE_URL}/img/hero-crystal-mountain.jpg`,
+    image: `${SITE_URL}/img/hero-crystal-mountain.webp`,
     geo: { "@type": "GeoCoordinates", latitude: "27.65", longitude: "28.3" },
     touristType: ["Nature lovers", "Photographers", "Adventure seekers"],
     author: { "@type": "Organization", name: "Bedouin Trails" },
@@ -65,7 +65,7 @@ export default async function CrystalMountainPage() {
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <GuideHero src="/img/hero-crystal-mountain.jpg" alt="Crystal Mountain Egypt quartz crystals Western Desert" h1={t("guide_crystal_h1")} objectPosition="center 40%" />
+      <GuideHero src="/img/hero-crystal-mountain.webp" alt="Crystal Mountain Egypt quartz crystals Western Desert" h1={t("guide_crystal_h1")} objectPosition="center 40%" />
 
       <div className={styles["guide-content"]}>
         <p>{t("guide_crystal_intro_p")}</p>

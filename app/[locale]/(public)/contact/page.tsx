@@ -19,8 +19,8 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title, description,
     alternates: buildAlternates("/contact", locale),
-    openGraph: { title, description, url, images: [`${SITE_URL}/img/hero-contact.jpg`] },
-    twitter: { card: "summary_large_image", title, description, images: [`${SITE_URL}/img/hero-contact.jpg`] },
+    openGraph: { title, description, url, images: [`${SITE_URL}/img/hero-contact.webp`] },
+    twitter: { card: "summary_large_image", title, description, images: [`${SITE_URL}/img/hero-contact.webp`] },
   };
 }
 
@@ -46,7 +46,7 @@ export default async function ContactPage() {
   return (
     <div className={styles.contactPage}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(contactJsonLd) }} />
-      <PageHero title={t("contact_hero_title")} image="/img/hero-contact.jpg" eyebrow={t("contact")} />
+      <PageHero title={t("contact_hero_title")} image="/img/hero-contact.webp" eyebrow={t("contact")} />
 
       <div className={styles.grid}>
         <div className={styles.infoCard}>

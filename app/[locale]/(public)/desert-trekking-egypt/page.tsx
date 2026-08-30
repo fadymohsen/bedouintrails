@@ -24,13 +24,13 @@ export async function generateMetadata(): Promise<Metadata> {
       title: t("guide_dtrek_og_title"),
       description: t("guide_dtrek_og_desc"),
       url,
-      images: [`${SITE_URL}/img/hero-desert-trekking.jpg`],
+      images: [`${SITE_URL}/img/hero-desert-trekking.webp`],
     },
     twitter: {
       card: "summary_large_image",
       title: t("guide_dtrek_twitter_title"),
       description: t("guide_dtrek_twitter_desc"),
-      images: [`${SITE_URL}/img/hero-desert-trekking.jpg`],
+      images: [`${SITE_URL}/img/hero-desert-trekking.webp`],
     },
   };
 }
@@ -46,7 +46,7 @@ export default async function DesertTrekkingEgyptPage() {
       headline: "Desert Trekking Egypt — Complete Hiking & Trekking Guide",
       description: "Complete guide to desert trekking in Egypt. Explore hiking trails through the White Desert, Black Desert, and Western Desert with experienced Bedouin guides.",
       url,
-      image: `${SITE_URL}/img/hero-desert-trekking.jpg`,
+      image: `${SITE_URL}/img/hero-desert-trekking.webp`,
       publisher: { "@type": "Organization", name: "Bedouin Trails", logo: { "@type": "ImageObject", url: `${SITE_URL}/img/logo.png` } },
       mainEntityOfPage: url,
       author: { "@type": "Organization", name: "Bedouin Trails" },
@@ -74,7 +74,7 @@ export default async function DesertTrekkingEgyptPage() {
         ]}
       />
 
-      <GuideHero src="/img/hero-desert-trekking.jpg" alt="Desert trekking Egypt hiking trails" h1={t("guide_dtrek_h1")} />
+      <GuideHero src="/img/hero-desert-trekking.webp" alt="Desert trekking Egypt hiking trails" h1={t("guide_dtrek_h1")} />
 
       <div className={styles["guide-content"]}>
         <p>{t("guide_dtrek_intro_p")}</p>

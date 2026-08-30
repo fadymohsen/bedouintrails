@@ -24,13 +24,13 @@ export async function generateMetadata(): Promise<Metadata> {
       title: t("guide_safaritours_og_title"),
       description: t("guide_safaritours_og_desc"),
       url,
-      images: [`${SITE_URL}/img/egypt-safari-camel-trek.jpg`],
+      images: [`${SITE_URL}/img/egypt-safari-camel-trek.webp`],
     },
     twitter: {
       card: "summary_large_image",
       title: t("guide_safaritours_twitter_title"),
       description: t("guide_safaritours_twitter_desc"),
-      images: [`${SITE_URL}/img/egypt-safari-camel-trek.jpg`],
+      images: [`${SITE_URL}/img/egypt-safari-camel-trek.webp`],
     },
   };
 }
@@ -45,7 +45,7 @@ export default async function EgyptSafariToursPage() {
     headline: "Egypt Safari Tours — Complete Guide to Desert Adventures",
     description: "Discover the best Egypt safari tours including White Desert safaris, camel treks, desert camping, and multi-day desert expeditions from Cairo.",
     url,
-    image: `${SITE_URL}/img/egypt-safari-camel-trek.jpg`,
+    image: `${SITE_URL}/img/egypt-safari-camel-trek.webp`,
     publisher: { "@type": "Organization", name: "Bedouin Trails", logo: { "@type": "ImageObject", url: `${SITE_URL}/img/logo.png` } },
     mainEntityOfPage: url,
     author: { "@type": "Organization", name: "Bedouin Trails" },
@@ -64,7 +64,7 @@ export default async function EgyptSafariToursPage() {
         ]}
       />
 
-      <GuideHero src="/img/egypt-safari-camel-trek.jpg" alt="Egypt safari tours camel trekking White Desert" h1={t("guide_safaritours_h1")} />
+      <GuideHero src="/img/egypt-safari-camel-trek.webp" alt="Egypt safari tours camel trekking White Desert" h1={t("guide_safaritours_h1")} />
 
       <div className={styles["guide-content"]}>
         <p>{t("guide_safaritours_intro_p")}</p>

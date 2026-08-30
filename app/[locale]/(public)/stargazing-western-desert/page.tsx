@@ -26,13 +26,13 @@ export async function generateMetadata(): Promise<Metadata> {
       title: t("guide_stars_og_title"),
       description: t("guide_stars_og_desc"),
       url,
-      images: [`${SITE_URL}/img/night-camp.jpg`],
+      images: [`${SITE_URL}/img/night-camp.webp`],
     },
     twitter: {
       card: "summary_large_image",
       title: t("guide_stars_twitter_title"),
       description: t("guide_stars_twitter_desc"),
-      images: [`${SITE_URL}/img/night-camp.jpg`],
+      images: [`${SITE_URL}/img/night-camp.webp`],
     },
   };
 }
@@ -46,7 +46,7 @@ export default async function StargazingPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
         "@context": "https://schema.org", "@type": "Article",
         headline: t("guide_stars_h1"), description: t("guide_stars_meta_desc"),
-        url, image: `${SITE_URL}/img/night-camp.jpg`,
+        url, image: `${SITE_URL}/img/night-camp.webp`,
         publisher: { "@type": "Organization", name: "Bedouin Trails", logo: { "@type": "ImageObject", url: `${SITE_URL}/img/logo.png` } },
         mainEntityOfPage: url,
         author: { "@type": "Organization", name: "Bedouin Trails" },
@@ -60,7 +60,7 @@ export default async function StargazingPage() {
         ]}
       />
 
-      <GuideHero src="/img/night-camp.jpg" alt="Stargazing Western Desert Egypt night sky Milky Way" h1={t("guide_stars_h1")} />
+      <GuideHero src="/img/night-camp.webp" alt="Stargazing Western Desert Egypt night sky Milky Way" h1={t("guide_stars_h1")} />
 
       <div className={styles["guide-content"]}>
         <p>{t("guide_stars_intro_p")}</p>

@@ -24,13 +24,13 @@ export async function generateMetadata(): Promise<Metadata> {
       title: t("guide_whitetour_og_title"),
       description: t("guide_whitetour_og_desc"),
       url,
-      images: [`${SITE_URL}/img/hero-white-desert-tour-cairo.jpg`],
+      images: [`${SITE_URL}/img/hero-white-desert-tour-cairo.webp`],
     },
     twitter: {
       card: "summary_large_image",
       title: t("guide_whitetour_twitter_title"),
       description: t("guide_whitetour_twitter_desc"),
-      images: [`${SITE_URL}/img/hero-white-desert-tour-cairo.jpg`],
+      images: [`${SITE_URL}/img/hero-white-desert-tour-cairo.webp`],
     },
   };
 }
@@ -46,7 +46,7 @@ export default async function WhiteDesertTourPage() {
     description:
       "A 2-day White Desert safari tour from Cairo including Bahariya Oasis, Black Desert, Crystal Mountain, and overnight camping in the White Desert under the stars.",
     url,
-    image: `${SITE_URL}/img/hero-white-desert-tour-cairo.jpg`,
+    image: `${SITE_URL}/img/hero-white-desert-tour-cairo.webp`,
     publisher: { "@type": "Organization", name: "Bedouin Trails", logo: { "@type": "ImageObject", url: `${SITE_URL}/img/logo.png` } },
     mainEntityOfPage: url,
     author: { "@type": "Organization", name: "Bedouin Trails" },
@@ -65,7 +65,7 @@ export default async function WhiteDesertTourPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: [1, 2, 3, 4].map((i) => ({ "@type": "Question", name: t(`guide_whitetour_faq${i}_q`), acceptedAnswer: { "@type": "Answer", text: t(`guide_whitetour_faq${i}_a`) } })) }) }} />
 
-      <GuideHero src="/img/hero-white-desert-tour-cairo.jpg" alt="White Desert tour from Cairo Egypt" h1={t("guide_whitetour_h1")} />
+      <GuideHero src="/img/hero-white-desert-tour-cairo.webp" alt="White Desert tour from Cairo Egypt" h1={t("guide_whitetour_h1")} />
 
       <div className={styles["guide-content"]}>
         <p>{t("guide_whitetour_intro_p")}</p>
