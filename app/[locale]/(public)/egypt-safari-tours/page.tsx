@@ -56,6 +56,7 @@ export default async function EgyptSafariToursPage() {
   return (
     <div className={styles["guide-page"]}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: [1, 2, 3, 4].map((i) => ({ "@type": "Question", name: t(`guide_safaritours_faq${i}_q`), acceptedAnswer: { "@type": "Answer", text: t(`guide_safaritours_faq${i}_a`) } })) }) }} />
       <Breadcrumbs
         items={[
           { name: t("breadcrumb_home"), url: `${SITE_URL}/${locale}` },

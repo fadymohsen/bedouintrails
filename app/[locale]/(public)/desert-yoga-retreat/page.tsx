@@ -63,6 +63,7 @@ export default async function DesertYogaRetreatPage() {
         ]}
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: [1, 2, 3, 4].map((i) => ({ "@type": "Question", name: t(`guide_yoga_faq${i}_q`), acceptedAnswer: { "@type": "Answer", text: t(`guide_yoga_faq${i}_a`) } })) }) }} />
 
       <GuideHero src="/img/western-desert-hero.webp" alt="Desert yoga retreat Egypt White Desert" h1={t("guide_yoga_h1")} objectPosition="bottom center" />
 

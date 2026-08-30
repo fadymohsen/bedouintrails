@@ -64,6 +64,7 @@ export default async function BlackDesertPage() {
         ]}
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: [1, 2, 3].map((i) => ({ "@type": "Question", name: t(`guide_black_faq${i}_q`), acceptedAnswer: { "@type": "Answer", text: t(`guide_black_faq${i}_a`) } })) }) }} />
 
       <GuideHero src="/img/hero-black-desert.webp" alt="Black Desert Egypt volcanic landscape" h1={t("guide_black_h1")} />
 
