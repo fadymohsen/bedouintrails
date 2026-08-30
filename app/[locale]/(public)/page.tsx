@@ -18,6 +18,8 @@ import styles from "@/components/home/home.module.scss";
 
 import { SITE_URL, buildAlternates } from "@/lib/seo";
 
+export const revalidate = 3600;
+
 export async function generateMetadata() {
   const t = await getTranslations();
   const locale = await getLocale();
