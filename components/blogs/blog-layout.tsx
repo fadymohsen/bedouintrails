@@ -48,7 +48,7 @@ export default function BlogLayout({
 }) {
   const currentTitle = localize(current.titleEn, current.titleAr, locale, current.titleI18n);
   const currentContent = localize(current.contentEn, current.contentAr, locale, current.contentI18n);
-  const currentUrl = `${SITE_URL}/blogs/${current.slug}`;
+  const currentUrl = `${SITE_URL}/${locale}/blogs/${current.slug}`;
 
   // Find the next blog in the sequence
   const currentIndex = blogs.findIndex((b) => b.slug === current.slug);
@@ -73,16 +73,35 @@ export default function BlogLayout({
     mainEntityOfPage: currentUrl,
   };
 
+  const faqJsonLd =
+    current.faqs && current.faqs.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: current.faqs.map((faq) => ({
+            "@type": "Question",
+            name: localize(faq.questionEn, faq.questionAr, locale, faq.questionI18n),
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: localize(faq.answerEn, faq.answerAr, locale, faq.answerI18n),
+            },
+          })),
+        }
+      : null;
+
   return (
     <div className={styles["blogs-page"]}>
       <Breadcrumbs
         items={[
-          { name: "Home", url: `${SITE_URL}/` },
-          { name: "Blogs", url: `${SITE_URL}/blogs` },
+          { name: "Home", url: `${SITE_URL}/${locale}` },
+          { name: "Blogs", url: `${SITE_URL}/${locale}/blogs` },
           { name: currentTitle, url: currentUrl },
         ]}
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      {faqJsonLd && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+      )}
 
       <main className={styles["content-section"]}>
         <article>
