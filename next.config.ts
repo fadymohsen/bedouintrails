@@ -55,36 +55,6 @@ const nextConfig: NextConfig = {
       permanent: true,
     },
 
-    // ── Dead Framer blog slugs — locale-prefixed ─────────────────────────
-    // Must come before generic /:locale/blogs/:slug to avoid chaining to 404
-    { source: "/:locale/blogs/egypt-desert-safari-cost-budget-guide", destination: "/:locale/blogs", permanent: true },
-    { source: "/:locale/blogs/what-to-pack-egypt-desert-safari", destination: "/:locale/blogs", permanent: true },
-    { source: "/:locale/blogs/is-egypt-desert-safe-to-visit", destination: "/:locale/blogs", permanent: true },
-    { source: "/:locale/blogs/best-time-visit-egypt-desert", destination: "/:locale/blogs", permanent: true },
-    { source: "/:locale/blogs/how-to-plan-egypt-desert-safari", destination: "/:locale/blogs", permanent: true },
-    { source: "/:locale/blogs/white-desert-camping-egypt", destination: "/:locale/blogs", permanent: true },
-    { source: "/:locale/blogs/fayoum-oasis-travel-guide", destination: "/:locale/blogs", permanent: true },
-    { source: "/:locale/blogs/dakhla-oasis-egypt-guide", destination: "/:locale/blogs", permanent: true },
-    { source: "/:locale/blogs/oasis-circle-egypt-complete-guide", destination: "/:locale/blogs", permanent: true },
-    { source: "/:locale/blogs/kharga-oasis-egypt-guide", destination: "/:locale/blogs", permanent: true },
-    { source: "/:locale/blogs/camel-safari-egypt-guide", destination: "/:locale/blogs", permanent: true },
-    { source: "/:locale/blogs/siwa-oasis-travel-guide", destination: "/:locale/blogs", permanent: true },
-
-    // ── Dead Framer blog slugs — no-locale ──────────────────────────────
-    // Must come before generic /blogs/:slug to avoid chaining to 404
-    { source: "/blogs/egypt-desert-safari-cost-budget-guide", destination: "/en/blogs", permanent: true },
-    { source: "/blogs/what-to-pack-egypt-desert-safari", destination: "/en/blogs", permanent: true },
-    { source: "/blogs/is-egypt-desert-safe-to-visit", destination: "/en/blogs", permanent: true },
-    { source: "/blogs/best-time-visit-egypt-desert", destination: "/en/blogs", permanent: true },
-    { source: "/blogs/how-to-plan-egypt-desert-safari", destination: "/en/blogs", permanent: true },
-    { source: "/blogs/white-desert-camping-egypt", destination: "/en/blogs", permanent: true },
-    { source: "/blogs/fayoum-oasis-travel-guide", destination: "/en/blogs", permanent: true },
-    { source: "/blogs/dakhla-oasis-egypt-guide", destination: "/en/blogs", permanent: true },
-    { source: "/blogs/oasis-circle-egypt-complete-guide", destination: "/en/blogs", permanent: true },
-    { source: "/blogs/kharga-oasis-egypt-guide", destination: "/en/blogs", permanent: true },
-    { source: "/blogs/camel-safari-egypt-guide", destination: "/en/blogs", permanent: true },
-    { source: "/blogs/siwa-oasis-travel-guide", destination: "/en/blogs", permanent: true },
-
     // ── No-locale generic redirects (add /en/ prefix) ────────────────────
     { source: "/journeys/:slug", destination: "/en/journeys/:slug", permanent: true },
     { source: "/blogs/:slug", destination: "/en/blogs/:slug", permanent: true },
