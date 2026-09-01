@@ -110,3 +110,20 @@ export async function deleteBlogFaqAction(blogId: number, faqId: number) {
   await deleteBlogFaq(faqId);
   revalidatePath(`/admin/blogs/${blogId}`);
 }
+
+export async function saveBlogRelatedTripsAction(blogId: number, trapIds: number[]): Promise<{ error?: string }> {
+  await requireAdmin("manage_website");
+  try {
+    const { prisma } = await import("@/lib/prisma");
+    await prisma.blogRelatedTrap.deleteMany({ where: { blogId } });
+    if (trapIds.length > 0) {
+      await prisma.blogRelatedTrap.createMany({
+        data: trapIds.map((trapId, i) => ({ blogId, trapId, sortOrder: i })),
+      });
+    }
+    revalidatePath(`/admin/blogs/${blogId}`);
+    return {};
+  } catch (err) {
+    return { error: err instanceof Error ? err.message : "Failed to save related trips." };
+  }
+}

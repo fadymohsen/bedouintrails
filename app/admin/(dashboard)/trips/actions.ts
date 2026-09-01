@@ -192,3 +192,20 @@ export async function deleteTrapDayCardAction(tripId: number, cardId: number): P
     return { error: err instanceof Error ? err.message : "Failed to delete card. Please try again." };
   }
 }
+
+export async function saveTripRelatedBlogsAction(tripId: number, blogIds: number[]): Promise<{ error?: string }> {
+  await requireAdmin("manage_trips");
+  try {
+    const { prisma } = await import("@/lib/prisma");
+    await prisma.trapRelatedBlog.deleteMany({ where: { trapId: tripId } });
+    if (blogIds.length > 0) {
+      await prisma.trapRelatedBlog.createMany({
+        data: blogIds.map((blogId, i) => ({ trapId: tripId, blogId, sortOrder: i })),
+      });
+    }
+    revalidatePath(`/admin/trips/${tripId}`);
+    return {};
+  } catch (err) {
+    return { error: err instanceof Error ? err.message : "Failed to save related blogs." };
+  }
+}

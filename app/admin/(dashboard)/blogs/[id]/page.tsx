@@ -1,9 +1,11 @@
 import { notFound } from "next/navigation";
 import { getBlogForAdmin } from "@/lib/services/adminBlogs";
 import { NotFoundError } from "@/lib/services/errors";
-import { updateBlogAction, deleteBlogAction } from "../actions";
+import { prisma } from "@/lib/prisma";
+import { updateBlogAction, deleteBlogAction, saveBlogRelatedTripsAction } from "../actions";
 import BlogForm from "@/components/admin/blog-form";
 import BlogFaqsManager from "@/components/admin/blog-faqs-manager";
+import RelatedLinksManager from "@/components/admin/related-links-manager";
 import styles from "@/components/admin/admin.module.scss";
 
 export default async function EditBlogPage({ params }: { params: Promise<{ id: string }> }) {
@@ -18,8 +20,22 @@ export default async function EditBlogPage({ params }: { params: Promise<{ id: s
     throw err;
   }
 
+  const [allTrips, currentRelatedTrips] = await Promise.all([
+    prisma.trap.findMany({
+      where: { status: "active" },
+      select: { id: true, nameEn: true },
+      orderBy: { nameEn: "asc" },
+    }),
+    prisma.blogRelatedTrap.findMany({
+      where: { blogId },
+      orderBy: { sortOrder: "asc" },
+      select: { trapId: true },
+    }),
+  ]);
+
   const boundUpdate = updateBlogAction.bind(null, blogId);
   const boundDelete = deleteBlogAction.bind(null, blogId);
+  const boundSaveRelatedTrips = saveBlogRelatedTripsAction.bind(null, blogId);
 
   return (
     <div>
@@ -63,6 +79,15 @@ export default async function EditBlogPage({ params }: { params: Promise<{ id: s
 
       <h2 style={{ fontSize: "1.1rem" }}>FAQs</h2>
       <BlogFaqsManager blogId={blogId} faqs={blog.faqs} />
+
+      <div className={styles.card} style={{ marginTop: 24 }}>
+        <RelatedLinksManager
+          title="Related Trips"
+          allOptions={allTrips.map((t) => ({ id: t.id, label: t.nameEn }))}
+          selectedIds={currentRelatedTrips.map((r) => r.trapId)}
+          onSave={boundSaveRelatedTrips}
+        />
+      </div>
     </div>
   );
 }

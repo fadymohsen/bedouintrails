@@ -4,7 +4,6 @@ import { prisma } from "@/lib/prisma";
 import { localize } from "@/lib/i18n/localized";
 import { getLocalFallbackImage } from "@/lib/image-fallback";
 import type { Locale } from "@/lib/i18n/config";
-import { tripToBlogs } from "@/lib/internal-links";
 import styles from "./related-blogs.module.scss";
 
 interface RelatedBlogsProps {
@@ -15,37 +14,43 @@ interface RelatedBlogsProps {
 }
 
 export default async function RelatedBlogs({ tripSlug, locale, heading, ctaLabel }: RelatedBlogsProps) {
-  const blogSlugs = tripToBlogs[tripSlug];
-  if (!blogSlugs || blogSlugs.length === 0) return null;
-
-  const blogs = await prisma.blog.findMany({
-    where: { slug: { in: blogSlugs }, isPublished: true },
+  const trap = await prisma.trap.findUnique({
+    where: { slug: tripSlug },
     select: {
-      id: true,
-      slug: true,
-      titleEn: true,
-      titleAr: true,
-      titleI18n: true,
-      excerptEn: true,
-      excerptAr: true,
-      excerptI18n: true,
-      image: true,
-      readingTime: true,
+      relatedBlogs: {
+        orderBy: { sortOrder: "asc" },
+        include: {
+          blog: {
+            select: {
+              id: true,
+              slug: true,
+              titleEn: true,
+              titleAr: true,
+              titleI18n: true,
+              excerptEn: true,
+              excerptAr: true,
+              excerptI18n: true,
+              image: true,
+              readingTime: true,
+              isPublished: true,
+            },
+          },
+        },
+      },
     },
   });
 
-  // Preserve the order from the mapping
-  const sorted = blogSlugs
-    .map((s) => blogs.find((b) => b.slug === s))
-    .filter((b): b is NonNullable<typeof b> => b != null);
+  const blogs = (trap?.relatedBlogs ?? [])
+    .map((r) => r.blog)
+    .filter((b) => b.isPublished);
 
-  if (sorted.length === 0) return null;
+  if (blogs.length === 0) return null;
 
   return (
     <div className={styles["related-blogs"]}>
       <h2>{heading}</h2>
       <div className={styles["related-grid"]}>
-        {sorted.map((blog) => {
+        {blogs.map((blog) => {
           const title = localize(
             blog.titleEn,
             blog.titleAr,

@@ -88,10 +88,12 @@ model Trap {
   createdAt         DateTime   @default(now()) @map("created_at")
   updatedAt         DateTime   @updatedAt @map("updated_at")
 
-  galleries Gallery[]
-  trapDays  TrapDay[]
-  orders    Order[]
-  reviews   Review[]
+  galleries    Gallery[]
+  trapDays     TrapDay[]
+  orders       Order[]
+  reviews      Review[]
+  relatedBlogs TrapRelatedBlog[]
+  linkedFromBlogs BlogRelatedTrap[]
 
   @@map("traps")
 }
@@ -274,9 +276,37 @@ model Blog {
   createdAt           DateTime  @default(now()) @map("created_at")
   updatedAt           DateTime  @updatedAt @map("updated_at")
 
-  faqs BlogFaq[]
+  faqs            BlogFaq[]
+  relatedTrips    BlogRelatedTrap[]
+  linkedFromTrips TrapRelatedBlog[]
 
   @@map("blogs")
+}
+
+model TrapRelatedBlog {
+  id        Int @id @default(autoincrement())
+  trapId    Int @map("trap_id")
+  blogId    Int @map("blog_id")
+  sortOrder Int @default(0) @map("sort_order")
+
+  trap Trap @relation(fields: [trapId], references: [id], onDelete: Cascade)
+  blog Blog @relation(fields: [blogId], references: [id], onDelete: Cascade)
+
+  @@unique([trapId, blogId])
+  @@map("trap_related_blogs")
+}
+
+model BlogRelatedTrap {
+  id        Int @id @default(autoincrement())
+  blogId    Int @map("blog_id")
+  trapId    Int @map("trap_id")
+  sortOrder Int @default(0) @map("sort_order")
+
+  blog Blog @relation(fields: [blogId], references: [id], onDelete: Cascade)
+  trap Trap @relation(fields: [trapId], references: [id], onDelete: Cascade)
+
+  @@unique([blogId, trapId])
+  @@map("blog_related_traps")
 }
 
 model BlogFaq {

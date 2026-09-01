@@ -1,8 +1,10 @@
 import { notFound } from "next/navigation";
 import { getTrapForAdmin } from "@/lib/services/adminTraps";
 import { NotFoundError } from "@/lib/services/errors";
-import { updateTrapAction, deleteTrapAction } from "../actions";
+import { prisma } from "@/lib/prisma";
+import { updateTrapAction, deleteTrapAction, saveTripRelatedBlogsAction } from "../actions";
 import TripEditTabs from "@/components/admin/trip-edit-tabs";
+import RelatedLinksManager from "@/components/admin/related-links-manager";
 import styles from "@/components/admin/admin.module.scss";
 
 export default async function EditTripPage({ params }: { params: Promise<{ id: string }> }) {
@@ -17,8 +19,22 @@ export default async function EditTripPage({ params }: { params: Promise<{ id: s
     throw err;
   }
 
+  const [allBlogs, currentRelatedBlogs] = await Promise.all([
+    prisma.blog.findMany({
+      where: { isPublished: true },
+      select: { id: true, titleEn: true },
+      orderBy: { titleEn: "asc" },
+    }),
+    prisma.trapRelatedBlog.findMany({
+      where: { trapId: tripId },
+      orderBy: { sortOrder: "asc" },
+      select: { blogId: true },
+    }),
+  ]);
+
   const boundUpdate = updateTrapAction.bind(null, tripId);
   const boundDelete = deleteTrapAction.bind(null, tripId);
+  const boundSaveRelatedBlogs = saveTripRelatedBlogsAction.bind(null, tripId);
 
   return (
     <div>
@@ -56,6 +72,15 @@ export default async function EditTripPage({ params }: { params: Promise<{ id: s
         days={trap.trapDays}
         images={trap.galleries}
       />
+
+      <div className={styles.card} style={{ marginTop: 24 }}>
+        <RelatedLinksManager
+          title="Related Blog Posts"
+          allOptions={allBlogs.map((b) => ({ id: b.id, label: b.titleEn }))}
+          selectedIds={currentRelatedBlogs.map((r) => r.blogId)}
+          onSave={boundSaveRelatedBlogs}
+        />
+      </div>
     </div>
   );
 }
