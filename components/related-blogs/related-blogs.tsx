@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { Link } from "@/lib/i18n/navigation";
 import { prisma } from "@/lib/prisma";
 import { localize } from "@/lib/i18n/localized";
 import { getLocalFallbackImage } from "@/lib/image-fallback";
@@ -67,7 +66,7 @@ export default async function RelatedBlogs({ tripSlug, locale, heading, ctaLabel
           const image = blog.image ? getLocalFallbackImage(blog.image) : "/img/adventure.webp";
 
           return (
-            <Link key={blog.id} href={`/blogs/${blog.slug}`} className={styles["blog-card"]}>
+            <a key={blog.id} href={`/${locale}/blogs/${blog.slug}`} className={styles["blog-card"]}>
               <div className={styles["blog-image"]}>
                 <Image src={image} alt={title} fill style={{ objectFit: "cover" }} />
               </div>
@@ -79,7 +78,7 @@ export default async function RelatedBlogs({ tripSlug, locale, heading, ctaLabel
                 )}
                 <span className={styles["blog-cta"]}>{ctaLabel} →</span>
               </div>
-            </Link>
+            </a>
           );
         })}
       </div>
