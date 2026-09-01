@@ -32,7 +32,7 @@ export default function JourneysFilterGrid({
 
   return (
     <>
-      <PageHero title={t("journeys_title")} image="/img/hero-journeys.webp" eyebrow={t("journeys")} backgroundPosition="center" />
+      <PageHero title={t("journeys_title")} image="/journeys hero section.jpeg" eyebrow={t("journeys")} backgroundPosition="center" />
 
       <div className={styles.filterBar}>
         <div className={styles.filter}>
