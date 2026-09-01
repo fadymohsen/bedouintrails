@@ -5,8 +5,12 @@
   width: 100%;
   max-width: fr.$section-max-width;
   margin: l.$space-6 auto 0;
-  padding-top: l.$space-5;
+  padding: l.$space-5 l.$gutter l.$space-8;
   border-top: 1px solid hsla(0, 0%, 100%, 0.1);
+
+  @media (max-width: 992px) {
+    padding: l.$space-5 24px l.$space-8;
+  }
 
   h2 {
     color: fr.$text-heading;
