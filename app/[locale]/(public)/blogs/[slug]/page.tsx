@@ -7,6 +7,7 @@ import { localize } from "@/lib/i18n/localized";
 import { getLocalFallbackImage } from "@/lib/image-fallback";
 import type { Locale } from "@/lib/i18n/config";
 import BlogLayout from "@/components/blogs/blog-layout";
+import RelatedTripsForBlog from "@/components/related-trips-for-blog/related-trips-for-blog";
 
 import { SITE_URL, buildAlternates } from "@/lib/seo";
 
@@ -96,6 +97,12 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
       <BlogLayout blogs={blogs} current={blog} locale={locale} t={t} />
+      <RelatedTripsForBlog
+        blogSlug={slug}
+        locale={locale}
+        heading={t("related_trips_title") || "Related Trips"}
+        ctaLabel={t("view_trip") || "View Trip"}
+      />
     </>
   );
 }

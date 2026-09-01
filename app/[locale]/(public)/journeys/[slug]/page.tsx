@@ -16,6 +16,7 @@ import TripHeroCarousel from "@/components/carousel/trip-hero-carousel";
 import TripDayViewer from "@/components/trip-detail/trip-day-viewer";
 import TripCarousel from "@/components/carousel/trip-carousel";
 import Card from "@/components/card/card";
+import RelatedBlogs from "@/components/related-blogs/related-blogs";
 import styles from "@/components/trip-detail/trip-detail.module.scss";
 
 import { SITE_URL, buildAlternates } from "@/lib/seo";
@@ -202,6 +203,12 @@ export default async function TripDetailPage({ params }: { params: Promise<{ slu
           </div>
         </div>
       )}
+      <RelatedBlogs
+        tripSlug={slug}
+        locale={locale}
+        heading={t("related_blogs_title") || "Travel Guides"}
+        ctaLabel={t("read_story") || "Read Story"}
+      />
     </div>
   );
 }
