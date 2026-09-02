@@ -125,7 +125,7 @@ export default async function ArticlesPage() {
                       src={blog.image ? getLocalFallbackImage(blog.image) : `/img/adventure${i % 3 === 0 ? "" : i % 3 === 1 ? "1" : "3"}.webp`}
                       alt={title}
                       fill
-                      style={{ objectFit: "cover", objectPosition: "center 30%" }}
+                      style={{ objectFit: "cover", objectPosition: "center 80%" }}
                     />
                   </div>
                   <div className={styles["card-content"]}>
