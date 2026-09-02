@@ -164,7 +164,7 @@ export default async function ArticlesPage() {
                   src={guide.img}
                   alt={t(guide.key as Parameters<typeof t>[0])}
                   fill
-                  style={{ objectFit: "cover" }}
+                  style={{ objectFit: "cover", objectPosition: "center 80%" }}
                 />
               </div>
               <div className={styles["card-content"]}>
