@@ -64,7 +64,7 @@ export default async function EgyptSafariToursPage() {
         ]}
       />
 
-      <GuideHero src="/img/egypt-safari-camel-trek.webp" alt="Egypt safari tours camel trekking White Desert" h1={t("guide_safaritours_h1")} />
+      <GuideHero src="/img/egypt-safari-camel-trek.webp" alt="Egypt safari tours camel trekking White Desert" h1={t("guide_safaritours_h1")} objectPosition="center 80%" />
 
       <div className={styles["guide-content"]}>
         <p>{t("guide_safaritours_intro_p")}</p>
