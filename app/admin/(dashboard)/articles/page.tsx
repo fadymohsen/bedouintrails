@@ -9,9 +9,14 @@ export default async function AdminArticlesPage() {
     <div>
       <div className={styles.header}>
         <h1 className={styles.title}>Articles</h1>
-        <Link href="/admin/articles/new" className={styles.primaryBtn}>
-          + New Article
-        </Link>
+        <div style={{ display: "flex", gap: "12px" }}>
+          <Link href="/admin/articles/guides" className={styles.linkBtn}>
+            Travel Guides
+          </Link>
+          <Link href="/admin/articles/new" className={styles.primaryBtn}>
+            + New Article
+          </Link>
+        </div>
       </div>
 
       <div className={styles.card}>

@@ -60,7 +60,7 @@ export default async function DesertSafetyPage() {
         ]}
       />
 
-      <GuideHero src="/img/adventure4.webp" alt="Desert safety guide Egypt Western Desert" h1={t("guide_safety_h1")} />
+      <GuideHero src="/img/adventure4.webp" alt="Desert safety guide Egypt Western Desert" h1={t("guide_safety_h1")} path={PATH} />
 
       <div className={styles["guide-content"]}>
         <p>{t("guide_safety_intro")}</p>

@@ -60,7 +60,7 @@ export default async function StargazingPage() {
         ]}
       />
 
-      <GuideHero src="/img/night-camp.webp" alt="Stargazing Western Desert Egypt night sky Milky Way" h1={t("guide_stars_h1")} />
+      <GuideHero src="/img/night-camp.webp" alt="Stargazing Western Desert Egypt night sky Milky Way" h1={t("guide_stars_h1")} path={PATH} />
 
       <div className={styles["guide-content"]}>
         <p>{t("guide_stars_intro_p")}</p>

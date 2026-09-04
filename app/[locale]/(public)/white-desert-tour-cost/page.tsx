@@ -60,7 +60,7 @@ export default async function TourCostPage() {
         ]}
       />
 
-      <GuideHero src="/img/white-desert-camping.webp" alt="White Desert tour cost price guide Egypt" h1={t("guide_cost_h1")} />
+      <GuideHero src="/img/white-desert-camping.webp" alt="White Desert tour cost price guide Egypt" h1={t("guide_cost_h1")} path={PATH} />
 
       <div className={styles["guide-content"]}>
         <p>{t("guide_cost_intro_p")}</p>

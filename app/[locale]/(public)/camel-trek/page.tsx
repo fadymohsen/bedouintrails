@@ -65,7 +65,7 @@ export default async function CamelTrekPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: [1, 2, 3].map((i) => ({ "@type": "Question", name: t(`guide_camel_faq${i}_q`), acceptedAnswer: { "@type": "Answer", text: t(`guide_camel_faq${i}_a`) } })) }) }} />
 
-      <GuideHero src="/img/camel-ride.webp" alt="Camel trek Egypt Western Desert" h1={t("guide_camel_h1")} />
+      <GuideHero src="/img/camel-ride.webp" alt="Camel trek Egypt Western Desert" h1={t("guide_camel_h1")} path={PATH} />
 
       <div className={styles["guide-content"]}>
         <p>{t("guide_camel_intro_p")}</p>

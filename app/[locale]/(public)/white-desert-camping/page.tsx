@@ -64,7 +64,7 @@ export default async function WhiteDesertCampingPage() {
         ]}
       />
 
-      <GuideHero src="/img/white-desert-camping.webp" alt="White Desert camping overnight experience Egypt" h1={t("guide_camping_h1")} />
+      <GuideHero src="/img/white-desert-camping.webp" alt="White Desert camping overnight experience Egypt" h1={t("guide_camping_h1")} path={PATH} />
 
       <div className={styles["guide-content"]}>
         <p>{t("guide_camping_intro_p")}</p>

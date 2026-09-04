@@ -66,7 +66,7 @@ export default async function WhiteDesertEgyptPage() {
         ]}
       />
 
-      <GuideHero src="/img/bg.webp" alt="White Desert Egypt chalk rock formations" h1={t("guide_wd_h1")} />
+      <GuideHero src="/img/bg.webp" alt="White Desert Egypt chalk rock formations" h1={t("guide_wd_h1")} path={PATH} />
 
       <div className={styles["guide-content"]}>
         <p>{t("guide_wd_intro_p")}</p>

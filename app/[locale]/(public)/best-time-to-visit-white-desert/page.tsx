@@ -59,7 +59,7 @@ export default async function BestTimePage() {
         ]}
       />
 
-      <GuideHero src="/img/western-desert-hero.webp" alt="Best time to visit White Desert Egypt weather guide" h1={t("guide_besttime_h1")} />
+      <GuideHero src="/img/western-desert-hero.webp" alt="Best time to visit White Desert Egypt weather guide" h1={t("guide_besttime_h1")} path={PATH} />
 
       <div className={styles["guide-content"]}>
         <p>{t("guide_besttime_intro_p")}</p>

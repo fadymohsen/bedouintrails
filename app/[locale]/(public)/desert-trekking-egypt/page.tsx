@@ -74,7 +74,7 @@ export default async function DesertTrekkingEgyptPage() {
         ]}
       />
 
-      <GuideHero src="/img/hero-desert-trekking.webp" alt="Desert trekking Egypt hiking trails" h1={t("guide_dtrek_h1")} />
+      <GuideHero src="/img/hero-desert-trekking.webp" alt="Desert trekking Egypt hiking trails" h1={t("guide_dtrek_h1")} path={PATH} />
 
       <div className={styles["guide-content"]}>
         <p>{t("guide_dtrek_intro_p")}</p>

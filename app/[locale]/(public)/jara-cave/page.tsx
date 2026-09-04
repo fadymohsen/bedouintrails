@@ -74,7 +74,7 @@ export default async function JaraCavePage() {
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <GuideHero src="/img/hero-jara-cave.webp" alt="Jara Cave prehistoric rock art Egypt Western Desert" h1={t("guide_djara_h1")} />
+      <GuideHero src="/img/hero-jara-cave.webp" alt="Jara Cave prehistoric rock art Egypt Western Desert" h1={t("guide_djara_h1")} path={PATH} />
 
       <div className={styles["guide-content"]}>
         <p>{t("guide_djara_intro_p")}</p>

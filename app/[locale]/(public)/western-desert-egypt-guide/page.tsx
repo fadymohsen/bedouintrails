@@ -64,7 +64,7 @@ export default async function WesternDesertGuidePage() {
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <GuideHero src="/img/western-desert-hero.webp" alt="Western Desert Egypt guide landscape" h1={t("guide_western_h1")} />
+      <GuideHero src="/img/western-desert-hero.webp" alt="Western Desert Egypt guide landscape" h1={t("guide_western_h1")} path={PATH} />
 
       <div className={styles["guide-content"]}>
         <p>{t("guide_western_intro_p1")}</p>

@@ -58,7 +58,7 @@ export default async function PackingGuidePage() {
         ]}
       />
 
-      <GuideHero src="/img/adventure.webp" alt="What to pack for White Desert Egypt packing list" h1={t("guide_packing_h1")} />
+      <GuideHero src="/img/adventure.webp" alt="What to pack for White Desert Egypt packing list" h1={t("guide_packing_h1")} path={PATH} />
 
       <div className={styles["guide-content"]}>
         <p>{t("guide_packing_intro_p")}</p>

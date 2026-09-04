@@ -69,7 +69,7 @@ export default async function WhiteDesertSafariPage() {
         ]}
       />
 
-      <GuideHero src="/img/hero-white-desert-safari.webp" alt="White Desert safari Egypt overnight tour" h1={t("guide_wdsafari_h1")} objectPosition="center bottom" />
+      <GuideHero src="/img/hero-white-desert-safari.webp" alt="White Desert safari Egypt overnight tour" h1={t("guide_wdsafari_h1")} objectPosition="center bottom" path={PATH} />
 
       <div className={styles["guide-content"]}>
         <p>{t("guide_wdsafari_intro_p")}</p>

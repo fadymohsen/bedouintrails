@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
 import { listPublishedBlogs } from "@/lib/services/blogs";
+import { listVisibleTravelGuides } from "@/lib/services/adminTravelGuides";
 import type { Locale } from "@/lib/i18n/config";
 import { localize } from "@/lib/i18n/localized";
 import { getLocalFallbackImage } from "@/lib/image-fallback";
@@ -15,22 +16,8 @@ import { SITE_URL, buildAlternates } from "@/lib/seo";
 
 export const revalidate = 3600;
 
-export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations();
-  const locale = await getLocale();
-  const title = t("meta_title_articles");
-  const description = t("meta_desc_articles");
-  const url = `${SITE_URL}/${locale}/articles`;
-  return {
-    title,
-    description,
-    alternates: buildAlternates("/articles", locale),
-    openGraph: { title, description, url, images: [`${SITE_URL}/img/hero-articles.webp`] },
-    twitter: { card: "summary_large_image", title, description, images: [`${SITE_URL}/img/hero-articles.webp`] },
-  };
-}
-
-const GUIDE_LINKS = [
+/* Hardcoded fallback used when DB is empty (first deploy before seeding) */
+const GUIDE_LINKS_FALLBACK = [
   { path: "/white-desert-tour-from-cairo", key: "guide_whitetour_breadcrumb", img: "/img/hero-white-desert-tour-cairo.webp" },
   { path: "/egypt-safari-tours", key: "guide_safaritours_breadcrumb", img: "/img/egypt-safari-camel-trek.webp" },
   { path: "/bahariya-oasis", key: "guide_bahariya_breadcrumb", img: "/img/bahariya-oasis-palms.webp" },
@@ -48,11 +35,31 @@ const GUIDE_LINKS = [
   { path: "/western-desert-egypt-guide", key: "guide_western_breadcrumb", img: "/img/western-desert-hero.webp" },
 ];
 
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations();
+  const locale = await getLocale();
+  const title = t("meta_title_articles");
+  const description = t("meta_desc_articles");
+  const url = `${SITE_URL}/${locale}/articles`;
+  return {
+    title,
+    description,
+    alternates: buildAlternates("/articles", locale),
+    openGraph: { title, description, url, images: [`${SITE_URL}/img/hero-articles.webp`] },
+    twitter: { card: "summary_large_image", title, description, images: [`${SITE_URL}/img/hero-articles.webp`] },
+  };
+}
+
 export default async function ArticlesPage() {
   const locale = (await getLocale()) as Locale;
   const t = await getTranslations();
-  const blogs = await listPublishedBlogs();
+  const [blogs, dbGuides] = await Promise.all([listPublishedBlogs(), listVisibleTravelGuides()]);
   const url = `${SITE_URL}/${locale}/articles`;
+
+  // Use DB guides if available, otherwise fallback to hardcoded list
+  const guides = dbGuides.length > 0
+    ? dbGuides.map((g) => ({ path: g.path, key: g.translationKey, img: g.image ?? "/img/western-desert-hero.webp" }))
+    : GUIDE_LINKS_FALLBACK;
 
   const itemListJsonLd = {
     "@context": "https://schema.org",
@@ -60,7 +67,7 @@ export default async function ArticlesPage() {
     name: "Egypt Desert Travel Guides & Blog Articles — Bedouin Trails",
     description: "Complete collection of Egypt desert travel guides, safari resources, and blog articles by Bedouin Trails.",
     url,
-    numberOfItems: GUIDE_LINKS.length + blogs.length,
+    numberOfItems: guides.length + blogs.length,
     itemListElement: [
       ...blogs.map((blog, i) => ({
         "@type": "ListItem",
@@ -68,7 +75,7 @@ export default async function ArticlesPage() {
         url: `${SITE_URL}/${locale}/blogs/${blog.slug}`,
         name: localize(blog.titleEn, blog.titleAr, locale, blog.titleI18n as Record<string, string> | null),
       })),
-      ...GUIDE_LINKS.map((guide, i) => ({
+      ...guides.map((guide, i) => ({
         "@type": "ListItem",
         position: blogs.length + i + 1,
         url: `${SITE_URL}/${locale}${guide.path}`,
@@ -157,7 +164,7 @@ export default async function ArticlesPage() {
           {t("articles_guides_heading")}
         </h2>
         <div className={styles["blogs-grid"]}>
-          {GUIDE_LINKS.map((guide) => (
+          {guides.map((guide) => (
             <Link href={guide.path} key={guide.path} className={styles["blog-card"]}>
               <div className={styles["card-image-wrapper"]}>
                 <SafeImage

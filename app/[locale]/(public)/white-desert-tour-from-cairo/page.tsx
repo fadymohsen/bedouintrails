@@ -65,7 +65,7 @@ export default async function WhiteDesertTourPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: [1, 2, 3, 4].map((i) => ({ "@type": "Question", name: t(`guide_whitetour_faq${i}_q`), acceptedAnswer: { "@type": "Answer", text: t(`guide_whitetour_faq${i}_a`) } })) }) }} />
 
-      <GuideHero src="/img/hero-white-desert-tour-cairo.webp" alt="White Desert tour from Cairo Egypt" h1={t("guide_whitetour_h1")} />
+      <GuideHero src="/img/hero-white-desert-tour-cairo.webp" alt="White Desert tour from Cairo Egypt" h1={t("guide_whitetour_h1")} path={PATH} />
 
       <div className={styles["guide-content"]}>
         <p>{t("guide_whitetour_intro_p")}</p>

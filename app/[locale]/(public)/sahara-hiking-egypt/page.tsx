@@ -66,7 +66,7 @@ export default async function SaharaHikingEgyptPage() {
         ]}
       />
 
-      <GuideHero src="/img/hero-desert-trekking.webp" alt="Sahara hiking tour Egypt Western Desert" h1={t("guide_hiking_h1")} />
+      <GuideHero src="/img/hero-desert-trekking.webp" alt="Sahara hiking tour Egypt Western Desert" h1={t("guide_hiking_h1")} path={PATH} />
 
       <div className={styles["guide-content"]}>
         <p>{t("guide_hiking_intro_p")}</p>

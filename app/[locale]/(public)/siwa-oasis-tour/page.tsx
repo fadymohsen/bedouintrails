@@ -87,7 +87,7 @@ export default async function SiwaOasisTourPage() {
         ]}
       />
 
-      <GuideHero src="/img/hero-siwa-oasis.webp" alt="Siwa Oasis Egypt Great Sand Sea tour" h1={t("guide_siwa_h1")} />
+      <GuideHero src="/img/hero-siwa-oasis.webp" alt="Siwa Oasis Egypt Great Sand Sea tour" h1={t("guide_siwa_h1")} path={PATH} />
 
       <div className={styles["guide-content"]}>
         <p>{t("guide_siwa_intro_p")}</p>

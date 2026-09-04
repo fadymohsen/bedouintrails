@@ -231,6 +231,21 @@ model Article {
   @@map("articles")
 }
 
+model TravelGuide {
+  id              Int      @id @default(autoincrement())
+  path            String   @unique
+  translationKey  String   @map("translation_key")
+  image           String?
+  heroImage       String?  @map("hero_image")
+  heroPosition    String?  @default("center") @map("hero_position")
+  sortOrder       Int      @default(0) @map("sort_order")
+  visible         Boolean  @default(true)
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  @@map("travel_guides")
+}
+
 model AboutUs {
   id              Int      @id @default(autoincrement())
   titleEn         String   @map("title_en")

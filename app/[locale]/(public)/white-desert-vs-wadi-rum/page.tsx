@@ -60,7 +60,7 @@ export default async function WhiteDesertVsWadiRumPage() {
         ]}
       />
 
-      <GuideHero src="/img/western-desert-hero.webp" alt="White Desert Egypt vs Wadi Rum Jordan comparison" h1={t("guide_compare_h1")} />
+      <GuideHero src="/img/western-desert-hero.webp" alt="White Desert Egypt vs Wadi Rum Jordan comparison" h1={t("guide_compare_h1")} path={PATH} />
 
       <div className={styles["guide-content"]}>
         <p>{t("guide_compare_intro_p")}</p>

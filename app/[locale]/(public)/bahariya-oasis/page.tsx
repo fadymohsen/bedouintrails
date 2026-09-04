@@ -65,7 +65,7 @@ export default async function BahariyaOasisPage() {
         ]}
       />
 
-      <GuideHero src="/img/bahariya-oasis-palms.webp" alt="Bahariya Oasis palm trees Western Desert Egypt" h1={t("guide_bahariya_h1")} />
+      <GuideHero src="/img/bahariya-oasis-palms.webp" alt="Bahariya Oasis palm trees Western Desert Egypt" h1={t("guide_bahariya_h1")} path={PATH} />
 
       <div className={styles["guide-content"]}>
         <p>{t("guide_bahariya_intro_p")}</p>

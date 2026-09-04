@@ -59,7 +59,7 @@ export default async function HowToGetTherePage() {
         ]}
       />
 
-      <GuideHero src="/img/western-desert-hero.webp" alt="How to get to White Desert Egypt" h1={t("guide_howto_h1")} />
+      <GuideHero src="/img/western-desert-hero.webp" alt="How to get to White Desert Egypt" h1={t("guide_howto_h1")} path={PATH} />
 
       <div className={styles["guide-content"]}>
         <p>{t("guide_howto_intro_p")}</p>

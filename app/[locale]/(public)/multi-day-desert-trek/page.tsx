@@ -64,7 +64,7 @@ export default async function MultiDayDesertTrekPage() {
         ]}
       />
 
-      <GuideHero src="/img/hero-multi-day-trek.webp" alt="Multi-day desert trek Egypt Sahara hiking" h1={t("guide_trek_h1")} />
+      <GuideHero src="/img/hero-multi-day-trek.webp" alt="Multi-day desert trek Egypt Sahara hiking" h1={t("guide_trek_h1")} path={PATH} />
 
       <div className={styles["guide-content"]}>
         <p>{t("guide_trek_intro_p")}</p>

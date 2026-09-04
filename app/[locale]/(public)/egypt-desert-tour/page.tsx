@@ -66,7 +66,7 @@ export default async function EgyptDesertTourPage() {
         ]}
       />
 
-      <GuideHero src="/img/western-desert-hero.webp" alt="Egypt desert tour Western Desert landscape" h1={t("guide_edt_h1")} />
+      <GuideHero src="/img/western-desert-hero.webp" alt="Egypt desert tour Western Desert landscape" h1={t("guide_edt_h1")} path={PATH} />
 
       <div className={styles["guide-content"]}>
         <p>{t("guide_edt_intro_p")}</p>
