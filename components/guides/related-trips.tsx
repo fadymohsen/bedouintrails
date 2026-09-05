@@ -10,23 +10,35 @@ interface RelatedTripsProps {
   locale: Locale;
   heading: string;
   ctaLabel: string;
+  /** When provided, show only these specific trips (by ID) in order */
+  tripIds?: number[];
 }
 
-export default async function RelatedTrips({ locale, heading, ctaLabel }: RelatedTripsProps) {
-  const traps = await prisma.trap.findMany({
-    where: { status: "active" },
-    take: 3,
-    orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }],
-    include: { galleries: { take: 1, orderBy: { id: "asc" } } },
-  });
+export default async function RelatedTrips({ locale, heading, ctaLabel, tripIds }: RelatedTripsProps) {
+  const traps = tripIds
+    ? await prisma.trap.findMany({
+        where: { id: { in: tripIds }, status: "active" },
+        include: { galleries: { take: 1, orderBy: { id: "asc" } } },
+      })
+    : await prisma.trap.findMany({
+        where: { status: "active" },
+        take: 3,
+        orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }],
+        include: { galleries: { take: 1, orderBy: { id: "asc" } } },
+      });
 
-  if (traps.length === 0) return null;
+  // Preserve tripIds order when specified
+  const ordered = tripIds
+    ? tripIds.map((id) => traps.find((t) => t.id === id)).filter(Boolean) as typeof traps
+    : traps;
+
+  if (ordered.length === 0) return null;
 
   return (
     <div className={styles["related-trips"]}>
       <h2>{heading}</h2>
       <div className={styles["related-grid"]}>
-        {traps.map((trap) => {
+        {ordered.map((trap) => {
           const name = localize(trap.nameEn, trap.nameAr, locale, trap.nameI18n as Record<string, string> | null);
           const image = trap.galleries[0]?.image ? getLocalFallbackImage(trap.galleries[0].image) : "/img/adventure.webp";
           return (

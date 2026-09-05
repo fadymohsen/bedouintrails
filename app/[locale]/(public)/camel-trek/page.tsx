@@ -117,7 +117,7 @@ export default async function CamelTrekPage() {
           ))}
         </div>
 
-        <RelatedTrips locale={locale as Locale} heading="Featured Desert Tours" ctaLabel="View Tour" />
+        <RelatedTrips locale={locale as Locale} heading="Featured Desert Tours" ctaLabel="View Tour" tripIds={[42, 43, 30]} />
 
         <div className={styles["cta-section"]}>
           <p>{t("guide_camel_cta")}</p>
