@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useTranslations } from "next-intl";
-import { apiPost, ApiClientError } from "@/lib/api-client";
 import styles from "./lead-popup.module.scss";
 
 const DISMISS_KEY = "leadPopupDismissed";
@@ -16,8 +15,6 @@ export default function LeadPopup() {
   const [visible, setVisible] = useState(false);
   const [formData, setFormData] = useState({ name: "", phone: "" });
   const [errors, setErrors] = useState<FormErrors>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<{ type: "success" | "error"; message: string } | null>(null);
   const shownRef = useRef(false);
 
   useEffect(() => {
@@ -69,19 +66,11 @@ export default function LeadPopup() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!validateForm()) return;
-    setIsSubmitting(true);
-    setSubmitStatus(null);
 
-    try {
-      await apiPost("/api/leads", formData);
-      setSubmitStatus({ type: "success", message: t("popup_success") });
-      setFormData({ name: "", phone: "" });
-      setTimeout(dismiss, 2000);
-    } catch (err) {
-      setSubmitStatus({ type: "error", message: err instanceof ApiClientError ? err.message : t("network_error") });
-    } finally {
-      setIsSubmitting(false);
-    }
+    const msg = `New lead from website:\nName: ${formData.name}\nPhone: ${formData.phone}`;
+    const waUrl = `https://wa.me/201002717380?text=${encodeURIComponent(msg)}`;
+    window.open(waUrl, "_blank", "noopener,noreferrer");
+    dismiss();
   }
 
   if (!visible) return null;
@@ -123,16 +112,10 @@ export default function LeadPopup() {
             {errors.phone && <span className={styles.fieldError}>{errors.phone}</span>}
           </div>
 
-          <button type="submit" className={styles.submitButton} disabled={isSubmitting}>
-            {isSubmitting ? `${t("submit")}...` : t("popup_submit")}
+          <button type="submit" className={styles.submitButton}>
+            {t("popup_submit")}
           </button>
         </form>
-
-        {submitStatus && (
-          <div className={`${styles.statusMessage} ${styles[submitStatus.type]}`}>
-            <p>{submitStatus.message}</p>
-          </div>
-        )}
       </div>
     </div>
   );
