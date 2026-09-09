@@ -1724,5 +1724,11 @@
   "why_choose_us_3_title": "Exclusieve routes buiten de gebaande paden",
   "write_your_comment": "Schrijf hier je opmerking...",
   "your_email": "Je E-mail",
-  "your_message": "Je bericht"
+  "your_message": "Je bericht",
+  "popup_headline": "Het Safariseizoen Begint Over Een Maand! 🚙",
+  "popup_body": "Maak je klaar! Er komen geweldige safariprogramma's aan. Laat hieronder je gegevens achter en ons team belt je om exclusieve aanbiedingen te delen en het perfecte programma voor jou samen te stellen.",
+  "popup_name_label": "Naam",
+  "popup_phone_label": "Telefoonnummer",
+  "popup_submit": "Ontvang Aangepaste Aanbiedingen",
+  "popup_success": "Bedankt! We nemen binnenkort contact met je op."
 }

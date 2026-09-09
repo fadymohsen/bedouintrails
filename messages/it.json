@@ -1724,5 +1724,11 @@
   "why_choose_us_3_title": "Percorsi esclusivi fuori dai sentieri battuti",
   "write_your_comment": "Scrivi qui il tuo commento...",
   "your_email": "La Tua Email",
-  "your_message": "Il tuo messaggio"
+  "your_message": "Il tuo messaggio",
+  "popup_headline": "La Stagione Safari Inizia Tra Un Mese! 🚙",
+  "popup_body": "Preparati! Abbiamo fantastici programmi safari in arrivo. Lascia i tuoi dati qui sotto e il nostro team ti chiamerà per condividere offerte esclusive e personalizzare il programma perfetto per te.",
+  "popup_name_label": "Nome",
+  "popup_phone_label": "Numero di Telefono",
+  "popup_submit": "Ottieni Offerte Personalizzate",
+  "popup_success": "Grazie! Ti contatteremo presto."
 }

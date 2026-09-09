@@ -1724,5 +1724,11 @@
   "why_choose_us_3_title": "Itinéraires exclusifs hors des sentiers battus",
   "write_your_comment": "Écrivez votre commentaire ici...",
   "your_email": "Votre E-mail",
-  "your_message": "Votre message"
+  "your_message": "Votre message",
+  "popup_headline": "La Saison Safari Commence Dans Un Mois ! 🚙",
+  "popup_body": "Préparez-vous ! Nous avons des programmes safari incroyables à venir. Laissez vos coordonnées ci-dessous, et notre équipe vous appellera pour partager des offres exclusives et personnaliser le programme parfait pour vous.",
+  "popup_name_label": "Nom",
+  "popup_phone_label": "Numéro de Téléphone",
+  "popup_submit": "Obtenir des Offres Personnalisées",
+  "popup_success": "Merci ! Nous vous contacterons bientôt."
 }

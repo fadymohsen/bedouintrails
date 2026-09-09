@@ -1724,5 +1724,11 @@
   "why_choose_us_3_title": "Rutas exclusivas fuera de lo común",
   "write_your_comment": "Escribe tu comentario aquí...",
   "your_email": "Tu Correo",
-  "your_message": "Tu mensaje"
+  "your_message": "Tu mensaje",
+  "popup_headline": "¡La Temporada de Safari Comienza en Un Mes! 🚙",
+  "popup_body": "¡Prepárate! Tenemos increíbles programas de safari próximamente. Deja tus datos abajo y nuestro equipo te llamará para compartir ofertas exclusivas y personalizar el programa perfecto para ti.",
+  "popup_name_label": "Nombre",
+  "popup_phone_label": "Número de Teléfono",
+  "popup_submit": "Obtener Ofertas Personalizadas",
+  "popup_success": "¡Gracias! Nos pondremos en contacto contigo pronto."
 }

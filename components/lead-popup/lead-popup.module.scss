@@ -1,0 +1,159 @@
+@use "@/styles/variables" as v;
+
+$primary-gold: v.$gold-primary;
+$dark-gold: v.$gold-dark;
+$white: v.$gold-white;
+$light-bg: v.$gold-light-bg;
+$text-dark: v.$gold-text-dark;
+$text-light: v.$gold-text-light;
+$error-red: v.$gold-error;
+$success-green: v.$gold-success;
+$border-color: v.$gold-border;
+
+$font-display: v.$font-display;
+$font-body: v.$font-body;
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  z-index: 1100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal {
+  position: relative;
+  background: $white;
+  max-width: 460px;
+  width: 100%;
+  padding: 40px 32px 32px;
+  border-radius: 16px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  .closeButton {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: $light-bg;
+    color: $text-light;
+    border-radius: 50%;
+    font-size: 1.3rem;
+    line-height: 1;
+    cursor: pointer;
+
+    html[dir="rtl"] & {
+      right: auto;
+      left: 14px;
+    }
+  }
+
+  .headline {
+    font-family: $font-display;
+    font-size: 1.5rem;
+    color: $text-dark;
+    margin: 0;
+  }
+
+  .body {
+    font-family: $font-body;
+    font-size: 0.95rem;
+    color: $text-light;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    text-align: left;
+
+    html[dir="rtl"] & {
+      text-align: right;
+    }
+  }
+
+  .formField {
+    display: flex;
+    flex-direction: column;
+
+    label {
+      font-family: $font-body;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: $text-light;
+      margin-bottom: 6px;
+    }
+
+    input {
+      font-family: $font-body;
+      padding: 12px 14px;
+      border: 1px solid $border-color;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      color: $text-dark;
+      background: $white;
+
+      &:focus {
+        outline: none;
+        border-color: $primary-gold;
+      }
+
+      &.error {
+        border-color: $error-red;
+      }
+    }
+  }
+
+  .fieldError {
+    font-family: $font-body;
+    font-size: 0.8rem;
+    color: $error-red;
+    margin-top: 4px;
+  }
+
+  .submitButton {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(90deg, $primary-gold, $dark-gold);
+    color: $white;
+    border: none;
+    border-radius: 10px;
+    font-family: $font-body;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 4px;
+
+    &:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+  }
+
+  .statusMessage {
+    font-family: $font-body;
+    font-size: 0.9rem;
+    border-radius: 10px;
+    padding: 10px;
+
+    &.success {
+      color: $success-green;
+    }
+
+    &.error {
+      color: $error-red;
+    }
+  }
+}

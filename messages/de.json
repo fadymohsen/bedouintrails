@@ -1724,5 +1724,11 @@
   "rg_western": "Reiseführer Westliche Wüste Ägypten",
   "rg_white_desert": "Reiseführer Weiße Wüste Ägypten",
   "rg_white_safari": "Weiße-Wüste-Safari",
-  "rg_white_tour": "Weiße-Wüste-Tour ab Kairo"
+  "rg_white_tour": "Weiße-Wüste-Tour ab Kairo",
+  "popup_headline": "Die Safari-Saison Beginnt in Einem Monat! 🚙",
+  "popup_body": "Mach dich bereit! Wir haben tolle Safariprogramme in Vorbereitung. Hinterlasse unten deine Daten, und unser Team ruft dich an, um exklusive Angebote zu teilen und das perfekte Programm für dich zusammenzustellen.",
+  "popup_name_label": "Name",
+  "popup_phone_label": "Telefonnummer",
+  "popup_submit": "Individuelles Angebot Erhalten",
+  "popup_success": "Danke! Wir melden uns bald bei dir."
 }

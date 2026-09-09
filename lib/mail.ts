@@ -44,3 +44,21 @@ export async function sendContactEmail(input: { name: string; email: string; pho
 
   await resend.emails.send({ from: FROM, to: CONTACT_INBOX, replyTo: input.email, subject, html });
 }
+
+export async function sendLeadEmail(input: { name: string; phone: string }): Promise<void> {
+  const subject = `New safari season lead from ${input.name}`;
+  const html = `
+    <div style="font-family: sans-serif; max-width: 480px; margin: 0 auto;">
+      <h2>New safari season popup lead</h2>
+      <p><strong>Name:</strong> ${input.name}</p>
+      <p><strong>Phone:</strong> ${input.phone}</p>
+    </div>
+  `;
+
+  if (!resend) {
+    console.log(`[mail:dev] Lead popup submission from ${input.name} <${input.phone}>`);
+    return;
+  }
+
+  await resend.emails.send({ from: FROM, to: CONTACT_INBOX, subject, html });
+}

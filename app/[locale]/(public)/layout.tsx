@@ -4,6 +4,7 @@ import { isRtl, type Locale } from "@/lib/i18n/config";
 import Navbar from "@/components/navbar/navbar";
 import Footer from "@/components/footer/footer";
 import WhatsAppFloat from "@/components/whatsapp-float/whatsapp-float";
+import LeadPopup from "@/components/lead-popup/lead-popup";
 import "./public-theme.css";
 
 const dmSans = DM_Sans({
@@ -48,6 +49,7 @@ export default async function PublicLayout({ children }: { children: React.React
       <div className="page-content">{children}</div>
       <Footer />
       <WhatsAppFloat />
+      <LeadPopup />
     </div>
   );
 }

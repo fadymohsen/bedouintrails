@@ -1720,5 +1720,11 @@
   "guide_hiking_faq4_q": "How different is Sahara hiking from mountain trekking?",
   "guide_hiking_faq4_a": "Very different. Sahara hiking has no altitude gain, no technical terrain, and no fixed ropes. The challenge is navigating open terrain, managing heat and UV exposure, and maintaining pace across long flat distances. The reward — vast silence, extraordinary light, and landscapes unchanged for thousands of years — is profound in an entirely different way.",
   "guide_hiking_cta": "Ready to hike the Sahara? Browse our desert tours and book your guided Sahara hiking tour from Cairo.",
-  "guide_hiking_cta_button": "Explore Hiking Tours"
+  "guide_hiking_cta_button": "Explore Hiking Tours",
+  "popup_headline": "Safari Season Starts in a Month! 🚙",
+  "popup_body": "Get ready! We have amazing safari programs coming up. Leave your details below, and our team will call you to share exclusive offers and customize the perfect program just for you.",
+  "popup_name_label": "Name",
+  "popup_phone_label": "Phone Number",
+  "popup_submit": "Get Customized Offers",
+  "popup_success": "Thanks! We'll contact you soon."
 }

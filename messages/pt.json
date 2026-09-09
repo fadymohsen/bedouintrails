@@ -1724,5 +1724,11 @@
   "rg_western": "Guia do Deserto Ocidental do Egito",
   "rg_white_desert": "Guia do Deserto Branco do Egito",
   "rg_white_safari": "Safári pelo Deserto Branco",
-  "rg_white_tour": "Tour ao Deserto Branco a Partir do Cairo"
+  "rg_white_tour": "Tour ao Deserto Branco a Partir do Cairo",
+  "popup_headline": "A Temporada de Safári Começa em Um Mês! 🚙",
+  "popup_body": "Prepare-se! Temos programas de safári incríveis chegando. Deixe seus dados abaixo e nossa equipe ligará para você para compartilhar ofertas exclusivas e personalizar o programa perfeito para você.",
+  "popup_name_label": "Nome",
+  "popup_phone_label": "Número de Telefone",
+  "popup_submit": "Receber Ofertas Personalizadas",
+  "popup_success": "Obrigado! Entraremos em contato em breve."
 }
