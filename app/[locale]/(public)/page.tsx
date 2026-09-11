@@ -340,7 +340,7 @@ export default async function HomePage() {
         <h2 className={styles.socialHandle}>@the.white.and.black.desert</h2>
         <div className={styles.socialGrid}>
           <a className={styles.socialTile} target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/the.white.and.black.desert?igsh=aHdjbzB6ajJ5dTBk">
-            <Image src="/img/social-1.webp" alt="White Desert dunes at sunset" loading="lazy" width={300} height={400} style={{ objectFit: "cover", objectPosition: "left center", borderRadius: "20px" }} />
+            <Image src="/img/social-1.webp" alt="White Desert dunes at sunset" loading="lazy" width={300} height={400} style={{ objectFit: "cover", objectPosition: "40% center", borderRadius: "20px" }} />
           </a>
           <a className={styles.socialTile} target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/the.white.and.black.desert?igsh=aHdjbzB6ajJ5dTBk">
             <Image src="/img/social-2.webp" alt="Desert meditation in the White Desert" loading="lazy" width={300} height={400} style={{ objectFit: "cover", borderRadius: "20px" }} />
