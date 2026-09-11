@@ -257,11 +257,9 @@ export default async function HomePage() {
                 <SafeImage src={spotlightImages[0]} alt={spotlightName ?? ""} width={170} height={150} />
               </div>
             )}
-            {spotlightImages[1] && (
-              <div className={`${styles.spotlightPolaroid} ${styles.right}`}>
-                <SafeImage src={spotlightImages[1]} alt={spotlightName ?? ""} width={170} height={150} />
-              </div>
-            )}
+            <div className={`${styles.spotlightPolaroid} ${styles.right}`}>
+              <SafeImage src="/img/white-desert-polaroid.jpg" alt="White Desert landscape" width={170} height={150} />
+            </div>
             <span className={styles.spotlightEyebrow}>{t("featured_journeys")}</span>
             <h2 className={styles.spotlightTitle}>{spotlightName}</h2>
             <div className={styles.spotlightMeta}>
@@ -342,7 +340,7 @@ export default async function HomePage() {
         <h2 className={styles.socialHandle}>@the.white.and.black.desert</h2>
         <div className={styles.socialGrid}>
           <a className={styles.socialTile} target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/the.white.and.black.desert?igsh=aHdjbzB6ajJ5dTBk">
-            <Image src="/img/social-1.webp" alt="White Desert dunes at sunset" loading="lazy" width={300} height={400} style={{ objectFit: "cover", borderRadius: "20px" }} />
+            <Image src="/img/social-1.webp" alt="White Desert dunes at sunset" loading="lazy" width={300} height={400} style={{ objectFit: "cover", objectPosition: "left center", borderRadius: "20px" }} />
           </a>
           <a className={styles.socialTile} target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/the.white.and.black.desert?igsh=aHdjbzB6ajJ5dTBk">
             <Image src="/img/social-2.webp" alt="Desert meditation in the White Desert" loading="lazy" width={300} height={400} style={{ objectFit: "cover", borderRadius: "20px" }} />
