@@ -19,6 +19,7 @@ export default async function RelatedTripsForBlog({ blogSlug, locale, heading, c
     select: {
       relatedTrips: {
         orderBy: { sortOrder: "asc" },
+        take: 3,
         include: {
           trap: {
             include: { galleries: { take: 1, orderBy: { id: "asc" } } },
@@ -30,7 +31,8 @@ export default async function RelatedTripsForBlog({ blogSlug, locale, heading, c
 
   const traps = (blog?.relatedTrips ?? [])
     .map((r) => r.trap)
-    .filter((t) => t.status === "active");
+    .filter((t) => t.status === "active")
+    .slice(0, 3);
 
   if (traps.length === 0) return null;
 

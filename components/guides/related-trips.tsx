@@ -27,9 +27,9 @@ export default async function RelatedTrips({ locale, heading, ctaLabel, tripIds 
         include: { galleries: { take: 1, orderBy: { id: "asc" } } },
       });
 
-  // Preserve tripIds order when specified
+  // Preserve tripIds order when specified, capped to 3
   const ordered = tripIds
-    ? tripIds.map((id) => traps.find((t) => t.id === id)).filter(Boolean) as typeof traps
+    ? (tripIds.slice(0, 3).map((id) => traps.find((t) => t.id === id)).filter(Boolean) as typeof traps)
     : traps;
 
   if (ordered.length === 0) return null;
