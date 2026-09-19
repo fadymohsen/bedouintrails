@@ -42,16 +42,19 @@ export default async function DesertTrekkingEgyptPage() {
   const jsonLd = [
     {
       "@context": "https://schema.org",
-      "@type": "Article",
-      headline: "Desert Trekking Egypt — Complete Hiking & Trekking Guide",
+      "@type": "TouristAttraction",
+      name: "Desert Trekking Egypt — Complete Hiking & Trekking Guide",
       description: "Complete guide to desert trekking in Egypt. Explore hiking trails through the White Desert, Black Desert, and Western Desert with experienced Bedouin guides.",
       url,
       image: `${SITE_URL}/img/hero-desert-trekking.webp`,
-      publisher: { "@type": "Organization", name: "Bedouin Trails", logo: { "@type": "ImageObject", url: `${SITE_URL}/img/logo.png` } },
-      mainEntityOfPage: url,
+      geo: { "@type": "GeoCoordinates", latitude: 27.25, longitude: 28.05 },
+      touristType: ["Adventure travelers", "Hikers", "Trekkers", "Outdoor enthusiasts"],
+      isAccessibleForFree: false,
+      address: { "@type": "PostalAddress", addressCountry: "EG", addressRegion: "New Valley Governorate" },
+      provider: { "@type": "Organization", name: "Bedouin Trails", logo: { "@type": "ImageObject", url: `${SITE_URL}/img/logo.png` } },
       author: { "@type": "Organization", name: "Bedouin Trails" },
       datePublished: "2025-01-15",
-      dateModified: "2026-08-24",
+      dateModified: "2026-09-19",
     },
     {
       "@context": "https://schema.org",
@@ -120,11 +123,11 @@ export default async function DesertTrekkingEgyptPage() {
         <div className={styles["highlight-box"]}>
           <p>
             Explore related guides:{" "}
+            <Link href="/white-desert-hiking">White Desert Hiking Expedition</Link>,{" "}
             <Link href="/white-desert-egypt">White Desert Egypt</Link>,{" "}
             <Link href="/camel-trek">Camel Trek Egypt</Link>,{" "}
             <Link href="/multi-day-desert-trek">Multi-Day Desert Trek</Link>,{" "}
-            <Link href="/white-desert-camping">White Desert Camping</Link>,{" "}
-            <Link href="/jara-cave">Jara Cave</Link>.
+            <Link href="/white-desert-camping">White Desert Camping</Link>.
           </p>
         </div>
 

@@ -51,7 +51,7 @@ export default async function CamelTrekPage() {
     mainEntityOfPage: url,
     author: { "@type": "Organization", name: "Bedouin Trails" },
     datePublished: "2025-01-15",
-    dateModified: "2026-08-30",
+    dateModified: "2026-09-19",
   };
 
   return (
@@ -115,6 +115,17 @@ export default async function CamelTrekPage() {
               <p>{t(`guide_camel_faq${i}_a`)}</p>
             </div>
           ))}
+        </div>
+
+        <div className={styles["highlight-box"]}>
+          <p>
+            Explore related guides:{" "}
+            <Link href="/white-desert-hiking">White Desert Hiking Expedition</Link>,{" "}
+            <Link href="/white-desert-egypt">White Desert Egypt</Link>,{" "}
+            <Link href="/multi-day-desert-trek">Multi-Day Desert Trek</Link>,{" "}
+            <Link href="/desert-trekking-egypt">Desert Trekking Guide</Link>,{" "}
+            <Link href="/white-desert-safari">White Desert Safari</Link>.
+          </p>
         </div>
 
         <RelatedTrips locale={locale as Locale} heading="Featured Desert Tours" ctaLabel="View Tour" tripIds={[42, 43, 30]} />

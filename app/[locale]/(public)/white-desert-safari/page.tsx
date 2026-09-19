@@ -132,6 +132,17 @@ export default async function WhiteDesertSafariPage() {
           ))}
         </div>
 
+        <div className={styles["highlight-box"]}>
+          <p>
+            Explore related guides:{" "}
+            <Link href="/white-desert-hiking">White Desert Hiking Expedition</Link>,{" "}
+            <Link href="/white-desert-egypt">White Desert Egypt</Link>,{" "}
+            <Link href="/camel-trek">Camel Trek Egypt</Link>,{" "}
+            <Link href="/white-desert-camping">White Desert Camping</Link>,{" "}
+            <Link href="/egypt-desert-tour">Egypt Desert Tour</Link>.
+          </p>
+        </div>
+
         <RelatedTrips locale={locale as Locale} heading="Featured Desert Tours" ctaLabel="View Tour" />
 
         <div className={styles["cta-section"]}>

@@ -110,6 +110,8 @@ export default async function EgyptDesertTourPage() {
 
         <RelatedGuides guides={[
           { href: "/white-desert-egypt", labelKey: "rg_white_desert" },
+          { href: "/white-desert-hiking", labelKey: "rg_wdhike" },
+          { href: "/camel-trek", labelKey: "rg_camel_trek" },
           { href: "/egypt-safari-tours", labelKey: "rg_safari_tours" },
           { href: "/best-time-to-visit-white-desert", labelKey: "rg_besttime" },
           { href: "/white-desert-tour-cost", labelKey: "rg_cost" },

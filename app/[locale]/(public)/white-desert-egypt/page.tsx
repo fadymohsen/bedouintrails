@@ -52,7 +52,7 @@ export default async function WhiteDesertEgyptPage() {
     address: { "@type": "PostalAddress", addressCountry: "EG", addressRegion: "New Valley Governorate" },
     author: { "@type": "Organization", name: "Bedouin Trails" },
     datePublished: "2025-01-15",
-    dateModified: "2026-07-26",
+    dateModified: "2026-09-19",
   };
 
   return (
@@ -106,6 +106,17 @@ export default async function WhiteDesertEgyptPage() {
               <p>{t(`guide_wd_faq${i}_a`)}</p>
             </div>
           ))}
+        </div>
+
+        <div className={styles["highlight-box"]}>
+          <p>
+            Explore related guides:{" "}
+            <Link href="/white-desert-hiking">White Desert Hiking Expedition</Link>,{" "}
+            <Link href="/white-desert-safari">White Desert Safari</Link>,{" "}
+            <Link href="/camel-trek">Camel Trek Egypt</Link>,{" "}
+            <Link href="/white-desert-camping">White Desert Camping</Link>,{" "}
+            <Link href="/best-time-to-visit-white-desert">Best Time to Visit</Link>.
+          </p>
         </div>
 
         <RelatedTrips locale={locale as Locale} heading="Featured Desert Tours" ctaLabel="View Tour" />
