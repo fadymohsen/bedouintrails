@@ -39,6 +39,7 @@ const STATIC_PATHS = [
   "/articles",
   "/egypt-desert-tour",
   "/sahara-hiking-egypt",
+  "/white-desert-hiking",
 ];
 
 // Fixed lastModified dates per path — stable so Googlebot doesn't see every
@@ -75,6 +76,7 @@ const STATIC_LAST_MODIFIED: Record<string, Date> = {
   "/siwa-oasis-tour": new Date("2026-08-24"),
   "/egypt-desert-tour": new Date("2026-08-30"),
   "/sahara-hiking-egypt": new Date("2026-08-30"),
+  "/white-desert-hiking": new Date("2026-09-19"),
 };
 
 interface SitemapEntry {
