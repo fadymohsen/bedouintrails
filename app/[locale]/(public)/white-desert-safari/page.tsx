@@ -56,6 +56,7 @@ export default async function WhiteDesertSafariPage() {
     author: { "@type": "Organization", name: "Bedouin Trails" },
     datePublished: "2026-08-08",
     dateModified: "2026-08-08",
+    inLanguage: locale,
   };
 
   return (

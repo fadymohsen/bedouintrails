@@ -51,6 +51,7 @@ export default async function WhiteDesertCampingPage() {
     author: { "@type": "Organization", name: "Bedouin Trails" },
     datePublished: "2025-01-15",
     dateModified: "2026-07-26",
+    inLanguage: locale,
   };
 
   return (

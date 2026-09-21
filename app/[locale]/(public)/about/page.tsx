@@ -53,6 +53,7 @@ export default async function AboutPage() {
       address: { "@type": "PostalAddress", addressCountry: "EG", addressLocality: "Giza" },
       contactPoint: { "@type": "ContactPoint", telephone: "+20-10-02717380", contactType: "reservations", availableLanguage: ["English", "Arabic"] },
     },
+    inLanguage: locale,
   };
 
   return (

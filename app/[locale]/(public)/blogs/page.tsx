@@ -54,6 +54,7 @@ export default async function BlogsIndexPage() {
             image: blog.image ? `${SITE_URL}${blog.image}` : `${SITE_URL}/img/hero-blogs.webp`,
             datePublished: blog.publishedAt?.toISOString() ?? blog.createdAt?.toISOString(),
             dateModified: blog.updatedAt?.toISOString(),
+            inLanguage: locale,
             author: { "@type": "Organization", name: "Bedouin Trails" },
           })),
         }

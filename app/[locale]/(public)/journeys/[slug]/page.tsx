@@ -132,6 +132,7 @@ export default async function TripDetailPage({ params }: { params: Promise<{ slu
       description: `${trip.duration} days from ${interfaceFrom} to ${interfaceTo}`,
     },
     provider: { "@type": "TravelAgency", name: "Bedouin Trails", url: SITE_URL },
+    inLanguage: locale,
     ...(trip.rate > 0 && reviews.length > 0
       ? {
           aggregateRating: {

@@ -55,6 +55,7 @@ export default async function DesertTrekkingEgyptPage() {
       author: { "@type": "Organization", name: "Bedouin Trails" },
       datePublished: "2025-01-15",
       dateModified: "2026-09-19",
+      inLanguage: locale,
     },
     {
       "@context": "https://schema.org",

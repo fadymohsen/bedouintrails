@@ -132,6 +132,7 @@ export default async function HomePage() {
       contactType: "reservations",
       availableLanguage: ["English", "Arabic"],
     },
+    inLanguage: locale,
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",

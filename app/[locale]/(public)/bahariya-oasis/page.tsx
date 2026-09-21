@@ -52,6 +52,7 @@ export default async function BahariyaOasisPage() {
     author: { "@type": "Organization", name: "Bedouin Trails" },
     datePublished: "2025-01-15",
     dateModified: "2026-08-30",
+    inLanguage: locale,
   };
 
   return (

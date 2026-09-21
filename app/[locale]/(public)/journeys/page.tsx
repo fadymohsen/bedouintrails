@@ -35,6 +35,7 @@ export default async function JourneysPage() {
           "@type": "ItemList",
           name: "Desert Safari Tours & Adventure Journeys",
           description: "Browse all White Desert safari tours, Egypt desert tours, and desert camping adventures by Bedouin Trails.",
+          inLanguage: locale,
           numberOfItems: trips.length,
           itemListElement: trips.map((trip, index) => ({
             "@type": "ListItem",

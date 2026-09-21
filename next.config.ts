@@ -79,6 +79,27 @@ const nextConfig: NextConfig = {
     // ── Renamed: 7-days → 8-days Egypt Adventure Journey ────────────────
     { source: "/:locale/journeys/7-days-egypt-adventure-journey", destination: "/:locale/journeys/8-days-egypt-adventure-journey", permanent: true },
     { source: "/journeys/7-days-egypt-adventure-journey", destination: "/en/journeys/8-days-egypt-adventure-journey", permanent: true },
+
+    // ── Old/renamed journey slugs (intermediate names before current DB slugs) ──
+    { source: "/:locale/journeys/8-days-7-nights-ancient-desert-trails-hiking-camel-trekking", destination: "/:locale/journeys", permanent: true },
+    { source: "/:locale/journeys/2-days-1-night-fayoum-oasis-program", destination: "/:locale/journeys", permanent: true },
+    { source: "/:locale/journeys/4-days-3-nights-siwa-oasis-program", destination: "/:locale/journeys", permanent: true },
+    { source: "/:locale/journeys/5-days-hiking-with-camels-program", destination: "/:locale/journeys", permanent: true },
+    { source: "/:locale/journeys/4-days-3-nights-black-white-desert-fayoum-oasis", destination: "/:locale/journeys", permanent: true },
+    { source: "/:locale/journeys/3-days-2-nights-black-and-white-desert-jara-cave", destination: "/:locale/journeys", permanent: true },
+    { source: "/:locale/journeys/5-days-4-nights-silence-of-the-desert-hiking-and-camel-trek", destination: "/:locale/journeys", permanent: true },
+
+    // ── Old Framer journey URL with numeric ID suffix ──────────────────
+    { source: "/:locale/journeys/:slug*-:id(\\d{10,})", destination: "/:locale/journeys", permanent: true },
+
+    // ── Deleted/old blog slugs ─────────────────────────────────────────
+    { source: "/:locale/blogs/what-to-pack-egypt-desert-safari", destination: "/:locale/blogs", permanent: true },
+    { source: "/:locale/blogs/how-to-plan-egypt-desert-safari", destination: "/:locale/blogs", permanent: true },
+    { source: "/:locale/blogs/best-time-visit-egypt-desert", destination: "/:locale/blogs", permanent: true },
+    { source: "/:locale/blogs/egypt-desert-safari-cost-budget-guide", destination: "/:locale/blogs", permanent: true },
+
+    // ── No-locale journey catch-alls (supplement existing :slug rule) ──
+    { source: "/journeys/:id(\\d+)/:slug*", destination: "/en/journeys", permanent: true },
   ],
   headers: async () => [
     {

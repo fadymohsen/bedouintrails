@@ -62,6 +62,7 @@ export default async function SiwaOasisTourPage() {
       },
       datePublished: "2026-08-24",
       dateModified: "2026-08-24",
+      inLanguage: locale,
     },
     {
       "@context": "https://schema.org",

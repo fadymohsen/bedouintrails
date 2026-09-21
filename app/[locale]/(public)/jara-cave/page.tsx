@@ -52,6 +52,7 @@ export default async function JaraCavePage() {
       touristType: ["History enthusiasts", "Adventure seekers", "Archaeologists"],
       datePublished: "2025-01-15",
       dateModified: "2026-08-24",
+      inLanguage: locale,
     },
     {
       "@context": "https://schema.org",

@@ -38,6 +38,7 @@ export default async function FaqPage() {
       ? {
           "@context": "https://schema.org",
           "@type": "FAQPage",
+          inLanguage: locale,
           mainEntity: faqs.map((item) => ({
             "@type": "Question",
             name: item.question,

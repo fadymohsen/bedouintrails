@@ -12,11 +12,6 @@ const websiteJsonLd = {
   "@type": "WebSite",
   name: "Bedouin Trails",
   url: SITE_URL,
-  potentialAction: {
-    "@type": "SearchAction",
-    target: `${SITE_URL}/en/journeys?q={search_term_string}`,
-    "query-input": "required name=search_term_string",
-  },
 };
 
 export const metadata: Metadata = {

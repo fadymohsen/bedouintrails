@@ -91,6 +91,7 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
     },
     datePublished: blog.publishedAt?.toISOString() ?? blog.createdAt.toISOString(),
     dateModified: blog.updatedAt.toISOString(),
+    inLanguage: locale,
   };
 
   return (

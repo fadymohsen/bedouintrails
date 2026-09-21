@@ -41,6 +41,7 @@ export default async function ContactPage() {
       email: "info@bedouintrails.com",
       address: { "@type": "PostalAddress", addressCountry: "EG", addressLocality: "Giza" },
     },
+    inLanguage: locale,
   };
 
   return (

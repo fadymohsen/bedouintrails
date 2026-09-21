@@ -60,6 +60,7 @@ export default async function WhiteDesertHikingPage() {
       author: { "@type": "Organization", name: "Bedouin Trails" },
       datePublished: "2026-09-19",
       dateModified: "2026-09-19",
+      inLanguage: locale,
     },
     {
       "@context": "https://schema.org",

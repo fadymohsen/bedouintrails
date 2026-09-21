@@ -53,6 +53,7 @@ export default async function SaharaHikingEgyptPage() {
     author: { "@type": "Organization", name: "Bedouin Trails" },
     datePublished: "2026-08-30",
     dateModified: "2026-08-30",
+    inLanguage: locale,
   };
 
   return (

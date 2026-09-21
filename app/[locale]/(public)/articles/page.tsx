@@ -66,6 +66,7 @@ export default async function ArticlesPage() {
     "@type": "ItemList",
     name: "Egypt Desert Travel Guides & Blog Articles — Bedouin Trails",
     description: "Complete collection of Egypt desert travel guides, safari resources, and blog articles by Bedouin Trails.",
+    inLanguage: locale,
     url,
     numberOfItems: guides.length + blogs.length,
     itemListElement: [

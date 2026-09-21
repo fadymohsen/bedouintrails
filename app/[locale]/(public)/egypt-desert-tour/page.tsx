@@ -53,6 +53,7 @@ export default async function EgyptDesertTourPage() {
     author: { "@type": "Organization", name: "Bedouin Trails" },
     datePublished: "2026-08-30",
     dateModified: "2026-08-30",
+    inLanguage: locale,
   };
 
   return (
