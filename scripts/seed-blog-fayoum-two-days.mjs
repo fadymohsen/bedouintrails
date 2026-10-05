@@ -417,7 +417,7 @@ const blog = {
   metaDescriptionEn: metaDescEn,
   metaDescriptionAr: metaDescAr,
   metaDescriptionI18n: metaDescI18n,
-  image: "/img/fayoum-two-days-cairo-escape.jpg",
+  image: "/img/fayoum-two-days-cairo-escape.webp",
   author: "Bedouin Trails Team",
   category: "Egypt Travel Guides",
   tags: JSON.stringify([

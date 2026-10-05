@@ -439,7 +439,7 @@ const blog = {
   metaDescriptionEn: metaDescEn,
   metaDescriptionAr: metaDescAr,
   metaDescriptionI18n: metaDescI18n,
-  image: "/img/13-days-desert-temples-luxor.jpg",
+  image: "/img/13-days-desert-temples-luxor.webp",
   author: "Bedouin Trails Team",
   category: "Egypt Travel Guides",
   tags: JSON.stringify([

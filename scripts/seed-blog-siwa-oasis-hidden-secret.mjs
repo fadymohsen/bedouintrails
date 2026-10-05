@@ -369,7 +369,7 @@ const blog = {
   metaDescriptionEn: metaDescEn,
   metaDescriptionAr: metaDescAr,
   metaDescriptionI18n: metaDescI18n,
-  image: "/img/siwa-oasis-hidden-secret.jpg",
+  image: "/img/siwa-oasis-hidden-secret.webp",
   author: "Bedouin Trails Team",
   category: "Egypt Travel Guides",
   tags: JSON.stringify([
