@@ -1,0 +1,105 @@
+# GSC Revalidation URLs — Prioritized
+# =====================================================
+# Step 1: Re-submit sitemap.xml in GSC (covers everything)
+# Step 2: Manually "Request Indexing" for these URLs (highest priority first)
+# GSC limits ~10 requests/day, so spread over several days.
+#
+# Priority order:
+#   P1 = Homepage & key pages (inLanguage fix, immediate impact)
+#   P2 = Duplicate canonical pages (inLanguage fix helps Google distinguish locales)
+#   P3 = 404s now redirecting (Google will see 301 and stop reporting 404)
+#   P4 = Alternate canonical (SearchAction removed, old URLs now redirect)
+
+# ── P1: Homepage & robots.txt (re-crawl triggers cascade) ──
+https://bedouintrails.com/ar
+https://bedouintrails.com/en
+https://bedouintrails.com/robots.txt
+
+# ── P2: "Duplicate, Google chose different canonical" (26 pages) ──
+# These are live pages — Google needs to re-read the new inLanguage JSON-LD
+https://bedouintrails.com/ar/best-time-to-visit-white-desert
+https://bedouintrails.com/ar/what-to-pack-white-desert
+https://bedouintrails.com/ar/crystal-mountain-egypt
+https://bedouintrails.com/ar/blogs/crystal-mountain-egypt-guide
+https://bedouintrails.com/ar/contact
+https://bedouintrails.com/ar/blogs/black-desert-egypt-guide
+https://bedouintrails.com/ar/blogs/white-desert-egypt-ultimate-guide
+https://bedouintrails.com/fr/black-desert-egypt
+https://bedouintrails.com/ar/journeys/7-days-6-nights-grand-oasis-overland-circuit-siwa-to-kharga-luxor
+https://bedouintrails.com/ar/journeys/2-days-1-night-fayoum-oasis-program
+https://bedouintrails.com/ar/blogs/white-desert-egypt-sunrise-sunset-photography
+https://bedouintrails.com/it/what-to-pack-white-desert
+https://bedouintrails.com/pt/how-to-get-to-white-desert
+https://bedouintrails.com/ar/journeys/5-days-4-nights-black-and-white-desert-deep-exploration
+https://bedouintrails.com/es/black-desert-egypt
+https://bedouintrails.com/nl/desert-yoga-retreat
+https://bedouintrails.com/ar/how-to-get-to-white-desert
+https://bedouintrails.com/fr/what-to-pack-white-desert
+https://bedouintrails.com/ar/blogs/black-desert-vs-white-desert-egypt
+https://bedouintrails.com/fr/multi-day-desert-trek
+https://bedouintrails.com/it/best-time-to-visit-white-desert
+https://bedouintrails.com/it/jara-cave
+https://bedouintrails.com/pt/white-desert-tour-from-cairo
+https://bedouintrails.com/nl/bahariya-oasis
+https://bedouintrails.com/ar/jara-cave
+
+# ── P3: "Not found (404)" — now 301-redirecting ──
+# Journey slugs (old/renamed, now redirect to /:locale/journeys)
+https://bedouintrails.com/ar/journeys/3-night-camping-in-the-black--white-desert--fayoum-oasis-1787237766959
+https://bedouintrails.com/pt/journeys/2-days-1-night-fayoum-oasis-program
+https://bedouintrails.com/de/journeys/2-days-1-night-fayoum-oasis-program
+https://bedouintrails.com/ar/journeys/4-days-3-nights-siwa-oasis-program
+https://bedouintrails.com/ar/journeys/5-days-hiking-with-camels-program
+https://bedouintrails.com/de/journeys/8-days-7-nights-ancient-desert-trails-hiking-camel-trekking
+https://bedouintrails.com/en/journeys/8-days-7-nights-ancient-desert-trails-hiking-camel-trekking
+https://bedouintrails.com/ar/journeys/3-days-2-nights-black-and-white-desert-jara-cave
+https://bedouintrails.com/ar/journeys/5-days-4-nights-silence-of-the-desert-hiking-and-camel-trek
+https://bedouintrails.com/ar/journeys/4-days-3-nights-black-white-desert-fayoum-oasis
+# Blog slugs (deleted, now redirect to /:locale/blogs)
+https://bedouintrails.com/zh/blogs/what-to-pack-egypt-desert-safari
+https://bedouintrails.com/ar/blogs/how-to-plan-egypt-desert-safari
+https://bedouintrails.com/ar/blogs/best-time-visit-egypt-desert
+https://bedouintrails.com/ar/blogs/what-to-pack-egypt-desert-safari
+https://bedouintrails.com/fr/blogs/what-to-pack-egypt-desert-safari
+https://bedouintrails.com/nl/blogs/egypt-desert-safari-cost-budget-guide
+https://bedouintrails.com/de/blogs/how-to-plan-egypt-desert-safari
+https://bedouintrails.com/it/blogs/how-to-plan-egypt-desert-safari
+https://bedouintrails.com/it/blogs/egypt-desert-safari-cost-budget-guide
+https://bedouintrails.com/pt/blogs/what-to-pack-egypt-desert-safari
+https://bedouintrails.com/en/blogs/best-time-visit-egypt-desert
+https://bedouintrails.com/fr/blogs/best-time-visit-egypt-desert
+# Already-redirecting journey slugs (existing redirects, confirm they work)
+https://bedouintrails.com/en/journeys/one-night-in-the-black-and-white-desert
+https://bedouintrails.com/ar/journeys/siwa-oasis-3-days-2-nights
+https://bedouintrails.com/ar/journeys/the-five-oases-of-egypt
+https://bedouintrails.com/ar/journeys/black-and-white-desert-and-jar-cave
+https://bedouintrails.com/ar/journeys/oases-the-white-desert-and-cairo
+https://bedouintrails.com/ar/journeys/3-nights-in-the-black-and-white-desert-and-khara-cave
+https://bedouintrails.com/ar/journeys/3-days-2-nights-black-and-white-desert-bahariya-oasis-tour
+https://bedouintrails.com/ar/journeys/2-day-1-night-program-in-fayoum-oasis
+https://bedouintrails.com/ar/journeys/3-nights-and-4-days-in-siwa-oasis
+https://bedouintrails.com/cardpage/17
+
+# ── P4: "Alternate page with proper canonical" — fixed or redirecting ──
+https://bedouintrails.com/en/journeys?q={search_term_string}
+https://bedouintrails.com/en/blogs?article=3
+https://bedouintrails.com/es/djara-cave
+https://bedouintrails.com/fr/djara-cave
+https://bedouintrails.com/ar/djara-cave
+https://bedouintrails.com/it/blogs/what-to-pack-egypt-desert-safari
+https://bedouintrails.com/fr/crystal-mountain-egypt
+https://bedouintrails.com/it/white-desert-egypt
+https://bedouintrails.com/de/desert-trekking-egypt
+https://bedouintrails.com/es/egypt-safari-tours
+https://bedouintrails.com/es/white-desert-tour-from-cairo
+https://bedouintrails.com/es/what-to-pack-white-desert
+https://bedouintrails.com/ar/desert-safety-guide
+https://bedouintrails.com/nl/best-time-to-visit-white-desert
+https://bedouintrails.com/pt/egypt-safari-tours
+https://bedouintrails.com/it/egypt-safari-tours
+https://bedouintrails.com/fr/white-desert-tour-from-cairo
+https://bedouintrails.com/nl/white-desert-tour-from-cairo
+https://bedouintrails.com/ar/white-desert-tour-cost
+https://bedouintrails.com/it/black-desert-egypt
+https://bedouintrails.com/fr/how-to-get-to-white-desert
+https://bedouintrails.com/de/western-desert-egypt-guide
