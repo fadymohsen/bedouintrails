@@ -23,6 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title,
     description,
+    keywords: t("meta_keywords_blogs"),
     alternates: buildAlternates("/blogs", locale),
     openGraph: { title, description, url, images: [`${SITE_URL}/img/hero-blogs.webp`] },
     twitter: { card: "summary_large_image", title, description, images: [`${SITE_URL}/img/hero-blogs.webp`] },

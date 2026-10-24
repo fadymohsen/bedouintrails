@@ -18,6 +18,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const url = `${SITE_URL}/${locale}/contact`;
   return {
     title, description,
+    keywords: t("meta_keywords_contact"),
     alternates: buildAlternates("/contact", locale),
     openGraph: { title, description, url, images: [`${SITE_URL}/img/hero-contact.webp`] },
     twitter: { card: "summary_large_image", title, description, images: [`${SITE_URL}/img/hero-contact.webp`] },
@@ -39,7 +40,19 @@ export default async function ContactPage() {
       url: SITE_URL,
       telephone: "+20-10-02717380",
       email: "info@bedouintrails.com",
-      address: { "@type": "PostalAddress", addressCountry: "EG", addressLocality: "Giza" },
+      address: { "@type": "PostalAddress", addressCountry: "EG", addressLocality: "Giza", addressRegion: "Giza Governorate" },
+      geo: { "@type": "GeoCoordinates", latitude: 28.3458203, longitude: 28.8724705 },
+      openingHoursSpecification: {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        opens: "08:00",
+        closes: "22:00",
+      },
+      sameAs: [
+        "https://www.instagram.com/the.white.and.black.desert",
+        "https://www.facebook.com/profile.php?id=61587717913002",
+        "https://ar.tripadvisor.com/Attraction_Review-g294202-d34391404-Reviews-Bedouin_Trails-Giza_Giza_Governorate.html",
+      ],
     },
     inLanguage: locale,
   };

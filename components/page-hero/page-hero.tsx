@@ -16,6 +16,7 @@ export default function PageHero({ title, subtitle, image, eyebrow, backgroundPo
         src={image}
         alt={title}
         fill
+        priority
         sizes="100vw"
         style={{ objectFit: "cover", objectPosition: backgroundPosition ?? "center" }}
       />

@@ -31,9 +31,9 @@ export default async function NotFound() {
         }}
       >
         <h1 style={{ fontSize: "6rem", color: "#CF9050", marginBottom: "0" }}>404</h1>
-        <h2 style={{ color: "#333", marginBottom: "16px" }}>Page Not Found</h2>
+        <h2 style={{ color: "#333", marginBottom: "16px" }}>{t("not_found_heading")}</h2>
         <p style={{ color: "#666", marginBottom: "32px", maxWidth: "400px" }}>
-          The page you are looking for doesn&apos;t exist or has been moved.
+          {t("not_found_message")}
         </p>
         <Link
           href="/"

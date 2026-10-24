@@ -23,10 +23,26 @@ export const revalidate = 3600;
 export async function generateMetadata() {
   const t = await getTranslations();
   const locale = await getLocale();
+  const title = t("meta_title_home");
+  const description = t("meta_desc_home");
+  const url = `${SITE_URL}/${locale}`;
   return {
-    title: t("meta_title_home"),
-    description: t("meta_desc_home"),
+    title,
+    description,
+    keywords: t("meta_keywords_home"),
     alternates: buildAlternates("/", locale),
+    openGraph: {
+      title,
+      description,
+      url,
+      images: [`${SITE_URL}/og-image.jpg`],
+    },
+    twitter: {
+      card: "summary_large_image" as const,
+      title,
+      description,
+      images: [`${SITE_URL}/og-image.jpg`],
+    },
   };
 }
 
@@ -106,6 +122,20 @@ export default async function HomePage() {
     : null;
   const spotlightImages = spotlightTrap?.galleries.map((g) => getLocalFallbackImage(g.image)) ?? [];
 
+  const faqJsonLd =
+    homeFaqs.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          inLanguage: locale,
+          mainEntity: homeFaqs.map((item) => ({
+            "@type": "Question",
+            name: item.question,
+            acceptedAnswer: { "@type": "Answer", text: item.answer },
+          })),
+        }
+      : null;
+
   const organizationJsonLd = {
     "@context": "https://schema.org",
     "@type": "TravelAgency",
@@ -164,6 +194,12 @@ export default async function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
       />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
       <div className="carousel">
         <HeroCarousel
           slides={heroSlides}

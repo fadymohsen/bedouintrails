@@ -18,13 +18,21 @@ export async function generateMetadata(): Promise<Metadata> {
   const url = `${SITE_URL}/${locale}/journeys`;
   return {
     title, description,
+    keywords: t("meta_keywords_journeys"),
     alternates: buildAlternates("/journeys", locale),
     openGraph: { title, description, url, images: [`${SITE_URL}/img/hero-journeys.webp`] },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [`${SITE_URL}/img/hero-journeys.webp`],
+    },
   };
 }
 
 export default async function JourneysPage() {
   const locale = (await getLocale()) as Locale;
+  const t = await getTranslations();
   const { traps, facets } = await listActiveTraps();
   const trips = traps.map((trap) => mapTrapForCard(trap, locale));
 
@@ -33,8 +41,8 @@ export default async function JourneysPage() {
       ? {
           "@context": "https://schema.org",
           "@type": "ItemList",
-          name: "Desert Safari Tours & Adventure Journeys",
-          description: "Browse all White Desert safari tours, Egypt desert tours, and desert camping adventures by Bedouin Trails.",
+          name: t("journeys_schema_name"),
+          description: t("journeys_schema_desc"),
           inLanguage: locale,
           numberOfItems: trips.length,
           itemListElement: trips.map((trip, index) => ({
@@ -63,8 +71,8 @@ export default async function JourneysPage() {
     <div>
       <Breadcrumbs
         items={[
-          { name: "Home", url: `${SITE_URL}/${locale}` },
-          { name: "Journeys", url: `${SITE_URL}/${locale}/journeys` },
+          { name: t("home"), url: `${SITE_URL}/${locale}` },
+          { name: t("journeys"), url: `${SITE_URL}/${locale}/journeys` },
         ]}
       />
       {itemListJsonLd && (

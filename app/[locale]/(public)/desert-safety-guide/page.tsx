@@ -19,10 +19,10 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: t("guide_safety_title"),
     description: t("guide_safety_meta_desc"),
-    keywords:
-      "desert safety Egypt, White Desert safety, Egypt desert tour safety, desert survival tips, desert camping safety, Western Desert Egypt safety, safari safety tips, desert first aid, desert travel advice",
+    keywords: t("guide_safety_meta_keywords"),
     alternates: buildAlternates(PATH, locale),
     openGraph: {
+      type: "article",
       title: t("guide_safety_og_title"),
       description: t("guide_safety_og_desc"),
       url,

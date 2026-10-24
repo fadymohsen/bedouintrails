@@ -22,6 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
     keywords: t("guide_edt_meta_keywords"),
     alternates: buildAlternates(PATH, locale),
     openGraph: {
+      type: "article",
       title: t("guide_edt_og_title"),
       description: t("guide_edt_og_desc"),
       url,

@@ -63,7 +63,7 @@ export async function generateMetadata({
       description: trip.metaDescription || name,
       images: [image],
       url,
-      type: "website",
+      type: "article",
     },
     twitter: {
       card: "summary_large_image",
@@ -150,8 +150,8 @@ export default async function TripDetailPage({ params }: { params: Promise<{ slu
     <div className={styles.Card_page}>
       <Breadcrumbs
         items={[
-          { name: "Home", url: `${SITE_URL}/${locale}` },
-          { name: "Journeys", url: `${SITE_URL}/${locale}/journeys` },
+          { name: t("home"), url: `${SITE_URL}/${locale}` },
+          { name: t("journeys"), url: `${SITE_URL}/${locale}/journeys` },
           { name, url },
         ]}
       />

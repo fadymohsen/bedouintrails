@@ -19,10 +19,10 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: t("guide_stars_title"),
     description: t("guide_stars_meta_desc"),
-    keywords:
-      "stargazing Western Desert, stargazing Egypt, White Desert stars, dark sky Egypt, Milky Way Egypt, desert stargazing, White Desert Camping, night sky Western Desert, astrophotography Egypt desert",
+    keywords: t("guide_stars_meta_keywords"),
     alternates: buildAlternates(PATH, locale),
     openGraph: {
+      type: "article",
       title: t("guide_stars_og_title"),
       description: t("guide_stars_og_desc"),
       url,

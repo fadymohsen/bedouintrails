@@ -20,6 +20,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const url = `${SITE_URL}/${locale}/faq`;
   return {
     title, description,
+    keywords: t("meta_keywords_faq"),
     alternates: buildAlternates("/faq", locale),
     openGraph: { title, description, url, images: [`${SITE_URL}/img/hero-faq.webp`] },
     twitter: { card: "summary_large_image", title, description, images: [`${SITE_URL}/img/hero-faq.webp`] },

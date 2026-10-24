@@ -19,10 +19,10 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: t("guide_cost_title"),
     description: t("guide_cost_meta_desc"),
-    keywords:
-      "White Desert tour cost, White Desert tour price, Egypt desert tour cost, how much White Desert safari, Egypt Safari Tours price, Bahariya Oasis tour cost, desert camping Egypt price, White Desert tour from Cairo cost",
+    keywords: t("guide_cost_meta_keywords"),
     alternates: buildAlternates(PATH, locale),
     openGraph: {
+      type: "article",
       title: t("guide_cost_og_title"),
       description: t("guide_cost_og_desc"),
       url,

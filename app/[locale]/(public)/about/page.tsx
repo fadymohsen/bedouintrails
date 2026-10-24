@@ -23,6 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title,
     description,
+    keywords: t("meta_keywords_about"),
     alternates: buildAlternates("/about", locale),
     openGraph: { title, description, url: `${SITE_URL}/${locale}/about`, images: [`${SITE_URL}/img/hero-about.webp`] },
     twitter: { card: "summary_large_image", title, description, images: [`${SITE_URL}/img/hero-about.webp`] },
@@ -49,9 +50,29 @@ export default async function AboutPage() {
       "@type": "TravelAgency",
       name: "Bedouin Trails",
       url: SITE_URL,
-      logo: `${SITE_URL}/img/logo.png`,
-      address: { "@type": "PostalAddress", addressCountry: "EG", addressLocality: "Giza" },
+      logo: { "@type": "ImageObject", url: `${SITE_URL}/img/logo.png` },
+      image: `${SITE_URL}/img/western-desert-hero.webp`,
+      address: { "@type": "PostalAddress", addressCountry: "EG", addressLocality: "Giza", addressRegion: "Giza Governorate" },
+      geo: { "@type": "GeoCoordinates", latitude: 28.3458203, longitude: 28.8724705 },
       contactPoint: { "@type": "ContactPoint", telephone: "+20-10-02717380", contactType: "reservations", availableLanguage: ["English", "Arabic"] },
+      openingHoursSpecification: {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        opens: "08:00",
+        closes: "22:00",
+      },
+      priceRange: "$$",
+      areaServed: [
+        { "@type": "Place", name: "Egypt" },
+        { "@type": "Place", name: "White Desert National Park" },
+        { "@type": "Place", name: "Bahariya Oasis" },
+        { "@type": "Place", name: "Western Desert, Egypt" },
+      ],
+      sameAs: [
+        "https://www.instagram.com/the.white.and.black.desert",
+        "https://www.facebook.com/profile.php?id=61587717913002",
+        "https://ar.tripadvisor.com/Attraction_Review-g294202-d34391404-Reviews-Bedouin_Trails-Giza_Giza_Governorate.html",
+      ],
     },
     inLanguage: locale,
   };
@@ -61,8 +82,8 @@ export default async function AboutPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutJsonLd) }} />
       <Breadcrumbs
         items={[
-          { name: "Home", url: `${SITE_URL}/${locale}` },
-          { name: "About", url: `${SITE_URL}/${locale}/about` },
+          { name: t("home"), url: `${SITE_URL}/${locale}` },
+          { name: t("about"), url: `${SITE_URL}/${locale}/about` },
         ]}
       />
 

@@ -14,6 +14,50 @@ const websiteJsonLd = {
   url: SITE_URL,
 };
 
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "TravelAgency",
+  name: "Bedouin Trails",
+  url: SITE_URL,
+  logo: { "@type": "ImageObject", url: `${SITE_URL}/img/logo.png` },
+  image: `${SITE_URL}/img/western-desert-hero.webp`,
+  description:
+    "Egyptian desert safari tour company based in Giza, organizing White Desert safari tours, camel treks, desert trekking, and multi-day desert tours.",
+  address: {
+    "@type": "PostalAddress",
+    addressCountry: "EG",
+    addressLocality: "Giza",
+    addressRegion: "Giza Governorate",
+  },
+  geo: { "@type": "GeoCoordinates", latitude: 28.3458203, longitude: 28.8724705 },
+  contactPoint: {
+    "@type": "ContactPoint",
+    telephone: "+20-10-02717380",
+    contactType: "reservations",
+    availableLanguage: ["English", "Arabic"],
+  },
+  openingHoursSpecification: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    opens: "08:00",
+    closes: "22:00",
+  },
+  priceRange: "$$",
+  currenciesAccepted: "EGP, USD, EUR",
+  paymentAccepted: "Cash, Credit Card",
+  areaServed: [
+    { "@type": "Place", name: "Egypt" },
+    { "@type": "Place", name: "White Desert National Park" },
+    { "@type": "Place", name: "Bahariya Oasis" },
+    { "@type": "Place", name: "Western Desert, Egypt" },
+  ],
+  sameAs: [
+    "https://www.instagram.com/the.white.and.black.desert",
+    "https://www.facebook.com/profile.php?id=61587717913002",
+    "https://ar.tripadvisor.com/Attraction_Review-g294202-d34391404-Reviews-Bedouin_Trails-Giza_Giza_Governorate.html",
+  ],
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL(
     (process.env.NEXT_PUBLIC_SITE_URL ?? "https://bedouintrails.com").replace(/\/+$/, "")
@@ -66,6 +110,10 @@ export default async function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
         {children}
       </body>

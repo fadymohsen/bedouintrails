@@ -22,6 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
     keywords: t("guide_howto_meta_keywords"),
     alternates: buildAlternates(PATH, locale),
     openGraph: {
+      type: "article",
       title: t("guide_howto_og_title"),
       description: t("guide_howto_og_desc"),
       url,
@@ -51,6 +52,19 @@ export default async function HowToGetTherePage() {
         author: { "@type": "Organization", name: "Bedouin Trails" },
         datePublished: "2025-01-15",
         dateModified: "2026-07-26",
+        inLanguage: locale,
+      }) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        name: t("guide_howto_h1"),
+        description: t("guide_howto_meta_desc"),
+        image: `${SITE_URL}/img/western-desert-hero.webp`,
+        step: [1, 2, 3, 4, 5, 6, 7].map((i) => ({
+          "@type": "HowToStep",
+          name: t(`guide_howto_route_li${i}_bold` as Parameters<typeof t>[0]),
+          text: t(`guide_howto_route_li${i}_text` as Parameters<typeof t>[0]),
+        })),
         inLanguage: locale,
       }) }} />
       <Breadcrumbs
