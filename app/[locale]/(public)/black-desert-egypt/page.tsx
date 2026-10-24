@@ -4,6 +4,7 @@ import { getTranslations, getLocale } from "next-intl/server";
 import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
 import GuideHero from "@/components/guides/guide-hero";
 import RelatedTrips from "@/components/guides/related-trips";
+import RelatedGuides from "@/components/guides/related-guides";
 import styles from "@/components/guides/guides.module.scss";
 
 import type { Locale } from "@/lib/i18n/config";
@@ -21,6 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
     keywords: t("guide_black_meta_keywords"),
     alternates: buildAlternates(PATH, locale),
     openGraph: {
+      type: "article",
       title: t("guide_black_og_title"),
       description: t("guide_black_og_desc"),
       url,
@@ -129,6 +131,13 @@ export default async function BlackDesertPage() {
             </div>
           ))}
         </div>
+
+        <RelatedGuides guides={[
+          { href: "/white-desert-egypt", labelKey: "rg_white_desert" },
+          { href: "/western-desert-egypt-guide", labelKey: "rg_western" },
+          { href: "/egypt-desert-tour", labelKey: "rg_desert_tour" },
+          { href: "/egypt-safari-tours", labelKey: "rg_safari_tours" },
+        ]} />
 
         <RelatedTrips locale={locale as Locale} heading="Featured Desert Tours" ctaLabel="View Tour" />
 

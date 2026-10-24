@@ -4,6 +4,7 @@ import { getTranslations, getLocale } from "next-intl/server";
 import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
 import GuideHero from "@/components/guides/guide-hero";
 import RelatedTrips from "@/components/guides/related-trips";
+import RelatedGuides from "@/components/guides/related-guides";
 import styles from "@/components/guides/guides.module.scss";
 
 import type { Locale } from "@/lib/i18n/config";
@@ -21,6 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
     keywords: t("guide_safaritours_meta_keywords"),
     alternates: buildAlternates(PATH, locale),
     openGraph: {
+      type: "article",
       title: t("guide_safaritours_og_title"),
       description: t("guide_safaritours_og_desc"),
       url,
@@ -109,6 +111,13 @@ export default async function EgyptSafariToursPage() {
             </div>
           ))}
         </div>
+
+        <RelatedGuides guides={[
+          { href: "/white-desert-tour-from-cairo", labelKey: "rg_white_tour" },
+          { href: "/egypt-desert-tour", labelKey: "rg_desert_tour" },
+          { href: "/white-desert-safari", labelKey: "rg_white_safari" },
+          { href: "/camel-trek", labelKey: "rg_camel_trek" },
+        ]} />
 
         <RelatedTrips locale={locale as Locale} heading="Featured Desert Tours" ctaLabel="View Tour" />
 

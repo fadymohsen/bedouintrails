@@ -4,6 +4,7 @@ import { getTranslations, getLocale } from "next-intl/server";
 import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
 import GuideHero from "@/components/guides/guide-hero";
 import RelatedTrips from "@/components/guides/related-trips";
+import RelatedGuides from "@/components/guides/related-guides";
 import styles from "@/components/guides/guides.module.scss";
 
 import type { Locale } from "@/lib/i18n/config";
@@ -18,10 +19,10 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: t("guide_crystal_title"),
     description: t("guide_crystal_meta_desc"),
-    keywords:
-      "Crystal Mountain Egypt, Crystal Mountain Western Desert, quartz crystal desert Egypt, Egypt Desert Tour, White Desert tour stops, Bahariya Oasis attractions, Western Desert Egypt landmarks, crystal ridge Egypt",
+    keywords: t("guide_crystal_meta_keywords"),
     alternates: buildAlternates(PATH, locale),
     openGraph: {
+      type: "article",
       title: t("guide_crystal_og_title"),
       description: t("guide_crystal_og_desc"),
       url,
@@ -124,6 +125,13 @@ export default async function CrystalMountainPage() {
             <strong><Link href="/bahariya-oasis">{t("guide_crystal_nearby_li4_bold")}</Link></strong> {t("guide_crystal_nearby_li4_text")}
           </li>
         </ul>
+
+        <RelatedGuides guides={[
+          { href: "/western-desert-egypt-guide", labelKey: "rg_western" },
+          { href: "/white-desert-tour-from-cairo", labelKey: "rg_white_tour" },
+          { href: "/egypt-desert-tour", labelKey: "rg_desert_tour" },
+          { href: "/white-desert-egypt", labelKey: "rg_white_desert" },
+        ]} />
 
         <RelatedTrips locale={locale as Locale} heading="Featured Desert Tours" ctaLabel="View Tour" />
 

@@ -4,6 +4,7 @@ import { getTranslations, getLocale } from "next-intl/server";
 import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
 import GuideHero from "@/components/guides/guide-hero";
 import RelatedTrips from "@/components/guides/related-trips";
+import RelatedGuides from "@/components/guides/related-guides";
 import styles from "@/components/guides/guides.module.scss";
 
 import type { Locale } from "@/lib/i18n/config";
@@ -21,6 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
     keywords: t("guide_packing_meta_keywords"),
     alternates: buildAlternates(PATH, locale),
     openGraph: {
+      type: "article",
       title: t("guide_packing_og_title"),
       description: t("guide_packing_og_desc"),
       url,
@@ -50,6 +52,28 @@ export default async function PackingGuidePage() {
         author: { "@type": "Organization", name: "Bedouin Trails" },
         datePublished: "2025-01-15",
         dateModified: "2026-07-26",
+        inLanguage: locale,
+      }) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        name: t("guide_packing_h1"),
+        description: t("guide_packing_meta_desc"),
+        image: `${SITE_URL}/img/adventure.webp`,
+        supply: [
+          { "@type": "HowToSupply", name: t("guide_packing_clothing_li1_bold") },
+          { "@type": "HowToSupply", name: t("guide_packing_clothing_li2_bold") },
+          { "@type": "HowToSupply", name: t("guide_packing_sun_li1_bold") },
+          { "@type": "HowToSupply", name: t("guide_packing_footwear_li1_bold") },
+          { "@type": "HowToSupply", name: t("guide_packing_personal_li1_bold") },
+        ],
+        step: [
+          { "@type": "HowToStep", name: t("guide_packing_clothing_h3"), text: [1, 2, 3, 4, 5, 6, 7].map((i) => t(`guide_packing_clothing_li${i}_bold` as Parameters<typeof t>[0])).join(", ") },
+          { "@type": "HowToStep", name: t("guide_packing_footwear_h3"), text: [1, 2].map((i) => t(`guide_packing_footwear_li${i}_bold` as Parameters<typeof t>[0])).join(", ") },
+          { "@type": "HowToStep", name: t("guide_packing_sun_h3"), text: [1, 2, 3, 4].map((i) => t(`guide_packing_sun_li${i}_bold` as Parameters<typeof t>[0])).join(", ") },
+          { "@type": "HowToStep", name: t("guide_packing_wind_h3"), text: t("guide_packing_wind_li1_bold") },
+          { "@type": "HowToStep", name: t("guide_packing_personal_h3"), text: [1, 2, 3, 4, 5, 6, 7].map((i) => t(`guide_packing_personal_li${i}_bold` as Parameters<typeof t>[0])).join(", ") },
+        ],
         inLanguage: locale,
       }) }} />
       <Breadcrumbs
@@ -157,13 +181,12 @@ export default async function PackingGuidePage() {
         <h3>{t("guide_packing_spring_h3")}</h3>
         <p>{t("guide_packing_spring_p")}</p>
 
-        <h2>{t("guide_packing_related_h2")}</h2>
-        <ul>
-          <li><Link href="/best-time-to-visit-white-desert">{t("guide_packing_related_besttime")}</Link></li>
-          <li><Link href="/desert-safety-guide">{t("guide_packing_related_safety")}</Link></li>
-          <li><Link href="/how-to-get-to-white-desert">{t("guide_packing_related_howto")}</Link></li>
-          <li><Link href="/white-desert-camping">{t("guide_packing_related_camping")}</Link></li>
-        </ul>
+        <RelatedGuides guides={[
+          { href: "/best-time-to-visit-white-desert", labelKey: "rg_besttime" },
+          { href: "/desert-safety-guide", labelKey: "rg_safety" },
+          { href: "/how-to-get-to-white-desert", labelKey: "rg_howto" },
+          { href: "/white-desert-camping", labelKey: "rg_camping" },
+        ]} />
 
         <RelatedTrips locale={locale as Locale} heading="Featured Desert Tours" ctaLabel="View Tour" />
 

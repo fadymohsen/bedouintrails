@@ -4,6 +4,7 @@ import { getTranslations, getLocale } from "next-intl/server";
 import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
 import GuideHero from "@/components/guides/guide-hero";
 import RelatedTrips from "@/components/guides/related-trips";
+import RelatedGuides from "@/components/guides/related-guides";
 import styles from "@/components/guides/guides.module.scss";
 
 import type { Locale } from "@/lib/i18n/config";
@@ -21,6 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
     keywords: t("guide_trek_meta_keywords"),
     alternates: buildAlternates(PATH, locale),
     openGraph: {
+      type: "article",
       title: t("guide_trek_og_title"),
       description: t("guide_trek_og_desc"),
       url,
@@ -106,6 +108,13 @@ export default async function MultiDayDesertTrekPage() {
             </div>
           ))}
         </div>
+
+        <RelatedGuides guides={[
+          { href: "/desert-trekking-egypt", labelKey: "rg_desert_trek" },
+          { href: "/camel-trek", labelKey: "rg_camel_trek" },
+          { href: "/what-to-pack-white-desert", labelKey: "rg_packing" },
+          { href: "/desert-safety-guide", labelKey: "rg_safety" },
+        ]} />
 
         <RelatedTrips locale={locale as Locale} heading="Featured Desert Tours" ctaLabel="View Tour" />
 
