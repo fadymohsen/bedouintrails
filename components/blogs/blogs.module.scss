@@ -158,6 +158,91 @@
   }
 }
 
+// ---- Filter Bar ----
+.filter-bar {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: fr.$gap-sm;
+  max-width: fr.$section-max-width;
+  margin: fr.$gap-lg auto;
+  padding: 0 24px;
+}
+
+.filter-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: fr.$surface-2;
+  border-radius: 100px;
+  padding: 12px 20px;
+  height: 52px;
+
+  select,
+  input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: fr.$text-heading;
+    font-family: fr.$font-body;
+    font-size: fr.$body-small-size;
+  }
+
+  select option {
+    color: #000;
+  }
+
+  input::placeholder {
+    color: fr.$text-body-muted;
+  }
+}
+
+.search-pill {
+  flex: 1;
+  max-width: 320px;
+
+  .search-icon {
+    color: fr.$text-body-muted;
+    flex-shrink: 0;
+  }
+
+  input {
+    width: 100%;
+  }
+}
+
+// ---- Category Sections ----
+.category-section {
+  max-width: fr.$section-max-width;
+  margin: 0 auto;
+  padding: 0 24px;
+
+  & + & {
+    margin-top: fr.$gap-lg;
+  }
+}
+
+.category-title {
+  font-family: fr.$font-heading;
+  font-size: fr.$h3-size;
+  line-height: fr.$h3-line;
+  color: fr.$text-heading;
+  margin-bottom: fr.$gap-md;
+  padding-bottom: 12px;
+  border-bottom: 2px solid fr.$accent;
+}
+
+.no-results {
+  text-align: center;
+  padding: fr.$gap-xl;
+
+  h2 {
+    font-size: fr.$h3-size;
+    line-height: fr.$h3-line;
+    color: fr.$text-body-muted;
+  }
+}
+
 // ---- Blogs Grid List ----
 .blogs-grid-container {
   max-width: fr.$section-max-width;

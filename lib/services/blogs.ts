@@ -9,6 +9,15 @@ export async function listPublishedBlogs() {
   });
 }
 
+export async function listBlogCategories() {
+  const cats = await prisma.blog.findMany({
+    where: { isPublished: true, category: { not: null } },
+    select: { category: true },
+    distinct: ["category"],
+  });
+  return cats.map((c) => c.category!);
+}
+
 export async function getBlogBySlug(slug: string) {
   const blog = await prisma.blog.findUnique({
     where: { slug },

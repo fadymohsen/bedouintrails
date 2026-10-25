@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
-import { listPublishedBlogs } from "@/lib/services/blogs";
+import { listPublishedBlogs, listBlogCategories } from "@/lib/services/blogs";
 import type { Locale } from "@/lib/i18n/config";
 import { localize } from "@/lib/i18n/localized";
 import { getLocalFallbackImage } from "@/lib/image-fallback";
-import { Link } from "@/lib/i18n/navigation";
-import SafeImage from "@/components/safe-image/safe-image";
 import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
 import PageHero from "@/components/page-hero/page-hero";
-import styles from "@/components/blogs/blogs.module.scss";
+import BlogsFilterGrid from "@/components/blogs/blogs-filter-grid";
+import type { BlogCardData } from "@/components/blogs/blogs-filter-grid";
 
 import { SITE_URL, buildAlternates } from "@/lib/seo";
 
@@ -33,7 +32,23 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function BlogsIndexPage() {
   const locale = (await getLocale()) as Locale;
   const t = await getTranslations();
-  const blogs = await listPublishedBlogs();
+  const [blogs, categories] = await Promise.all([listPublishedBlogs(), listBlogCategories()]);
+
+  const blogCards: BlogCardData[] = blogs.map((blog, i) => {
+    const title = localize(blog.titleEn, blog.titleAr, locale, blog.titleI18n as Record<string, string> | null);
+    const excerpt =
+      localize(blog.excerptEn ?? "", blog.excerptAr, locale, blog.excerptI18n as Record<string, string> | null) ||
+      localize(blog.contentEn ?? "", blog.contentAr, locale, blog.contentI18n as Record<string, string> | null);
+    const cleanExcerpt = excerpt.replace(/<[^>]*>/g, "").slice(0, 140) + "...";
+    return {
+      id: blog.id,
+      slug: blog.slug,
+      title,
+      excerpt: cleanExcerpt,
+      image: blog.image ? getLocalFallbackImage(blog.image)! : `/img/adventure${i % 3 === 0 ? "" : i % 3 === 1 ? "1" : "3"}.webp`,
+      category: blog.category,
+    };
+  });
 
   const blogListJsonLd =
     blogs.length > 0
@@ -87,37 +102,8 @@ export default async function BlogsIndexPage() {
         eyebrow={t("blogs")}
       />
 
-      <div className={styles["blogs-grid-container"]}>
-        <div className={styles["blogs-grid"]}>
-          {blogs.map((blog, i) => {
-            const title = localize(blog.titleEn, blog.titleAr, locale, blog.titleI18n as Record<string, string> | null);
-            const excerpt =
-              localize(blog.excerptEn ?? "", blog.excerptAr, locale, blog.excerptI18n as Record<string, string> | null) ||
-              localize(blog.contentEn ?? "", blog.contentAr, locale, blog.contentI18n as Record<string, string> | null);
-            const cleanExcerpt = excerpt.replace(/<[^>]*>/g, "").slice(0, 140) + "...";
-
-            return (
-              <Link href={`/blogs/${blog.slug}`} key={blog.id} className={styles["blog-card"]}>
-                <div className={styles["card-image-wrapper"]}>
-                  <SafeImage
-                    src={blog.image ? getLocalFallbackImage(blog.image) : `/img/adventure${i % 3 === 0 ? "" : i % 3 === 1 ? "1" : "3"}.webp`}
-                    alt={title}
-                    fill
-                    style={{ objectFit: "cover" }}
-                  />
-                </div>
-                <div className={styles["card-content"]}>
-                  <span className={styles.eyebrow}>{t("blogs")}</span>
-                  <h3>{title}</h3>
-                  <p>{cleanExcerpt}</p>
-                  <span className={styles["read-more-link"]}>
-                    {t("read_story") || "Read Story"} →
-                  </span>
-                </div>
-              </Link>
-            );
-          })}
-        </div>
+      <div className="blogs-page-content">
+        <BlogsFilterGrid blogs={blogCards} categories={categories} />
       </div>
     </div>
   );
