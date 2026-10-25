@@ -1809,5 +1809,13 @@
   "popup_name_label": "Nombre",
   "popup_phone_label": "Número de Teléfono",
   "popup_submit": "Obtener Ofertas Personalizadas",
-  "popup_success": "¡Gracias! Nos pondremos en contacto contigo pronto."
+  "popup_success": "¡Gracias! Nos pondremos en contacto contigo pronto.",
+  "all_categories": "Todas las Categorías",
+  "category_black_white_desert_camping": "Tours de Camping en el Desierto Blanco y Negro",
+  "category_egypt_oasis_tours": "Tours de Oasis de Egipto y Aventuras",
+  "category_desert_hiking_trekking": "Senderismo y Trekking en el Desierto",
+  "category_desert_camel_trekking": "Trekking en Camello por el Desierto",
+  "category_desert_jeep_safari": "Safari en Jeep y Camping en el Desierto",
+  "category_egypt_oases_discovery": "Tours de Descubrimiento de Oasis de Egipto",
+  "other_trips": "Otros Viajes"
 }

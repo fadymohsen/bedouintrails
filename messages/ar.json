@@ -1810,5 +1810,13 @@
   "popup_name_label": "الاسم",
   "popup_phone_label": "رقم الهاتف",
   "popup_submit": "احصل على عرض مخصص",
-  "popup_success": "شكراً لك! سنتواصل معك قريباً."
+  "popup_success": "شكراً لك! سنتواصل معك قريباً.",
+  "all_categories": "جميع الفئات",
+  "category_black_white_desert_camping": "رحلات تخييم الصحراء البيضاء والسوداء",
+  "category_egypt_oasis_tours": "رحلات الواحات المصرية والمغامرات",
+  "category_desert_hiking_trekking": "رحلات المشي والتسلق الصحراوية",
+  "category_desert_camel_trekking": "رحلات ركوب الجمال الصحراوية",
+  "category_desert_jeep_safari": "سفاري الجيب الصحراوي والتخييم",
+  "category_egypt_oases_discovery": "رحلات اكتشاف الواحات المصرية",
+  "other_trips": "رحلات أخرى"
 }

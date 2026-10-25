@@ -1809,5 +1809,13 @@
   "popup_name_label": "Naam",
   "popup_phone_label": "Telefoonnummer",
   "popup_submit": "Ontvang Aangepaste Aanbiedingen",
-  "popup_success": "Bedankt! We nemen binnenkort contact met je op."
+  "popup_success": "Bedankt! We nemen binnenkort contact met je op.",
+  "all_categories": "Alle Categorieën",
+  "category_black_white_desert_camping": "Zwarte & Witte Woestijn Kampeerreizen",
+  "category_egypt_oasis_tours": "Egyptische Oase Tours & Avonturen",
+  "category_desert_hiking_trekking": "Woestijn Wandel- & Trekkingtochten",
+  "category_desert_camel_trekking": "Woestijn Kameeltrekking",
+  "category_desert_jeep_safari": "Jeepsafari & Kamperen in de Woestijn",
+  "category_egypt_oases_discovery": "Egyptische Oases Ontdekkingsreizen",
+  "other_trips": "Overige Reizen"
 }

@@ -1810,5 +1810,13 @@
   "popup_name_label": "Nom",
   "popup_phone_label": "Numéro de Téléphone",
   "popup_submit": "Obtenir des Offres Personnalisées",
-  "popup_success": "Merci ! Nous vous contacterons bientôt."
+  "popup_success": "Merci ! Nous vous contacterons bientôt.",
+  "all_categories": "Toutes les Catégories",
+  "category_black_white_desert_camping": "Camping Désert Noir et Blanc",
+  "category_egypt_oasis_tours": "Tours des Oasis d'Égypte et Aventures",
+  "category_desert_hiking_trekking": "Randonnée et Trekking dans le Désert",
+  "category_desert_camel_trekking": "Trekking à Dos de Chameau",
+  "category_desert_jeep_safari": "Safari Jeep et Camping dans le Désert",
+  "category_egypt_oases_discovery": "Découverte des Oasis d'Égypte",
+  "other_trips": "Autres Voyages"
 }

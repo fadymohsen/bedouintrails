@@ -19,6 +19,7 @@ type TrapLike = {
   interfaceToI18n?: I18nJson;
   duration: number;
   countPeople: number;
+  category?: string | null;
   galleries?: { image: string }[];
   rate?: number;
 };
@@ -31,6 +32,7 @@ export type TripCardData = {
   interfaceTo: string;
   duration: number;
   countPeople: number;
+  category: string | null;
   image: string | null;
   rate: number;
 };
@@ -44,6 +46,7 @@ export function mapTrapForCard(trap: TrapLike, locale: Locale): TripCardData {
     interfaceTo: localize(trap.interfaceToEn, trap.interfaceToAr, locale, trap.interfaceToI18n),
     duration: trap.duration,
     countPeople: trap.countPeople,
+    category: trap.category ?? null,
     image: getLocalFallbackImage(trap.galleries?.[0]?.image ?? null),
     rate: trap.rate ?? 0,
   };

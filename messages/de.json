@@ -1810,5 +1810,13 @@
   "popup_name_label": "Name",
   "popup_phone_label": "Telefonnummer",
   "popup_submit": "Individuelles Angebot Erhalten",
-  "popup_success": "Danke! Wir melden uns bald bei dir."
+  "popup_success": "Danke! Wir melden uns bald bei dir.",
+  "all_categories": "Alle Kategorien",
+  "category_black_white_desert_camping": "Schwarze & Weiße Wüste Camping-Touren",
+  "category_egypt_oasis_tours": "Ägyptische Oasen-Touren & Abenteuer",
+  "category_desert_hiking_trekking": "Wüstenwandern & Trekking-Touren",
+  "category_desert_camel_trekking": "Kamelreiten in der Wüste",
+  "category_desert_jeep_safari": "Jeep-Safari & Camping in der Wüste",
+  "category_egypt_oases_discovery": "Ägyptische Oasen-Entdeckungstouren",
+  "other_trips": "Weitere Reisen"
 }

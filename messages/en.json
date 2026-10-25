@@ -1806,5 +1806,13 @@
   "popup_name_label": "Name",
   "popup_phone_label": "Phone Number",
   "popup_submit": "Get Customized Offers",
-  "popup_success": "Thanks! We'll contact you soon."
+  "popup_success": "Thanks! We'll contact you soon.",
+  "all_categories": "All Categories",
+  "category_black_white_desert_camping": "Black & White Desert Camping Tours",
+  "category_egypt_oasis_tours": "Egypt Oasis Tours & Adventures",
+  "category_desert_hiking_trekking": "Desert Hiking & Trekking Tours",
+  "category_desert_camel_trekking": "Desert Camel Trekking Tours",
+  "category_desert_jeep_safari": "Desert Jeep Safari & Camping",
+  "category_egypt_oases_discovery": "Egypt Oases Discovery Tours",
+  "other_trips": "Other Trips"
 }

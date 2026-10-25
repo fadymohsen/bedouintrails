@@ -78,7 +78,7 @@ export default async function JourneysPage() {
       {itemListJsonLd && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }} />
       )}
-      <JourneysFilterGrid trips={trips} durations={facets.durations} />
+      <JourneysFilterGrid trips={trips} durations={facets.durations} categories={facets.categories} />
     </div>
   );
 }

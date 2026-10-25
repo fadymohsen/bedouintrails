@@ -34,12 +34,18 @@ export async function listActiveTraps(filters: TrapFilters = {}) {
     orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }],
   });
 
-  const [durations, fromLocations, toLocations] = await Promise.all([
+  const [durations, categories, fromLocations, toLocations] = await Promise.all([
     prisma.trap.findMany({
       where: { status: "active" },
       select: { duration: true },
       distinct: ["duration"],
       orderBy: { duration: "asc" },
+    }),
+    prisma.trap.findMany({
+      where: { status: "active", category: { not: null } },
+      select: { category: true },
+      distinct: ["category"],
+      orderBy: { sortOrder: "asc" },
     }),
     prisma.trap.findMany({
       where: { status: "active" },
@@ -57,6 +63,7 @@ export async function listActiveTraps(filters: TrapFilters = {}) {
     traps,
     facets: {
       durations: durations.map((d) => d.duration),
+      categories: categories.map((c) => c.category!),
       fromLocations: fromLocations.map((f) => f.interfaceFromEn),
       toLocations: toLocations.map((t) => t.interfaceToEn),
     },

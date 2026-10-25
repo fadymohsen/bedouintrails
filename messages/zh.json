@@ -1810,5 +1810,13 @@
   "popup_name_label": "姓名",
   "popup_phone_label": "电话号码",
   "popup_submit": "获取专属定制优惠",
-  "popup_success": "谢谢！我们会尽快与您联系。"
+  "popup_success": "谢谢！我们会尽快与您联系。",
+  "all_categories": "所有类别",
+  "category_black_white_desert_camping": "黑白沙漠露营之旅",
+  "category_egypt_oasis_tours": "埃及绿洲旅游与冒险",
+  "category_desert_hiking_trekking": "沙漠徒步与远足之旅",
+  "category_desert_camel_trekking": "沙漠骆驼徒步之旅",
+  "category_desert_jeep_safari": "沙漠吉普车探险与露营",
+  "category_egypt_oases_discovery": "埃及绿洲发现之旅",
+  "other_trips": "其他旅程"
 }
