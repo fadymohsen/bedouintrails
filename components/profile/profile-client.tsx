@@ -184,7 +184,7 @@ export default function ProfileClient({ user }: { user: ProfileUser }) {
           <div className={styles.imageContainer}>
             <img
               className={styles.userImage}
-              src={imagePreview || userData.image || "/img/profile-img.png"}
+              src={imagePreview || userData.image || "/img/small-logo.png"}
               alt={`${userData.firstName} profile picture`}
             />
           </div>
