@@ -59,7 +59,7 @@ export default async function HomePage() {
   const locale = (await getLocale()) as Locale;
   const t = await getTranslations();
 
-  const [traps, spotlightTrap, blogs, faqs, topReview, trapCount, dbSliders] =
+  const [traps, spotlightTrap, blogs, faqs, topReviews, trapCount, dbSliders] =
     await Promise.all([
       prisma.trap.findMany({
         where: { status: "active" },
@@ -78,7 +78,8 @@ export default async function HomePage() {
         orderBy: { publishedAt: "desc" },
       }),
       prisma.commonQuestion.findMany({ orderBy: { createdAt: "asc" }, take: 8 }),
-      prisma.review.findFirst({
+      prisma.review.findMany({
+        take: 6,
         where: { comment: { not: null } },
         orderBy: [{ stars: "desc" }, { createdAt: "desc" }],
         include: { user: { select: { firstName: true, lastName: true, image: true } } },
@@ -116,7 +117,7 @@ export default async function HomePage() {
   const featuredCards = tripCards.slice(0, 3);
   const homeBlogs = blogs.map((b) => mapBlogForHomeSection(b, locale));
   const homeFaqs = faqs.map((f) => mapFaq(f, locale));
-  const testimonial = topReview ? mapReviewForTestimonial(topReview) : null;
+  const guestReviews = topReviews.map(mapReviewForTestimonial);
   const spotlightName = spotlightTrap
     ? localize(spotlightTrap.nameEn, spotlightTrap.nameAr, locale, spotlightTrap.nameI18n)
     : null;
@@ -270,10 +271,10 @@ export default async function HomePage() {
         <h2>{t("what_our_guests_say")}</h2>
         <ReviewCarousel
           data={[
+            ...guestReviews,
             { id: -1, userName: t("review_1_name"), userImage: null, stars: 5, comment: t("review_1_comment") },
             { id: -2, userName: t("review_2_name"), userImage: null, stars: 5, comment: t("review_2_comment") },
             { id: -3, userName: t("review_3_name"), userImage: null, stars: 5, comment: t("review_3_comment") },
-            ...(testimonial?.comment ? [testimonial] : []),
           ]}
         />
         <a

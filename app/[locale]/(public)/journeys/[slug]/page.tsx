@@ -2,8 +2,10 @@ import { notFound } from "next/navigation";
 import { Link } from "@/lib/i18n/navigation";
 import type { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
-import { FaWhatsapp } from "react-icons/fa";
+import { FaWhatsapp, FaStar } from "react-icons/fa";
 import { getTrapBySlug } from "@/lib/services/traps";
+import { getReviewEligibility } from "@/lib/services/reviews";
+import { getUserSession } from "@/lib/auth/session";
 import { NotFoundError } from "@/lib/services/errors";
 import { localize } from "@/lib/i18n/localized";
 import { getLocalFallbackImage } from "@/lib/image-fallback";
@@ -17,6 +19,10 @@ import TripDayViewer from "@/components/trip-detail/trip-day-viewer";
 import TripCarousel from "@/components/carousel/trip-carousel";
 import Card from "@/components/card/card";
 import RelatedBlogs from "@/components/related-blogs/related-blogs";
+import ReviewCarousel from "@/components/carousel/review-carousel";
+import { TestimonialCard } from "@/components/rating-card/rating-card";
+import TripReviewForm, { type TripReviewFormState } from "@/components/trip-reviews/trip-review-form";
+import reviewStyles from "@/components/trip-reviews/trip-reviews.module.scss";
 import styles from "@/components/trip-detail/trip-detail.module.scss";
 
 import { SITE_URL, buildAlternates } from "@/lib/seo";
@@ -94,6 +100,10 @@ export default async function TripDetailPage({ params }: { params: Promise<{ slu
     ])
   );
   const reviews = trip.reviews.map(mapReviewForTestimonial);
+  const session = await getUserSession();
+  const reviewForm: TripReviewFormState = session
+    ? await getReviewEligibility(session.uid, trip.id)
+    : { state: "login" };
   const days = trip.trapDays.map((day) => ({
     dayNumber: day.dayNumber,
     cards: day.cards.map((card) => ({
@@ -194,6 +204,30 @@ export default async function TripDetailPage({ params }: { params: Promise<{ slu
       <div className={styles["part-2"]}>
         <TripDayViewer key={trip.id} days={days} interfaceFrom={interfaceFrom} interfaceTo={interfaceTo} />
       </div>
+      <section className={reviewStyles.section} id="reviews">
+        <h2>{t("customer_reviews")}</h2>
+        {reviews.length > 0 ? (
+          <>
+            <div className={reviewStyles.summary}>
+              <FaStar color="#ffc107" size={22} />
+              <strong>{trip.rate}</strong>
+              <span>{t("reviews_count", { count: reviews.length })}</span>
+            </div>
+            {reviews.length > 3 ? (
+              <ReviewCarousel data={reviews} />
+            ) : (
+              <div className={reviewStyles.grid}>
+                {reviews.map((review) => (
+                  <TestimonialCard key={review.id} review={review} />
+                ))}
+              </div>
+            )}
+          </>
+        ) : (
+          <p className={reviewStyles.empty}>{t("no_reviews_yet")}</p>
+        )}
+        <TripReviewForm {...reviewForm} />
+      </section>
       {relatedCards.length > 0 && (
         <div className={styles.relatedTripsSection}>
           <h2>{t("related_trips_title") || "Related Trips"}</h2>
