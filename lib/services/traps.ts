@@ -79,7 +79,11 @@ export async function getTrapBySlug(slug: string) {
         orderBy: { dayNumber: "asc" },
       },
       galleries: true,
-      reviews: { include: { user: { select: { firstName: true, lastName: true, image: true } } } },
+      reviews: {
+        where: { isApproved: true },
+        orderBy: { createdAt: "desc" },
+        include: { user: { select: { firstName: true, lastName: true, image: true } } },
+      },
     },
   });
   if (!trap) throw new NotFoundError("Trip not found.");

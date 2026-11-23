@@ -167,18 +167,20 @@ model Order {
 }
 
 model Review {
-  id        Int      @id @default(autoincrement())
-  userId    Int      @map("user_id")
-  orderId   Int      @map("order_id")
-  trapId    Int      @map("trap_id")
-  stars     Int
-  comment   String?
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  id         Int      @id @default(autoincrement())
+  userId     Int?     @map("user_id")
+  orderId    Int?     @map("order_id")
+  trapId     Int      @map("trap_id")
+  stars      Int
+  comment    String?
+  guestName  String?  @map("guest_name")
+  isApproved Boolean  @default(true) @map("is_approved")
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
 
-  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
-  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  trap  Trap  @relation(fields: [trapId], references: [id], onDelete: Cascade)
+  user  User?  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  order Order? @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  trap  Trap   @relation(fields: [trapId], references: [id], onDelete: Cascade)
 
   @@map("reviews")
 }

@@ -1,0 +1,164 @@
+@use "@/styles/framer-tokens" as fr;
+@use "@/styles/layout" as l;
+
+.form,
+.notice {
+    max-width: 640px;
+    margin: l.$space-6 auto 0;
+    padding: l.$space-5;
+    background: fr.$surface-2;
+    border: 1px solid hsla(0, 0%, 100%, 0.12);
+    border-radius: l.$radius-lg;
+    box-sizing: border-box;
+    text-align: center;
+
+    @include l.md-down {
+        padding: l.$space-4;
+        border-radius: l.$radius-md;
+    }
+}
+
+.form h3 {
+    font-size: 1.5rem;
+    color: fr.$text-heading;
+    margin: 0 0 l.$space-3;
+}
+
+.notice p {
+    margin: 0 0 l.$space-3;
+    color: fr.$text-body-muted;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.stars {
+    display: flex;
+    justify-content: center;
+    gap: l.$space-2;
+    margin-bottom: l.$space-4;
+}
+
+.starBtn {
+    display: inline-flex;
+    padding: 0;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    line-height: 0;
+}
+
+.input {
+    width: 100%;
+    padding: l.$space-3;
+    margin-bottom: l.$space-3;
+    background: fr.$surface-1;
+    color: fr.$text-body;
+    border: 1px solid hsla(0, 0%, 100%, 0.2);
+    border-radius: l.$radius-md;
+    font: inherit;
+    box-sizing: border-box;
+
+    &::placeholder {
+        color: fr.$text-body-muted;
+    }
+}
+
+.honeypot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+}
+
+.textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: l.$space-3;
+    margin-bottom: l.$space-4;
+    background: fr.$surface-1;
+    color: fr.$text-body;
+    border: 1px solid hsla(0, 0%, 100%, 0.2);
+    border-radius: l.$radius-md;
+    font: inherit;
+    resize: vertical;
+    box-sizing: border-box;
+
+    &::placeholder {
+        color: fr.$text-body-muted;
+    }
+}
+
+.submit {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 14px 32px;
+    background: fr.$brand-primary;
+    color: #fff;
+    font-weight: 600;
+    border: 0;
+    border-radius: l.$radius-pill;
+    cursor: pointer;
+    transition: background-color 250ms;
+
+    &:hover:not(:disabled) {
+        background: fr.$brand-primary-hovered;
+    }
+
+    &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+}
+
+// Section wrapper + summary used by the trip page.
+.section {
+    max-width: fr.$section-max-width;
+    margin: 60px auto 40px;
+    padding: 0 2.5%;
+    width: 100%;
+    box-sizing: border-box;
+
+    h2 {
+        font-size: fr.$h2-size;
+        color: fr.$text-heading;
+        text-align: center;
+        margin: 0 0 l.$space-3;
+
+        @include l.md-down {
+            font-size: 1.8rem;
+        }
+    }
+}
+
+.summary {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: l.$space-3;
+    margin-bottom: l.$space-5;
+    color: fr.$text-body-muted;
+
+    strong {
+        font-size: 1.5rem;
+        color: fr.$text-heading;
+    }
+}
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: l.$space-3;
+}
+
+.empty {
+    text-align: center;
+    padding: l.$space-5;
+    background: fr.$surface-2;
+    border-radius: l.$radius-md;
+    color: fr.$text-body-muted;
+}

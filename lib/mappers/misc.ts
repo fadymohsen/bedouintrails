@@ -111,14 +111,15 @@ type ReviewLike = {
   id: number;
   stars: number;
   comment: string | null;
-  user: { firstName: string; lastName: string; image: string | null };
+  guestName?: string | null;
+  user: { firstName: string; lastName: string; image: string | null } | null;
 };
 
 export function mapReviewForTestimonial(review: ReviewLike) {
   return {
     id: review.id,
-    userName: `${review.user.firstName} ${review.user.lastName}`.trim(),
-    userImage: getLocalFallbackImage(review.user.image),
+    userName: review.user ? `${review.user.firstName} ${review.user.lastName}`.trim() : (review.guestName ?? ""),
+    userImage: getLocalFallbackImage(review.user?.image ?? null),
     stars: review.stars,
     comment: review.comment,
   };

@@ -71,7 +71,7 @@ export async function getOrderDetails(orderId: number, userId: number) {
           galleries: true,
         },
       },
-      reviews: { include: { user: { select: { firstName: true, lastName: true, image: true } } } },
+      reviews: { where: { isApproved: true }, include: { user: { select: { firstName: true, lastName: true, image: true } } } },
     },
   });
 
