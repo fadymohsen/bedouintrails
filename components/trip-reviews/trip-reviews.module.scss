@@ -49,6 +49,30 @@
     line-height: 0;
 }
 
+.input {
+    width: 100%;
+    padding: l.$space-3;
+    margin-bottom: l.$space-3;
+    background: fr.$surface-1;
+    color: fr.$text-body;
+    border: 1px solid hsla(0, 0%, 100%, 0.2);
+    border-radius: l.$radius-md;
+    font: inherit;
+    box-sizing: border-box;
+
+    &::placeholder {
+        color: fr.$text-body-muted;
+    }
+}
+
+.honeypot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+}
+
 .textarea {
     width: 100%;
     min-height: 120px;

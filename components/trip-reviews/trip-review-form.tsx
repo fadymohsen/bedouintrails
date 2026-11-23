@@ -3,43 +3,33 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { FaStar } from "react-icons/fa6";
-import { Link, useRouter } from "@/lib/i18n/navigation";
+import { useRouter } from "@/lib/i18n/navigation";
 import { apiPost, ApiClientError } from "@/lib/api-client";
 import sweetAlert from "@/lib/sweet-alert";
 import styles from "./trip-reviews.module.scss";
 
-export type TripReviewFormState =
-  | { state: "login" }
-  | { state: "no_booking" }
-  | { state: "already_reviewed" }
-  | { state: "can_review"; orderId: number };
-
-export default function TripReviewForm(props: TripReviewFormState) {
+export default function TripReviewForm({
+  trapId,
+  orderId,
+  loggedIn,
+  alreadyReviewed,
+}: {
+  trapId: number;
+  orderId: number | null;
+  loggedIn: boolean;
+  alreadyReviewed: boolean;
+}) {
   const t = useTranslations();
   const router = useRouter();
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
   const [comment, setComment] = useState("");
+  const [name, setName] = useState("");
+  const [website, setWebsite] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [sent, setSent] = useState(false);
 
-  if (props.state === "login") {
-    return (
-      <div className={styles.notice}>
-        <p>{t("review_login_prompt")}</p>
-        <Link href="/auth" className={styles.submit}>
-          {t("login")}
-        </Link>
-      </div>
-    );
-  }
-  if (props.state === "no_booking") {
-    return (
-      <div className={styles.notice}>
-        <p>{t("review_booking_required")}</p>
-      </div>
-    );
-  }
-  if (props.state === "already_reviewed") {
+  if (alreadyReviewed || sent) {
     return (
       <div className={styles.notice}>
         <p>{t("review_already_submitted")}</p>
@@ -47,15 +37,20 @@ export default function TripReviewForm(props: TripReviewFormState) {
     );
   }
 
-  const orderId = props.orderId;
-
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (rating === 0) return sweetAlert.warning(t("please_select_star_rating"));
     setSubmitting(true);
     try {
-      await apiPost("/api/reviews", { orderId, stars: rating, comment });
-      sweetAlert.success(t("rating_added_successfully"));
+      const res = await apiPost<{ review: { isApproved: boolean } }>("/api/reviews", {
+        ...(orderId !== null ? { orderId } : { trapId }),
+        stars: rating,
+        comment,
+        ...(loggedIn ? {} : { guestName: name }),
+        website,
+      });
+      sweetAlert.success(res.review.isApproved ? t("rating_added_successfully") : t("review_pending_approval"));
+      setSent(true);
       router.refresh();
     } catch (err) {
       sweetAlert.warning(err instanceof ApiClientError ? err.message : t("rating_submit_failed"));
@@ -81,6 +76,28 @@ export default function TripReviewForm(props: TripReviewFormState) {
           </button>
         ))}
       </div>
+      {!loggedIn && (
+        <input
+          className={styles.input}
+          type="text"
+          placeholder={t("review_your_name")}
+          value={name}
+          maxLength={60}
+          required
+          onChange={(e) => setName(e.target.value)}
+        />
+      )}
+      {/* Honeypot: hidden from people, tempting to bots. */}
+      <input
+        type="text"
+        name="website"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className={styles.honeypot}
+        value={website}
+        onChange={(e) => setWebsite(e.target.value)}
+      />
       <textarea
         className={styles.textarea}
         placeholder={t("write_your_comment")}

@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
 import { FaWhatsapp, FaStar } from "react-icons/fa";
 import { getTrapBySlug } from "@/lib/services/traps";
-import { getReviewEligibility } from "@/lib/services/reviews";
+import { getTripReviewContext } from "@/lib/services/reviews";
 import { getUserSession } from "@/lib/auth/session";
 import { NotFoundError } from "@/lib/services/errors";
 import { localize } from "@/lib/i18n/localized";
@@ -21,7 +21,7 @@ import Card from "@/components/card/card";
 import RelatedBlogs from "@/components/related-blogs/related-blogs";
 import ReviewCarousel from "@/components/carousel/review-carousel";
 import { TestimonialCard } from "@/components/rating-card/rating-card";
-import TripReviewForm, { type TripReviewFormState } from "@/components/trip-reviews/trip-review-form";
+import TripReviewForm from "@/components/trip-reviews/trip-review-form";
 import reviewStyles from "@/components/trip-reviews/trip-reviews.module.scss";
 import styles from "@/components/trip-detail/trip-detail.module.scss";
 
@@ -101,9 +101,7 @@ export default async function TripDetailPage({ params }: { params: Promise<{ slu
   );
   const reviews = trip.reviews.map(mapReviewForTestimonial);
   const session = await getUserSession();
-  const reviewForm: TripReviewFormState = session
-    ? await getReviewEligibility(session.uid, trip.id)
-    : { state: "login" };
+  const reviewContext = await getTripReviewContext(session?.uid ?? null, trip.id);
   const days = trip.trapDays.map((day) => ({
     dayNumber: day.dayNumber,
     cards: day.cards.map((card) => ({
@@ -226,7 +224,12 @@ export default async function TripDetailPage({ params }: { params: Promise<{ slu
         ) : (
           <p className={reviewStyles.empty}>{t("no_reviews_yet")}</p>
         )}
-        <TripReviewForm {...reviewForm} />
+        <TripReviewForm
+          trapId={trip.id}
+          orderId={reviewContext.orderId}
+          loggedIn={reviewContext.loggedIn}
+          alreadyReviewed={reviewContext.alreadyReviewed}
+        />
       </section>
       {relatedCards.length > 0 && (
         <div className={styles.relatedTripsSection}>

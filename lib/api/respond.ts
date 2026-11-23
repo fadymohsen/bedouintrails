@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { ZodError } from "zod";
-import { AuthError, ConflictError, NotFoundError, OwnershipError } from "@/lib/services/errors";
+import { AuthError, ConflictError, NotFoundError, OwnershipError, ValidationError } from "@/lib/services/errors";
 
 export function ok(data: unknown = {}, init?: number) {
   return NextResponse.json({ status: true, ...toObject(data) }, { status: init ?? 200 });
@@ -29,6 +29,9 @@ export function handleApiError(err: unknown) {
   }
   if (err instanceof ConflictError) {
     return fail(err.message, 409);
+  }
+  if (err instanceof ValidationError) {
+    return fail(err.message, 422);
   }
   console.error(err);
   return fail("Something went wrong. Please try again.", 500);

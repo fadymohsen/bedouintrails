@@ -80,6 +80,7 @@ export async function getTrapBySlug(slug: string) {
       },
       galleries: true,
       reviews: {
+        where: { isApproved: true },
         orderBy: { createdAt: "desc" },
         include: { user: { select: { firstName: true, lastName: true, image: true } } },
       },

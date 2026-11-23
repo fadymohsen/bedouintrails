@@ -65,7 +65,7 @@ export default async function HomePage() {
         where: { status: "active" },
         take: 10,
         orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }],
-        include: { galleries: { take: 1, orderBy: { id: "asc" } }, reviews: { select: { stars: true } } },
+        include: { galleries: { take: 1, orderBy: { id: "asc" } }, reviews: { where: { isApproved: true }, select: { stars: true } } },
       }),
       prisma.trap.findFirst({
         where: { status: "active" },
@@ -80,7 +80,7 @@ export default async function HomePage() {
       prisma.commonQuestion.findMany({ orderBy: { createdAt: "asc" }, take: 8 }),
       prisma.review.findMany({
         take: 6,
-        where: { comment: { not: null } },
+        where: { comment: { not: null }, isApproved: true },
         orderBy: [{ stars: "desc" }, { createdAt: "desc" }],
         include: { user: { select: { firstName: true, lastName: true, image: true } } },
       }),
